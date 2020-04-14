@@ -1,0 +1,13 @@
+namespace: istio-system
+phase: system
+hooks:
+- name: "crd-apply"
+  events: ["prepare"]
+  showlogs: true
+  command: "kubectl"
+  args:
+  - apply
+  - --wait
+  - --validate=false
+  - -f
+  - https://raw.githubusercontent.com/weaveworks/flagger/master/artifacts/flagger/crd.yaml
