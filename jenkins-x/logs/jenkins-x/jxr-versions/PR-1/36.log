@@ -1,0 +1,100 @@
+
+Showing logs for build [32mjenkins-x-jxr-versions-pr-1-gke-5bkv2-36[0m stage [32mci[0m and container [32mstep-credential-initializer-gbprl[0m
+{"level":"warn","ts":1587138190.3231258,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1587138190.3239415,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mjenkins-x-jxr-versions-pr-1-gke-5bkv2-36[0m stage [32mci[0m and container [32mstep-working-dir-initializer-l4r5z[0m
+{"level":"warn","ts":1587138190.7060616,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1587138190.7075849,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mjenkins-x-jxr-versions-pr-1-gke-5bkv2-36[0m stage [32mci[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mjenkins-x-jxr-versions-pr-1-gke-5bkv2-36[0m stage [32mci[0m and container [32mstep-git-source-jenkins-x-jxr-versions-pr-1-gke-5bkv2-4qr4g[0m
+{"level":"warn","ts":1587138196.8643548,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1587138198.0466359,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/jenkins-x/**r-versions.git @ master in path /workspace/source"}
+
+Showing logs for build [32mjenkins-x-jxr-versions-pr-1-gke-5bkv2-36[0m stage [32mci[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:6ba87e1ad5cb88a2241e1665e945405e6b4f206b,1:7abdcc357b733b50e97df68af433fbabfa2882f1
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git fetch origin --unshallow 7abdcc357b733b50e97df68af433fbabfa2882f1: 6ba87e1ad5cb88a2241e1665e945405e6b4f206b:
+DEBUG: ran git fetch --unshallow origin 7abdcc357b733b50e97df68af433fbabfa2882f1: 6ba87e1ad5cb88a2241e1665e945405e6b4f206b: in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git branch
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git checkout master
+DEBUG: ran git checkout master in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git reset --hard 6ba87e1ad5cb88a2241e1665e945405e6b4f206b
+DEBUG: ran git reset --hard 6ba87e1ad5cb88a2241e1665e945405e6b4f206b in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git clean -fd .
+DEBUG: ran clean --force -d . in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git merge 7abdcc357b733b50e97df68af433fbabfa2882f1
+DEBUG: ran git merge 7abdcc357b733b50e97df68af433fbabfa2882f1 in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git log --format=%H%x1f%an%x1f%ae%x1f%cn%x1f%ce%x1f%s%n%b%x1e 6ba87e1ad5cb88a2241e1665e945405e6b4f206b..HEAD
+Merged SHA 7abdcc357b733b50e97df68af433fbabfa2882f1 with commit message 'fix: lets try use the cb-kubecd org' into base branch master
+Merged SHA 1cd74101aaabf299ef1c539c5b7debe273501230 with commit message 'fix: lets try use the cb-kubecd org' into base branch master
+Merged SHA 5f330f4eabc8a3d912881bf97f41ccccae281579 with commit message 'fix: remove helm init' into base branch master
+Merged SHA 83dc23d0bc989415a19ddd6a994cca46dc6264af with commit message 'fix: avoid whitespace in user/token' into base branch master
+Merged SHA 7db8b2156069daf62eb561ac9b7dc7c106b6257f with commit message 'fix: avoid whitespace in user/token' into base branch master
+Merged SHA b579eda5866659bfb139a16096e726850fb5a116 with commit message 'fix: add the new mandatory argument' into base branch master
+Merged SHA 040b63be101e26540b4de0367d45ee8e88cdce46 with commit message 'fix: upgrade **l' into base branch master
+Merged SHA 57b134a02eae3d31dbdeff447350e1ae5217443b with commit message 'fix: add missing pipelines' into base branch master
+Merged SHA fa7647802b5aa732041fed6ea2c18a84cfc15b39 with commit message 'fix: add missing pipelines' into base branch master
+Merged SHA 2d5c8e80ef0b738bf066286430e034ddb43b07c4 with commit message 'chore: move to workload identity rather than useing GCP service account tokens' into base branch master
+Merged SHA 4c05eb7719d03358a399b745c75de00c6334a97c with commit message 'fix: upgrade **l' into base branch master
+Merged SHA b6a2baad91d59ec15cb4ad35db5f15164a1445c5 with commit message 'fix: upgrade image version' into base branch master
+Merged SHA d335809c3344c37348f7fb4c9c1cbadb94ee45a0 with commit message 'fix: switch to private image' into base branch master
+Merged SHA 0a659d76afd669bcf567f8d25ec6eef737fac08d with commit message 'fix: add private images' into base branch master
+
+Showing logs for build [32mjenkins-x-jxr-versions-pr-1-gke-5bkv2-36[0m stage [32mci[0m and container [32mstep-runci[0m
++ JX_HOME=/tmp/**home
++ KUBECONFIG=/tmp/**home/config
++ export XDG_CONFIG_HOME=/tmp/**home
++ XDG_CONFIG_HOME=/tmp/**home
++ mkdir -p /tmp/**home/git
++ ** --version
+2.0.1285-dev+0a1fd5e18
++ export GH_USERNAME=******************
++ GH_USERNAME=******************
++ export GH_EMAIL=jenkins-x@googlegroups.com
++ GH_EMAIL=jenkins-x@googlegroups.com
++ export GH_OWNER=cb-kubecd
++ GH_OWNER=cb-kubecd
++ export PROJECT_ID=jenkins-x-labs-bdd
++ PROJECT_ID=jenkins-x-labs-bdd
+++ date +%a-%b-%d-%Y-%H-%M-%S
++ export CREATED_TIME=Fri-Apr-17-2020-15-43-20
++ CREATED_TIME=Fri-Apr-17-2020-15-43-20
++ export CLUSTER_NAME=pr-1-36-bdd-gke
++ CLUSTER_NAME=pr-1-36-bdd-gke
++ export ZONE=europe-west1-c
++ ZONE=europe-west1-c
++ export LABELS=branch=pr-1,cluster=bdd-gke,create-time=fri-apr-17-2020-15-43-20
++ LABELS=branch=pr-1,cluster=bdd-gke,create-time=fri-apr-17-2020-15-43-20
++ git config --global --add user.name JenkinsXBot
++ git config --global --add user.email jenkins-x@googlegroups.com
+running the BDD test with JX_HOME = /tmp/**home
++ echo 'running the BDD test with JX_HOME = /tmp/**home'
++ echo https://******************:****************************************@github.com
+creating cluster pr-1-36-bdd-gke in project jenkins-x-labs-bdd with labels branch=pr-1,cluster=bdd-gke,create-time=fri-apr-17-2020-15-43-20
++ echo 'creating cluster pr-1-36-bdd-gke in project jenkins-x-labs-bdd with labels branch=pr-1,cluster=bdd-gke,create-time=fri-apr-17-2020-15-43-20'
++ git clone https://github.com/jenkins-x-labs/cloud-resources.git
+Cloning into 'cloud-resources'...
++ cloud-resources/gcloud/create_cluster.sh
+creating a new cluster pr-1-36-bdd-gke in project jenkins-x-labs-bdd and region europe-west1-c
+WARNING: Currently VPC-native is not the default mode during cluster creation. In the future, this will become the default mode and can be disabled using `--no-enable-ip-alias` flag. Use `--[no-]enable-ip-alias` flag to suppress this warning.
+WARNING: Newly created clusters and node-pools will have node auto-upgrade enabled by default. This can be disabled using the `--no-enable-autoupgrade` flag.
+WARNING: Starting with version 1.18, clusters will have shielded GKE nodes by default.
+WARNING: Your Pod address range (`--cluster-ipv4-cidr`) can accommodate at most 1008 node(s). 
+This will enable the autorepair feature for nodes. Please see https://cloud.google.com/kubernetes-engine/docs/node-auto-repair for more information on node autorepairs.
+Creating cluster pr-1-36-bdd-gke in europe-west1-c...
+........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................done.
+Created [https://container.googleapis.com/v1beta1/projects/jenkins-x-labs-bdd/zones/europe-west1-c/clusters/pr-1-36-bdd-gke].
+To inspect the contents of your cluster, go to: https://console.cloud.google.com/kubernetes/workload_/gcloud/europe-west1-c/pr-1-36-bdd-gke?project=jenkins-x-labs-bdd
+kubeconfig entry generated for pr-1-36-bdd-gke.
+NAME             LOCATION        MASTER_VERSION  MASTER_IP      MACHINE_TYPE   NODE_VERSION    NUM_NODES  STATUS
+pr-1-36-bdd-gke  europe-west1-c  1.14.10-gke.27  34.77.228.233  n1-standard-4  1.14.10-gke.27  2          RUNNING
+setting up the cloud resources for ecluster pr-1-36-bdd-gke in project jenkins-x-labs-bdd
+Updated property [core/project].
+Created service account [pr-1-36-bdd-gke-ex].
+ERROR: (gcloud.iam.service-accounts.create) RESOURCE_EXHAUSTED: Maximum number of service accounts on project reached.
+- '@type': type.googleapis.com/google.rpc.RetryInfo
+  retryDelay: 86401s
+[31m
+Pipeline failed on stage 'ci' : container 'step-runci'. The execution of the pipeline has stopped.[0m
