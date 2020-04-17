@@ -1,0 +1,63 @@
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-k2nm6-9[0m stage [32mmeta-pipeline[0m and container [32mstep-credential-initializer-7z6wp[0m
+{"level":"warn","ts":1587128300.4257812,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1587128300.4263723,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-k2nm6-9[0m stage [32mmeta-pipeline[0m and container [32mstep-working-dir-initializer-2wr8h[0m
+{"level":"warn","ts":1587128300.8451252,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1587128300.846198,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-k2nm6-9[0m stage [32mmeta-pipeline[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-k2nm6-9[0m stage [32mmeta-pipeline[0m and container [32mstep-git-source-meta-jenkins-x-jxr-versions-pr-k2nm6-kl2d6[0m
+{"level":"warn","ts":1587128307.0003715,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1587128308.1861322,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/jenkins-x/**r-versions.git @ 6ba87e1ad5cb88a2241e1665e945405e6b4f206b in path /workspace/source"}
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-k2nm6-9[0m stage [32mmeta-pipeline[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:6ba87e1ad5cb88a2241e1665e945405e6b4f206b,1:2d5c8e80ef0b738bf066286430e034ddb43b07c4
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git fetch origin --unshallow 2d5c8e80ef0b738bf066286430e034ddb43b07c4: 6ba87e1ad5cb88a2241e1665e945405e6b4f206b:
+DEBUG: ran git fetch --unshallow origin 2d5c8e80ef0b738bf066286430e034ddb43b07c4: 6ba87e1ad5cb88a2241e1665e945405e6b4f206b: in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git branch
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git checkout master
+DEBUG: ran git checkout master in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git reset --hard 6ba87e1ad5cb88a2241e1665e945405e6b4f206b
+DEBUG: ran git reset --hard 6ba87e1ad5cb88a2241e1665e945405e6b4f206b in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git clean -fd .
+DEBUG: ran clean --force -d . in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git merge 2d5c8e80ef0b738bf066286430e034ddb43b07c4
+DEBUG: ran git merge 2d5c8e80ef0b738bf066286430e034ddb43b07c4 in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git log --format=%H%x1f%an%x1f%ae%x1f%cn%x1f%ce%x1f%s%n%b%x1e 6ba87e1ad5cb88a2241e1665e945405e6b4f206b..HEAD
+Merged SHA 2d5c8e80ef0b738bf066286430e034ddb43b07c4 with commit message 'chore: move to workload identity rather than useing GCP service account tokens' into base branch master
+Merged SHA b6a2baad91d59ec15cb4ad35db5f15164a1445c5 with commit message 'fix: upgrade image version' into base branch master
+Merged SHA d335809c3344c37348f7fb4c9c1cbadb94ee45a0 with commit message 'fix: switch to private image' into base branch master
+Merged SHA 0a659d76afd669bcf567f8d25ec6eef737fac08d with commit message 'fix: add private images' into base branch master
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-k2nm6-9[0m stage [32mmeta-pipeline[0m and container [32mstep-merge-pull-refs[0m
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git fetch origin --unshallow 2d5c8e80ef0b738bf066286430e034ddb43b07c4: 6ba87e1ad5cb88a2241e1665e945405e6b4f206b:
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git fetch origin 2d5c8e80ef0b738bf066286430e034ddb43b07c4: 6ba87e1ad5cb88a2241e1665e945405e6b4f206b:
+DEBUG: ran git fetch origin 2d5c8e80ef0b738bf066286430e034ddb43b07c4: 6ba87e1ad5cb88a2241e1665e945405e6b4f206b: in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git rev-parse --is-shallow-repository
+DEBUG: Unshallowed git repo in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git branch
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git checkout master
+DEBUG: ran git checkout master in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git reset --hard 6ba87e1ad5cb88a2241e1665e945405e6b4f206b
+DEBUG: ran git reset --hard 6ba87e1ad5cb88a2241e1665e945405e6b4f206b in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git clean -fd .
+DEBUG: ran clean --force -d . in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git merge 2d5c8e80ef0b738bf066286430e034ddb43b07c4
+DEBUG: ran git merge 2d5c8e80ef0b738bf066286430e034ddb43b07c4 in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git log --format=%H%x1f%an%x1f%ae%x1f%cn%x1f%ce%x1f%s%n%b%x1e 6ba87e1ad5cb88a2241e1665e945405e6b4f206b..HEAD
+Merged SHA 2d5c8e80ef0b738bf066286430e034ddb43b07c4 with commit message 'chore: move to workload identity rather than useing GCP service account tokens' into base branch master
+Merged SHA b6a2baad91d59ec15cb4ad35db5f15164a1445c5 with commit message 'fix: upgrade image version' into base branch master
+Merged SHA d335809c3344c37348f7fb4c9c1cbadb94ee45a0 with commit message 'fix: switch to private image' into base branch master
+Merged SHA 0a659d76afd669bcf567f8d25ec6eef737fac08d with commit message 'fix: add private images' into base branch master
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-k2nm6-9[0m stage [32mmeta-pipeline[0m and container [32mstep-create-effective-pipeline[0m
+Cloning the Jenkins X versions repo https://github.com/jenkins-x/**r-versions.git with ref refs/heads/master to /builder/home/.**/jenkins-x-versions
+Effective pipeline written to jenkins-x-gke-effective.yml
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-k2nm6-9[0m stage [32mmeta-pipeline[0m and container [32mstep-create-tekton-crds[0m
+error: failed to generate Tekton CRDs: unable to extract the requested pipeline: no pipeline defined for kind pullrequest
+[31m
+Pipeline failed on stage 'meta-pipeline' : container 'step-create-tekton-crds'. The execution of the pipeline has stopped.[0m
