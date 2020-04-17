@@ -33,7 +33,11 @@ echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github
 
 echo "creating cluster $CLUSTER_NAME in project $PROJECT_ID with labels $LABELS"
 
-git clone https://github.com/jenkins-x-labs/cloud-resources.git
+# lets find the current cloud resources version
+export CLOUD_RESOURCES_VERSION=$(grep  'version: ' /workspace/source/git/github.com/jenkins-x-labs/cloud-resources.yml | awk '{ print $2}')
+echo "found cloud-resources version $CLOUD_RESOURCES_VERSION"
+
+git clone -b v${CLOUD_RESOURCES_VERSION} https://github.com/jenkins-x-labs/cloud-resources.git
 cloud-resources/gcloud/create_cluster.sh
 
 # lets install vault
