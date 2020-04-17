@@ -13,7 +13,7 @@ pipelineConfig:
                 cpu: 1
                 memory: 2048Mi
         environment:
-          - name: GH_ACCESS_TOKEN 
+          - name: GH_ACCESS_TOKEN
             valueFrom:
               secretKeyRef:
                 name: bdd-pipeline-token-github
@@ -28,6 +28,6 @@ pipelineConfig:
         stages:
           - name: ci
             steps:
-              - command: jx/bdd/gsm/ci.sh
+              - command: jx/bdd/mc/ci.sh
                 image: gcr.io/jenkinsxio-labs-private/jxl:0.0.11
                 name: runci

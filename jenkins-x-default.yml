@@ -13,8 +13,6 @@ pipelineConfig:
                 cpu: 1
                 memory: 2048Mi
         environment:
-          - name: GKE_SA
-            value: /secrets/bdd/sa.json
           - name: GH_ACCESS_TOKEN 
             valueFrom:
               secretKeyRef:
@@ -29,19 +27,7 @@ pipelineConfig:
           image: gcr.io/jenkinsxio/builder-go-nodejs:2.0.1245-582
         stages:
           - name: ci
-            options:
-              volumes:
-                - name: sa
-                  secret:
-                    secretName: bdd-gcp-sa
-                    items:
-                      - key: credentials.json
-                        path: bdd/sa.json
-              containerOptions:
-                volumeMounts:
-                  - mountPath: /secrets
-                    name: sa
             steps:
               - command: jx/bdd/default/ci.sh
-                image: gcr.io/jenkinsxio-labs/jxl:0.0.181
+                image: gcr.io/jenkinsxio-labs-private/jxl:0.0.11
                 name: runci

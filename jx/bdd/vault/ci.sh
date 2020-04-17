@@ -14,9 +14,7 @@ jx --version
 
 export GH_USERNAME="jenkins-x-labs-bot"
 export GH_EMAIL="jenkins-x@googlegroups.com"
-# TODO when we can use an org and private repos
-#export GH_OWNER="jenkins-x-labs-bdd-tests"
-export GH_OWNER="jenkins-x-labs-bot"
+export GH_OWNER="cb-kubecd"
 
 export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-bdd-vault"
 export PROJECT_ID=jenkins-x-labs-bdd
@@ -31,11 +29,15 @@ git config --global --add user.email jenkins-x@googlegroups.com
 echo "running the BDD test with JX_HOME = $JX_HOME"
 
 # replace the credentials file with a single user entry
-echo "https://$GH_USERNAME:$GH_ACCESS_TOKEN@github.com" > $JX_HOME/git/credentials
+echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $JX_HOME/git/credentials
 
 echo "creating cluster $CLUSTER_NAME in project $PROJECT_ID with labels $LABELS"
 
-git clone https://github.com/jenkins-x-labs/cloud-resources.git
+# lets find the current cloud resources version
+export CLOUD_RESOURCES_VERSION=$(grep  'version: ' /workspace/source/git/github.com/jenkins-x-labs/cloud-resources.yml | awk '{ print $2}')
+echo "found cloud-resources version $CLOUD_RESOURCES_VERSION"
+
+git clone -b v${CLOUD_RESOURCES_VERSION} https://github.com/jenkins-x-labs/cloud-resources.git
 cloud-resources/gcloud/create_cluster.sh
 
 # lets install vault
@@ -62,7 +64,7 @@ export JX_SECRETS_YAML=/tmp/secrets.yaml
 echo "using the version stream ref: $PULL_PULL_SHA"
 
 # create the boot git repository
-jxl boot create -b --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE \
+jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE \
   --secret=vault
 
 # lets wait for the operator to kick in
@@ -108,7 +110,7 @@ kubectl get env
 kubectl get env dev -oyaml
 
 # TODO not sure we need this?
-helm init
+
 helm repo add jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
 
 
