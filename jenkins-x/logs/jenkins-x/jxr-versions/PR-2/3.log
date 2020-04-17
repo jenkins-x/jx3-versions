@@ -1,0 +1,61 @@
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-jf6ht-3[0m stage [32mmeta-pipeline[0m and container [32mstep-credential-initializer-qrf6b[0m
+{"level":"warn","ts":1587128187.1752326,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1587128187.1757078,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-jf6ht-3[0m stage [32mmeta-pipeline[0m and container [32mstep-working-dir-initializer-tt6qc[0m
+{"level":"warn","ts":1587128188.849868,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1587128188.905797,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-jf6ht-3[0m stage [32mmeta-pipeline[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-jf6ht-3[0m stage [32mmeta-pipeline[0m and container [32mstep-git-source-meta-jenkins-x-jxr-versions-pr-jf6ht-j4ckh[0m
+{"level":"warn","ts":1587128196.0686712,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1587128199.0320039,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/jenkins-x/**r-versions.git @ 6ba87e1ad5cb88a2241e1665e945405e6b4f206b in path /workspace/source"}
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-jf6ht-3[0m stage [32mmeta-pipeline[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:6ba87e1ad5cb88a2241e1665e945405e6b4f206b,2:274bdc7d2a4b2c27b7dd084bb433cc34e3dca3f3
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git fetch origin --unshallow 274bdc7d2a4b2c27b7dd084bb433cc34e3dca3f3: 6ba87e1ad5cb88a2241e1665e945405e6b4f206b:
+DEBUG: ran git fetch --unshallow origin 274bdc7d2a4b2c27b7dd084bb433cc34e3dca3f3: 6ba87e1ad5cb88a2241e1665e945405e6b4f206b: in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git branch
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git checkout master
+DEBUG: ran git checkout master in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git reset --hard 6ba87e1ad5cb88a2241e1665e945405e6b4f206b
+DEBUG: ran git reset --hard 6ba87e1ad5cb88a2241e1665e945405e6b4f206b in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git clean -fd .
+DEBUG: ran clean --force -d . in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git merge 274bdc7d2a4b2c27b7dd084bb433cc34e3dca3f3
+DEBUG: ran git merge 274bdc7d2a4b2c27b7dd084bb433cc34e3dca3f3 in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git log --format=%H%x1f%an%x1f%ae%x1f%cn%x1f%ce%x1f%s%n%b%x1e 6ba87e1ad5cb88a2241e1665e945405e6b4f206b..HEAD
+Merged SHA 274bdc7d2a4b2c27b7dd084bb433cc34e3dca3f3 with commit message 'chore(deps): bump https://github.com/jenkins-x/**l from 0.0.0-JR6 to 0.0.11' into base branch master
+Merged SHA 2ffd8f2ffcdd4770b8a688d169a508468bf4ff11 with commit message 'chore(deps): bump https://github.com/jenkins-x/**l from 0.0.181 to 0.0.11' into base branch master
+Merged SHA 78b6a118b8171c8acb60ac0f65f6aaa0a4d8fc93 with commit message 'chore(deps): bump https://github.com/jenkins-x/**l to 0.0.11' into base branch master
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-jf6ht-3[0m stage [32mmeta-pipeline[0m and container [32mstep-merge-pull-refs[0m
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git fetch origin --unshallow 274bdc7d2a4b2c27b7dd084bb433cc34e3dca3f3: 6ba87e1ad5cb88a2241e1665e945405e6b4f206b:
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git fetch origin 274bdc7d2a4b2c27b7dd084bb433cc34e3dca3f3: 6ba87e1ad5cb88a2241e1665e945405e6b4f206b:
+DEBUG: ran git fetch origin 274bdc7d2a4b2c27b7dd084bb433cc34e3dca3f3: 6ba87e1ad5cb88a2241e1665e945405e6b4f206b: in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git rev-parse --is-shallow-repository
+DEBUG: Unshallowed git repo in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git branch
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git checkout master
+DEBUG: ran git checkout master in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git reset --hard 6ba87e1ad5cb88a2241e1665e945405e6b4f206b
+DEBUG: ran git reset --hard 6ba87e1ad5cb88a2241e1665e945405e6b4f206b in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git clean -fd .
+DEBUG: ran clean --force -d . in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git merge 274bdc7d2a4b2c27b7dd084bb433cc34e3dca3f3
+DEBUG: ran git merge 274bdc7d2a4b2c27b7dd084bb433cc34e3dca3f3 in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git log --format=%H%x1f%an%x1f%ae%x1f%cn%x1f%ce%x1f%s%n%b%x1e 6ba87e1ad5cb88a2241e1665e945405e6b4f206b..HEAD
+Merged SHA 274bdc7d2a4b2c27b7dd084bb433cc34e3dca3f3 with commit message 'chore(deps): bump https://github.com/jenkins-x/**l from 0.0.0-JR6 to 0.0.11' into base branch master
+Merged SHA 2ffd8f2ffcdd4770b8a688d169a508468bf4ff11 with commit message 'chore(deps): bump https://github.com/jenkins-x/**l from 0.0.181 to 0.0.11' into base branch master
+Merged SHA 78b6a118b8171c8acb60ac0f65f6aaa0a4d8fc93 with commit message 'chore(deps): bump https://github.com/jenkins-x/**l to 0.0.11' into base branch master
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-jf6ht-3[0m stage [32mmeta-pipeline[0m and container [32mstep-create-effective-pipeline[0m
+Cloning the Jenkins X versions repo https://github.com/jenkins-x/**r-versions.git with ref refs/heads/master to /builder/home/.**/jenkins-x-versions
+Effective pipeline written to jenkins-x-gke-effective.yml
+
+Showing logs for build [32mmeta-jenkins-x-jxr-versions-pr-jf6ht-3[0m stage [32mmeta-pipeline[0m and container [32mstep-create-tekton-crds[0m
+error: failed to generate Tekton CRDs: unable to extract the requested pipeline: no pipeline defined for kind pullrequest
+[31m
+Pipeline failed on stage 'meta-pipeline' : container 'step-create-tekton-crds'. The execution of the pipeline has stopped.[0m
