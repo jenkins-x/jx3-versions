@@ -79,7 +79,7 @@ kubectl get env
 kubectl get env dev -oyaml
 
 # TODO not sure we need this?
-helm init
+
 helm repo add jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
 
 
