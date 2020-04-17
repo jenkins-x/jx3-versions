@@ -1,0 +1,83 @@
+
+Showing logs for build [32mjenkins-x-jxr-versions-pr-1-gke-tnsms-15[0m stage [32mci[0m and container [32mstep-credential-initializer-kccjf[0m
+{"level":"warn","ts":1587129649.6318567,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1587129649.6324854,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mjenkins-x-jxr-versions-pr-1-gke-tnsms-15[0m stage [32mci[0m and container [32mstep-working-dir-initializer-pr7np[0m
+{"level":"warn","ts":1587129650.61418,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1587129650.6162696,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mjenkins-x-jxr-versions-pr-1-gke-tnsms-15[0m stage [32mci[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mjenkins-x-jxr-versions-pr-1-gke-tnsms-15[0m stage [32mci[0m and container [32mstep-git-source-jenkins-x-jxr-versions-pr-1-gke-tnsms-6fksc[0m
+{"level":"warn","ts":1587129687.7388306,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1587129689.0278563,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/jenkins-x/**r-versions.git @ master in path /workspace/source"}
+
+Showing logs for build [32mjenkins-x-jxr-versions-pr-1-gke-tnsms-15[0m stage [32mci[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:6ba87e1ad5cb88a2241e1665e945405e6b4f206b,1:040b63be101e26540b4de0367d45ee8e88cdce46
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git fetch origin --unshallow 040b63be101e26540b4de0367d45ee8e88cdce46: 6ba87e1ad5cb88a2241e1665e945405e6b4f206b:
+DEBUG: ran git fetch --unshallow origin 040b63be101e26540b4de0367d45ee8e88cdce46: 6ba87e1ad5cb88a2241e1665e945405e6b4f206b: in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git branch
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git checkout master
+DEBUG: ran git checkout master in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git reset --hard 6ba87e1ad5cb88a2241e1665e945405e6b4f206b
+DEBUG: ran git reset --hard 6ba87e1ad5cb88a2241e1665e945405e6b4f206b in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git clean -fd .
+DEBUG: ran clean --force -d . in 
+DEBUG: JX_LOG_LEVEL=error LC_ALL=C git merge 040b63be101e26540b4de0367d45ee8e88cdce46
+DEBUG: ran git merge 040b63be101e26540b4de0367d45ee8e88cdce46 in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git log --format=%H%x1f%an%x1f%ae%x1f%cn%x1f%ce%x1f%s%n%b%x1e 6ba87e1ad5cb88a2241e1665e945405e6b4f206b..HEAD
+Merged SHA 040b63be101e26540b4de0367d45ee8e88cdce46 with commit message 'fix: upgrade **l' into base branch master
+Merged SHA 57b134a02eae3d31dbdeff447350e1ae5217443b with commit message 'fix: add missing pipelines' into base branch master
+Merged SHA fa7647802b5aa732041fed6ea2c18a84cfc15b39 with commit message 'fix: add missing pipelines' into base branch master
+Merged SHA 2d5c8e80ef0b738bf066286430e034ddb43b07c4 with commit message 'chore: move to workload identity rather than useing GCP service account tokens' into base branch master
+Merged SHA 4c05eb7719d03358a399b745c75de00c6334a97c with commit message 'fix: upgrade **l' into base branch master
+Merged SHA b6a2baad91d59ec15cb4ad35db5f15164a1445c5 with commit message 'fix: upgrade image version' into base branch master
+Merged SHA d335809c3344c37348f7fb4c9c1cbadb94ee45a0 with commit message 'fix: switch to private image' into base branch master
+Merged SHA 0a659d76afd669bcf567f8d25ec6eef737fac08d with commit message 'fix: add private images' into base branch master
+
+Showing logs for build [32mjenkins-x-jxr-versions-pr-1-gke-tnsms-15[0m stage [32mci[0m and container [32mstep-runci[0m
++ JX_HOME=/tmp/**home
++ KUBECONFIG=/tmp/**home/config
++ export XDG_CONFIG_HOME=/tmp/**home
++ XDG_CONFIG_HOME=/tmp/**home
++ mkdir -p /tmp/**home/git
++ ** --version
+2.0.1285-dev+0a1fd5e18
++ export GH_USERNAME=******************
++ GH_USERNAME=******************
++ export GH_EMAIL=jenkins-x@googlegroups.com
++ GH_EMAIL=jenkins-x@googlegroups.com
++ export GH_OWNER=******************
++ GH_OWNER=******************
++ export PROJECT_ID=jenkins-x-labs-bdd
++ PROJECT_ID=jenkins-x-labs-bdd
+++ date +%a-%b-%d-%Y-%H-%M-%S
++ export CREATED_TIME=Fri-Apr-17-2020-13-21-38
++ CREATED_TIME=Fri-Apr-17-2020-13-21-38
++ export CLUSTER_NAME=pr-1-15-bdd-gke
++ CLUSTER_NAME=pr-1-15-bdd-gke
++ export ZONE=europe-west1-c
++ ZONE=europe-west1-c
++ export LABELS=branch=pr-1,cluster=bdd-gke,create-time=fri-apr-17-2020-13-21-38
++ LABELS=branch=pr-1,cluster=bdd-gke,create-time=fri-apr-17-2020-13-21-38
++ git config --global --add user.name JenkinsXBot
++ git config --global --add user.email jenkins-x@googlegroups.com
++ echo 'running the BDD test with JX_HOME = /tmp/**home'
++ echo 'https://******************:****************************************
+@github.com'
++ echo 'creating cluster pr-1-15-bdd-gke in project jenkins-x-labs-bdd with labels branch=pr-1,cluster=bdd-gke,create-time=fri-apr-17-2020-13-21-38'
++ git clone https://github.com/jenkins-x-labs/cloud-resources.git
+running the BDD test with JX_HOME = /tmp/**home
+creating cluster pr-1-15-bdd-gke in project jenkins-x-labs-bdd with labels branch=pr-1,cluster=bdd-gke,create-time=fri-apr-17-2020-13-21-38
+Cloning into 'cloud-resources'...
++ cloud-resources/gcloud/create_cluster.sh
+creating a new cluster pr-1-15-bdd-gke in project jenkins-x-labs-bdd and region europe-west1-c
+WARNING: Currently VPC-native is not the default mode during cluster creation. In the future, this will become the default mode and can be disabled using `--no-enable-ip-alias` flag. Use `--[no-]enable-ip-alias` flag to suppress this warning.
+WARNING: Newly created clusters and node-pools will have node auto-upgrade enabled by default. This can be disabled using the `--no-enable-autoupgrade` flag.
+WARNING: Starting with version 1.18, clusters will have shielded GKE nodes by default.
+WARNING: Your Pod address range (`--cluster-ipv4-cidr`) can accommodate at most 1008 node(s). 
+This will enable the autorepair feature for nodes. Please see https://cloud.google.com/kubernetes-engine/docs/node-auto-repair for more information on node autorepairs.
+ERROR: (gcloud.beta.container.clusters.create) ResponseError: code=403, message=Required "container.clusters.create" permission(s) for "projects/jenkins-x-labs-bdd".
+[31m
+Pipeline failed on stage 'ci' : container 'step-runci'. The execution of the pipeline has stopped.[0m
