@@ -16,9 +16,7 @@ export GH_USERNAME="jenkins-x-labs-bot"
 export GH_EMAIL="jenkins-x@googlegroups.com"
 export GH_USERNAME="jenkins-x-labs-bot"
 export GH_EMAIL="jenkins-x@googlegroups.com"
-# TODO when we can use an org and private repos
-#export GH_OWNER="jenkins-x-labs-bdd-tests"
-export GH_OWNER="jenkins-x-labs-bot"
+export GH_OWNER="cb-kubecd"
 
 export CREATED_TIME=$(date '+%a-%b-%d-%Y-%H-%M-%S')
 export PROJECT_ID=jenkins-x-labs-bdd
