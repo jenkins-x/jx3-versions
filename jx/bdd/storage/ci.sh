@@ -94,4 +94,4 @@ export GIT_ORGANISATION="$GH_OWNER"
 bddjx -ginkgo.focus=golang -test.v
 
 echo cleaning up cloud resources
-curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
+curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/v$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
