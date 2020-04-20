@@ -91,3 +91,7 @@ export GIT_ORGANISATION="$GH_OWNER"
 
 # run the BDD tests
 bddjx -ginkgo.focus=golang -test.v
+
+echo cleaning up cloud resources
+curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/v$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
+gcloud container clusters delete $CLUSTER_NAME --zone $ZONE --quiet

@@ -48,6 +48,8 @@ echo "using the version stream ref: $PULL_PULL_SHA"
 # create the boot git repository
 jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --out giturl.txt
 
+# add external-dns and certmanager
+
 # import secrets...
 echo "secrets:
   adminUser:
@@ -90,3 +92,7 @@ export GIT_ORGANISATION="$GH_OWNER"
 
 # run the BDD tests
 bddjx -ginkgo.focus=golang -test.v
+
+echo cleaning up cloud resources
+curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/v$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
+gcloud container clusters delete $CLUSTER_NAME --zone $ZONE --quiet
