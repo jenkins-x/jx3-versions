@@ -69,3 +69,4 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x-labs/istio](https://github.com/jenkins-x-labs/istio) |  | [0.0.21]() | 
 [jenkins-x/jxl](https://github.com/jenkins-x/jxl) |  | [0.0.27](https://github.com/jenkins-x/jxl/releases/tag/v0.0.27) | 
 [jenkins-x-labs/cloud-resources](https://github.com/jenkins-x-labs/cloud-resources) |  | [0.0.25]() | 
+[jenkins-x/jxr-packs-kubernetes](https://github.com/jenkins-x/jxr-packs-kubernetes) |  | [0.0.3]() | 
