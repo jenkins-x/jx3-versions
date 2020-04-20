@@ -477,5 +477,5 @@ dependencies:
   owner: jenkins-x
   repo: jxl
   url: https://github.com/jenkins-x/jxl
-  version: 0.0.25
-  versionURL: https://github.com/jenkins-x/jxl/releases/tag/v0.0.25
+  version: 0.0.24
+  versionURL: https://github.com/jenkins-x/jxl/releases/tag/v0.0.24

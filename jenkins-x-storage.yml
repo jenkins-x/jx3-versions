@@ -29,5 +29,5 @@ pipelineConfig:
           - name: ci
             steps:
               - command: jx/bdd/storage/ci.sh
-                image: gcr.io/jenkinsxio-labs-private/jxl:0.0.25
+                image: gcr.io/jenkinsxio-labs-private/jxl:0.0.24
                 name: runci
