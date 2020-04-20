@@ -92,6 +92,5 @@ export GIT_ORGANISATION="$GH_OWNER"
 bddjx -ginkgo.focus=golang -test.v
 
 echo cleaning up cloud resources
-#curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/v$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
-curl https://gist.githubusercontent.com/rawlingsj/c14a913c44b2ede49dcfaac590f41d2c/raw/40e5e5db2e8b9c1298e9c2cb5eddfe9e1c366363/gistfile1.txt | bash
-gcloud container clusters delete $CLUSTER_NAME
+curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/v$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
+gcloud container clusters delete $CLUSTER_NAME --zone $ZONE --quiet
