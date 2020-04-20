@@ -1,0 +1,58 @@
+
+Showing logs for build [32mjenkins-x-jxr-versions-master-6m6w2-4[0m stage [32mchangelog[0m and container [32mstep-credential-initializer-9m2vt[0m
+{"level":"warn","ts":1587371331.2284424,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1587371331.2292874,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mjenkins-x-jxr-versions-master-6m6w2-4[0m stage [32mchangelog[0m and container [32mstep-working-dir-initializer-nwn88[0m
+{"level":"warn","ts":1587371332.5212276,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1587371332.5226755,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mjenkins-x-jxr-versions-master-6m6w2-4[0m stage [32mchangelog[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mjenkins-x-jxr-versions-master-6m6w2-4[0m stage [32mchangelog[0m and container [32mstep-git-source-jenkins-x-jxr-versions-master-6m6w2-zf4bp[0m
+{"level":"warn","ts":1587371338.573313,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1587371339.7806728,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/jenkins-x/**r-versions.git @ v0.0.3 in path /workspace/source"}
+
+Showing logs for build [32mjenkins-x-jxr-versions-master-6m6w2-4[0m stage [32mchangelog[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:4a916b1ba54b9df481e271cb128b9c4ed3ff2c30
+WARNING: no SHAs to merge, falling back to initial cloned commit
+
+Showing logs for build [32mjenkins-x-jxr-versions-master-6m6w2-4[0m stage [32mchangelog[0m and container [32mstep-get-jx-prerelease-state[0m
+
+Showing logs for build [32mjenkins-x-jxr-versions-master-6m6w2-4[0m stage [32mchangelog[0m and container [32mstep-changelog[0m
+Converted /workspace/source to an unshallow repository
+DEBUG: Using helmBinary helm with feature flag: template-mode
+Generating change log from git ref b52d9814a38048a2f8cc5998c9d808eca61c8cdb => v0.0.3
+DEBUG: merging pipeline secrets with local secrets
+DEBUG: merging pipeline secrets with local secrets
+WARNING: failed to find git commits between revision b52d9814a38048a2f8cc5998c9d808eca61c8cdb and v0.0.3 due to: object not found
+DEBUG: Found commits:
+DEBUG: Generated release notes:
+
+
+WARNING: No release found for jenkins-x/**r-versions and tag v0.0.3 so creating a new release
+Updated the release information at https://github.com/jenkins-x/**r-versions/releases/tag/v0.0.3
+Uploaded /workspace/source/dependency-matrix/matrix.yaml to release asset https://github.com/jenkins-x/**r-versions/releases/download/v0.0.3/dependency-matrix.yaml
+generated: /workspace/source/templates/release.yaml
+Created Release **r-versions-0-0-3 resource in namespace **
+Updating PipelineActivity jenkins-x-**r-versions-master-4 with version 0.0.3
+Updated PipelineActivities jenkins-x-**r-versions-master-4 with release notes URL: https://github.com/jenkins-x/**r-versions/releases/tag/v0.0.3
+
+Showing logs for build [32mjenkins-x-jxr-versions-master-6m6w2-4[0m stage [32mchangelog[0m and container [32mstep-release-jx[0m
++ export GH_OWNER=jenkins-x
++ GH_OWNER=jenkins-x
++ export GH_REPO=**
++ GH_REPO=**
+++ sed 's:^.*jenkins-x\/**.*\[\([0-9.]*\)\].*$:\1:;t;d' ./dependency-matrix/matrix.md
++ export 'JX_VERSION=2.0.1245
+0.0.26'
++ JX_VERSION='2.0.1245
+0.0.26'
++ [[ 2.0.1245
+0.0.26 =~ ^[0-9]*\.[0-9]*\.[0-9]*$ ]]
+
+Showing logs for build [32mjenkins-x-jxr-versions-master-6m6w2-4[0m stage [32mchangelog[0m and container [32mstep-update-jx-bot[0m
+cat: is_**_prerelease.bool: No such file or directory
+
+Showing logs for build [32mjenkins-x-jxr-versions-master-6m6w2-4[0m stage [32mchangelog[0m and container [32mstep-update-jx-website[0m
+cat: is_**_prerelease.bool: No such file or directory
