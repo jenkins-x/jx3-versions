@@ -485,3 +485,9 @@ dependencies:
   url: https://github.com/jenkins-x-labs/cloud-resources
   version: 0.0.27
   versionURL: ""
+- host: github.com
+  owner: jenkins-x
+  repo: jxr-packs-kubernetes
+  url: https://github.com/jenkins-x/jxr-packs-kubernetes
+  version: 0.0.4
+  versionURL: ""
