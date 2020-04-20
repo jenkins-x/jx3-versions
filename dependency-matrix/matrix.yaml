@@ -477,8 +477,8 @@ dependencies:
   owner: jenkins-x
   repo: jxl
   url: https://github.com/jenkins-x/jxl
-  version: 0.0.27
-  versionURL: https://github.com/jenkins-x/jxl/releases/tag/v0.0.27
+  version: 0.0.30
+  versionURL: https://github.com/jenkins-x/jxl/releases/tag/v0.0.30
 - host: github.com
   owner: jenkins-x-labs
   repo: cloud-resources
