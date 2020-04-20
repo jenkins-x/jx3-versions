@@ -483,5 +483,5 @@ dependencies:
   owner: jenkins-x-labs
   repo: cloud-resources
   url: https://github.com/jenkins-x-labs/cloud-resources
-  version: 0.0.26
+  version: 0.0.27
   versionURL: ""
