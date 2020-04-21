@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -e
-set -x
 
 # setup environment
 JX_HOME="/tmp/jxhome"
@@ -45,10 +44,21 @@ export JX_SECRETS_YAML=/tmp/secrets.yaml
 
 echo "using the version stream ref: $PULL_PULL_SHA"
 
-# create the boot git repository
-jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --out giturl.txt
-
 # add external-dns and certmanager
+jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --out giturl.txt \
+  --domain $CLUSTER_NAME.jenkinsxlabs-test.com \
+  --tls \
+  --dns \
+  --tls-email jenkins-x-admin@googlegroups.com \
+  --tls-production=false
+
+# create service account key used by certmanager to add A records for the dns challange by letsencrypt
+gcloud iam service-accounts create $CLUSTER_NAME-dns01-solver --display-name "$CLUSTER_NAME dns01-solver" --project jenkins-x-labs-bdd
+gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$CLUSTER_NAME-dns01-solver@$PROJECT_ID.iam.gserviceaccount.com --role roles/dns.admin --project jenkins-x-labs-bdd
+gcloud iam service-accounts keys create /tmp/credentials.json --iam-account $CLUSTER_NAME-dns01-solver@$PROJECT_ID.iam.gserviceaccount.com --project jenkins-x-labs-bdd
+kubectl create secret generic external-dns-gcp-sa --from-file=/tmp/credentials.json
+rm /tmp/credentials.json
+
 
 # import secrets...
 echo "secrets:
@@ -80,18 +90,10 @@ kubectl get environments
 kubectl get env
 kubectl get env dev -oyaml
 
-# TODO not sure we need this?
-
-helm repo add jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
-
-
-export JX_DISABLE_DELETE_APP="true"
-
-export GIT_ORGANISATION="$GH_OWNER"
-
-
-# run the BDD tests
-bddjx -ginkgo.focus=golang -test.v
+# verify that we have a stagin certificate from LetsEncrypt
+kubectl get issuer letsencrypt-staging -ojsonpath='{.status.conditions[0].status}'
+kubectl get issuer letsencrypt-staging -ojsonpath='{.status.conditions[0].message}'
+jxl verify tls hook-jx.$CLUSTER_NAME.jenkinsxlabs-test.com  --production=false --issuer 'Fake LE Intermediate X1'
 
 echo cleaning up cloud resources
 curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/v$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
