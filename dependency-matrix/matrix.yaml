@@ -489,5 +489,5 @@ dependencies:
   owner: jenkins-x
   repo: jxr-packs-kubernetes
   url: https://github.com/jenkins-x/jxr-packs-kubernetes
-  version: 0.0.4
+  version: 0.0.5
   versionURL: ""
