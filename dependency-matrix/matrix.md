@@ -67,6 +67,6 @@ Dependency | Sources | Version | Mismatched versions
 [kubernetes-sigs/external-dns](https://github.com/kubernetes-sigs/external-dns) |  | [2.20.5]() | 
 [jenkins-x-labs/jxl](https://github.com/jenkins-x-labs/jxl) |  | [0.0.181](https://github.com/jenkins-x-labs/jxl/releases/tag/v0.0.181) | 
 [jenkins-x-labs/istio](https://github.com/jenkins-x-labs/istio) |  | [0.0.21]() | 
-[jenkins-x/jxl](https://github.com/jenkins-x/jxl) |  | [0.0.39](https://github.com/jenkins-x/jxl/releases/tag/v0.0.39) | 
+[jenkins-x/jxl](https://github.com/jenkins-x/jxl) |  | [0.0.41](https://github.com/jenkins-x/jxl/releases/tag/v0.0.41) | 
 [jenkins-x-labs/cloud-resources](https://github.com/jenkins-x-labs/cloud-resources) |  | [0.0.27]() | 
 [jenkins-x/jxr-packs-kubernetes](https://github.com/jenkins-x/jxr-packs-kubernetes) |  | [0.0.6]() | 
