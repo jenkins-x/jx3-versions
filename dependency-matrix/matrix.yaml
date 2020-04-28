@@ -495,5 +495,5 @@ dependencies:
   owner: jenkins-x
   repo: helm-annotate
   url: https://github.com/jenkins-x/helm-annotate
-  version: 0.0.6
+  version: 0.0.7
   versionURL: ""
