@@ -509,3 +509,9 @@ dependencies:
   url: https://github.com/jenkins-x/charts
   version: 1.1.7
   versionURL: ""
+- host: github.com
+  owner: jenkins-x-charts
+  repo: nexus
+  url: https://github.com/jenkins-x-charts/nexus
+  version: 0.1.28
+  versionURL: ""
