@@ -497,3 +497,9 @@ dependencies:
   url: https://github.com/jenkins-x/helm-annotate
   version: 0.0.10
   versionURL: ""
+- host: github.com
+  owner: godaddy
+  repo: kubernetes-external-secrets
+  url: https://github.com/godaddy/kubernetes-external-secrets
+  version: 3.2.0
+  versionURL: ""
