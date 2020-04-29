@@ -527,3 +527,9 @@ dependencies:
   url: https://github.com/Comcast/kuberhealthy
   version: 1.2.6
   versionURL: ""
+- host: github.com
+  owner: helm
+  repo: metrics-server
+  url: https://github.com/helm/charts/tree/master/stable/metrics-server
+  version: 2.11.1
+  versionURL: ""

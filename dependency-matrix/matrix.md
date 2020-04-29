@@ -76,3 +76,4 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x-charts/nexus](https://github.com/jenkins-x-charts/nexus) |  | [0.1.28]() | 
 [helm/cluster-autoscaler](https://github.com/helm/charts/tree/master/stable/cluster-autoscaler) |  | [7.2.2]() | 
 [Comcast/kuberhealthy](https://github.com/Comcast/kuberhealthy) |  | [1.2.6]() | 
+[helm/metrics-server](https://github.com/helm/charts/tree/master/stable/metrics-server) |  | [2.11.1]() | 
