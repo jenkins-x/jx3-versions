@@ -72,3 +72,4 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jxr-packs-kubernetes](https://github.com/jenkins-x/jxr-packs-kubernetes) |  | [0.0.10]() | 
 [jenkins-x/helm-annotate](https://github.com/jenkins-x/helm-annotate) |  | [0.0.10]() | 
 [godaddy/kubernetes-external-secrets](https://github.com/godaddy/kubernetes-external-secrets) |  | [3.2.0]() | 
+[jenkins-x/charts](https://github.com/jenkins-x/charts) |  | [1.1.7]() | 
