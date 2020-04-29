@@ -521,3 +521,9 @@ dependencies:
   url: https://github.com/helm/charts/tree/master/stable/cluster-autoscaler
   version: 7.2.2
   versionURL: ""
+- host: github.com
+  owner: Comcast
+  repo: kuberhealthy
+  url: https://github.com/Comcast/kuberhealthy
+  version: 1.2.6
+  versionURL: ""
