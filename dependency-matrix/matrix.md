@@ -71,3 +71,4 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x-labs/cloud-resources](https://github.com/jenkins-x-labs/cloud-resources) |  | [0.0.27]() | 
 [jenkins-x/jxr-packs-kubernetes](https://github.com/jenkins-x/jxr-packs-kubernetes) |  | [0.0.10]() | 
 [jenkins-x/helm-annotate](https://github.com/jenkins-x/helm-annotate) |  | [0.0.10]() | 
+[jenkins-x/jxr-versions](https://github.com/jenkins-x/jxr-versions) |  | [0.0.55]() | 
