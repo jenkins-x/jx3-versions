@@ -497,3 +497,9 @@ dependencies:
   url: https://github.com/jenkins-x/helm-annotate
   version: 0.0.10
   versionURL: ""
+- host: github.com
+  owner: jenkins-x
+  repo: jxr-versions
+  url: https://github.com/jenkins-x/jxr-versions
+  version: 0.0.55
+  versionURL: ""
