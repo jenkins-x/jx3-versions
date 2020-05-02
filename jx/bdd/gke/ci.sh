@@ -61,6 +61,8 @@ echo "secrets:
 
 jxl boot secrets import -f /tmp/secrets.yaml --git-url `cat giturl.txt`
 
+sleep infinity
+
 jxl boot run -b --job
 
 
