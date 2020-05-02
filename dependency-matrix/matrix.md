@@ -13,7 +13,7 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jenkins-x-platform](https://github.com/jenkins-x/jenkins-x-platform) |  | [2.0.2190](https://github.com/jenkins-x/jenkins-x-platform/releases/tag/v2.0.2190) | 
 [jenkins-x-charts/jx-build-templates](https://github.com/jenkins-x-charts/jx-build-templates) |  | [0.0.1434]() | 
 [jenkins-x-charts/knative-build](https://github.com/jenkins-x-charts/knative-build) |  | [0.1.19]() | 
-[jenkins-x/lighthouse](https://github.com/jenkins-x/lighthouse) |  | [0.0.565]() | 
+[jenkins-x/lighthouse](https://github.com/jenkins-x/lighthouse) |  | [0.0.566]() | 
 [jenkins-x-charts/prow](https://github.com/jenkins-x-charts/prow) |  | [0.0.1760](https://github.com/jenkins-x-charts/prow/releases/tag/v0.0.1760) | 
 [jenkins-x/sso-operator](https://github.com/jenkins-x/sso-operator) |  | [1.2.44]() | 
 [jenkins-x-charts/tekton](https://github.com/jenkins-x-charts/tekton) |  | [0.0.53]() | 
@@ -21,7 +21,7 @@ Dependency | Sources | Version | Mismatched versions
 [jetstack/cert-manager](https://github.com/jetstack/cert-manager) |  | [0.14.3](https://github.com/jetstack/cert-manager/releases/tag/v0.14.3) | 
 [helm/charts](https://github.com/helm/charts/tree/master/stable/nginx-ingress) |  | [1.17.1]() | 
 [bitnami/charts](https://github.com/bitnami/charts/tree/master/bitnami/external-dns) |  | [2.10.2]() | 
-[grafana/grafana](https://github.com/grafana/grafana) |  | [5.0.21]() | 
+[grafana/grafana](https://github.com/grafana/grafana) |  | [5.0.22]() | 
 [prometheus/alertmanager](https://github.com/prometheus/alertmanager) |  | [11.1.5]() | 
 [weaveworks/flagger](https://github.com/weaveworks/flagger):flagger |  | [0.27.0]() | 
 [weaveworks/flagger](https://github.com/weaveworks/flagger):grafana |  | [1.4.0]() | 
@@ -71,7 +71,7 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x-labs/cloud-resources](https://github.com/jenkins-x-labs/cloud-resources) |  | [0.0.27]() | 
 [jenkins-x/jxr-packs-kubernetes](https://github.com/jenkins-x/jxr-packs-kubernetes) |  | [0.0.10]() | 
 [jenkins-x/helm-annotate](https://github.com/jenkins-x/helm-annotate) |  | [0.0.10]() | 
-[godaddy/kubernetes-external-secrets](https://github.com/godaddy/kubernetes-external-secrets) |  | [3.2.0]() | 
+[godaddy/kubernetes-external-secrets](https://github.com/godaddy/kubernetes-external-secrets) |  | [3.3.0]() | 
 [jenkins-x/charts](https://github.com/jenkins-x/charts) |  | [1.1.7]() | 
 [jenkins-x-charts/nexus](https://github.com/jenkins-x-charts/nexus) |  | [0.1.28]() | 
 [helm/cluster-autoscaler](https://github.com/helm/charts/tree/master/stable/cluster-autoscaler) |  | [7.2.2]() | 
