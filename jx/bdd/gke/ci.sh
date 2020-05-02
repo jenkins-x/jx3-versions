@@ -11,8 +11,8 @@ export XDG_CONFIG_HOME=$JX_HOME
 mkdir -p $JX_HOME/git
 
 # copy the binary plugins
-ls -al $HOME/.jx
-cp -r $HOME/.jx/plugins $JX_HOME/plugins
+ls -al /root/.jx
+cp -r /root/.jx/plugins $JX_HOME/plugins
 echo "the binary plugins in the temporary home dir are:"
 ls -al $JX_HOME/plugins/bin
 
