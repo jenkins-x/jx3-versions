@@ -501,7 +501,7 @@ dependencies:
   owner: godaddy
   repo: kubernetes-external-secrets
   url: https://github.com/godaddy/kubernetes-external-secrets
-  version: 3.2.0
+  version: 3.3.0
   versionURL: ""
 - host: github.com
   owner: jenkins-x
