@@ -10,6 +10,11 @@ KUBECONFIG="/tmp/jxhome/config"
 export XDG_CONFIG_HOME=$JX_HOME
 mkdir -p $JX_HOME/git
 
+# copy the binary plugins
+cp -r ~/.jx/plugins $JX_HOME/plugins
+echo "the binary plugins in the temporary home dir are:"
+ls -al $JX_HOME/plugins/bin
+
 jx --version
 
 export GH_USERNAME="jenkins-x-labs-bot"
