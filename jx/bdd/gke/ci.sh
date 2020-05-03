@@ -3,13 +3,15 @@ set -e
 set -x
 
 # setup environment
-#JX_HOME="/tmp/jxhome"
 KUBECONFIG="/tmp/jxhome/config"
 
 mkdir -p $JX_HOME/git
 
 echo "current HOME is $HOME"
 export HOME="/builder/home"
+
+#JX_HOME="/tmp/jxhome"
+export JX_HOME="/home"
 
 # copy the binary plugins
 # TODO is this required?
