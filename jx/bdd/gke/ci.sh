@@ -15,6 +15,7 @@ export JX_HOME="/home"
 
 # copy the binary plugins
 # TODO is this required?
+mkdir -p $JX_HOME/git
 mkdir -p $JX_HOME/plugins/jx/bin
 cp -r $JX_HOME/plugins/jx/bin $JX_HOME/plugins/bin
 
@@ -40,10 +41,15 @@ export LABELS="branch=${BRANCH_NAME,,},cluster=bdd-gke,create-time=${CREATED_TIM
 git config --global --add user.name JenkinsXBot
 git config --global --add user.email jenkins-x@googlegroups.com
 
+
+# lets avoid the git/credentials causing confusion during the test
+#export XDG_CONFIG_HOME=$JX_HOME
+
 echo "running the BDD test with JX_HOME = $JX_HOME"
 
+mkdir -p $XDG_CONFIG_HOME/git
 # replace the credentials file with a single user entry
-echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $JX_HOME/git/credentials
+echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $XDG_CONFIG_HOME/git/credentials
 
 echo "creating cluster $CLUSTER_NAME in project $PROJECT_ID with labels $LABELS"
 
@@ -102,8 +108,6 @@ export JX_DISABLE_DELETE_APP="true"
 export GIT_ORGANISATION="$GH_OWNER"
 
 
-# lets avoid the git/credentials causing confusion during the test
-export XDG_CONFIG_HOME=$JX_HOME
 
 # run the BDD tests
 bddjx -ginkgo.focus=golang -test.v
