@@ -3,27 +3,24 @@ set -e
 set -x
 
 # setup environment
-JX_HOME="/tmp/jxhome"
+#JX_HOME="/tmp/jxhome"
 KUBECONFIG="/tmp/jxhome/config"
 
-# lets avoid the git/credentials causing confusion during the test
-export XDG_CONFIG_HOME=$JX_HOME
 mkdir -p $JX_HOME/git
 
 echo "current HOME is $HOME"
 export HOME="/builder/home"
 
 # copy the binary plugins
-ls -al $HOME/.jx
-cp -r $HOME/.jx/plugins/jx/bin $HOME/.jx/plugins/bin
-ls -al $HOME/.jx/plugins/jx/bin
-ls -al $HOME/.jx/plugins/bin
-
-cp -r $HOME/.jx/plugins $JX_HOME/plugins
+# TODO is this required?
 mkdir -p $JX_HOME/plugins/jx/bin
+cp -r $JX_HOME/plugins/jx/bin $JX_HOME/plugins/bin
+
+#cp -r $HOME/.jx/plugins $JX_HOME/plugins
 
 echo "the binary plugins in the temporary jx home dir are:"
 ls -al $JX_HOME/plugins/bin
+ls -al $JX_HOME/plugins/jx/bin
 
 jx --version
 
@@ -102,6 +99,9 @@ export JX_DISABLE_DELETE_APP="true"
 
 export GIT_ORGANISATION="$GH_OWNER"
 
+
+# lets avoid the git/credentials causing confusion during the test
+export XDG_CONFIG_HOME=$JX_HOME
 
 # run the BDD tests
 bddjx -ginkgo.focus=golang -test.v
