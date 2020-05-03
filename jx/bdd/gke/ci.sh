@@ -16,6 +16,10 @@ echo "JX_HOME = $JX_HOME"
 
 ls -al $JX_HOME
 
+# lets copy the XDG_CONFIG_HOME across
+export XDG_CONFIG_HOME="/builder/home/.config"
+cp -r /home/.config /builder/home/.config
+
 # copy the binary plugins
 # TODO is this required?
 mkdir -p $JX_HOME/git
