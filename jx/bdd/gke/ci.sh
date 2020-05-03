@@ -5,8 +5,6 @@ set -x
 # setup environment
 KUBECONFIG="/tmp/jxhome/config"
 
-mkdir -p $JX_HOME/git
-
 echo "HOME = $HOME"
 echo "JX_HOME = $JX_HOME"
 echo "XDG_CACHE_HOME = $XDG_CACHE_HOME"
