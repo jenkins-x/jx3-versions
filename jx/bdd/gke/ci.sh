@@ -3,27 +3,41 @@ set -e
 set -x
 
 # setup environment
-JX_HOME="/tmp/jxhome"
 KUBECONFIG="/tmp/jxhome/config"
 
-# lets avoid the git/credentials causing confusion during the test
-export XDG_CONFIG_HOME=$JX_HOME
 mkdir -p $JX_HOME/git
 
-echo "current HOME is $HOME"
 export HOME="/builder/home"
+export JX_HOME="/home/.jx"
+#JX_HOME="/tmp/jxhome"
+
+echo "HOME = $HOME"
+echo "JX_HOME = $JX_HOME"
+echo "XDG_CACHE_HOME = $XDG_CACHE_HOME"
+echo "XDG_CONFIG_HOME = $XDG_CONFIG_HOME"
+echo "XDG_DATA_HOME = $XDG_DATA_HOME"
+
+export XDG_CACHE_HOME="/home/.cache"
+export XDG_DATA_HOME="/home/.data"
+
+# lets copy the XDG_CONFIG_HOME across
+export XDG_CONFIG_HOME="/builder/home/.config"
+mkdir -p /home/.config
+cp -r /home/.config /builder/home/.config
+
+echo "XDG_CACHE_HOME = $XDG_CACHE_HOME"
+echo "XDG_CONFIG_HOME = $XDG_CONFIG_HOME"
+echo "XDG_DATA_HOME = $XDG_DATA_HOME"
 
 # copy the binary plugins
-ls -al $HOME/.jx
-cp -r $HOME/.jx/plugins/jx/bin $HOME/.jx/plugins/bin
-ls -al $HOME/.jx/plugins/jx/bin
-ls -al $HOME/.jx/plugins/bin
-
-cp -r $HOME/.jx/plugins $JX_HOME/plugins
+# TODO is this required?
+mkdir -p $JX_HOME/git
 mkdir -p $JX_HOME/plugins/jx/bin
+cp -r $JX_HOME/plugins/jx/bin $JX_HOME/plugins/bin
 
 echo "the binary plugins in the temporary jx home dir are:"
 ls -al $JX_HOME/plugins/bin
+ls -al $JX_HOME/plugins/jx/bin
 
 jx --version
 
@@ -41,10 +55,18 @@ export LABELS="branch=${BRANCH_NAME,,},cluster=bdd-gke,create-time=${CREATED_TIM
 git config --global --add user.name JenkinsXBot
 git config --global --add user.email jenkins-x@googlegroups.com
 
+
+# lets avoid the git/credentials causing confusion during the test
+#export XDG_CONFIG_HOME=$JX_HOME
+
 echo "running the BDD test with JX_HOME = $JX_HOME"
 
+mkdir -p $XDG_CONFIG_HOME/git
 # replace the credentials file with a single user entry
-echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $JX_HOME/git/credentials
+echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $XDG_CONFIG_HOME/git/credentials
+
+echo "using git credentials: $XDG_CONFIG_HOME/git/credentials"
+ls -al $XDG_CONFIG_HOME/git/credentials
 
 echo "creating cluster $CLUSTER_NAME in project $PROJECT_ID with labels $LABELS"
 
@@ -101,6 +123,7 @@ helm repo add jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
 export JX_DISABLE_DELETE_APP="true"
 
 export GIT_ORGANISATION="$GH_OWNER"
+
 
 
 # run the BDD tests
