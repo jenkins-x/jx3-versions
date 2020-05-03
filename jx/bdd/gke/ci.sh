@@ -10,10 +10,19 @@ KUBECONFIG="/tmp/jxhome/config"
 export XDG_CONFIG_HOME=$JX_HOME
 mkdir -p $JX_HOME/git
 
+echo "current HOME is $HOME"
+export HOME="/builder/home"
+
 # copy the binary plugins
-ls -al /root/.jx
-cp -r /root/.jx/plugins $JX_HOME/plugins
-echo "the binary plugins in the temporary home dir are:"
+ls -al $HOME/.jx
+cp -r $HOME/.jx/plugins/jx/bin $HOME/.jx/plugins/bin
+ls -al $HOME/.jx/plugins/jx/bin
+ls -al $HOME/.jx/plugins/bin
+
+cp -r $HOME/.jx/plugins $JX_HOME/plugins
+mkdir -p $JX_HOME/plugins/jx/bin
+
+echo "the binary plugins in the temporary jx home dir are:"
 ls -al $JX_HOME/plugins/bin
 
 jx --version
