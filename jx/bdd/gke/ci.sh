@@ -9,18 +9,18 @@ mkdir -p $JX_HOME/git
 
 export HOME="/builder/home"
 export JX_HOME="/home/.jx"
+#JX_HOME="/tmp/jxhome"
 
 echo "HOME = $HOME"
-echo "HOME = $HOME"
-#JX_HOME="/tmp/jxhome"
+echo "JX_HOME = $JX_HOME"
+
+ls -al $JX_HOME
 
 # copy the binary plugins
 # TODO is this required?
 mkdir -p $JX_HOME/git
 mkdir -p $JX_HOME/plugins/jx/bin
 cp -r $JX_HOME/plugins/jx/bin $JX_HOME/plugins/bin
-
-#cp -r $HOME/.jx/plugins $JX_HOME/plugins
 
 echo "the binary plugins in the temporary jx home dir are:"
 ls -al $JX_HOME/plugins/bin
@@ -51,6 +51,9 @@ echo "running the BDD test with JX_HOME = $JX_HOME"
 mkdir -p $XDG_CONFIG_HOME/git
 # replace the credentials file with a single user entry
 echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $XDG_CONFIG_HOME/git/credentials
+
+echo "using git credentials: $XDG_CONFIG_HOME/git/credentials"
+ls -al $XDG_CONFIG_HOME/git/credentials
 
 echo "creating cluster $CLUSTER_NAME in project $PROJECT_ID with labels $LABELS"
 
