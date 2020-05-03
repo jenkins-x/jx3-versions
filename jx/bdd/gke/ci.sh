@@ -18,6 +18,8 @@ cp -r /root/.jx/plugins $JX_HOME/plugins
 echo "the binary plugins in the temporary home dir are:"
 mkdir -p $JX_HOME/plugins/jx/bin
 ls -al $JX_HOME/plugins/jx/bin
+echo "current HOME is $HOME"
+export HOME="/root"
 
 jx --version
 
