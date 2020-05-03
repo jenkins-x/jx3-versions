@@ -14,7 +14,8 @@ mkdir -p $JX_HOME/git
 ls -al /root/.jx
 cp -r /root/.jx/plugins $JX_HOME/plugins
 echo "the binary plugins in the temporary home dir are:"
-ls -al $JX_HOME/plugins/bin
+mkdir -p $JX_HOME/plugins/jx/bin
+ls -al JX_HOME/plugins/jx/bin
 
 jx --version
 
