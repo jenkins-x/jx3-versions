@@ -7,11 +7,12 @@ KUBECONFIG="/tmp/jxhome/config"
 
 mkdir -p $JX_HOME/git
 
-echo "current HOME is $HOME"
 export HOME="/builder/home"
+export JX_HOME="/home/.jx"
 
+echo "HOME = $HOME"
+echo "HOME = $HOME"
 #JX_HOME="/tmp/jxhome"
-export JX_HOME="/home"
 
 # copy the binary plugins
 # TODO is this required?
