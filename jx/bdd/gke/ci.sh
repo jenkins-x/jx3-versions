@@ -12,6 +12,8 @@ mkdir -p $JX_HOME/git
 
 # copy the binary plugins
 ls -al /root/.jx
+mkdir -p /builder/home/.jx
+cp -r /root/.jx/plugins /builder/home/.jx/plugins
 cp -r /root/.jx/plugins $JX_HOME/plugins
 echo "the binary plugins in the temporary home dir are:"
 mkdir -p $JX_HOME/plugins/jx/bin
