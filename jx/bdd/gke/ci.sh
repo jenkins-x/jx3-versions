@@ -13,8 +13,16 @@ export JX_HOME="/home/.jx"
 
 echo "HOME = $HOME"
 echo "JX_HOME = $JX_HOME"
+echo "XDG_CACHE_HOME = $XDG_CACHE_HOME"
+echo "XDG_CONFIG_HOME = $XDG_CONFIG_HOME"
+echo "XDG_DATA_HOME = $XDG_DATA_HOME"
 
-ls -al $JX_HOME
+export XDG_CACHE_HOME="/home/.config"
+export XDG_DATA_HOME="/home/.data"
+
+echo "XDG_CONFIG_HOME = $XDG_CONFIG_HOME"
+echo "XDG_DATA_HOME = $XDG_DATA_HOME"
+
 
 # lets copy the XDG_CONFIG_HOME across
 export XDG_CONFIG_HOME="/builder/home/.config"
