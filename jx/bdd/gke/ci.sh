@@ -7,16 +7,14 @@ KUBECONFIG="/tmp/jxhome/config"
 
 mkdir -p $JX_HOME/git
 
-export HOME="/builder/home"
-export JX_HOME="/home/.jx"
-#JX_HOME="/tmp/jxhome"
-
 echo "HOME = $HOME"
 echo "JX_HOME = $JX_HOME"
 echo "XDG_CACHE_HOME = $XDG_CACHE_HOME"
 echo "XDG_CONFIG_HOME = $XDG_CONFIG_HOME"
 echo "XDG_DATA_HOME = $XDG_DATA_HOME"
 
+export HOME="/builder/home"
+export JX_HOME="/home/.jx"
 export XDG_CACHE_HOME="/home/.cache"
 export XDG_DATA_HOME="/home/.data"
 
@@ -25,6 +23,8 @@ export XDG_CONFIG_HOME="/builder/home/.config"
 mkdir -p /home/.config
 cp -r /home/.config /builder/home/.config
 
+echo "HOME = $HOME"
+echo "JX_HOME = $JX_HOME"
 echo "XDG_CACHE_HOME = $XDG_CACHE_HOME"
 echo "XDG_CONFIG_HOME = $XDG_CONFIG_HOME"
 echo "XDG_DATA_HOME = $XDG_DATA_HOME"
