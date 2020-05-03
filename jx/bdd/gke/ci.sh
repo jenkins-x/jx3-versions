@@ -17,17 +17,17 @@ echo "XDG_CACHE_HOME = $XDG_CACHE_HOME"
 echo "XDG_CONFIG_HOME = $XDG_CONFIG_HOME"
 echo "XDG_DATA_HOME = $XDG_DATA_HOME"
 
-export XDG_CACHE_HOME="/home/.config"
+export XDG_CACHE_HOME="/home/.cache"
 export XDG_DATA_HOME="/home/.data"
-
-echo "XDG_CONFIG_HOME = $XDG_CONFIG_HOME"
-echo "XDG_DATA_HOME = $XDG_DATA_HOME"
-
 
 # lets copy the XDG_CONFIG_HOME across
 export XDG_CONFIG_HOME="/builder/home/.config"
 mkdir -p /home/.config
 cp -r /home/.config /builder/home/.config
+
+echo "XDG_CACHE_HOME = $XDG_CACHE_HOME"
+echo "XDG_CONFIG_HOME = $XDG_CONFIG_HOME"
+echo "XDG_DATA_HOME = $XDG_DATA_HOME"
 
 # copy the binary plugins
 # TODO is this required?
