@@ -73,7 +73,7 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/helm-annotate](https://github.com/jenkins-x/helm-annotate) |  | [0.0.10]() | 
 [godaddy/kubernetes-external-secrets](https://github.com/godaddy/kubernetes-external-secrets) |  | [3.3.0]() | 
 [jenkins-x/charts](https://github.com/jenkins-x/charts) |  | [1.1.7]() | 
-[jenkins-x-charts/nexus](https://github.com/jenkins-x-charts/nexus) |  | [0.1.28]() | 
+[jenkins-x-charts/nexus](https://github.com/jenkins-x-charts/nexus) |  | [0.1.29]() | 
 [helm/cluster-autoscaler](https://github.com/helm/charts/tree/master/stable/cluster-autoscaler) |  | [7.2.2]() | 
 [Comcast/kuberhealthy](https://github.com/Comcast/kuberhealthy) |  | [1.2.6]() | 
 [helm/metrics-server](https://github.com/helm/charts/tree/master/stable/metrics-server) |  | [2.11.1]() | 

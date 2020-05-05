@@ -513,7 +513,7 @@ dependencies:
   owner: jenkins-x-charts
   repo: nexus
   url: https://github.com/jenkins-x-charts/nexus
-  version: 0.1.28
+  version: 0.1.29
   versionURL: ""
 - host: github.com
   owner: helm
