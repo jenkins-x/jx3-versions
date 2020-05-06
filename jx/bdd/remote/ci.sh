@@ -20,9 +20,9 @@ export GH_OWNER="cb-kubecd"
 
 export CREATED_TIME=$(date '+%a-%b-%d-%Y-%H-%M-%S')
 export PROJECT_ID=jenkins-x-labs-bdd
-export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-mc"
+export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-bdd-remote"
 export ZONE=europe-west1-c
-export LABELS="branch=${BRANCH_NAME,,},cluster=helm3-mc,create-time=${CREATED_TIME,,}"
+export LABELS="branch=${BRANCH_NAME,,},cluster=bdd-remote,create-time=${CREATED_TIME,,}"
 
 # lets setup git
 git config --global --add user.name JenkinsXBot
@@ -36,19 +36,36 @@ echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github
 
 echo "creating cluster $CLUSTER_NAME in project $PROJECT_ID with labels $LABELS"
 
-# lets find the current cloud resources version
-export CLOUD_RESOURCES_VERSION=$(grep  'version: ' /workspace/source/git/github.com/jenkins-x-labs/cloud-resources.yml | awk '{ print $2}')
-echo "found cloud-resources version $CLOUD_RESOURCES_VERSION"
+# lets download the latests jxl
+export JXL_VERSION=$(grep  'version: ' /workspace/source/packagesjxl.yml | awk '{ print $2}')
+echo "found jxl resources version JXL_VERSION"
+curl -L  https://github.com/jenkins-x/jxl/releases/download/v${JXL_VERSION}/jxl-linux-amd64.tar.gz | tar xzv
+mv jxl /usr/local/bin
 
-git clone -b v${CLOUD_RESOURCES_VERSION} https://github.com/jenkins-x-labs/cloud-resources.git
-cloud-resources/gcloud/create_cluster.sh
+jxl version
+
+# lets boot a dev v2 cluster
+jx step bdd \
+    --use-revision \
+    --version-repo-pr \
+    --versions-repo https://github.com/jenkins-x/jenkins-x-versions.git \
+    --config jx/bdd/tekton/cluster.yaml \
+    --gopath /tmp \
+    --git-provider=github \
+    --git-username $GH_USERNAME \
+    --git-owner $GH_OWNER \
+    --git-api-token $GH_ACCESS_TOKEN \
+    --default-admin-password $JENKINS_PASSWORD \
+    --no-delete-app \
+    --no-delete-repo \
+
 
 # TODO remove once we remove the code from the multicluster branch of jx:
 export JX_SECRETS_YAML=/tmp/secrets.yaml
 
 echo "using the version stream ref: $PULL_PULL_SHA"
 
-# create the boot git repository
+# create the boot git repository for the remote environment
 jxl boot create -b --env dev --env-remote --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --out giturl.txt
 
 # import secrets...
@@ -67,10 +84,10 @@ jxl boot secrets import -f /tmp/secrets.yaml --git-url `cat giturl.txt`
 jxl boot run -b --job
 
 
-# now lets create the staging cluster
+# now lets create the remote staging cluster
 export DEV_CLUSTER_NAME="$CLUSTER_NAME"
-export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-mc-staging"
-export STAGING_CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-mc-staging"
+export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-bdd-remote-staging"
+export STAGING_CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-bdd-remote-staging"
 export STAGING_GIT_URL="https://github.com/${GH_OWNER}/environment-${DEV_CLUSTER_NAME}-staging.git"
 export NAMESPACE=jx-staging
 
@@ -78,25 +95,20 @@ echo "CREATE: staging cluster $CLUSTER_NAME with namespace $NAMESPACE with label
 
 cloud-resources/gcloud/create_cluster.sh
 
-
-
 mkdir staging
 cd staging
 
 echo "SWITCH: to staging cluster: $STAGING_CLUSTER_NAME to setup staging"
 gcloud container clusters get-credentials $STAGING_CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
+
+
+
 jx ns jx-staging
 jx ctx -b
 
-jxl boot verify requirements -b --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --git-url=$STAGING_GIT_URL
-
-# TODO should not be needed but just in case
-jx ns jx-staging
+jxl boot create -b --env staging -b --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --git-url=$STAGING_GIT_URL
 
 jxl boot secrets import -f /tmp/secrets.yaml --git-url=$STAGING_GIT_URL
-
-# TODO should not be needed but just in case
-jx ns jx-staging
 
 jxl boot run -b --job
 
