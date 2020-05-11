@@ -6,7 +6,8 @@ set -x
 KUBECONFIG="/tmp/jxhome/config"
 
 export XDG_CONFIG_HOME="/builder/home/.config"
-mkdir -p $XDG_CONFIG_HOME/git
+mkdir -p /home/.config
+cp -r /home/.config /builder/home/.config
 
 jx --version
 
@@ -26,6 +27,7 @@ git config --global --add user.email jenkins-x@googlegroups.com
 
 echo "running the BDD test with JX_HOME = $JX_HOME"
 
+mkdir -p $XDG_CONFIG_HOME/git
 # replace the credentials file with a single user entry
 echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $XDG_CONFIG_HOME/git/credentials
 
@@ -47,7 +49,7 @@ export JX_SECRETS_YAML=/tmp/secrets.yaml
 echo "using the version stream ref: $PULL_PULL_SHA"
 
 # create the boot git repository
-jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --out giturl.txt
+jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE
 
 # import secrets...
 echo "secrets:

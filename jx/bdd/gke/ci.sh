@@ -5,37 +5,9 @@ set -x
 # setup environment
 KUBECONFIG="/tmp/jxhome/config"
 
-echo "HOME = $HOME"
-echo "JX_HOME = $JX_HOME"
-echo "XDG_CACHE_HOME = $XDG_CACHE_HOME"
-echo "XDG_CONFIG_HOME = $XDG_CONFIG_HOME"
-echo "XDG_DATA_HOME = $XDG_DATA_HOME"
-
-#export HOME="/builder/home"
-#export JX_HOME="/home/.jx"
-#export XDG_CACHE_HOME="/home/.cache"
-#export XDG_DATA_HOME="/home/.data"
-
-# lets copy the XDG_CONFIG_HOME across
 export XDG_CONFIG_HOME="/builder/home/.config"
 mkdir -p /home/.config
 cp -r /home/.config /builder/home/.config
-
-#echo "HOME = $HOME"
-#echo "JX_HOME = $JX_HOME"
-#echo "XDG_CACHE_HOME = $XDG_CACHE_HOME"
-echo "XDG_CONFIG_HOME = $XDG_CONFIG_HOME"
-#echo "XDG_DATA_HOME = $XDG_DATA_HOME"
-
-# copy the binary plugins
-# TODO is this required?
-#mkdir -p $JX_HOME/git
-#mkdir -p $JX_HOME/plugins/jx/bin
-#cp -r $JX_HOME/plugins/jx/bin $JX_HOME/plugins/bin
-
-echo "the jx binary plugins are:"
-ls -al $JX_HOME/plugins/bin
-#ls -al $JX_HOME/plugins/jx/bin
 
 jx --version
 
@@ -52,10 +24,6 @@ export LABELS="branch=${BRANCH_NAME,,},cluster=bdd-gke,create-time=${CREATED_TIM
 # lets setup git
 git config --global --add user.name JenkinsXBot
 git config --global --add user.email jenkins-x@googlegroups.com
-
-
-# lets avoid the git/credentials causing confusion during the test
-#export XDG_CONFIG_HOME=$JX_HOME
 
 echo "running the BDD test with JX_HOME = $JX_HOME"
 
@@ -81,7 +49,7 @@ export JX_SECRETS_YAML=/tmp/secrets.yaml
 echo "using the version stream ref: $PULL_PULL_SHA"
 
 # create the boot git repository
-jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --out giturl.txt
+jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE
 
 # import secrets...
 echo "secrets:

@@ -6,7 +6,8 @@ set -x
 KUBECONFIG="/tmp/jxhome/config"
 
 export XDG_CONFIG_HOME="/builder/home/.config"
-mkdir -p $XDG_CONFIG_HOME/git
+mkdir -p /home/.config
+cp -r /home/.config /builder/home/.config
 
 jx --version
 
@@ -26,6 +27,7 @@ git config --global --add user.email jenkins-x@googlegroups.com
 
 echo "running the BDD test with JX_HOME = $JX_HOME"
 
+mkdir -p $XDG_CONFIG_HOME/git
 # replace the credentials file with a single user entry
 echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $XDG_CONFIG_HOME/git/credentials
 
@@ -87,6 +89,7 @@ helm repo add jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
 export JX_DISABLE_DELETE_APP="true"
 
 export GIT_ORGANISATION="$GH_OWNER"
+
 
 
 # run the BDD tests
