@@ -94,7 +94,7 @@ echo "secrets:
     token: $GH_ACCESS_TOKEN
     email: $GH_EMAIL" > /tmp/secrets.yaml
 
-jxl boot secrets import -f /tmp/secrets.yaml --git-url `cat giturl.txt`
+jxl boot secrets import -f /tmp/secrets.yaml --git-url https://github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
 
 jxl boot run -b --job
 
