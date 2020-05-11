@@ -3,11 +3,13 @@ set -e
 set -x
 
 # setup environment
-JX_HOME="/tmp/jxhome"
+#JX_HOME="/tmp/jxhome"
 KUBECONFIG="/tmp/jxhome/config"
 
 # lets avoid the git/credentials causing confusion during the test
-export XDG_CONFIG_HOME=$JX_HOME
+#export XDG_CONFIG_HOME=$JX_HOME
+export XDG_CONFIG_HOME="/builder/home/.config"
+mkdir -p /home/.config
 mkdir -p $JX_HOME/git
 
 jx --version
