@@ -535,7 +535,7 @@ dependencies:
   versionURL: ""
 - host: github.com
   owner: jenkins-x
-  repo: flagger-metrics
-  url: https://github.com/jenkins-x/flagger-metrics
-  version: 0.0.3
+  repo: istio
+  url: https://github.com/jenkins-x/istio
+  version: 0.0.6
   versionURL: ""
