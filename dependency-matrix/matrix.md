@@ -78,3 +78,4 @@ Dependency | Sources | Version | Mismatched versions
 [Comcast/kuberhealthy](https://github.com/Comcast/kuberhealthy) |  | [1.2.6]() | 
 [helm/metrics-server](https://github.com/helm/charts/tree/master/stable/metrics-server) |  | [2.11.1]() | 
 [jenkins-x/flagger-metrics](https://github.com/jenkins-x/flagger-metrics) |  | [0.1.1]() | 
+[jenkins-x/istio](https://github.com/jenkins-x/istio) |  | [0.1.1]() | 
