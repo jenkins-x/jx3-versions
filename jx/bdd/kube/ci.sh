@@ -9,8 +9,6 @@ KUBECONFIG="/tmp/jxhome/config"
 # lets avoid the git/credentials causing confusion during the test
 #export XDG_CONFIG_HOME=$JX_HOME
 export XDG_CONFIG_HOME="/builder/home/.config"
-mkdir -p /home/.config
-mkdir -p $JX_HOME/git
 
 jx --version
 
@@ -31,6 +29,7 @@ git config --global --add user.email jenkins-x@googlegroups.com
 echo "running the BDD test with JX_HOME = $JX_HOME"
 
 # replace the credentials file with a single user entry
+mkdir -p $XDG_CONFIG_HOME/git
 echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $XDG_CONFIG_HOME/git/credentials
 
 echo "using git credentials: $XDG_CONFIG_HOME/git/credentials"
