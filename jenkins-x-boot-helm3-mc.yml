@@ -31,5 +31,5 @@ pipelineConfig:
           - name: ci
             steps:
               - command: jx/bdd/boot-helm3-mc/ci.sh
-                image: gcr.io/jenkinsxio-labs-private/jxl:0.0.118
+                image: gcr.io/jenkinsxio-labs-private/jxl:0.0.119
                 name: runci
