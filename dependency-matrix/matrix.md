@@ -57,14 +57,14 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x-quickstarts/vertx-rest-prometheus](https://github.com/jenkins-x-quickstarts/vertx-rest-prometheus.git) |  | [1.0.0+fd180fd76]() | 
 [heptio/velero](https://github.com/heptio/velero):velero |  | [2.7.4]() | 
 [jenkins-x/jenkins-x-builders-base](https://github.com/jenkins-x/jenkins-x-builders-base) | [github.com/jenkins-x/jenkins-x-builders-ml](https://github.com/jenkins-x/jenkins-x-builders-ml.git);[github.com/jenkins-x/jenkins-x-builders](https://github.com/jenkins-x/jenkins-x-builders.git) | [0.0.79](https://github.com/jenkins-x/jenkins-x-builders-base/releases/tag/v0.0.79) | 
-[jenkins-x/bucketrepo](https://github.com/jenkins-x/bucketrepo) |  | [0.1.38]() | 
+[jenkins-x/bucketrepo](https://github.com/jenkins-x/bucketrepo) |  | [0.1.39]() | 
 [helm/cert-manager](https://github.com/helm/charts/tree/master/stable/cert-manager):cert-manager |  | [0.6.7]() | 
 [bitnami/external-dns](https://github.com/bitnami/charts/tree/master/bitnami/external-dns) |  | [2.20.4]() | 
 [helm/nginx-ingress](https://github.com/helm/charts/tree/master/stable/nginx-ingress):nginx-ingress |  | [1.36.3]() | 
 [jenkins-x/jenkins-x-builders-base-image](https://github.com/jenkins-x/jenkins-x-builders-base-image) | [github.com/jenkins-x/jenkins-x-builders-ml](https://github.com/jenkins-x/jenkins-x-builders-ml.git) | [0.0.34]() | 
 [solo-io/gloo](https://github.com/solo-io/gloo) |  | [1.3.26](https://github.com/solo-io/gloo/releases/tag/v1.3.26) | 
-[jenkins-x-charts/jxboot-helmfile-resources](https://github.com/jenkins-x-charts/jxboot-helmfile-resources) |  | [0.0.189]() | 
-[kubernetes-sigs/external-dns](https://github.com/kubernetes-sigs/external-dns) |  | [2.22.1]() | 
+[jenkins-x-charts/jxboot-helmfile-resources](https://github.com/jenkins-x-charts/jxboot-helmfile-resources) |  | [0.0.190]() | 
+[kubernetes-sigs/external-dns](https://github.com/kubernetes-sigs/external-dns) |  | [2.22.2]() | 
 [jenkins-x-labs/jxl](https://github.com/jenkins-x-labs/jxl) |  | [0.0.181](https://github.com/jenkins-x-labs/jxl/releases/tag/v0.0.181) | 
 [jenkins-x-labs/istio](https://github.com/jenkins-x-labs/istio) |  | [0.0.21]() | 
 [jenkins-x/jxl](https://github.com/jenkins-x/jxl) |  | [0.0.124]() | 
