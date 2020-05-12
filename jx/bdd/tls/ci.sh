@@ -49,7 +49,7 @@ echo "using the version stream ref: $PULL_PULL_SHA"
 jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE \
   --domain $CLUSTER_NAME.jenkinsxlabs-test.com \
   --tls \
-  --dns \
+  --add=bitnami/external-dns \
   --tls-email jenkins-x-admin@googlegroups.com \
   --tls-production=false
 
