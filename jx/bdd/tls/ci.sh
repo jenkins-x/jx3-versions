@@ -2,12 +2,10 @@
 set -e
 
 # setup environment
-JX_HOME="/tmp/jxhome"
 KUBECONFIG="/tmp/jxhome/config"
 
-# lets avoid the git/credentials causing confusion during the test
-export XDG_CONFIG_HOME=$JX_HOME
-mkdir -p $JX_HOME/git
+export XDG_CONFIG_HOME="/builder/home/.config"
+mkdir -p $XDG_CONFIG_HOME/git
 
 jx --version
 
@@ -28,7 +26,10 @@ git config --global --add user.email jenkins-x@googlegroups.com
 echo "running the BDD test with JX_HOME = $JX_HOME"
 
 # replace the credentials file with a single user entry
-echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $JX_HOME/git/credentials
+echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $XDG_CONFIG_HOME/git/credentials
+
+echo "using git credentials: $XDG_CONFIG_HOME/git/credentials"
+ls -al $XDG_CONFIG_HOME/git/credentials
 
 echo "creating cluster $CLUSTER_NAME in project $PROJECT_ID with labels $LABELS"
 
@@ -45,7 +46,7 @@ export JX_SECRETS_YAML=/tmp/secrets.yaml
 echo "using the version stream ref: $PULL_PULL_SHA"
 
 # add external-dns and certmanager
-jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --out giturl.txt \
+jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE \
   --domain $CLUSTER_NAME.jenkinsxlabs-test.com \
   --tls \
   --dns \
@@ -71,7 +72,7 @@ echo "secrets:
     token: $GH_ACCESS_TOKEN
     email: $GH_EMAIL" > /tmp/secrets.yaml
 
-jxl boot secrets import -f /tmp/secrets.yaml --git-url `cat giturl.txt`
+jxl boot secrets import -f /tmp/secrets.yaml --git-url https://github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
 
 jxl boot run -b --job
 

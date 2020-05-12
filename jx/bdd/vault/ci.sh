@@ -3,12 +3,11 @@ set -e
 set -x
 
 # setup environment
-JX_HOME="/tmp/jxhome"
 KUBECONFIG="/tmp/jxhome/config"
 
-# lets avoid the git/credentials causing confusion during the test
-export XDG_CONFIG_HOME=$JX_HOME
-mkdir -p $JX_HOME/git
+export XDG_CONFIG_HOME="/builder/home/.config"
+mkdir -p /home/.config
+cp -r /home/.config /builder/home/.config
 
 jx --version
 
@@ -28,8 +27,12 @@ git config --global --add user.email jenkins-x@googlegroups.com
 
 echo "running the BDD test with JX_HOME = $JX_HOME"
 
+mkdir -p $XDG_CONFIG_HOME/git
 # replace the credentials file with a single user entry
-echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $JX_HOME/git/credentials
+echo "https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $XDG_CONFIG_HOME/git/credentials
+
+echo "using git credentials: $XDG_CONFIG_HOME/git/credentials"
+ls -al $XDG_CONFIG_HOME/git/credentials
 
 echo "creating cluster $CLUSTER_NAME in project $PROJECT_ID with labels $LABELS"
 
