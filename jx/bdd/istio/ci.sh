@@ -95,6 +95,11 @@ export JX_DISABLE_DELETE_APP="true"
 export GIT_ORGANISATION="$GH_OWNER"
 
 
+# lets annotate the staging namespace for istio:
+kubectl create namespace jx-staging
+kubectl label namespace jx-staging istio-injection=enabled
+
+
 # run the BDD tests
 bddjx -ginkgo.focus=golang -test.v
 
