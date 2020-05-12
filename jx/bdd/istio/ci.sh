@@ -50,6 +50,7 @@ echo "using the version stream ref: $PULL_PULL_SHA"
 
 # create the boot git repository
 jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE \
+  --bucket-logs=gs://jxr-bdd-logs --bucket-repo=gs://jxr-bdd-repo --bucket-reports=gs://jxr-bdd-reports --repository=bucketrepo \
   --ingress-kind=istio \
   --add=flagger/flagger \
   --canary --hpa
