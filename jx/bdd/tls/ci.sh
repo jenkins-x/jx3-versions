@@ -54,9 +54,9 @@ jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA 
   --tls-production=false
 
 # create service account key used by certmanager to add A records for the dns challange by letsencrypt
-gcloud iam service-accounts create $CLUSTER_NAME-dns01-solver --display-name "$CLUSTER_NAME dns01-solver" --project jenkins-x-labs-bdd
-gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$CLUSTER_NAME-dns01-solver@$PROJECT_ID.iam.gserviceaccount.com --role roles/dns.admin --project jenkins-x-labs-bdd
-gcloud iam service-accounts keys create /tmp/credentials.json --iam-account $CLUSTER_NAME-dns01-solver@$PROJECT_ID.iam.gserviceaccount.com --project jenkins-x-labs-bdd
+gcloud iam service-accounts create $CLUSTER_NAME-dns --display-name "$CLUSTER_NAME dns" --project jenkins-x-labs-bdd
+gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$CLUSTER_NAME-dns@$PROJECT_ID.iam.gserviceaccount.com --role roles/dns.admin --project jenkins-x-labs-bdd
+gcloud iam service-accounts keys create /tmp/credentials.json --iam-account $CLUSTER_NAME-dns@$PROJECT_ID.iam.gserviceaccount.com --project jenkins-x-labs-bdd
 kubectl create secret generic external-dns-gcp-sa --from-file=/tmp/credentials.json
 rm /tmp/credentials.json
 

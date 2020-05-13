@@ -51,8 +51,41 @@ echo "using the version stream ref: $PULL_PULL_SHA"
 # create the boot git repository
 jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE \
   --ingress-kind=istio \
-  --add=flagger/flagger \
-  --canary --hpa
+  --canary --hpa \
+  --tls-email jenkins-x-admin@googlegroups.com \
+  --tls-production=false \
+  --domain $CLUSTER_NAME.jenkinsxlabs-test.com
+
+# modify the apps yaml to add acme resources in the istio namespace
+# also nice to simulate what a user should do
+# wonder if we could use these to generate examples for the website?
+git clone https://github.com/$GH_OWNER/environment-$CLUSTER_NAME-dev.git
+pushd environment-$CLUSTER_NAME-dev
+  echo "apps:
+  - name: jx-labs/jenkins-x-crds
+  - name: jx-labs/istio
+  - name: jenkins-x/jxboot-helmfile-resources
+  - name: jenkins-x/nexus
+  - name: jenkins-x/tekton
+  - name: jenkins-x/chartmuseum
+  - name: jenkins-x/lighthouse
+  - name: bitnami/external-dns
+  - name: jetstack/cert-manager
+  - name: jx-labs/acme
+    namespace: istio-system
+  - name: repositories
+    repository: .." > jx-apps.yml
+  git add jx-apps.yml
+  git commit -a -m 'chore: add istio, certmanager, externaldns apps'
+  git push origin master
+popd
+
+# create service account key used by certmanager to add A records for the dns challange by letsencrypt
+gcloud iam service-accounts create $CLUSTER_NAME-dns --display-name "$CLUSTER_NAME dns" --project jenkins-x-labs-bdd
+gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$CLUSTER_NAME-dns@$PROJECT_ID.iam.gserviceaccount.com --role roles/dns.admin --project jenkins-x-labs-bdd
+gcloud iam service-accounts keys create /tmp/credentials.json --iam-account $CLUSTER_NAME-dns@$PROJECT_ID.iam.gserviceaccount.com --project jenkins-x-labs-bdd
+kubectl create secret generic external-dns-gcp-sa --from-file=/tmp/credentials.json
+rm /tmp/credentials.json
 
 # import secrets...
 echo "secrets:
@@ -76,6 +109,11 @@ export JX_HELM3="true"
 gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
 jx ns jx
 
+# verify that we have a stagin certificate from LetsEncrypt
+kubectl get issuer letsencrypt-staging -n istio-system -ojsonpath='{.status.conditions[0].status}'
+kubectl get issuer letsencrypt-staging -n istio-system -ojsonpath='{.status.conditions[0].message}'
+jxl verify tls hook-jx.$CLUSTER_NAME.jenkinsxlabs-test.com  --production=false --issuer 'Fake LE Intermediate X1'
+
 # diagnostic commands to test the image's kubectl
 kubectl version
 
@@ -98,5 +136,6 @@ export GIT_ORGANISATION="$GH_OWNER"
 bddjx -ginkgo.focus=golang -test.v
 
 echo cleaning up cloud resources
-curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/v$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
-gcloud container clusters delete $CLUSTER_NAME --zone $ZONE --quiet
+# TODO enable again after testing
+# curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/v$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
+# gcloud container clusters delete $CLUSTER_NAME --zone $ZONE --quiet

@@ -1,5 +1,8 @@
 sources:
 - ingress
+{{- if eq .Values.jxRequirements.ingress.kind "istio" }}
+- istio-gateway
+{{- end }}
 {{- if eq .Values.jxRequirements.cluster.provider "eks" }}
 provider: aws
 aws:
