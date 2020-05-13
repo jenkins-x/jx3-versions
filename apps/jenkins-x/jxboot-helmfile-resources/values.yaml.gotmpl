@@ -1,8 +1,17 @@
 versions:
-  jxl: 0.0.96
+  jxl: 0.0.130
+
+controllerrole:
+  image:
+    repository: gcr.io/jenkinsxio-labs-private/jxl
+    tag: 0.0.130
+
+controllerbuild:
+  image:
+    repository: gcr.io/jenkinsxio-labs-private/jxl
+    tag: 0.0.130
 
 {{- if eq .Values.jxRequirements.cluster.provider "gke"}}
-controllerbuild:
   serviceaccount:
     annotations:
       iam.gke.io/gcp-service-account: {{ .Values.jxRequirements.cluster.clusterName }}-st@{{ .Values.jxRequirements.cluster.project }}.iam.gserviceaccount.com
