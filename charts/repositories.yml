@@ -11,7 +11,7 @@ repositories:
       - http://chartmuseum.jenkins-x.io
   - prefix: jx-labs
     urls:
-      - gs://jenkinsxio-labs-private/charts
+      - https://storage.googleapis.com/jenkinsxio-labs-private/charts
   - prefix: stable
     urls:
       - https://kubernetes-charts.storage.googleapis.com
