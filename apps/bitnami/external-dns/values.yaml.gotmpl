@@ -18,10 +18,12 @@ google:
 rbac:
   create: true
 {{- if eq .Values.jxRequirements.cluster.provider "gke" }}
-  serviceAccountAnnotations:
+serviceAccount:
+  annotations:
     iam.gke.io/gcp-service-account: {{ .Values.jxRequirements.cluster.clusterName }}-ex@{{ .Values.jxRequirements.cluster.project }}.iam.gserviceaccount.com
 {{- else if eq .Values.jxRequirements.cluster.provider "eks" }}
-  serviceAccountAnnotations:
+serviceAccount:
+  annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::{{ .Values.jxRequirements.cluster.project }}:role/{{ .Values.jxRequirements.cluster.clusterName }}-{{ .Values.jxRequirements.cluster.namespace }}-external-dns
 {{- end }}
 
