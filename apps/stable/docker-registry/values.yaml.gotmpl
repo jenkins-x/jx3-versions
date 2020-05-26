@@ -1,7 +1,7 @@
 service:
   port: 80
 
-{{- if and (hasKey .Values.jxRequirements.ingress "serviceType") (eq "NodePort" .Values.jxRequirements.ingress.serviceType) }}
+{{- if and (hasKey .Values.jxRequirements "ingress") (hasKey .Values.jxRequirements.ingress "serviceType") (eq .Values.jxRequirements.ingress.serviceType "NodePort") }}
 {{- else }}
 
 ingress:
