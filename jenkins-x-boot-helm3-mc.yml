@@ -26,7 +26,7 @@ pipelineConfig:
                 name: bdd-admin-password
                 key: password
         agent:
-          image: gcr.io/jenkinsxio/builder-go-nodejs:2.1.56-688
+          image: gcr.io/jenkinsxio/builder-go-nodejs:2.1.58-690
         stages:
           - name: ci
             steps:
