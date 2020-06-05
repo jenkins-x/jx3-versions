@@ -4,12 +4,12 @@ versions:
 controllerrole:
   image:
     repository: gcr.io/jenkinsxio-labs-private/jxl
-    tag: 0.0.152
+    tag: 0.0.154
 
 controllerbuild:
   image:
     repository: gcr.io/jenkinsxio-labs-private/jxl
-    tag: 0.0.152
+    tag: 0.0.154
 
 {{- if eq .Values.jxRequirements.cluster.provider "gke"}}
   serviceaccount:
