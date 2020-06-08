@@ -37,6 +37,10 @@ pipelineConfig:
                 - --rev
                 - "v${VERSION}"
 
+              - name: release-resources
+                command: ./jx/scripts/release-resources.sh
+                image: gcr.io/jenkinsxio-labs-private/jxl
+
               - name: release-jx
                 command: ./jx/scripts/release-jx.sh
 
