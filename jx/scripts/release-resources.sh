@@ -7,7 +7,7 @@ cd jxr-kube-resources
 
 echo "generating the kubernetes resources from the helm charts"
 
-jxl boot step helm stream --dir=..
+jx-gitops helm stream --dir=..
 
 echo "done - now pushing"
 git push
