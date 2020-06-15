@@ -8,6 +8,7 @@ jxRequirements:
 auth:
   docker:
     username: jenkins-x-bot
+    password: dummy
   git:
     username: jenkins-x-bot
     password: dummy
