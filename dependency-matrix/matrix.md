@@ -79,4 +79,4 @@ Dependency | Sources | Version | Mismatched versions
 [helm/metrics-server](https://github.com/helm/charts/tree/master/stable/metrics-server) |  | [2.11.1]() | 
 [jenkins-x/flagger-metrics](https://github.com/jenkins-x/flagger-metrics) |  | [0.1.1]() | 
 [jenkins-x/istio](https://github.com/jenkins-x/istio) |  | [0.1.1]() | 
-[jenkins-x/jx-gitops](https://github.com/jenkins-x/jx-gitops) |  | [0.0.10](https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.10) | 
+[jenkins-x/jx-gitops](https://github.com/jenkins-x/jx-gitops) |  | [0.0.13](https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.13) | 
