@@ -1,0 +1,13 @@
+jxRequirements:
+  ingress:
+    domain: cluster.local
+    namespaceSubDomain: "."
+    tls:
+      enabled: true
+
+auth:
+  docker:
+    username: jenkins-x-bot
+  git:
+    username: jenkins-x-bot
+    url: https://github.com
