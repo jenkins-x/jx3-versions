@@ -10,4 +10,5 @@ auth:
     username: jenkins-x-bot
   git:
     username: jenkins-x-bot
+    password: dummy
     url: https://github.com
