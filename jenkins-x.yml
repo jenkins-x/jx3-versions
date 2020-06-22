@@ -39,7 +39,7 @@ pipelineConfig:
 
               - name: release-resources
                 command: ./jx/scripts/release-resources.sh
-                image: gcr.io/jenkinsxio-labs-private/jx-gitops:0.0.29
+                image: gcr.io/jenkinsxio-labs-private/jx-gitops:0.0.30
 
               - name: release-jx
                 command: ./jx/scripts/release-jx.sh
