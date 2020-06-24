@@ -70,7 +70,7 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jxl](https://github.com/jenkins-x/jxl) |  | [0.0.193]() | 
 [jenkins-x-labs/cloud-resources](https://github.com/jenkins-x-labs/cloud-resources) |  | [0.0.27]() | 
 [jenkins-x/jxr-packs-kubernetes](https://github.com/jenkins-x/jxr-packs-kubernetes) |  | [0.0.19]() | 
-[jenkins-x/helm-annotate](https://github.com/jenkins-x/helm-annotate) |  | [0.0.10]() | 
+[jenkins-x/helm-annotate](https://github.com/jenkins-x/helm-annotate) |  | [0.0.13]() | 
 [godaddy/kubernetes-external-secrets](https://github.com/godaddy/kubernetes-external-secrets) |  | [4.0.0]() | 
 [jenkins-x/charts](https://github.com/jenkins-x/charts) |  | [1.1.7]() | 
 [jenkins-x-charts/nexus](https://github.com/jenkins-x-charts/nexus) |  | [0.1.30]() | 
@@ -80,4 +80,4 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/flagger-metrics](https://github.com/jenkins-x/flagger-metrics) |  | [0.1.1]() | 
 [jenkins-x/istio](https://github.com/jenkins-x/istio) |  | [0.1.1]() | 
 [jenkins-x/jx-gitops](https://github.com/jenkins-x/jx-gitops) |  | [0.0.29](https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.29) | 
-[jenkins-x/jx-promote](https://github.com/jenkins-x/jx-promote) |  | [0.0.36](https://github.com/jenkins-x/jx-promote/releases/tag/v0.0.36) | 
+[jenkins-x/jx-promote](https://github.com/jenkins-x/jx-promote) |  | [0.0.39](https://github.com/jenkins-x/jx-promote/releases/tag/v0.0.39) | 

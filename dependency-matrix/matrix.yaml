@@ -495,7 +495,7 @@ dependencies:
   owner: jenkins-x
   repo: helm-annotate
   url: https://github.com/jenkins-x/helm-annotate
-  version: 0.0.10
+  version: 0.0.13
   versionURL: ""
 - host: github.com
   owner: godaddy
@@ -555,5 +555,5 @@ dependencies:
   owner: jenkins-x
   repo: jx-promote
   url: https://github.com/jenkins-x/jx-promote
-  version: 0.0.36
-  versionURL: https://github.com/jenkins-x/jx-promote/releases/tag/v0.0.36
+  version: 0.0.39
+  versionURL: https://github.com/jenkins-x/jx-promote/releases/tag/v0.0.39
