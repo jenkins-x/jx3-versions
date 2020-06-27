@@ -563,3 +563,9 @@ dependencies:
   url: https://github.com/jenkins-x/jx-git-operator
   version: 0.0.30
   versionURL: https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.30
+- host: github.com
+  owner: jenkins-x
+  repo: jxr-versions
+  url: https://github.com/jenkins-x/jxr-versions
+  version: 0.0.16
+  versionURL: https://github.com/jenkins-x/jxr-versions/releases/tag/v0.0.16
