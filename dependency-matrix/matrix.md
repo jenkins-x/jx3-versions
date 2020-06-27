@@ -80,4 +80,5 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/flagger-metrics](https://github.com/jenkins-x/flagger-metrics) |  | [0.1.1]() | 
 [jenkins-x/istio](https://github.com/jenkins-x/istio) |  | [0.1.1]() | 
 [jenkins-x/jx-gitops](https://github.com/jenkins-x/jx-gitops) |  | [0.0.29](https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.29) | 
-[jenkins-x/jx-promote](https://github.com/jenkins-x/jx-promote) |  | [0.0.45](https://github.com/jenkins-x/jx-promote/releases/tag/v0.0.45) | 
+[jenkins-x/jx-promote](https://github.com/jenkins-x/jx-promote) |  | [0.0.39](https://github.com/jenkins-x/jx-promote/releases/tag/v0.0.39) | 
+[jenkins-x/jx-git-operator](https://github.com/jenkins-x/jx-git-operator) |  | [0.0.26](https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.26) | 
