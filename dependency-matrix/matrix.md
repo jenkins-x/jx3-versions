@@ -82,3 +82,4 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jx-gitops](https://github.com/jenkins-x/jx-gitops) |  | [0.0.29](https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.29) | 
 [jenkins-x/jx-promote](https://github.com/jenkins-x/jx-promote) |  | [0.0.39](https://github.com/jenkins-x/jx-promote/releases/tag/v0.0.39) | 
 [jenkins-x/jx-git-operator](https://github.com/jenkins-x/jx-git-operator) |  | [0.0.30](https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.30) | 
+[jenkins-x/jxr-versions](https://github.com/jenkins-x/jxr-versions) |  | [0.0.16](https://github.com/jenkins-x/jxr-versions/releases/tag/v0.0.16) | 
