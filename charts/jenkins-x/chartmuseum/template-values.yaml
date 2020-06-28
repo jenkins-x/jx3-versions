@@ -1,10 +1,3 @@
-jxRequirements:
-  ingress:
-    domain: cluster.local
-    namespaceSubDomain: "."
-    tls:
-      enabled: true
-
 env:
   secret:
     BASIC_AUTH_USER: dummy
