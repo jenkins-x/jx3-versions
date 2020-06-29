@@ -569,3 +569,9 @@ dependencies:
   url: https://github.com/jenkins-x/jx-extsecret
   version: 0.0.18
   versionURL: https://github.com/jenkins-x/jx-extsecret/releases/tag/v0.0.18
+- host: github.com
+  owner: jenkins-x
+  repo: jxr-versions
+  url: https://github.com/jenkins-x/jxr-versions
+  version: 0.0.46
+  versionURL: https://github.com/jenkins-x/jxr-versions/releases/tag/v0.0.46
