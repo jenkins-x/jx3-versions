@@ -53,7 +53,7 @@ cloud-resources/gcloud/create_cluster.sh
 echo "using the version stream ref: $PULL_PULL_SHA"
 
 # create the boot git repository
-/home/.jx3/plugins/jx-admin-0.0.29 create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev
+/home/.jx3/plugins/jx-admin-0.0.29 create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev --no-operator
 #jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE
 
 echo "now installing the operator"
