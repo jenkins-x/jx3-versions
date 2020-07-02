@@ -86,3 +86,4 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jxr-versions](https://github.com/jenkins-x/jxr-versions) |  | [0.0.46](https://github.com/jenkins-x/jxr-versions/releases/tag/v0.0.46) | 
 [jenkins-x/jx-admin](https://github.com/jenkins-x/jx-admin) |  | [0.0.23](https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.23) | 
 [jenkins-x/jx-cli](https://github.com/jenkins-x/jx-cli) |  | [0.0.16](https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.16) | 
+[jenkins-x/jx-project](https://github.com/jenkins-x/jx-project) |  | [0.0.17](https://github.com/jenkins-x/jx-project/releases/tag/v0.0.17) | 
