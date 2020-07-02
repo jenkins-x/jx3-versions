@@ -87,8 +87,7 @@ secrets:
     email: $GH_EMAIL" > /tmp/secrets.yaml
 
 #jx secret import -f /tmp/secrets.yaml --git-url https://github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
-/home/.jx3/plugins/jx-secret-0.0.34 import -f /tmp/secrets.yaml --git-url https://github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
-
+/home/.jx3/plugins/jx-secret-0.0.34 import -f /tmp/secrets.yaml
 
 # TODO verify env / install
 sleep 100
