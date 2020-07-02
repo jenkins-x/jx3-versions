@@ -593,3 +593,9 @@ dependencies:
   url: https://github.com/jenkins-x/jx-project
   version: 0.0.17
   versionURL: https://github.com/jenkins-x/jx-project/releases/tag/v0.0.17
+- host: github.com
+  owner: jenkins-x
+  repo: jx-secret
+  url: https://github.com/jenkins-x/jx-secret
+  version: 0.0.30
+  versionURL: https://github.com/jenkins-x/jx-secret/releases/tag/v0.0.30
