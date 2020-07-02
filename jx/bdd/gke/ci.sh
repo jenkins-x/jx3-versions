@@ -60,7 +60,7 @@ echo "now installing the operator"
 
 # now installing the operator
 #jx admin operator --url https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
-/home/.jx3/plugins/jx-admin-0.0.29 operator --url https://github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
+/home/.jx3/plugins/jx-admin-0.0.29 operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
 
 
 # wait for vault to get setup
