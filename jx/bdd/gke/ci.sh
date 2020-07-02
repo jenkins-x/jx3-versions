@@ -64,7 +64,11 @@ jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.g
 # wait for vault to get setup
 jx secret vault wait -d 30m
 
-export VAULT_ADDR=https://vault.vault-infra:8200
+#export VAULT_ADDR=https://vault.vault-infra:8200
+
+jx secret vault portforward &
+
+sleep 10
 
 # lets port forward
 # import secrets...
