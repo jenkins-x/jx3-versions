@@ -13,7 +13,11 @@ cp -r /home/.config /builder/home/.config
 
 jx version
 jx help
-/home/.jx3/plugins/jx-admin-0.0.29
+
+export JX3_HOME=/home/.jx3
+jx admin --help
+
+#/home/.jx3/plugins/jx-admin-0.0.29
 #jx admin --help
 #jx secret --help
 
