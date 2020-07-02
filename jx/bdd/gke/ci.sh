@@ -2,14 +2,20 @@
 set -e
 set -x
 
+echo HOME=$HOME
+
 # setup environment
 KUBECONFIG="/tmp/jxhome/config"
 
-export XDG_CONFIG_HOME="/builder/home/.config"
+#export XDG_CONFIG_HOME="/builder/home/.config"
 mkdir -p /home/.config
 cp -r /home/.config /builder/home/.config
 
 jx version
+jx help
+jx admin --help
+jx secret --help
+
 
 export GH_USERNAME="jenkins-x-labs-bot"
 export GH_EMAIL="jenkins-x@googlegroups.com"
@@ -48,6 +54,7 @@ echo "using the version stream ref: $PULL_PULL_SHA"
 # create the boot git repository
 jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE
 
+echo "now installing the operator"
 
 # now installing the operator
 jx admin operator --url https://${GH_USERNAME}:${GH_ACCESS_TOKEN}@github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
