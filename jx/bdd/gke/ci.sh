@@ -16,11 +16,7 @@ jx help
 
 export JX3_HOME=/home/.jx3
 jx admin --help
-
-#/home/.jx3/plugins/jx-admin-0.0.29
-#jx admin --help
-#jx secret --help
-
+jx secret --help
 
 export GH_USERNAME="jenkins-x-labs-bot"
 export GH_EMAIL="jenkins-x@googlegroups.com"
@@ -57,19 +53,16 @@ cloud-resources/gcloud/create_cluster.sh
 echo "using the version stream ref: $PULL_PULL_SHA"
 
 # create the boot git repository
-/home/.jx3/plugins/jx-admin-0.0.29 create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev --no-operator
-#jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE
+jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev --no-operator
 
 echo "now installing the operator"
 
 # now installing the operator
-#jx admin operator --url https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
-/home/.jx3/plugins/jx-admin-0.0.29 operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
+jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
 
 
 # wait for vault to get setup
-#jx secret vault wait -d 30m
-/home/.jx3/plugins/jx-secret-0.0.34 vault wait -d 30m
+jx secret vault wait -d 30m
 
 export VAULT_ADDR=https://vault.vault-infra:8200
 
@@ -90,8 +83,7 @@ secrets:
     token: $GH_ACCESS_TOKEN
     email: $GH_EMAIL" > /tmp/secrets.yaml
 
-#jx secret import -f /tmp/secrets.yaml --git-url https://github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
-/home/.jx3/plugins/jx-secret-0.0.34 import -f /tmp/secrets.yaml
+jx secret import -f /tmp/secrets.yaml
 
 # TODO verify env / install
 sleep 100
