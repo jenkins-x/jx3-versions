@@ -85,4 +85,4 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jx-extsecret](https://github.com/jenkins-x/jx-extsecret) |  | [0.0.18](https://github.com/jenkins-x/jx-extsecret/releases/tag/v0.0.18) | 
 [jenkins-x/jxr-versions](https://github.com/jenkins-x/jxr-versions) |  | [0.0.46](https://github.com/jenkins-x/jxr-versions/releases/tag/v0.0.46) | 
 [jenkins-x/jx-admin](https://github.com/jenkins-x/jx-admin) |  | [0.0.23](https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.23) | 
-[jenkins-x/jx-cli](https://github.com/jenkins-x/jx-cli) |  | [0.0.12](https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.12) | 
+[jenkins-x/jx-cli](https://github.com/jenkins-x/jx-cli) |  | [0.0.14](https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.14) | 
