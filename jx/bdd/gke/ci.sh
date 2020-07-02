@@ -9,7 +9,7 @@ export XDG_CONFIG_HOME="/builder/home/.config"
 mkdir -p /home/.config
 cp -r /home/.config /builder/home/.config
 
-jx --version
+jx version
 
 export GH_USERNAME="jenkins-x-labs-bot"
 export GH_EMAIL="jenkins-x@googlegroups.com"
