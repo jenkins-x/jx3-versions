@@ -13,8 +13,9 @@ cp -r /home/.config /builder/home/.config
 
 jx version
 jx help
-jx admin --help
-jx secret --help
+/home/.jx3/plugins/jx-admin-0.0.29
+#jx admin --help
+#jx secret --help
 
 
 export GH_USERNAME="jenkins-x-labs-bot"
@@ -52,16 +53,19 @@ cloud-resources/gcloud/create_cluster.sh
 echo "using the version stream ref: $PULL_PULL_SHA"
 
 # create the boot git repository
-jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE
+/home/.jx3/plugins/jx-admin-0.0.29 create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE
+#jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE
 
 echo "now installing the operator"
 
 # now installing the operator
-jx admin operator --url https://${GH_USERNAME}:${GH_ACCESS_TOKEN}@github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
+#jx admin operator --url https://${GH_USERNAME}:${GH_ACCESS_TOKEN}@github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
+/home/.jx3/plugins/jx-admin-0.0.29 operator --url https://${GH_USERNAME}:${GH_ACCESS_TOKEN}@github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
 
 
 # wait for vault to get setup
-jx secret vault wait -d 30m
+#jx secret vault wait -d 30m
+/home/.jx3/plugins/jx-secret-0.0.34 vault wait -d 30m
 
 export VAULT_ADDR=https://vault.vault-infra:8200
 
@@ -82,7 +86,8 @@ secrets:
     token: $GH_ACCESS_TOKEN
     email: $GH_EMAIL" > /tmp/secrets.yaml
 
-jx secret import -f /tmp/secrets.yaml --git-url https://github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
+#jx secret import -f /tmp/secrets.yaml --git-url https://github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
+/home/.jx3/plugins/jx-secret-0.0.34 import -f /tmp/secrets.yaml --git-url https://github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
 
 
 # TODO verify env / install
