@@ -84,3 +84,4 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jx-git-operator](https://github.com/jenkins-x/jx-git-operator) |  | [0.0.51](https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.51) | 
 [jenkins-x/jx-extsecret](https://github.com/jenkins-x/jx-extsecret) |  | [0.0.18](https://github.com/jenkins-x/jx-extsecret/releases/tag/v0.0.18) | 
 [jenkins-x/jxr-versions](https://github.com/jenkins-x/jxr-versions) |  | [0.0.46](https://github.com/jenkins-x/jxr-versions/releases/tag/v0.0.46) | 
+[jenkins-x/jx-admin](https://github.com/jenkins-x/jx-admin) |  | [0.0.21](https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.21) | 
