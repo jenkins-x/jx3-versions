@@ -68,7 +68,7 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x-labs/jxl](https://github.com/jenkins-x-labs/jxl) |  | [0.0.181](https://github.com/jenkins-x-labs/jxl/releases/tag/v0.0.181) | 
 [jenkins-x-labs/istio](https://github.com/jenkins-x-labs/istio) |  | [0.0.21]() | 
 [jenkins-x/jxl](https://github.com/jenkins-x/jxl) |  | [0.0.208]() | 
-[jenkins-x-labs/cloud-resources](https://github.com/jenkins-x-labs/cloud-resources) |  | [0.0.27]() | 
+[jenkins-x-labs/cloud-resources](https://github.com/jenkins-x-labs/cloud-resources) |  | [0.0.31]() | 
 [jenkins-x/jxr-packs-kubernetes](https://github.com/jenkins-x/jxr-packs-kubernetes) |  | [0.0.22]() | 
 [jenkins-x/helm-annotate](https://github.com/jenkins-x/helm-annotate) |  | [0.0.13]() | 
 [godaddy/kubernetes-external-secrets](https://github.com/godaddy/kubernetes-external-secrets) |  | [4.0.0]() | 
@@ -85,5 +85,5 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jx-extsecret](https://github.com/jenkins-x/jx-extsecret) |  | [0.0.18](https://github.com/jenkins-x/jx-extsecret/releases/tag/v0.0.18) | 
 [jenkins-x/jxr-versions](https://github.com/jenkins-x/jxr-versions) |  | [0.0.46](https://github.com/jenkins-x/jxr-versions/releases/tag/v0.0.46) | 
 [jenkins-x/jx-admin](https://github.com/jenkins-x/jx-admin) |  | [0.0.27](https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.27) | 
-[jenkins-x/jx-cli](https://github.com/jenkins-x/jx-cli) |  | [0.0.34](https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.34) | 
+[jenkins-x/jx-cli](https://github.com/jenkins-x/jx-cli) |  | [0.0.16](https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.16) | 
 [jenkins-x/jx-project](https://github.com/jenkins-x/jx-project) |  | [0.0.17](https://github.com/jenkins-x/jx-project/releases/tag/v0.0.17) | 
