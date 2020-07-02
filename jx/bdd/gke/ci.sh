@@ -85,10 +85,14 @@ sleep 100
 #export JX_HELM3="true"
 
 gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
-jx ns jx
 
 # diagnostic commands to test the image's kubectl
 kubectl version
+
+kubectl config set-context --current --namespace=jx
+
+# TODO
+#jx ns jx
 
 # for some reason we need to use the full name once for the second command to work!
 kubectl get environments
