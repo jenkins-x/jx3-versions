@@ -74,18 +74,19 @@ sleep 10
 # import secrets...
 echo "secrets:
 secrets:
-  adminUser:
-    username: admin
-    password: $JENKINS_PASSWORD
   docker:
-    url: ""
+    url: todo
     username: todo
     password: todo
   hmacToken: todo
-  pipelineUser:
-    username: $GH_USERNAME
-    token: $GH_ACCESS_TOKEN
-    email: $GH_EMAIL" > /tmp/secrets.yaml
+  jx:
+    adminUser:
+      username: admin
+      password: $JENKINS_PASSWORD
+    pipelineUser:
+      username: $GH_USERNAME
+      token: $GH_ACCESS_TOKEN
+      email: $GH_EMAIL" > /tmp/secrets.yaml
 
 jx secret import -f /tmp/secrets.yaml
 
