@@ -59,8 +59,8 @@ echo "using the version stream ref: $PULL_PULL_SHA"
 echo "now installing the operator"
 
 # now installing the operator
-#jx admin operator --url https://${GH_USERNAME}:${GH_ACCESS_TOKEN}@github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
-/home/.jx3/plugins/jx-admin-0.0.29 operator --url https://${GH_USERNAME}:${GH_ACCESS_TOKEN}@github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
+#jx admin operator --url https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
+/home/.jx3/plugins/jx-admin-0.0.29 operator --url https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
 
 
 # wait for vault to get setup
