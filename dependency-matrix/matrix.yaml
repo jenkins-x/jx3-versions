@@ -585,8 +585,8 @@ dependencies:
   owner: jenkins-x
   repo: jx-cli
   url: https://github.com/jenkins-x/jx-cli
-  version: 0.0.36
-  versionURL: https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.36
+  version: 0.0.38
+  versionURL: https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.38
 - host: github.com
   owner: jenkins-x
   repo: jx-project
@@ -597,5 +597,5 @@ dependencies:
   owner: jenkins-x
   repo: jx-verify
   url: https://github.com/jenkins-x/jx-verify
-  version: 0.0.2
-  versionURL: https://github.com/jenkins-x/jx-verify/releases/tag/v0.0.2
+  version: 0.0.4
+  versionURL: https://github.com/jenkins-x/jx-verify/releases/tag/v0.0.4
