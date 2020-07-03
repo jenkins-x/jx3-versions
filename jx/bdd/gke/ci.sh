@@ -110,8 +110,8 @@ kubectl get env dev -oyaml
 
 # verify env / install
 
-jx verify install
 jx verify env
+jx verify install
 jx verify ingress
 
 
