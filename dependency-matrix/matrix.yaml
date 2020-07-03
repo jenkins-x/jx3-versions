@@ -483,7 +483,7 @@ dependencies:
   owner: jenkins-x-labs
   repo: cloud-resources
   url: https://github.com/jenkins-x-labs/cloud-resources
-  version: 0.0.27
+  version: 0.0.31
   versionURL: ""
 - host: github.com
   owner: jenkins-x
@@ -579,14 +579,14 @@ dependencies:
   owner: jenkins-x
   repo: jx-admin
   url: https://github.com/jenkins-x/jx-admin
-  version: 0.0.27
-  versionURL: https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.27
+  version: 0.0.31
+  versionURL: https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.31
 - host: github.com
   owner: jenkins-x
   repo: jx-cli
   url: https://github.com/jenkins-x/jx-cli
-  version: 0.0.16
-  versionURL: https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.16
+  version: 0.0.36
+  versionURL: https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.36
 - host: github.com
   owner: jenkins-x
   repo: jx-project
