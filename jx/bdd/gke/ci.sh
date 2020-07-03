@@ -72,21 +72,18 @@ sleep 10
 
 # lets port forward
 # import secrets...
-echo "secrets:
-secrets:
-  docker:
-    url: todo
-    username: todo
-    password: todo
-  hmacToken: todo
+echo "secret:
   jx:
     adminUser:
-      username: admin
       password: $JENKINS_PASSWORD
+      username: admin
     pipelineUser:
       username: $GH_USERNAME
       token: $GH_ACCESS_TOKEN
-      email: $GH_EMAIL" > /tmp/secrets.yaml
+      email: $GH_EMAIL
+  lighthouse:
+    hmac:
+      token: 2efa226914ae6e81d062e9566646bd54bb1c0cc23" > /tmp/secrets.yaml
 
 jx secret import -f /tmp/secrets.yaml
 
