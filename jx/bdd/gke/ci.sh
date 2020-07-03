@@ -2,7 +2,10 @@
 set -e
 set -x
 
+echo PATH=$PATH
 echo HOME=$HOME
+
+export PATH=$PATH:/usr/local/bin
 
 # setup environment
 KUBECONFIG="/tmp/jxhome/config"
