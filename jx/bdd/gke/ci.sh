@@ -92,7 +92,7 @@ sleep 100
 
 jx secret verify
 
-git clone https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/env-${CLUSTER_NAME}-dev.git
+git clone https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
 cd env-${CLUSTER_NAME}-dev.git
 
 kubectl config set-context --current --namespace=jx
@@ -111,8 +111,8 @@ kubectl get env dev -oyaml
 # verify env / install
 
 jx verify install
-jx verify ingress
 jx verify env
+jx verify ingress
 
 
 export JX_DISABLE_DELETE_APP="true"
