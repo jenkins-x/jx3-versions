@@ -50,27 +50,27 @@ echo "found cloud-resources version $CLOUD_RESOURCES_VERSION"
 git clone -b v${CLOUD_RESOURCES_VERSION} https://github.com/jenkins-x-labs/cloud-resources.git
 cloud-resources/gcloud/create_cluster.sh
 
+gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
+
+
 echo "using the version stream ref: $PULL_PULL_SHA"
 
 # create the boot git repository
-jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev --no-operator
+jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev
 
-echo "now installing the operator"
+#echo "now installing the operator"
 
 # now installing the operator
-jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
+#jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
 
 
 # wait for vault to get setup
 jx secret vault wait -d 30m
 
-#export VAULT_ADDR=https://vault.vault-infra:8200
-
 jx secret vault portforward &
 
 sleep 10
 
-# lets port forward
 # import secrets...
 echo "secret:
   jx:
@@ -87,29 +87,26 @@ echo "secret:
 
 jx secret import -f /tmp/secrets.yaml
 
-# TODO verify env / install
 sleep 100
 
-# lets make sure jx defaults to helm3
-#export JX_HELM3="true"
+jx secret verify
 
-gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
+jx ns jx
 
 # diagnostic commands to test the image's kubectl
 kubectl version
-
-kubectl config set-context --current --namespace=jx
-
-# TODO
-#jx ns jx
 
 # for some reason we need to use the full name once for the second command to work!
 kubectl get environments
 kubectl get env
 kubectl get env dev -oyaml
 
-# TODO not sure we need this?
-#helm repo add jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
+
+# verify env / install
+
+jx verify install
+jx verify ingress
+jx verify env
 
 
 export JX_DISABLE_DELETE_APP="true"
