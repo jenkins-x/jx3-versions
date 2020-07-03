@@ -56,18 +56,19 @@ gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $
 echo "using the version stream ref: $PULL_PULL_SHA"
 
 # create the boot git repository
-jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev
+jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev --no-operator
 
 echo "now installing the operator"
 
 # now installing the operator
-#jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
+jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
 
 
 # wait for vault to get setup
 jx secret vault wait -d 30m
 
 jx secret vault portforward &
+
 
 sleep 10
 
@@ -91,7 +92,12 @@ sleep 100
 
 jx secret verify
 
-jx ns jx
+git clone https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/env-${CLUSTER_NAME}-dev.git
+cd env-${CLUSTER_NAME}-dev.git
+
+kubectl config set-context --current --namespace=jx
+# TODO
+#jx ns jx
 
 # diagnostic commands to test the image's kubectl
 kubectl version
