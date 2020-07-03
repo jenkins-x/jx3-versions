@@ -85,6 +85,6 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jx-extsecret](https://github.com/jenkins-x/jx-extsecret) |  | [0.0.18](https://github.com/jenkins-x/jx-extsecret/releases/tag/v0.0.18) | 
 [jenkins-x/jxr-versions](https://github.com/jenkins-x/jxr-versions) |  | [0.0.46](https://github.com/jenkins-x/jxr-versions/releases/tag/v0.0.46) | 
 [jenkins-x/jx-admin](https://github.com/jenkins-x/jx-admin) |  | [0.0.31](https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.31) | 
-[jenkins-x/jx-cli](https://github.com/jenkins-x/jx-cli) |  | [0.0.36](https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.36) | 
+[jenkins-x/jx-cli](https://github.com/jenkins-x/jx-cli) |  | [0.0.38](https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.38) | 
 [jenkins-x/jx-project](https://github.com/jenkins-x/jx-project) |  | [0.0.17](https://github.com/jenkins-x/jx-project/releases/tag/v0.0.17) | 
 [jenkins-x/jx-verify](https://github.com/jenkins-x/jx-verify) |  | [0.0.2](https://github.com/jenkins-x/jx-verify/releases/tag/v0.0.2) | 
