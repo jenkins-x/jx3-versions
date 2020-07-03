@@ -93,7 +93,7 @@ sleep 100
 jx secret verify
 
 git clone https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
-cd env-${CLUSTER_NAME}-dev.git
+cd env-${CLUSTER_NAME}-dev
 
 kubectl config set-context --current --namespace=jx
 # TODO
