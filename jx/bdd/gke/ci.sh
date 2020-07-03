@@ -126,8 +126,8 @@ export GIT_ORGANISATION="$GH_OWNER"
 echo "about to run the bdd tests...."
 
 # run the BDD tests
-#bddjx -ginkgo.focus=golang -test.v
-bddjx -ginkgo.focus=javascript -test.v
+bddjx -ginkgo.focus=golang -test.v
+#bddjx -ginkgo.focus=javascript -test.v
 
 
 echo "completed the bdd tests"
