@@ -81,6 +81,9 @@ echo "secret:
     adminUser:
       password: $JENKINS_PASSWORD
       username: admin
+    docker:
+      password: dummy
+      username: admin
     pipelineUser:
       username: $GH_USERNAME
       token: $GH_ACCESS_TOKEN
