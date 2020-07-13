@@ -87,6 +87,6 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jx-admin](https://github.com/jenkins-x/jx-admin) |  | [0.0.39](https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.39) | 
 [jenkins-x/jx-cli](https://github.com/jenkins-x/jx-cli) |  | [0.0.64](https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.64) | 
 [jenkins-x/jx-project](https://github.com/jenkins-x/jx-project) |  | [0.0.31](https://github.com/jenkins-x/jx-project/releases/tag/v0.0.31) | 
-[jenkins-x/jx-verify](https://github.com/jenkins-x/jx-verify) |  | [0.0.4](https://github.com/jenkins-x/jx-verify/releases/tag/v0.0.4) | 
+[jenkins-x/jx-verify](https://github.com/jenkins-x/jx-verify) |  | [0.0.8](https://github.com/jenkins-x/jx-verify/releases/tag/v0.0.8) | 
 [jenkins-x/jx-pipeline](https://github.com/jenkins-x/jx-pipeline) |  | [0.0.2](https://github.com/jenkins-x/jx-pipeline/releases/tag/v0.0.2) | 
 [jenkins-x/jx-application](https://github.com/jenkins-x/jx-application) |  | [0.0.6](https://github.com/jenkins-x/jx-application/releases/tag/v0.0.6) | 
