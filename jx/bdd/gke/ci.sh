@@ -2,14 +2,24 @@
 set -e
 set -x
 
+echo PATH=$PATH
+echo HOME=$HOME
+
+export PATH=$PATH:/usr/local/bin
+
 # setup environment
 KUBECONFIG="/tmp/jxhome/config"
 
-export XDG_CONFIG_HOME="/builder/home/.config"
+#export XDG_CONFIG_HOME="/builder/home/.config"
 mkdir -p /home/.config
 cp -r /home/.config /builder/home/.config
 
-jx --version
+jx version
+jx help
+
+export JX3_HOME=/home/.jx3
+jx admin --help
+jx secret --help
 
 export GH_USERNAME="jenkins-x-labs-bot"
 export GH_EMAIL="jenkins-x@googlegroups.com"
@@ -43,35 +53,54 @@ echo "found cloud-resources version $CLOUD_RESOURCES_VERSION"
 git clone -b v${CLOUD_RESOURCES_VERSION} https://github.com/jenkins-x-labs/cloud-resources.git
 cloud-resources/gcloud/create_cluster.sh
 
-# TODO remove once we remove the code from the multicluster branch of jx:
-export JX_SECRETS_YAML=/tmp/secrets.yaml
+gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
+
 
 echo "using the version stream ref: $PULL_PULL_SHA"
 
 # create the boot git repository
-jxl boot create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE
+jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev --no-operator
+
+echo "now installing the operator"
+
+# now installing the operator
+jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
+
+
+# wait for vault to get setup
+jx secret vault wait -d 30m
+
+jx secret vault portforward &
+
+
+sleep 10
 
 # import secrets...
-echo "secrets:
-  adminUser:
-    username: admin
-    password: $JENKINS_PASSWORD
-  hmacToken: $GH_ACCESS_TOKEN
-  pipelineUser:
-    username: $GH_USERNAME
-    token: $GH_ACCESS_TOKEN
-    email: $GH_EMAIL" > /tmp/secrets.yaml
+echo "secret:
+  jx:
+    adminUser:
+      password: $JENKINS_PASSWORD
+      username: admin
+    pipelineUser:
+      username: $GH_USERNAME
+      token: $GH_ACCESS_TOKEN
+      email: $GH_EMAIL
+  lighthouse:
+    hmac:
+      token: 2efa226914ae6e81d062e9566646bd54bb1c0cc23" > /tmp/secrets.yaml
 
-jxl boot secrets import -f /tmp/secrets.yaml --git-url https://github.com/${GH_OWNER}/environment-${CLUSTER_NAME}-dev.git
+jx secret import -f /tmp/secrets.yaml
 
-jxl boot run -b --job
+sleep 100
 
+jx secret verify
 
-# lets make sure jx defaults to helm3
-export JX_HELM3="true"
+git clone https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
+cd env-${CLUSTER_NAME}-dev
 
-gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
-jx ns jx
+kubectl config set-context --current --namespace=jx
+# TODO
+#jx ns jx
 
 # diagnostic commands to test the image's kubectl
 kubectl version
@@ -81,9 +110,12 @@ kubectl get environments
 kubectl get env
 kubectl get env dev -oyaml
 
-# TODO not sure we need this?
 
-helm repo add jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
+# verify env / install
+
+jx verify env
+#jx verify install
+#jx verify ingress
 
 
 export JX_DISABLE_DELETE_APP="true"
@@ -91,11 +123,15 @@ export JX_DISABLE_DELETE_APP="true"
 export GIT_ORGANISATION="$GH_OWNER"
 
 
+echo "about to run the bdd tests...."
 
 # run the BDD tests
-#bddjx -ginkgo.focus=golang -test.v
-bddjx -ginkgo.focus=javascript -test.v
+bddjx -ginkgo.focus=golang -test.v
+#bddjx -ginkgo.focus=javascript -test.v
 
-echo cleaning up cloud resources
-curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/v$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
-gcloud container clusters delete $CLUSTER_NAME --zone $ZONE --quiet
+
+echo "completed the bdd tests"
+
+#echo cleaning up cloud resources
+#curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/v$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
+#gcloud container clusters delete $CLUSTER_NAME --zone $ZONE --quiet
