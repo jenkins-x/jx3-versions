@@ -84,6 +84,9 @@ echo "secret:
     docker:
       password: dummy
       username: admin
+    mavenSettings:
+      settingsXml: dummy
+      securityXml: dummy
     pipelineUser:
       username: $GH_USERNAME
       token: $GH_ACCESS_TOKEN
