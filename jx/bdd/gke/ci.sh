@@ -114,8 +114,16 @@ kubectl get env dev -oyaml
 # verify env / install
 
 jx verify env
+jx verify ingress
+
+# lets update the ingress
+make pr
+
+# TODO lets wait for the ingress to be setup....
+sleep 60
+
 #jx verify install
-#jx verify ingress
+
 
 
 export JX_DISABLE_DELETE_APP="true"
