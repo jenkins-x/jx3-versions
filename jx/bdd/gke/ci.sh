@@ -73,7 +73,7 @@ jx secret vault wait -d 30m
 jx secret vault portforward &
 
 
-sleep 10
+sleep 30
 
 # import secrets...
 echo "secret:
