@@ -97,7 +97,7 @@ echo "secret:
 
 jx secret import -f /tmp/secrets.yaml
 
-sleep 100
+sleep 90
 
 jx secret verify
 
