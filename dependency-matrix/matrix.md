@@ -79,7 +79,7 @@ Dependency | Sources | Version | Mismatched versions
 [helm/metrics-server](https://github.com/helm/charts/tree/master/stable/metrics-server) |  | [2.11.1]() | 
 [jenkins-x/flagger-metrics](https://github.com/jenkins-x/flagger-metrics) |  | [0.1.1]() | 
 [jenkins-x/istio](https://github.com/jenkins-x/istio) |  | [0.1.1]() | 
-[jenkins-x/jx-gitops](https://github.com/jenkins-x/jx-gitops) |  | [0.0.72](https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.72) | 
+[jenkins-x/jx-gitops](https://github.com/jenkins-x/jx-gitops) |  | [0.0.74](https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.74) | 
 [jenkins-x/jx-promote](https://github.com/jenkins-x/jx-promote) |  | [0.0.56](https://github.com/jenkins-x/jx-promote/releases/tag/v0.0.56) | 
 [jenkins-x/jx-git-operator](https://github.com/jenkins-x/jx-git-operator) |  | [0.0.51](https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.51) | 
 [jenkins-x/jx-extsecret](https://github.com/jenkins-x/jx-extsecret) |  | [0.0.18](https://github.com/jenkins-x/jx-extsecret/releases/tag/v0.0.18) | 
@@ -88,6 +88,6 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jx-cli](https://github.com/jenkins-x/jx-cli) |  | [0.0.94](https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.94) | 
 [jenkins-x/jx-project](https://github.com/jenkins-x/jx-project) |  | [0.0.37](https://github.com/jenkins-x/jx-project/releases/tag/v0.0.37) | 
 [jenkins-x/jx-verify](https://github.com/jenkins-x/jx-verify) |  | [0.0.10](https://github.com/jenkins-x/jx-verify/releases/tag/v0.0.10) | 
-[jenkins-x/jx-pipeline](https://github.com/jenkins-x/jx-pipeline) |  | [0.0.6](https://github.com/jenkins-x/jx-pipeline/releases/tag/v0.0.6) | 
+[jenkins-x/jx-pipeline](https://github.com/jenkins-x/jx-pipeline) |  | [0.0.8](https://github.com/jenkins-x/jx-pipeline/releases/tag/v0.0.8) | 
 [jenkins-x/jx-application](https://github.com/jenkins-x/jx-application) |  | [0.0.6](https://github.com/jenkins-x/jx-application/releases/tag/v0.0.6) | 
 [jenkins-x/jx-secret](https://github.com/jenkins-x/jx-secret) |  | [0.0.38](https://github.com/jenkins-x/jx-secret/releases/tag/v0.0.38) | 
