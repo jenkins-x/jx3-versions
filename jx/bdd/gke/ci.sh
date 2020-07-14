@@ -128,10 +128,8 @@ make pr
 sleep 60
 
 # now register webhooks now we've updated the git repo name
-jx verify env
-
+make verify
 #jx verify install
-
 
 
 export JX_DISABLE_DELETE_APP="true"
