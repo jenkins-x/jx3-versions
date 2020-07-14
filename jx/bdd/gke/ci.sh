@@ -116,14 +116,14 @@ kubectl get environments
 kubectl get env
 kubectl get env dev -oyaml
 
-
-# verify env / install
-
-jx verify env
+# update the ingress domain
 jx verify ingress
 
 # lets update the ingress
 make pr
+
+# now register webhooks now we've updated the git repo name
+jx verify env
 
 # TODO lets wait for the ingress to be setup....
 sleep 60
