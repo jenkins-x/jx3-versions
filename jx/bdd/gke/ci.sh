@@ -106,9 +106,7 @@ jx secret verify
 git clone https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
 cd env-${CLUSTER_NAME}-dev
 
-kubectl config set-context --current --namespace=jx
-# TODO
-#jx ns jx
+jx ns jx
 
 # diagnostic commands to test the image's kubectl
 kubectl version
@@ -129,7 +127,6 @@ sleep 60
 
 # now register webhooks now we've updated the git repo name
 make verify
-#jx verify install
 
 
 export JX_DISABLE_DELETE_APP="true"
