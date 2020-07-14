@@ -124,14 +124,12 @@ jx verify ingress
 # lets update the ingress
 make pr
 
-# now register webhooks now we've updated the git repo name
-jx verify env
-
 # TODO lets wait for the ingress to be setup....
 sleep 60
 
+# now register webhooks now we've updated the git repo name
+make verify
 #jx verify install
-
 
 
 export JX_DISABLE_DELETE_APP="true"
