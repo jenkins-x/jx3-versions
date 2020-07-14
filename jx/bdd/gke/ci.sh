@@ -59,12 +59,14 @@ gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $
 echo "using the version stream ref: $PULL_PULL_SHA"
 
 # create the boot git repository
-jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev --no-operator
+jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev
 
-echo "now installing the operator"
+# --no-operator
+
+#echo "now installing the operator"
 
 # now installing the operator
-jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
+#jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
 
 
 # wait for vault to get setup
@@ -97,7 +99,7 @@ echo "secret:
 
 jx secret import -f /tmp/secrets.yaml
 
-sleep 100
+sleep 90
 
 jx secret verify
 
@@ -116,14 +118,14 @@ kubectl get environments
 kubectl get env
 kubectl get env dev -oyaml
 
-
-# verify env / install
-
-jx verify env
+# update the ingress domain
 jx verify ingress
 
 # lets update the ingress
 make pr
+
+# now register webhooks now we've updated the git repo name
+jx verify env
 
 # TODO lets wait for the ingress to be setup....
 sleep 60
