@@ -549,8 +549,8 @@ dependencies:
   owner: jenkins-x
   repo: jx-gitops
   url: https://github.com/jenkins-x/jx-gitops
-  version: 0.0.72
-  versionURL: https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.72
+  version: 0.0.84
+  versionURL: https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.84
 - host: github.com
   owner: jenkins-x
   repo: jx-promote
@@ -585,8 +585,8 @@ dependencies:
   owner: jenkins-x
   repo: jx-cli
   url: https://github.com/jenkins-x/jx-cli
-  version: 0.0.94
-  versionURL: https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.94
+  version: 0.0.104
+  versionURL: https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.104
 - host: github.com
   owner: jenkins-x
   repo: jx-project
