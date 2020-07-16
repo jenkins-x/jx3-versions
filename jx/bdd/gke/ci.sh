@@ -131,7 +131,6 @@ sleep 60
 # now register webhooks now we've updated the git repo name
 make verify
 
-
 export JX_DISABLE_DELETE_APP="true"
 
 export GIT_ORGANISATION="$GH_OWNER"
