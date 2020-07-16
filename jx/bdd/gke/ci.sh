@@ -68,6 +68,10 @@ jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA 
 # now installing the operator
 #jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
 
+# lets modify the git repo stuff - eventually we can remove this?
+make all commit
+git push origin master
+
 
 # wait for vault to get setup
 jx secret vault wait -d 30m
@@ -121,8 +125,6 @@ jx verify ingress
 
 # lets update the ingress
 make all commit
-
-# push  the regeneration to master
 git push origin master
 
 # TODO lets wait for the ingress to be setup....
