@@ -69,15 +69,16 @@ jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA 
 #jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
 
 # lets modify the git repo stuff - eventually we can remove this?
+git clone https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
+cd env-${CLUSTER_NAME}-dev
+
 make all commit
 git push origin master
-
 
 # wait for vault to get setup
 jx secret vault wait -d 30m
 
 jx secret vault portforward &
-
 
 sleep 30
 
@@ -106,9 +107,6 @@ jx secret import -f /tmp/secrets.yaml
 sleep 90
 
 jx secret verify
-
-git clone https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
-cd env-${CLUSTER_NAME}-dev
 
 jx ns jx
 
