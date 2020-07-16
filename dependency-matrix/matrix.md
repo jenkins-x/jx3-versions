@@ -79,13 +79,13 @@ Dependency | Sources | Version | Mismatched versions
 [helm/metrics-server](https://github.com/helm/charts/tree/master/stable/metrics-server) |  | [2.11.1]() | 
 [jenkins-x/flagger-metrics](https://github.com/jenkins-x/flagger-metrics) |  | [0.1.1]() | 
 [jenkins-x/istio](https://github.com/jenkins-x/istio) |  | [0.1.1]() | 
-[jenkins-x/jx-gitops](https://github.com/jenkins-x/jx-gitops) |  | [0.0.84](https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.84) | 
+[jenkins-x/jx-gitops](https://github.com/jenkins-x/jx-gitops) |  | [0.0.118](https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.118) | 
 [jenkins-x/jx-promote](https://github.com/jenkins-x/jx-promote) |  | [0.0.56](https://github.com/jenkins-x/jx-promote/releases/tag/v0.0.56) | 
 [jenkins-x/jx-git-operator](https://github.com/jenkins-x/jx-git-operator) |  | [0.0.51](https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.51) | 
 [jenkins-x/jx-extsecret](https://github.com/jenkins-x/jx-extsecret) |  | [0.0.18](https://github.com/jenkins-x/jx-extsecret/releases/tag/v0.0.18) | 
 [jenkins-x/jxr-versions](https://github.com/jenkins-x/jxr-versions) |  | [0.0.46](https://github.com/jenkins-x/jxr-versions/releases/tag/v0.0.46) | 
 [jenkins-x/jx-admin](https://github.com/jenkins-x/jx-admin) |  | [0.0.41](https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.41) | 
-[jenkins-x/jx-cli](https://github.com/jenkins-x/jx-cli) |  | [0.0.104](https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.104) | 
+[jenkins-x/jx-cli](https://github.com/jenkins-x/jx-cli) |  | [0.0.124](https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.124) | 
 [jenkins-x/jx-project](https://github.com/jenkins-x/jx-project) |  | [0.0.37](https://github.com/jenkins-x/jx-project/releases/tag/v0.0.37) | 
 [jenkins-x/jx-verify](https://github.com/jenkins-x/jx-verify) |  | [0.0.10](https://github.com/jenkins-x/jx-verify/releases/tag/v0.0.10) | 
 [jenkins-x/jx-pipeline](https://github.com/jenkins-x/jx-pipeline) |  | [0.0.8](https://github.com/jenkins-x/jx-pipeline/releases/tag/v0.0.8) | 
