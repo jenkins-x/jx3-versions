@@ -128,8 +128,15 @@ git push origin master
 # TODO lets wait for the ingress to be setup....
 sleep 60
 
+kubectl get cm config -oyaml
+
 # now register webhooks now we've updated the git repo name
 make verify
+
+sleep 60
+
+kubectl get cm config -oyaml
+
 
 export JX_DISABLE_DELETE_APP="true"
 
