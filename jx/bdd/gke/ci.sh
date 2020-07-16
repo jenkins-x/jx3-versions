@@ -21,6 +21,7 @@ export JX3_HOME=/home/.jx3
 jx admin --help
 jx secret --help
 
+
 export GH_USERNAME="jenkins-x-labs-bot"
 export GH_EMAIL="jenkins-x@googlegroups.com"
 export GH_OWNER="cb-kubecd"
@@ -142,6 +143,9 @@ export JX_DISABLE_DELETE_APP="true"
 
 export GIT_ORGANISATION="$GH_OWNER"
 
+
+# lets turn off color output
+export TERM=dumb
 
 echo "about to run the bdd tests...."
 
