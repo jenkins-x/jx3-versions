@@ -120,7 +120,10 @@ kubectl get env dev -oyaml
 jx verify ingress
 
 # lets update the ingress
-make pr
+make all commit
+
+# push  the regeneration to master
+git push origin master
 
 # TODO lets wait for the ingress to be setup....
 sleep 60
