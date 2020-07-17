@@ -73,9 +73,6 @@ jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA 
 git clone https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
 cd env-${CLUSTER_NAME}-dev
 
-make all commit
-git push origin master
-
 # wait for vault to get setup
 jx secret vault wait -d 30m
 
@@ -120,11 +117,13 @@ kubectl get env
 kubectl get env dev -oyaml
 
 # update the ingress domain
-jx verify ingress
+#jx verify ingress
 
 # lets update the ingress
-make all commit
-git push origin master
+#make all commit
+#git push origin master
+
+kubectl get cm config -oyaml
 
 # TODO lets wait for the ingress to be setup....
 sleep 60
@@ -132,8 +131,11 @@ sleep 60
 kubectl get cm config -oyaml
 
 # now register webhooks now we've updated the git repo name
-make verify
+#make verify
 
+make verify-install
+
+# TODO remove sleep as the above step should ideally wait until things are setup correctly?
 sleep 60
 
 kubectl get cm config -oyaml
