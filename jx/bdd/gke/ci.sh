@@ -21,6 +21,7 @@ export JX3_HOME=/home/.jx3
 jx admin --help
 jx secret --help
 
+
 export GH_USERNAME="jenkins-x-labs-bot"
 export GH_EMAIL="jenkins-x@googlegroups.com"
 export GH_OWNER="cb-kubecd"
@@ -68,12 +69,14 @@ jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA 
 # now installing the operator
 #jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
 
+# lets modify the git repo stuff - eventually we can remove this?
+git clone https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
+cd env-${CLUSTER_NAME}-dev
 
 # wait for vault to get setup
 jx secret vault wait -d 30m
 
 jx secret vault portforward &
-
 
 sleep 30
 
@@ -103,9 +106,6 @@ sleep 90
 
 jx secret verify
 
-git clone https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
-cd env-${CLUSTER_NAME}-dev
-
 jx ns jx
 
 # diagnostic commands to test the image's kubectl
@@ -116,26 +116,18 @@ kubectl get environments
 kubectl get env
 kubectl get env dev -oyaml
 
-# update the ingress domain
-jx verify ingress
+# lets wait for things to be installed correctly
+make verify-install
 
-# lets update the ingress
-make all commit
-
-# push  the regeneration to master
-git push origin master
-
-# TODO lets wait for the ingress to be setup....
-sleep 60
-
-# now register webhooks now we've updated the git repo name
-make verify
-
+kubectl get cm config -oyaml
 
 export JX_DISABLE_DELETE_APP="true"
 
 export GIT_ORGANISATION="$GH_OWNER"
 
+
+# lets turn off color output
+export TERM=dumb
 
 echo "about to run the bdd tests...."
 
