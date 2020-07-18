@@ -561,8 +561,8 @@ dependencies:
   owner: jenkins-x
   repo: jx-git-operator
   url: https://github.com/jenkins-x/jx-git-operator
-  version: 0.0.51
-  versionURL: https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.51
+  version: 0.0.59
+  versionURL: https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.59
 - host: github.com
   owner: jenkins-x
   repo: jx-extsecret
@@ -579,14 +579,14 @@ dependencies:
   owner: jenkins-x
   repo: jx-admin
   url: https://github.com/jenkins-x/jx-admin
-  version: 0.0.41
-  versionURL: https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.41
+  version: 0.0.47
+  versionURL: https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.47
 - host: github.com
   owner: jenkins-x
   repo: jx-cli
   url: https://github.com/jenkins-x/jx-cli
-  version: 0.0.146
-  versionURL: https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.146
+  version: 0.0.152
+  versionURL: https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.152
 - host: github.com
   owner: jenkins-x
   repo: jx-project
