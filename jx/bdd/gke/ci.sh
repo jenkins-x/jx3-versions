@@ -60,7 +60,7 @@ gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $
 echo "using the version stream ref: $PULL_PULL_SHA"
 
 # create the boot git repository
-jx admin create -b --env dev --operator-namespace=jx --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev
+jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev
 
 # --no-operator
 
