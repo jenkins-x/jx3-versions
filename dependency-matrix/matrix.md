@@ -81,7 +81,7 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/istio](https://github.com/jenkins-x/istio) |  | [0.1.1]() | 
 [jenkins-x/jx-gitops](https://github.com/jenkins-x/jx-gitops) |  | [0.0.134](https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.134) | 
 [jenkins-x/jx-promote](https://github.com/jenkins-x/jx-promote) |  | [0.0.56](https://github.com/jenkins-x/jx-promote/releases/tag/v0.0.56) | 
-[jenkins-x/jx-git-operator](https://github.com/jenkins-x/jx-git-operator) |  | [0.0.51](https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.51) | 
+[jenkins-x/jx-git-operator](https://github.com/jenkins-x/jx-git-operator) |  | [0.0.59](https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.59) | 
 [jenkins-x/jx-extsecret](https://github.com/jenkins-x/jx-extsecret) |  | [0.0.18](https://github.com/jenkins-x/jx-extsecret/releases/tag/v0.0.18) | 
 [jenkins-x/jxr-versions](https://github.com/jenkins-x/jxr-versions) |  | [0.0.46](https://github.com/jenkins-x/jxr-versions/releases/tag/v0.0.46) | 
 [jenkins-x/jx-admin](https://github.com/jenkins-x/jx-admin) |  | [0.0.47](https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.47) | 
