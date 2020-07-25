@@ -122,6 +122,7 @@ make verify-install
 kubectl get cm config -oyaml
 
 export JX_DISABLE_DELETE_APP="true"
+export JX_DISABLE_DELETE_REPO="true"
 
 export GIT_ORGANISATION="$GH_OWNER"
 
