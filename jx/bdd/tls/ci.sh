@@ -150,12 +150,11 @@ export TERM=dumb
 echo "about to run the bdd tests...."
 
 # run the BDD tests
-bddjx -ginkgo.focus=golang -test.v
-#bddjx -ginkgo.focus=javascript -test.v
+#bddjx -ginkgo.focus=golang -test.v
 
 
 echo "completed the bdd tests"
 
-echo cleaning up cloud resources
-curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/v$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
-gcloud container clusters delete $CLUSTER_NAME --zone $ZONE --quiet
+#echo cleaning up cloud resources
+#curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/v$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
+#gcloud container clusters delete $CLUSTER_NAME --zone $ZONE --quiet
