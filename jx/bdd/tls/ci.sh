@@ -28,9 +28,9 @@ export GH_OWNER="cb-kubecd"
 
 export PROJECT_ID=jenkins-x-labs-bdd
 export CREATED_TIME=$(date '+%a-%b-%d-%Y-%H-%M-%S')
-export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-bdd-gke"
+export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-bdd-tls"
 export ZONE=europe-west1-c
-export LABELS="branch=${BRANCH_NAME,,},cluster=bdd-gke,create-time=${CREATED_TIME,,}"
+export LABELS="branch=${BRANCH_NAME,,},cluster=bdd-tls,create-time=${CREATED_TIME,,}"
 
 # lets setup git
 git config --global --add user.name JenkinsXBot
@@ -51,15 +51,16 @@ echo "creating cluster $CLUSTER_NAME in project $PROJECT_ID with labels $LABELS"
 export CLOUD_RESOURCES_VERSION=$(grep  'version: ' /workspace/source/git/github.com/jenkins-x-labs/cloud-resources.yml | awk '{ print $2}')
 echo "found cloud-resources version $CLOUD_RESOURCES_VERSION"
 
-git clone -b v${CLOUD_RESOURCES_VERSION} https://github.com/jenkins-x-labs/cloud-resources.git
-cloud-resources/gcloud/create_cluster.sh
-
-gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
-
 echo "lets get the PR head clone URL"
 export PR_SOURCE_URL=$(jx gitops pr get --git-token=$GH_ACCESS_TOKEN --head-url)
 
 echo "using the version stream url $PR_SOURCE_URL ref: $PULL_PULL_SHA"
+
+
+git clone -b v${CLOUD_RESOURCES_VERSION} https://github.com/jenkins-x-labs/cloud-resources.git
+cloud-resources/gcloud/create_cluster.sh
+
+gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
 
 # create service account key used by certmanager to add A records for the dns challange by letsencrypt
 gcloud iam service-accounts create $CLUSTER_NAME-dns01-solver --display-name "$CLUSTER_NAME dns01-solver" --project jenkins-x-labs-bdd

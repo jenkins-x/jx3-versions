@@ -51,15 +51,16 @@ echo "creating cluster $CLUSTER_NAME in project $PROJECT_ID with labels $LABELS"
 export CLOUD_RESOURCES_VERSION=$(grep  'version: ' /workspace/source/git/github.com/jenkins-x-labs/cloud-resources.yml | awk '{ print $2}')
 echo "found cloud-resources version $CLOUD_RESOURCES_VERSION"
 
-git clone -b v${CLOUD_RESOURCES_VERSION} https://github.com/jenkins-x-labs/cloud-resources.git
-cloud-resources/gcloud/create_cluster.sh
-
-gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
-
 echo "lets get the PR head clone URL"
 export PR_SOURCE_URL=$(jx gitops pr get --git-token=$GH_ACCESS_TOKEN --head-url)
 
 echo "using the version stream url $PR_SOURCE_URL ref: $PULL_PULL_SHA"
+
+
+git clone -b v${CLOUD_RESOURCES_VERSION} https://github.com/jenkins-x-labs/cloud-resources.git
+cloud-resources/gcloud/create_cluster.sh
+
+gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
 
 # create the boot git repository
 jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --version-stream-url=${PR_SOURCE_URL//[[:space:]]} --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev
