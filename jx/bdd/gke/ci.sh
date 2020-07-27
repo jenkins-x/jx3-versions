@@ -56,17 +56,15 @@ cloud-resources/gcloud/create_cluster.sh
 
 gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
 
+echo "lets get the PR head clone URL"
+export PR_SOURCE_URL=$(jx gitops pr get --git-token=$GH_ACCESS_TOKEN --head-url)
 
-echo "using the version stream ref: $PULL_PULL_SHA"
+echo "using the version stream url $PR_SOURCE_URL ref: $PULL_PULL_SHA"
 
 # create the boot git repository
-jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev
+jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --version-stream-url=${PR_SOURCE_URL//[[:space:]]} --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev
 
-# --no-operator
-
-#echo "now installing the operator"
-
-# now installing the operator
+# to install the operator separately try adding --no-operator then...
 #jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
 
 # lets modify the git repo stuff - eventually we can remove this?
@@ -139,6 +137,6 @@ bddjx -ginkgo.focus=golang -test.v
 
 echo "completed the bdd tests"
 
-#echo cleaning up cloud resources
-#curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/v$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
-#gcloud container clusters delete $CLUSTER_NAME --zone $ZONE --quiet
+echo cleaning up cloud resources
+curl https://raw.githubusercontent.com/jenkins-x-labs/cloud-resources/v$CLOUD_RESOURCES_VERSION/gcloud/cleanup-cloud-resurces.sh | bash
+gcloud container clusters delete $CLUSTER_NAME --zone $ZONE --quiet
