@@ -1,5 +1,9 @@
 installCRDs: true
 
+global:
+  leaderElection:
+    namespace: cert-manager
+
 cert-manager:
   enabled: {{ .Values.jxRequirements.ingress.tls.enabled }}
 {{- if eq .Values.jxRequirements.cluster.provider "eks" }}
