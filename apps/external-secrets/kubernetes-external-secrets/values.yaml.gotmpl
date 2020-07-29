@@ -8,6 +8,7 @@ jxRequirements:
 crds:
   create: true
 
+{{- if eq .Values.jxRequirements.secretStorage "vault" }}
 env:
   VAULT_ADDR: https://vault:8200
   NODE_EXTRA_CA_CERTS: "/usr/local/share/ca-certificates/ca.crt"
@@ -16,3 +17,4 @@ filesFromSecret:
   vault-ca:
     secret: vault-tls
     mountPath: /usr/local/share/ca-certificates
+{{- end }}
