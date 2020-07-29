@@ -37,6 +37,9 @@ pipelineConfig:
                 - --rev
                 - "v${VERSION}"
 
+              - name: update-bot-fork
+                command: ./jx/scripts/update-bot-fork.sh
+
               - name: release-resources
                 command: ./jx/scripts/release-resources.sh
                 image: gcr.io/jenkinsxio-labs-private/jx-gitops
