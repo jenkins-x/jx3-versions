@@ -62,11 +62,12 @@ cloud-resources/gcloud/create_cluster.sh
 
 gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID
 
-# create the boot git repository
-jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --version-stream-url=${PR_SOURCE_URL//[[:space:]]} --env-git-owner=$GH_OWNER --project=$PROJECT_ID --cluster=$CLUSTER_NAME --zone=$ZONE --repo env-$CLUSTER_NAME-dev
+# create the boot git repository to mimic creating the git repository via the github create repository wizard
+jx admin create -b --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --version-stream-url=${PR_SOURCE_URL//[[:space:]]} --env-git-owner=$GH_OWNER --repo env-$CLUSTER_NAME-dev --no-operator
 
-# to install the operator separately try adding --no-operator then...
-#jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
+
+# now lets install the operator
+jx admin operator --url https://github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git --username $GH_USERNAME --token $GH_ACCESS_TOKEN
 
 # lets modify the git repo stuff - eventually we can remove this?
 git clone https://${GH_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
