@@ -25,6 +25,7 @@ jx secret --help
 export GIT_USERNAME="jenkins-x-labs-bot"
 export GIT_USER_EMAIL="jenkins-x@googlegroups.com"
 export GH_OWNER="cb-kubecd"
+export GIT_TOKEN="${GH_ACCESS_TOKEN//[[:space:]]}"
 
 export PROJECT_ID=jenkins-x-labs-bdd
 export CREATED_TIME=$(date '+%a-%b-%d-%Y-%H-%M-%S')
@@ -40,7 +41,7 @@ echo "running the BDD test with JX_HOME = $JX_HOME"
 
 mkdir -p $XDG_CONFIG_HOME/git
 # replace the credentials file with a single user entry
-echo "https://${GIT_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $XDG_CONFIG_HOME/git/credentials
+echo "https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@github.com" > $XDG_CONFIG_HOME/git/credentials
 
 echo "using git credentials: $XDG_CONFIG_HOME/git/credentials"
 ls -al $XDG_CONFIG_HOME/git/credentials
@@ -68,7 +69,7 @@ echo "using GitOps template: $GITOPS_TEMPLATE_URL version: $GITOPS_TEMPLATE_VERS
 # create the boot git repository to mimic creating the git repository via the github create repository wizard
 jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --version-stream-url=${PR_SOURCE_URL//[[:space:]]} --env-git-owner=$GH_OWNER --repo env-$CLUSTER_NAME-dev --no-operator
 
-git clone https://${GIT_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
+git clone https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
 cd env-${CLUSTER_NAME}-dev
 
 
@@ -84,7 +85,7 @@ git push
 
 # now lets install the operator
 # --username is found from $GIT_USERNAME or git clone URL
-# --token is found from git clone URL
+# --token is found from $GIT_TOKEN or git clone URL
 #jx admin operator --username $GIT_USERNAME --token $GH_ACCESS_TOKEN
 jx admin operator
 
