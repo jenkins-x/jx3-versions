@@ -49,7 +49,7 @@ ls -al $XDG_CONFIG_HOME/git/credentials
 echo "creating cluster $CLUSTER_NAME in project $PROJECT_ID with labels $LABELS"
 
 echo "lets get the PR head clone URL"
-export PR_SOURCE_URL=$(jx gitops pr get --git-token=$GH_ACCESS_TOKEN --head-url)
+export PR_SOURCE_URL=$(jx gitops pr get --git-token=$GIT_TOKEN --head-url)
 
 echo "using the version stream url $PR_SOURCE_URL ref: $PULL_PULL_SHA"
 
@@ -86,7 +86,7 @@ git push
 # now lets install the operator
 # --username is found from $GIT_USERNAME or git clone URL
 # --token is found from $GIT_TOKEN or git clone URL
-#jx admin operator --username $GIT_USERNAME --token $GH_ACCESS_TOKEN
+#jx admin operator --username $GIT_USERNAME --token $GIT_TOKEN
 jx admin operator
 
 # lets modify the git repo stuff - eventually we can remove this?
@@ -111,7 +111,7 @@ echo "secret:
       securityXml: dummy
     pipelineUser:
       username: $GIT_USERNAME
-      token: $GH_ACCESS_TOKEN
+      token: $GIT_TOKEN
       email: $GIT_USER_EMAIL
   lighthouse:
     hmac:
