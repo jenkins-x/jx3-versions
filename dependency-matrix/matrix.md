@@ -91,4 +91,4 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jx-pipeline](https://github.com/jenkins-x/jx-pipeline) |  | [0.0.8](https://github.com/jenkins-x/jx-pipeline/releases/tag/v0.0.8) | 
 [jenkins-x/jx-application](https://github.com/jenkins-x/jx-application) |  | [0.0.10](https://github.com/jenkins-x/jx-application/releases/tag/v0.0.10) | 
 [jenkins-x/jx-secret](https://github.com/jenkins-x/jx-secret) |  | [0.0.42](https://github.com/jenkins-x/jx-secret/releases/tag/v0.0.42) | 
-[jenkins-x/jx-preview](https://github.com/jenkins-x/jx-preview) |  | [0.0.8](https://github.com/jenkins-x/jx-preview/releases/tag/v0.0.8) | 
+[jenkins-x/jx-preview](https://github.com/jenkins-x/jx-preview) |  | [0.0.10](https://github.com/jenkins-x/jx-preview/releases/tag/v0.0.10) | 
