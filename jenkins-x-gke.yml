@@ -13,7 +13,7 @@ pipelineConfig:
                 cpu: 1
                 memory: 2048Mi
         environment:
-          - name: GH_ACCESS_TOKEN
+          - name: GIT_TOKEN
             valueFrom:
               secretKeyRef:
                 name: bdd-pipeline-token-github
