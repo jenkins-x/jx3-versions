@@ -40,7 +40,7 @@ echo "running the BDD test with JX_HOME = $JX_HOME"
 
 mkdir -p $XDG_CONFIG_HOME/git
 # replace the credentials file with a single user entry
-echo "https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN//[[:space:]]}@github.com" > $XDG_CONFIG_HOME/git/credentials
+echo "https://${GIT_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com" > $XDG_CONFIG_HOME/git/credentials
 
 echo "using git credentials: $XDG_CONFIG_HOME/git/credentials"
 ls -al $XDG_CONFIG_HOME/git/credentials
@@ -48,7 +48,7 @@ ls -al $XDG_CONFIG_HOME/git/credentials
 echo "creating cluster $CLUSTER_NAME in project $PROJECT_ID with labels $LABELS"
 
 echo "lets get the PR head clone URL"
-export PR_SOURCE_URL=$(jx gitops pr get --git-token=$GIT_TOKEN --head-url)
+export PR_SOURCE_URL=$(jx gitops pr get --git-token=$GH_ACCESS_TOKEN --head-url)
 
 echo "using the version stream url $PR_SOURCE_URL ref: $PULL_PULL_SHA"
 
@@ -68,7 +68,7 @@ echo "using GitOps template: $GITOPS_TEMPLATE_URL version: $GITOPS_TEMPLATE_VERS
 # create the boot git repository to mimic creating the git repository via the github create repository wizard
 jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --provider=gke --version-stream-ref=$PULL_PULL_SHA --version-stream-url=${PR_SOURCE_URL//[[:space:]]} --env-git-owner=$GH_OWNER --repo env-$CLUSTER_NAME-dev --no-operator
 
-git clone https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
+git clone https://${GIT_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
 cd env-${CLUSTER_NAME}-dev
 
 
@@ -84,8 +84,8 @@ git push
 
 # now lets install the operator
 # --username is found from $GIT_USERNAME or git clone URL
-# --token is found from $GIT_TOKEN or git clone URL
-#jx admin operator --username $GIT_USERNAME --token $GIT_TOKEN
+# --token is found from git clone URL
+#jx admin operator --username $GIT_USERNAME --token $GH_ACCESS_TOKEN
 jx admin operator
 
 # lets modify the git repo stuff - eventually we can remove this?
@@ -110,7 +110,7 @@ echo "secret:
       securityXml: dummy
     pipelineUser:
       username: $GIT_USERNAME
-      token: $GIT_TOKEN
+      token: $GH_ACCESS_TOKEN
       email: $GIT_USER_EMAIL
   lighthouse:
     hmac:
