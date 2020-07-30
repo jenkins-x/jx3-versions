@@ -617,3 +617,9 @@ dependencies:
   url: https://github.com/jenkins-x/jx-secret
   version: 0.0.42
   versionURL: https://github.com/jenkins-x/jx-secret/releases/tag/v0.0.42
+- host: github.com
+  owner: jenkins-x
+  repo: jx-preview
+  url: https://github.com/jenkins-x/jx-preview
+  version: 0.0.8
+  versionURL: https://github.com/jenkins-x/jx-preview/releases/tag/v0.0.8
