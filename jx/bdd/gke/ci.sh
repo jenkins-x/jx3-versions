@@ -141,8 +141,9 @@ kubectl get cm config -oyaml
 export JX_DISABLE_DELETE_APP="true"
 export JX_DISABLE_DELETE_REPO="true"
 
+# define variables for the BDD tests
 export GIT_ORGANISATION="$GH_OWNER"
-
+export GH_USERNAME="$GIT_USERNAME"
 
 # lets turn off color output
 export TERM=dumb
