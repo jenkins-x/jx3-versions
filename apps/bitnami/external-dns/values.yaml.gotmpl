@@ -20,7 +20,7 @@ rbac:
 {{- if eq .Values.jxRequirements.cluster.provider "gke" }}
 serviceAccount:
   annotations:
-    iam.gke.io/gcp-service-account: {{ .Values.jxRequirements.cluster.clusterName }}-ex@{{ .Values.jxRequirements.cluster.project }}.iam.gserviceaccount.com
+    iam.gke.io/gcp-service-account: {{ .Values.jxRequirements.cluster.clusterName }}-dn@{{ .Values.jxRequirements.cluster.project }}.iam.gserviceaccount.com
 {{- else if eq .Values.jxRequirements.cluster.provider "eks" }}
 serviceAccount:
   annotations:
