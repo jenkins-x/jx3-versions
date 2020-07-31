@@ -20,7 +20,7 @@ serviceaccount:
 {{- else if eq .Values.jxRequirements.cluster.provider "gke" }}
 serviceaccount:
   annotations:
-    iam.gke.io/gcp-service-account: {{ .Values.jxRequirements.cluster.clusterName }}-tk@{{ .Values.jxRequirements.cluster.project }}.iam.gserviceaccount.com
+    iam.gke.io/gcp-service-account: {{ .Values.jxRequirements.cluster.clusterName }}-tekton@{{ .Values.jxRequirements.cluster.project }}.iam.gserviceaccount.com
 {{- end }}
 
 tillerNamespace: ""
