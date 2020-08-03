@@ -28,6 +28,6 @@ pipelineConfig:
         stages:
           - name: ci
             steps:
-              - command: jx/bdd/storage/ci.sh
-                image: gcr.io/jenkinsxio-labs-private/jxl:0.0.208
+              - command: jx/bdd/terraform/ci.sh
+                image: gcr.io/jenkinsxio-labs-private/jx-cli:0.0.248
                 name: runci
