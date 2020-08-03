@@ -71,12 +71,13 @@ jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --version-st
 git clone https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
 cd env-${CLUSTER_NAME}-dev
 
+export GITOPS_BIN=`pwd`/env-${CLUSTER_NAME}-dev/bin
 
 # lets configure git to use the project/cluster
-./bin/configure.sh
+$GITOPS_BIN/configure.sh
 
 # lets create the cluster
-./bin/create.sh
+$GITOPS_BIN/create.sh
 
 # lets add / commit any cloud resource specific changes
 git add *
@@ -157,4 +158,4 @@ bddjx -ginkgo.focus=golang -test.v
 echo "completed the bdd tests"
 
 echo cleaning up cloud resources
-./bin/destroy.sh
+$GITOPS_BIN/destroy.sh
