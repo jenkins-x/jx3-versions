@@ -29,6 +29,10 @@ export GIT_USER_EMAIL="jenkins-x@googlegroups.com"
 export GH_OWNER="cb-kubecd"
 export GIT_TOKEN="${GH_ACCESS_TOKEN//[[:space:]]}"
 
+# batch mode for terraform
+export TERRAFORM_APPROVE="-auto-approve"
+export TERRAFORM_INPUT="-input=false"
+
 export PROJECT_ID=jenkins-x-labs-bdd
 export CREATED_TIME=$(date '+%a-%b-%d-%Y-%H-%M-%S')
 export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
@@ -80,8 +84,8 @@ $GITOPS_BIN/configure.sh
 $GITOPS_BIN/create.sh
 
 # lets add / commit any cloud resource specific changes
-git add *
-git commit -a -m "chore: cluster changes"
+git add * || true
+git commit -a -m "chore: cluster changes" || true
 git push
 
 # now lets install the operator
