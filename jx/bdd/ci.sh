@@ -71,7 +71,7 @@ jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --version-st
 git clone https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
 cd env-${CLUSTER_NAME}-dev
 
-export GITOPS_BIN=`pwd`/env-${CLUSTER_NAME}-dev/bin
+export GITOPS_BIN=`pwd`/bin
 
 # lets configure git to use the project/cluster
 $GITOPS_BIN/configure.sh
