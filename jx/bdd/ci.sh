@@ -77,7 +77,7 @@ export GITOPS_BIN=`pwd`/bin
 $GITOPS_BIN/configure.sh
 
 # lets create the cluster
-$GITOPS_BIN/create.sh
+$GITOPS_BIN/create.sh -auto-approve
 
 # lets add / commit any cloud resource specific changes
 git add *
@@ -158,4 +158,4 @@ bddjx -ginkgo.focus=golang -test.v
 echo "completed the bdd tests"
 
 echo cleaning up cloud resources
-$GITOPS_BIN/destroy.sh
+$GITOPS_BIN/destroy.sh -auto-approve
