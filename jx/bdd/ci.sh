@@ -84,8 +84,8 @@ $GITOPS_BIN/configure.sh
 $GITOPS_BIN/create.sh
 
 # lets add / commit any cloud resource specific changes
-git add *
-git commit -a -m "chore: cluster changes"
+git add * || true
+git commit -a -m "chore: cluster changes" || true
 git push
 
 # now lets install the operator
