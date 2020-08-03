@@ -29,6 +29,10 @@ export GIT_USER_EMAIL="jenkins-x@googlegroups.com"
 export GH_OWNER="cb-kubecd"
 export GIT_TOKEN="${GH_ACCESS_TOKEN//[[:space:]]}"
 
+# batch mode for terraform
+export TERRAFORM_APPROVE="-auto-approve"
+export TERRAFORM_INPUT="-input=false"
+
 export PROJECT_ID=jenkins-x-labs-bdd
 export CREATED_TIME=$(date '+%a-%b-%d-%Y-%H-%M-%S')
 export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
@@ -77,7 +81,7 @@ export GITOPS_BIN=`pwd`/bin
 $GITOPS_BIN/configure.sh
 
 # lets create the cluster
-$GITOPS_BIN/create.sh -auto-approve
+$GITOPS_BIN/create.sh
 
 # lets add / commit any cloud resource specific changes
 git add *
@@ -158,4 +162,4 @@ bddjx -ginkgo.focus=golang -test.v
 echo "completed the bdd tests"
 
 echo cleaning up cloud resources
-$GITOPS_BIN/destroy.sh -auto-approve
+$GITOPS_BIN/destroy.sh
