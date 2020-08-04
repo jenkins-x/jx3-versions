@@ -579,8 +579,8 @@ dependencies:
   owner: jenkins-x
   repo: jx-admin
   url: https://github.com/jenkins-x/jx-admin
-  version: 0.0.57
-  versionURL: https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.57
+  version: 0.0.59
+  versionURL: https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.59
 - host: github.com
   owner: jenkins-x
   repo: jx-cli
@@ -623,3 +623,9 @@ dependencies:
   url: https://github.com/jenkins-x/jx-preview
   version: 0.0.24
   versionURL: https://github.com/jenkins-x/jx-preview/releases/tag/v0.0.24
+- host: github.com
+  owner: jenkins-x
+  repo: jx-test
+  url: https://github.com/jenkins-x/jx-test
+  version: 0.0.16
+  versionURL: https://github.com/jenkins-x/jx-test/releases/tag/v0.0.16
