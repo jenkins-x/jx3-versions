@@ -159,12 +159,17 @@ export TERM=dumb
 
 echo "about to run the bdd tests...."
 
-# run the BDD tests
-bddjx -ginkgo.focus=golang -test.v
-#bddjx -ginkgo.focus=javascript -test.v
 
+# run the BDD tests
+if [ -z "$RUN_TEST" ]
+then
+      bddjx -ginkgo.focus=golang -test.v
+      #bddjx -ginkgo.focus=javascript -test.v
+else
+      $RUN_TEST
+fi
 
 echo "completed the bdd tests"
+echo "cleaning up cloud resources"
 
-echo cleaning up cloud resources
 $GITOPS_BIN/destroy.sh
