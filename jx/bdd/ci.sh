@@ -173,6 +173,12 @@ else
 fi
 
 echo "completed the bdd tests"
-echo "cleaning up cloud resources"
 
+echo "switching context back to the infra cluster"
+
+# lets connect back to the infra cluster so we can find the TestRun CRDs
+gcloud container clusters get-credentials flash --zone europe-west1-b --project jx-labs-infra
+jx ns jx
+
+echo "cleaning up cloud resources"
 jx test delete --test-url $GITOPS_REPO --dir=$GITOPS_DIR --script=$GITOPS_BIN/destroy.sh
