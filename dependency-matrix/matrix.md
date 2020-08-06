@@ -80,7 +80,7 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/flagger-metrics](https://github.com/jenkins-x/flagger-metrics) |  | [0.1.1]() | 
 [jenkins-x/istio](https://github.com/jenkins-x/istio) |  | [0.1.1]() | 
 [jenkins-x/jx-gitops](https://github.com/jenkins-x/jx-gitops) |  | [0.0.166](https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.166) | 
-[jenkins-x/jx-promote](https://github.com/jenkins-x/jx-promote) |  | [0.0.74](https://github.com/jenkins-x/jx-promote/releases/tag/v0.0.74) | 
+[jenkins-x/jx-promote](https://github.com/jenkins-x/jx-promote) |  | [0.0.76](https://github.com/jenkins-x/jx-promote/releases/tag/v0.0.76) | 
 [jenkins-x/jx-git-operator](https://github.com/jenkins-x/jx-git-operator) |  | [0.0.61](https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.61) | 
 [jenkins-x/jx-extsecret](https://github.com/jenkins-x/jx-extsecret) |  | [0.0.18](https://github.com/jenkins-x/jx-extsecret/releases/tag/v0.0.18) | 
 [jenkins-x/jxr-versions](https://github.com/jenkins-x/jxr-versions) |  | [0.0.46](https://github.com/jenkins-x/jxr-versions/releases/tag/v0.0.46) | 
@@ -92,4 +92,4 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jx-application](https://github.com/jenkins-x/jx-application) |  | [0.0.10](https://github.com/jenkins-x/jx-application/releases/tag/v0.0.10) | 
 [jenkins-x/jx-secret](https://github.com/jenkins-x/jx-secret) |  | [0.0.44](https://github.com/jenkins-x/jx-secret/releases/tag/v0.0.44) | 
 [jenkins-x/jx-preview](https://github.com/jenkins-x/jx-preview) |  | [0.0.24](https://github.com/jenkins-x/jx-preview/releases/tag/v0.0.24) | 
-[jenkins-x/jx-test](https://github.com/jenkins-x/jx-test) |  | [0.0.16](https://github.com/jenkins-x/jx-test/releases/tag/v0.0.16) | 
+[jenkins-x/jx-test](https://github.com/jenkins-x/jx-test) |  | [0.0.18](https://github.com/jenkins-x/jx-test/releases/tag/v0.0.18) | 
