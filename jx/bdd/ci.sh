@@ -173,4 +173,4 @@ echo "completed the bdd tests"
 echo "cleaning up cloud resources"
 
 # TODO disable for now
-#$GITOPS_BIN/destroy.sh
+$GITOPS_BIN/destroy.sh
