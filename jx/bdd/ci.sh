@@ -72,15 +72,18 @@ echo "using GitOps template: $GITOPS_TEMPLATE_URL version: $GITOPS_TEMPLATE_VERS
 # create the boot git repository to mimic creating the git repository via the github create repository wizard
 jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --version-stream-ref=$PULL_PULL_SHA --version-stream-url=${PR_SOURCE_URL//[[:space:]]} --env-git-owner=$GH_OWNER --repo env-$CLUSTER_NAME-dev --no-operator
 
-jx test create --test-url https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
+export GITOPS_REPO=https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
+
+jx test create --test-url $GITOPS_REPO
 
 # lets garbage collect any old tests or previous failed tests of this repo/PR/context...
 jx test gc
 
-git clone https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
+git clone $GITOPS_REPO
 cd env-${CLUSTER_NAME}-dev
 
-export GITOPS_BIN=`pwd`/bin
+export GITOPS_DIR=`pwd`
+export GITOPS_BIN=$GITOPS_DIR/bin
 
 # lets configure git to use the project/cluster
 $GITOPS_BIN/configure.sh
@@ -170,7 +173,12 @@ else
 fi
 
 echo "completed the bdd tests"
-echo "cleaning up cloud resources"
 
-# TODO disable for now
-$GITOPS_BIN/destroy.sh
+echo "switching context back to the infra cluster"
+
+# lets connect back to the infra cluster so we can find the TestRun CRDs
+gcloud container clusters get-credentials flash --zone europe-west1-b --project jx-labs-infra
+jx ns jx
+
+echo "cleaning up cloud resources"
+jx test delete --test-url $GITOPS_REPO --dir=$GITOPS_DIR --script=$GITOPS_BIN/destroy.sh
