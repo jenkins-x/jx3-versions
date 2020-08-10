@@ -11,9 +11,6 @@ jobs:
         KIND_BDD_SECRETS: ${{ secrets.KIND_BDD_SECRETS }}
         GIT_CREDENTIALS: ${{ secrets.GIT_CREDENTIALS }}
       run: |
-        echo "now testing the binary:"
-        jx help
-
         export KIND_VERSION=0.8.1
         export JX_VERSION=0.0.286
 
@@ -21,6 +18,9 @@ jobs:
 
         curl -L https://github.com/jenkins-x/jx-cli/releases/download/v${JX_VERSION}/jx-cli-linux-amd64.tar.gz | tar xzv
         sudo mv jx /usr/local/bin
+
+        echo "now testing the binary:"
+        jx help
 
         # BDD test specific part
         export BDD_NAME="bdd-gke"
