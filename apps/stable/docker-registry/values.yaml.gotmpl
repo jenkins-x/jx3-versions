@@ -4,4 +4,4 @@ service:
 ingress:
   enabled: true
   hosts:
-  - docker-registry{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
+  - docker-registry{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain | default "cluster.local" }}
