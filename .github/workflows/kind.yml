@@ -7,7 +7,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Kind
-      uses: docker://gcr.io/jenkinsxio-labs-private/jx-cli:0.0.286
       env:
         KIND_BDD_SECRETS: ${{ secrets.KIND_BDD_SECRETS }}
         GIT_CREDENTIALS: ${{ secrets.GIT_CREDENTIALS }}
@@ -15,8 +14,13 @@ jobs:
         echo "now testing the binary:"
         jx help
 
-        export KIND_VERSION=0.7.0
+        export KIND_VERSION=0.8.1
+        export JX_VERSION=0.0.286
+
         wget https://github.com/kubernetes-sigs/kind/releases/download/v${KIND_VERSION}/kind-linux-amd64 && chmod +x kind-linux-amd64 && mv kind-linux-amd64 /usr/local/bin/kind
+
+        curl -L https://github.com/jenkins-x/jx-cli/releases/download/v${JX_VERSION}/jx-cli-linux-amd64.tar.gz | tar xzv
+        sudo mv jx /usr/local/bin
 
         # BDD test specific part
         export BDD_NAME="bdd-gke"
