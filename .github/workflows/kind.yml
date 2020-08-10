@@ -36,6 +36,8 @@ jobs:
 
         # TODO replace this some day with using a container image?
         # download all the plugins
+        export JX3_HOME=/home/.jx3
+        sudo mkdir -p $JX3_HOME
         jx upgrade
 
         # BDD test specific part
