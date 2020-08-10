@@ -24,14 +24,15 @@ jobs:
         curl -L https://github.com/jenkins-x/jx-cli/releases/download/v${JX_VERSION}/jx-cli-linux-amd64.tar.gz | tar xzv
         sudo mv jx /usr/local/bin
 
-        curl -L https://github.com/kubernetes-sigs/kind/releases/download/v${KIND_VERSION}/kind-linux-amd64
-        chmod +x kind-linux-amd64
-        sudo mv kind-linux-amd64 /usr/local/bin/kind
+        curl -L https://github.com/kubernetes-sigs/kind/releases/download/v${KIND_VERSION}/kind-linux-amd64 > kind
+        chmod +x kind
+        sudo mv kind /usr/local/bin/kind
 
         cd ..
 
-        echo "now testing the binary:"
+        echo "now testing the binaries:"
         jx help
+        kind version
 
         # BDD test specific part
         export BDD_NAME="bdd-gke"
