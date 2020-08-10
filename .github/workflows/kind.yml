@@ -34,6 +34,10 @@ jobs:
         jx help
         kind version
 
+        # TODO replace this some day with using a container image?
+        # download all the plugins
+        jx upgrade
+
         # BDD test specific part
         export BDD_NAME="bdd-gke"
 
