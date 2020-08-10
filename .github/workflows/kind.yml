@@ -8,7 +8,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Kind
       env:
-        KIND_BDD_SECRETS: ${{ secrets.KIND_BDD_SECRETS }}
-        GIT_CREDENTIALS: ${{ secrets.GIT_CREDENTIALS }}
+        GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+        JENKINS_PASSWORD: ${{ secrets.JENKINS_PASSWORD }}
       run: |
-        sudo ./jx/bdd/kind/ci.sh
+        sudo -E ./jx/bdd/kind/ci.sh
