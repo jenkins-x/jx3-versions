@@ -37,7 +37,11 @@ sudo mkdir -p $JX3_HOME
 jx upgrade
 
 # BDD test specific part
-export BDD_NAME="bdd-gke"
+export BDD_NAME="bdd-kind"
+
+# lets default env vars that don't get populated if not running in jx
+BRANCH_NAME="${BRANCH_NAME:-pr}"
+BUILD_NUMBER="${BUILD_NUMBER:-1}"
 
 # the gitops repository template to use
 export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-kind-vault"
