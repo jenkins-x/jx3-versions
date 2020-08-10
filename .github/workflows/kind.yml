@@ -1,0 +1,27 @@
+name: Kind
+on: [pull_request]
+
+jobs:
+  kind:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Kind
+      uses: docker://gcr.io/jenkinsxio-labs-private/jx-cli:0.0.286
+      env:
+        KIND_BDD_SECRETS: ${{ secrets.KIND_BDD_SECRETS }}
+        GIT_CREDENTIALS: ${{ secrets.GIT_CREDENTIALS }}
+      run: |
+        echo "now testing the binary:"
+        jx help
+
+        export KIND_VERSION=0.7.0
+        wget https://github.com/kubernetes-sigs/kind/releases/download/v${KIND_VERSION}/kind-linux-amd64 && chmod +x kind-linux-amd64 && mv kind-linux-amd64 /usr/local/bin/kind
+
+        # BDD test specific part
+        export BDD_NAME="bdd-gke"
+
+        # the gitops repository template to use
+        export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-kind-vault"
+
+        `dirname "$0"`/../../jx/bdd/ci.sh
