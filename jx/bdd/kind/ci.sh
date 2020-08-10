@@ -2,6 +2,7 @@
 set -e
 set -x
 
+export NO_JX_TEST="true"
 export KIND_VERSION=0.8.1
 export JX_VERSION=0.0.286
 
