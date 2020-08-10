@@ -11,7 +11,7 @@ jobs:
         KIND_BDD_SECRETS: ${{ secrets.KIND_BDD_SECRETS }}
         GIT_CREDENTIALS: ${{ secrets.GIT_CREDENTIALS }}
       run: |
-        sudo
+        sudo bash
 
         export KIND_VERSION=0.8.1
         export JX_VERSION=0.0.286
