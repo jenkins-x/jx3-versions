@@ -24,7 +24,9 @@ jobs:
         curl -L https://github.com/jenkins-x/jx-cli/releases/download/v${JX_VERSION}/jx-cli-linux-amd64.tar.gz | tar xzv
         sudo mv jx /usr/local/bin
 
-        wget https://github.com/kubernetes-sigs/kind/releases/download/v${KIND_VERSION}/kind-linux-amd64 && chmod +x kind-linux-amd64 && sudo mv kind-linux-amd64 /usr/local/bin/kind
+        curl -L https://github.com/kubernetes-sigs/kind/releases/download/v${KIND_VERSION}/kind-linux-amd64
+        chmod +x kind-linux-amd64
+        sudo mv kind-linux-amd64 /usr/local/bin/kind
 
         cd ..
 
@@ -37,4 +39,4 @@ jobs:
         # the gitops repository template to use
         export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-kind-vault"
 
-        `dirname "$0"`/../../jx/bdd/ci.sh
+        jx/bdd/ci.sh
