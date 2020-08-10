@@ -28,8 +28,8 @@ sudo mv kind /usr/local/bin/kind
 
 cd ..
 
-echo "now testing the binaries:"
-jx help
+echo "now testing the binaries..."
+jx version
 kind version
 
 # TODO replace this some day with using a container image?
