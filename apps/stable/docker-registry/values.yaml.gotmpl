@@ -1,11 +1,7 @@
 service:
   port: 80
 
-{{- if and (hasKey .Values.jxRequirements "ingress") (hasKey .Values.jxRequirements.ingress "serviceType") (eq .Values.jxRequirements.ingress.serviceType "NodePort") }}
-{{- else }}
-
 ingress:
   enabled: true
   hosts:
   - docker-registry{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
-{{- end }}
