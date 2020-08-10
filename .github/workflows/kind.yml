@@ -40,4 +40,4 @@ jobs:
         # the gitops repository template to use
         export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-kind-vault"
 
-        jx/bdd/ci.sh
+        sudo jx/bdd/ci.sh
