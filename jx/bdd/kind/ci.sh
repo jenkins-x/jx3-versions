@@ -2,6 +2,8 @@
 set -e
 set -x
 
+pwd
+
 export NO_JX_TEST="true"
 export KIND_VERSION=0.8.1
 export JX_VERSION=0.0.286
@@ -40,8 +42,8 @@ jx upgrade
 export BDD_NAME="bdd-kind"
 
 # lets default env vars that don't get populated if not running in jx
-BRANCH_NAME="${BRANCH_NAME:-pr}"
-BUILD_NUMBER="${BUILD_NUMBER:-1}"
+export BRANCH_NAME="${BRANCH_NAME:-pr}"
+export BUILD_NUMBER="${BUILD_NUMBER:-1}"
 
 # the gitops repository template to use
 export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-kind-vault"
