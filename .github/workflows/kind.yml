@@ -17,10 +17,16 @@ jobs:
         mkdir $HOME/bin
         export PATH=$PATH:$HOME/bin
 
-        wget https://github.com/kubernetes-sigs/kind/releases/download/v${KIND_VERSION}/kind-linux-amd64 && chmod +x kind-linux-amd64 && mv kind-linux-amd64 $HOME/bin/kind
+        # use a sub dir for downloading to avoid clashing with the jx dir etc
+        mkdir downloads
+        cd downloads
 
         curl -L https://github.com/jenkins-x/jx-cli/releases/download/v${JX_VERSION}/jx-cli-linux-amd64.tar.gz | tar xzv
-        sudo mv jx $HOME/bin
+        sudo mv jx /usr/local/bin/bin
+
+        wget https://github.com/kubernetes-sigs/kind/releases/download/v${KIND_VERSION}/kind-linux-amd64 && chmod +x kind-linux-amd64 && sudo mv kind-linux-amd64 /usr/local/bin/kind
+
+        cd ..
 
         echo "now testing the binary:"
         jx help
