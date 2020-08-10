@@ -8,6 +8,10 @@ export JX_VERSION=0.0.286
 mkdir $HOME/bin
 export PATH=$PATH:$HOME/bin
 
+# setup git credential store
+export XDG_CONFIG_HOME=/home/.config
+git config credential.helper store
+
 # use a sub dir for downloading to avoid clashing with the jx dir etc
 mkdir downloads
 cd downloads
