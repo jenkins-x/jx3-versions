@@ -4,6 +4,13 @@ set -x
 
 pwd
 
+if [ -z "$GH_ACCESS_TOKEN" ]
+then
+      echo "ERROR: no GH_ACCESS_TOKEN env var defined for kind/ci.sh"
+else
+      echo "has valid git token for kind/ci.sh"
+fi
+
 export NO_JX_TEST="true"
 export KIND_VERSION=0.8.1
 export JX_VERSION=0.0.286
