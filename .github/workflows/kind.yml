@@ -1,12 +1,15 @@
 name: Kind
-on: [pull_request]
-
+on:
+  pull_request:
+    types:
+      - labeled
 jobs:
   kind:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Kind
+      if: github.repository_owner == 'jenkins-x' && github.event.label.name == 'testkind'
       env:
         GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
         JENKINS_PASSWORD: ${{ secrets.JENKINS_PASSWORD }}
