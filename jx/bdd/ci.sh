@@ -24,10 +24,21 @@ jx admin --help
 jx secret --help
 
 
+
+
+
 export GIT_USERNAME="jenkins-x-labs-bot"
 export GIT_USER_EMAIL="jenkins-x@googlegroups.com"
 export GH_OWNER="cb-kubecd"
 export GIT_TOKEN="${GH_ACCESS_TOKEN//[[:space:]]}"
+
+
+if [ -z "$GIT_TOKEN" ]
+then
+      echo "ERROR: no GH_ACCESS_TOKEN env var defined for bdd/ci.sh"
+else
+      echo "has valid git token in bdd/ci.sh"
+fi
 
 # batch mode for terraform
 export TERRAFORM_APPROVE="-auto-approve"
