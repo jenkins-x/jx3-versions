@@ -120,53 +120,21 @@ git push
 # --token is found from $GIT_TOKEN or git clone URL
 jx admin operator
 
-# lets modify the git repo stuff - eventually we can remove this?
-# wait for vault to get setup
-jx secret vault wait -d 30m
-
-jx secret vault portforward &
-
-sleep 30
-
-# import secrets...
-echo "secret:
-  jx:
-    adminUser:
-      password: $JENKINS_PASSWORD
-      username: admin
-    docker:
-      password: dummy
-      username: admin
-    mavenSettings:
-      settingsXml: dummy
-      securityXml: dummy
-    pipelineUser:
-      username: $GIT_USERNAME
-      token: $GIT_TOKEN
-      email: $GIT_USER_EMAIL
-  lighthouse:
-    hmac:
-      token: 2efa226914ae6e81d062e9566646bd54bb1c0cc23" > /tmp/secrets.yaml
-
-jx secret import -f /tmp/secrets.yaml
-
 sleep 90
 
-jx secret verify
-
 jx ns jx
+
+# lets wait for things to be installed correctly
+make verify-install
+
+jx secret verify
 
 # diagnostic commands to test the image's kubectl
 kubectl version
 
 # for some reason we need to use the full name once for the second command to work!
 kubectl get environments
-kubectl get env
 kubectl get env dev -oyaml
-
-# lets wait for things to be installed correctly
-make verify-install
-
 kubectl get cm config -oyaml
 
 export JX_DISABLE_DELETE_APP="true"
