@@ -18,3 +18,9 @@ filesFromSecret:
     secret: vault-tls
     mountPath: /usr/local/share/ca-certificates
 {{- end }}
+
+{{- if eq .Values.jxRequirements.secretStorage "gsm" }}
+serviceAccount:
+  annotations:
+    iam.gke.io/gcp-service-account: {{ .Values.jxRequirements.cluster.clusterName }}-sm@{{ .Values.jxRequirements.cluster.project }}.iam.gserviceaccount.com
+{{- end }}
