@@ -96,10 +96,16 @@ else
       echo "not using jx-test to gc old tests"
 fi
 
-
+# avoid cloning cluster repo into the working CI folder
+cd ..
 
 git clone $GITOPS_REPO
 cd env-${CLUSTER_NAME}-dev
+
+# use the changes from this PR in the version stream for the cluster repo when resolving the helmfile
+cp -R ../source versionStream
+rm -rf versionStream/.git versionStream/.github
+git add versionStream/
 
 export GITOPS_DIR=`pwd`
 export GITOPS_BIN=$GITOPS_DIR/bin
