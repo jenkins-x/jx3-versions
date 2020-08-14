@@ -1,5 +1,4 @@
 namespace: cert-manager
-phase: system
 hooks:
 - name: "crd-apply"
   events: ["prepare"]

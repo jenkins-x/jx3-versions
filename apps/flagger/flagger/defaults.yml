@@ -1,5 +1,4 @@
 namespace: istio-system
-phase: system
 hooks:
 - name: "crd-apply"
   events: ["prepare"]

@@ -45,12 +45,12 @@ cloud-resources/gcloud/create_cluster.sh
 
 # lets install vault
 # Create a namespace for the vault operator
-kubectl create namespace vault-infra
-kubectl label namespace vault-infra name=vault-infra
+kubectl create namespace secret-infra
+kubectl label namespace secret-infra name=secret-infra
 
-# Install the vault-operator to the vault-infra namespace
+# Install the vault-operator to the secret-infra namespace
 helm repo add banzaicloud-stable https://kubernetes-charts.banzaicloud.com
-helm upgrade --namespace vault-infra --install vault-operator banzaicloud-stable/vault-operator --wait
+helm upgrade --namespace secret-infra --install vault-operator banzaicloud-stable/vault-operator --wait
 
 jxl ns jx
 
