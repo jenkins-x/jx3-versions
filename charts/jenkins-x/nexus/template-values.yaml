@@ -1,6 +1,0 @@
-jxRequirements:
-  ingress:
-    domain: cluster.local
-    namespaceSubDomain: "."
-    tls:
-      enabled: true 
