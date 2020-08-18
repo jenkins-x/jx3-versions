@@ -69,7 +69,7 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x-labs/istio](https://github.com/jenkins-x-labs/istio) |  | [0.0.21]() | 
 [jenkins-x/jxl](https://github.com/jenkins-x/jxl) |  | [0.0.208]() | 
 [jenkins-x-labs/cloud-resources](https://github.com/jenkins-x-labs/cloud-resources) |  | [0.0.31]() | 
-[jenkins-x/jxr-packs-kubernetes](https://github.com/jenkins-x/jxr-packs-kubernetes) |  | [0.0.37]() | 
+[jenkins-x/jxr-packs-kubernetes](https://github.com/jenkins-x/jxr-packs-kubernetes) |  | [0.0.38]() | 
 [jenkins-x/helm-annotate](https://github.com/jenkins-x/helm-annotate) |  | [0.0.13]() | 
 [godaddy/kubernetes-external-secrets](https://github.com/godaddy/kubernetes-external-secrets) |  | [4.0.0]() | 
 [jenkins-x/charts](https://github.com/jenkins-x/charts) |  | [1.1.7]() | 
@@ -84,12 +84,12 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jx-git-operator](https://github.com/jenkins-x/jx-git-operator) |  | [0.0.65](https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.65) | 
 [jenkins-x/jx-extsecret](https://github.com/jenkins-x/jx-extsecret) |  | [0.0.18](https://github.com/jenkins-x/jx-extsecret/releases/tag/v0.0.18) | 
 [jenkins-x/jxr-versions](https://github.com/jenkins-x/jxr-versions) |  | [0.0.46](https://github.com/jenkins-x/jxr-versions/releases/tag/v0.0.46) | 
-[jenkins-x/jx-admin](https://github.com/jenkins-x/jx-admin) |  | [0.0.71](https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.69) | 
+[jenkins-x/jx-admin](https://github.com/jenkins-x/jx-admin) |  | [0.0.71](https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.71) | 
 [jenkins-x/jx-cli](https://github.com/jenkins-x/jx-cli) |  | [0.0.374](https://github.com/jenkins-x/jx-cli/releases/tag/v0.0.374) | 
 [jenkins-x/jx-project](https://github.com/jenkins-x/jx-project) |  | [0.0.55](https://github.com/jenkins-x/jx-project/releases/tag/v0.0.55) | 
 [jenkins-x/jx-verify](https://github.com/jenkins-x/jx-verify) |  | [0.0.18](https://github.com/jenkins-x/jx-verify/releases/tag/v0.0.18) | 
 [jenkins-x/jx-pipeline](https://github.com/jenkins-x/jx-pipeline) |  | [0.0.14](https://github.com/jenkins-x/jx-pipeline/releases/tag/v0.0.14) | 
 [jenkins-x/jx-application](https://github.com/jenkins-x/jx-application) |  | [0.0.10](https://github.com/jenkins-x/jx-application/releases/tag/v0.0.10) | 
-[jenkins-x/jx-secret](https://github.com/jenkins-x/jx-secret) |  | [0.0.78](https://github.com/jenkins-x/jx-secret/releases/tag/v0.0.78) | 
+[jenkins-x/jx-secret](https://github.com/jenkins-x/jx-secret) |  | [0.0.80](https://github.com/jenkins-x/jx-secret/releases/tag/v0.0.80) | 
 [jenkins-x/jx-preview](https://github.com/jenkins-x/jx-preview) |  | [0.0.24](https://github.com/jenkins-x/jx-preview/releases/tag/v0.0.24) | 
 [jenkins-x/jx-test](https://github.com/jenkins-x/jx-test) |  | [0.0.18](https://github.com/jenkins-x/jx-test/releases/tag/v0.0.18) | 
