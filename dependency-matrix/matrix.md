@@ -93,3 +93,4 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jx-secret](https://github.com/jenkins-x/jx-secret) |  | [0.0.80](https://github.com/jenkins-x/jx-secret/releases/tag/v0.0.80) | 
 [jenkins-x/jx-preview](https://github.com/jenkins-x/jx-preview) |  | [0.0.24](https://github.com/jenkins-x/jx-preview/releases/tag/v0.0.24) | 
 [jenkins-x/jx-test](https://github.com/jenkins-x/jx-test) |  | [0.0.18](https://github.com/jenkins-x/jx-test/releases/tag/v0.0.18) | 
+[jenkins-x/step-go-releaser](https://github.com/jenkins-x/step-go-releaser) |  | [0.0.14]() | 
