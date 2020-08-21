@@ -12,7 +12,7 @@ image:
 
 rbac:
   create: true
-{{- if eq .Values.jxRequirements.cluster.provider "eks" }}
+{{- if and (hasKey .Values.jxRequirements.cluster "project") (hasKey .Values.jxRequirements.cluster "clusterName") (eq .Values.jxRequirements.cluster.provider "eks") }}
   serviceAccount:
     name: cluster-autoscaler
   serviceAccountAnnotations:
