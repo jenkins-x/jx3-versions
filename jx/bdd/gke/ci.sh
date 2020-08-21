@@ -9,6 +9,6 @@ export BDD_NAME="bdd-gke"
 #export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-gcloud-vault"
 export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-terraform-vault"
 
-export RUN_TEST="bddjx -ginkgo.focus=java -test.v"
+export RUN_TEST="bddjx -ginkgo.focus=spring-boot-http-gradle -test.v"
 
 `dirname "$0"`/../ci.sh
