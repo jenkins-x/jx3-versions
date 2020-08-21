@@ -53,3 +53,13 @@ pipelineConfig:
               - name: update-jx-website
                 image: gcr.io/jenkinsxio/builder-go:2.1.100-729
                 command: ./jx/scripts/update-jx-website.sh
+    pullRequest:
+      pipeline:
+        agent:
+          image: golang:1.13
+        stages:
+          - name: test
+            steps:
+              - name: make-test
+                dir: /workspace/source/tests
+                command: make test
