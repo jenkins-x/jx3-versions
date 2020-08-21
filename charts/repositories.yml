@@ -9,6 +9,9 @@ repositories:
     urls:
       - https://storage.googleapis.com/chartmuseum.jenkins-x.io
       - http://chartmuseum.jenkins-x.io
+  - prefix: jx3
+    urls:
+      - https://storage.googleapis.com/jenkinsxio/charts
   - prefix: jx-labs
     urls:
       - https://storage.googleapis.com/jenkinsxio-labs-private/charts
