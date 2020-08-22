@@ -6,8 +6,7 @@ See the documentation on [version streams](https://jenkins-x.io/about/concepts/v
 
 The main directories are:
 
-* [charts](charts) for helm charts
+* [charts](charts) for helm chart version and configuration files
 * [git](git) for git repositories
 * [images](docker) for container images
 * [packages](packages) for packages (local command line tools)
-* [values](apps) helm / helmfile values files
