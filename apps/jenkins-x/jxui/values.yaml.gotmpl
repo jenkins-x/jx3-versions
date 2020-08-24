@@ -1,5 +1,0 @@
-{{- if eq .Values.jxRequirements.cluster.provider "eks" }}
-serviceaccount:
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::{{ .Values.jxRequirements.cluster.project }}:role/{{ .Values.jxRequirements.cluster.clusterName }}-{{ .Values.jxRequirements.cluster.namespace }}-jxui
-{{- end }}

@@ -1,3 +1,0 @@
-component: grafana
-gitUrl: https://github.com/weaveworks/flagger
-version: 1.4.0
