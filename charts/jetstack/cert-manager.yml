@@ -1,4 +1,0 @@
-gitUrl: https://github.com/jetstack/cert-manager
-version: v0.13.1
-# TODO need old cert manager so we can disable webhook handler
-#version: v0.15.1
