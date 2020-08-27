@@ -49,7 +49,11 @@ fetch: init
 	helm repo add jx http://chartmuseum.jenkins-x.io
 
 	# generate the yaml from the charts in helmfile.yaml and moves them to the right directory tree (cluster or namespaces/foo)
-	jx gitops helmfile template $(HELMFILE_TEMPLATE_FLAGS) --args="--include-crds --values=jx-values.yaml --values=versionStream/src/fake-secrets.yaml.gotmpl" --output-dir $(OUTPUT_DIR)
+	ifeq ($(HIDE_TEMPLATE_OUT),)
+		jx gitops helmfile template $(HELMFILE_TEMPLATE_FLAGS) --args="--include-crds --values=jx-values.yaml --values=versionStream/src/fake-secrets.yaml.gotmpl" --output-dir $(OUTPUT_DIR)
+	else
+		jx gitops helmfile template $(HELMFILE_TEMPLATE_FLAGS) --args="--include-crds --values=jx-values.yaml --values=versionStream/src/fake-secrets.yaml.gotmpl" --output-dir $(OUTPUT_DIR) | grep -v "wrote "
+	endif
 
 	# convert k8s Secrets => ExternalSecret resources using secret mapping + schemas
 	# see: https://github.com/jenkins-x/jx-secret#mappings
