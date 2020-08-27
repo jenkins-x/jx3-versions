@@ -49,7 +49,7 @@ jx upgrade
 export BDD_NAME="bdd-kind"
 
 # lets default env vars that don't get populated if not running in jx
-export BRANCH_NAME="${BRANCH_NAME:-pr}"
+export BRANCH_NAME="${BRANCH_NAME:-pr-todo}"
 export BUILD_NUMBER="${BUILD_NUMBER:-1}"
 
 # the gitops repository template to use
