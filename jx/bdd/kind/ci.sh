@@ -13,7 +13,7 @@ fi
 
 export NO_JX_TEST="true"
 export KIND_VERSION=0.8.1
-export JX_VERSION=0.0.286
+export JX_VERSION=3.0.78
 
 mkdir $HOME/bin
 export PATH=$PATH:$HOME/bin
