@@ -85,6 +85,7 @@ jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --version-st
 
 export GITOPS_REPO=https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
 
+echo "going to clone git repo $GITOPS_REPO"
 
 if [ -z "$NO_JX_TEST" ]
 then
