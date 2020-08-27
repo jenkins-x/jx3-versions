@@ -104,6 +104,7 @@ git clone $GITOPS_REPO
 cd env-${CLUSTER_NAME}-dev
 
 # use the changes from this PR in the version stream for the cluster repo when resolving the helmfile
+rm -rf versionStream
 cp -R ../source versionStream
 rm -rf versionStream/.git versionStream/.github
 git add versionStream/
