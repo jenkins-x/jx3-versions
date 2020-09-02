@@ -184,7 +184,9 @@ echo "completed the bdd tests"
 echo "switching context back to the infra cluster"
 
 # lets connect back to the infra cluster so we can find the TestRun CRDs
-gcloud container clusters get-credentials flash --zone europe-west1-b --project jx-labs-infra
+#gcloud container clusters get-credentials flash --zone europe-west1-b --project jx-labs-infra
+gcloud container clusters get-credentials tf-jx-growing-ant --zone us-central1-a --project jx-labs-infra
+
 jx ns jx
 
 
