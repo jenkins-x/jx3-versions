@@ -31,7 +31,6 @@ then
     export GIT_USERNAME="jenkins-x-labs-bot"
 fi
 
-export GIT_USERNAME="jenkins-x-labs-bot"
 export GIT_USER_EMAIL="jenkins-x@googlegroups.com"
 export GH_OWNER="cb-kubecd"
 export GIT_TOKEN="${GH_ACCESS_TOKEN//[[:space:]]}"
@@ -63,6 +62,7 @@ echo "running the BDD test with JX_HOME = $JX_HOME"
 mkdir -p $XDG_CONFIG_HOME/git
 # replace the credentials file with a single user entry
 echo "https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@github.com" > $XDG_CONFIG_HOME/git/credentials
+echo $JX_BDD_GIT_CREDENTIALS >> $XDG_CONFIG_HOME/git/credentials
 
 echo "using git credentials: $XDG_CONFIG_HOME/git/credentials"
 ls -al $XDG_CONFIG_HOME/git/credentials
@@ -184,7 +184,9 @@ echo "completed the bdd tests"
 echo "switching context back to the infra cluster"
 
 # lets connect back to the infra cluster so we can find the TestRun CRDs
-gcloud container clusters get-credentials flash --zone europe-west1-b --project jx-labs-infra
+#gcloud container clusters get-credentials flash --zone europe-west1-b --project jx-labs-infra
+gcloud container clusters get-credentials tf-jx-growing-ant --zone us-central1-a --project jx-labs-infra
+
 jx ns jx
 
 
