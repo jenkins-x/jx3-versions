@@ -37,8 +37,13 @@ then
     export GIT_SERVER_HOST="github.com"
 fi
 
+if [ -z "$GH_OWNER" ]
+then
+    export GH_OWNER="cb-kubecd"
+fi
+
+
 export GIT_USER_EMAIL="jenkins-x@googlegroups.com"
-export GH_OWNER="cb-kubecd"
 export GIT_TOKEN="${GH_ACCESS_TOKEN//[[:space:]]}"
 
 
