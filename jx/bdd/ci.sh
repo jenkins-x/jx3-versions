@@ -32,6 +32,11 @@ then
     export GIT_USERNAME="jenkins-x-labs-bot"
 fi
 
+if [ -z "$GIT_SERVER_HOST" ]
+then
+    export GIT_SERVER_HOST="github.com"
+fi
+
 export GIT_USER_EMAIL="jenkins-x@googlegroups.com"
 export GH_OWNER="cb-kubecd"
 export GIT_TOKEN="${GH_ACCESS_TOKEN//[[:space:]]}"
@@ -62,8 +67,7 @@ echo "running the BDD test with JX_HOME = $JX_HOME"
 
 mkdir -p $XDG_CONFIG_HOME/git
 # replace the credentials file with a single user entry
-echo "https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@github.com" > $XDG_CONFIG_HOME/git/credentials
-echo $JX_BDD_GIT_CREDENTIALS >> $XDG_CONFIG_HOME/git/credentials
+echo "https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@${GIT_SERVER_HOST}" > $XDG_CONFIG_HOME/git/credentials
 
 echo "using git credentials: $XDG_CONFIG_HOME/git/credentials"
 ls -al $XDG_CONFIG_HOME/git/credentials

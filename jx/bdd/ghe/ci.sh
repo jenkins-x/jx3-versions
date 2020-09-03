@@ -14,10 +14,10 @@ export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-terraform-vault"
 
 # add extra git token
 export GIT_USERNAME="dev1"
-export JX_BDD_GIT_CREDENTIALS="https://${GIT_USERNAME//[[:space:]]}:${GH_ACCESS_TOKEN//[[:space:]]}@github.beescloud.com"
+export GIT_SERVER_HOST="github.beescloud.com"
 
 # lets default to using github enterprise
-export JX_ADMIN_CREATE_ARGS="--git-name ghe --git-server https://github.beescloud.com --env-git-owner ${GIT_USERNAME}"
+export JX_ADMIN_CREATE_ARGS="--git-name ghe --git-server https://${GIT_SERVER_HOST} --env-git-owner ${GIT_USERNAME}"
 
 
 `dirname "$0"`/../ci.sh
