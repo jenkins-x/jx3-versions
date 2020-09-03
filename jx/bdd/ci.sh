@@ -13,6 +13,7 @@ export PATH=$PATH:/usr/local/bin
 KUBECONFIG="/tmp/jxhome/config"
 
 #export XDG_CONFIG_HOME="/builder/home/.config"
+mkdir -p /builder/home
 mkdir -p /home/.config
 cp -r /home/.config /builder/home/.config
 
