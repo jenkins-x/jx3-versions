@@ -42,9 +42,9 @@ then
     export GH_OWNER="cb-kubecd"
 fi
 
-
 export GIT_USER_EMAIL="jenkins-x@googlegroups.com"
 export GIT_TOKEN="${GH_ACCESS_TOKEN//[[:space:]]}"
+export GIT_PROVIDER_URL="https://${GIT_SERVER_HOST}"
 
 
 if [ -z "$GIT_TOKEN" ]
