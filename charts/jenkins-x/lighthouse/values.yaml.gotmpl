@@ -15,6 +15,10 @@ replicaCount: 2
 env:
   JX_DEFAULT_IMAGE: gcr.io/jenkinsxio/builder-maven:2.1.142-761
 
+engines:
+  tekton: false
+  jx: true
+
 image:
   repository: gcr.io/jenkinsxio/lighthouse
 
