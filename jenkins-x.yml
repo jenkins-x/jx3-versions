@@ -39,7 +39,7 @@ pipelineConfig:
 
               - name: promote-vs
                 command: ./jx/scripts/promote-vs.sh
-                image: gcr.io/jenkinsxio/jx-cli:3.0.3.0.152
+                image: gcr.io/jenkinsxio/jx-cli:3.0.152
 
               - name: update-bot-fork
                 command: ./jx/scripts/update-bot-fork.sh
