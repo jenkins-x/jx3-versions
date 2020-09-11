@@ -10,6 +10,6 @@ export BDD_NAME="bdd-gke"
 export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-terraform-vault"
 
 # to enable spring / gradle...
-#export RUN_TEST="bddjx -ginkgo.focus=spring-boot-http-gradle -test.v"
+export RUN_TEST="bddjx -ginkgo.focus=spring-boot-http-gradle -test.v"
 
 `dirname "$0"`/../ci.sh
