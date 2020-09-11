@@ -55,6 +55,12 @@ fetch: init
 	# see: https://github.com/jenkins-x/jx-secret#mappings
 	jx secret convert --dir $(OUTPUT_DIR)
 
+	# replicate secrets to local staging/production namespaces
+	jx secret replicate --selector secret.jenkins-x.io/replica-source=true
+
+	# lets make sure all the namespaces exist for environments of the replicated secrets
+	jx gitops namespace --dir-mode --dir $(OUTPUT_DIR)/namespaces
+
 .PHONY: build
 # uncomment this line to enable kustomize
 #build: build-kustomise
