@@ -13,3 +13,5 @@ The main directories are:
 * [packages](packages) for packages (local command line tools)
 * [secrets](secrets) the default secret mapping files for defining how to map External Secrets to the underlying secret storage (e.g. Vault / GSM / ASM)
 * [src](src) the common source code for the boot job and the [Makefile](src/Makefile.mk)
+
+
