@@ -5,6 +5,9 @@ repositories:
 - prefix: bitnami
   urls:
   - https://charts.bitnami.com/bitnami
+- prefix: cdf
+  urls:
+  - https://cdfoundation.github.io/tekton-helm-chart
 - prefix: external-secrets
   urls:
   - https://godaddy.github.io/kubernetes-external-secrets
