@@ -9,9 +9,11 @@ declare -a repos=(
   # local
   "jx3-kubernetes" "jx3-kind-vault" "jx3-minikube-vault" "jx3-docker-vault"
   # GKE
-  "jx3-gke-terraform-vault" "jx3-gke-gcloud-vault" 
+  "jx3-gke-terraform-vault" "jx3-gke-gsm" "jx3-gke-gcloud-vault" 
   # EKS
   "jx3-eks-terraform-vault"
+  # Azure
+  "jx3-azure-terraform"
 )
 
 export TMPDIR=/tmp/jx3-gitops-promote
