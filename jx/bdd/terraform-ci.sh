@@ -49,10 +49,14 @@ export GIT_PROVIDER_URL="https://${GIT_SERVER_HOST}"
 
 if [ -z "$GIT_TOKEN" ]
 then
-      echo "ERROR: no GIT_TOKEN env var defined for bdd/terraform-ci.sh"
+      echo "ERROR: no GIT_TOKEN env var defined for bdd/ci.sh"
 else
-      echo "has valid git token in bdd/terraform-ci.sh"
+      echo "has valid git token in bdd/ci.sh"
 fi
+
+# batch mode for terraform
+export TERRAFORM_APPROVE="-auto-approve"
+export TERRAFORM_INPUT="-input=false"
 
 export PROJECT_ID=jenkins-x-labs-bdd
 export CREATED_TIME=$(date '+%a-%b-%d-%Y-%H-%M-%S')
@@ -61,7 +65,7 @@ export ZONE=europe-west1-c
 export LABELS="branch=${BRANCH_NAME,,},cluster=$BDD_NAME,create-time=${CREATED_TIME,,}"
 
 # lets setup git
-git config --global --add user.name jenkins-x-bot
+git config --global --add user.name JenkinsXBot
 git config --global --add user.email jenkins-x@googlegroups.com
 
 echo "running the BDD test with JX_HOME = $JX_HOME"
@@ -82,12 +86,21 @@ echo "using the version stream url $PR_SOURCE_URL ref: $PULL_PULL_SHA"
 
 export GITOPS_TEMPLATE_URL="https://github.com/${GITOPS_TEMPLATE_PROJECT}.git"
 
+# lets find the current template  version
+export GITOPS_TEMPLATE_VERSION=$(grep  'version: ' /workspace/source/git/github.com/$GITOPS_TEMPLATE_PROJECT.yml | awk '{ print $2}')
+
+echo "using GitOps template: $GITOPS_TEMPLATE_URL version: $GITOPS_TEMPLATE_VERSION"
+
+# TODO support versioning?
+#git clone -b v${GITOPS_TEMPLATE_VERSION} $GITOPS_TEMPLATE_URL
+
 # create the boot git repository to mimic creating the git repository via the github create repository wizard
 jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --version-stream-ref=$PULL_PULL_SHA --version-stream-url=${PR_SOURCE_URL//[[:space:]]} --env-git-owner=$GH_OWNER --repo env-$CLUSTER_NAME-dev --no-operator $JX_ADMIN_CREATE_ARGS
 
-export GITOPS_REPO=https://${GIT_SERVER_HOST}/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
 
-echo "going to clone git repo $GITOPS_REPO"
+export GITOPS_REPO=https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@${GIT_SERVER_HOST}/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
+
+echo "gitops cluster git repo $GITOPS_REPO"
 
 if [ -z "$NO_JX_TEST" ]
 then
@@ -122,42 +135,60 @@ git add * || true
 git commit -a -m "chore: cluster changes" || true
 git push
 
-cd ..
+# if there is an infra gitops project then use that to create cloud resources rather than the cluster gitops template
+if [ -z "$GITOPS_INFRA_PROJECT" ]
+then
+    echo "this is not a multi repo terraform test"
+else
+    cd ..
 
-export GITOPS_INFRA_URL="https://github.com/${GITOPS_INFRA_PROJECT}.git"
+    export GITOPS_INFRA_URL="https://github.com/${GITOPS_INFRA_PROJECT}.git"
 
-echo "going to clone git repo $GITOPS_INFRA_URL"
+    echo "going to clone git repo $GITOPS_INFRA_URL"
 
-git clone $GITOPS_INFRA_URL ${CLUSTER_NAME}-infra
-cd ${CLUSTER_NAME}-infra
-# lets protect against pushing local files like state etc to a git repo
-rm -rf .git
+    git clone $GITOPS_INFRA_URL ${CLUSTER_NAME}-infra
+    cd ${CLUSTER_NAME}-infra
 
-# lets configure the terraform module
-export TF_VAR_gcp_project=$PROJECT_ID
-export TF_VAR_cluster_name=$CLUSTER_NAME
-export TF_VAR_jx_git_url=$GITOPS_REPO
-export TF_VAR_jx_bot_username=$GIT_USERNAME
-export TF_VAR_jx_bot_token=$GIT_TOKEN
-
+    # lets protect against pushing local files like state etc to a git repo
+    rm -rf .git
+fi
 
 export GITOPS_DIR=`pwd`
 export GITOPS_BIN=$GITOPS_DIR/bin
 
+if [ -z "$CUSTOMISE_GITOPS_REPO" ]
+then
+      echo "no custom gitops repository setup commands"
+else
+      echo "customising the gitops repository"
+
+      $CUSTOMISE_GITOPS_REPO
+fi
+
+# lets configure the cluster
+source $GITOPS_BIN/configure.sh
 
 # lets create the cluster
 $GITOPS_BIN/create.sh
 
-$(terraform output connect)
+# if terraform then we automaticaly install the git operator and verify
+if [ -z "$GITOPS_INFRA_PROJECT" ]
+then
+      # now lets install the operator
+      # --username is found from $GIT_USERNAME or git clone URL
+      # --token is found from $GIT_TOKEN or git clone URL
+      jx admin operator
 
-$(terraform output follow_install_logs)
+      sleep 90
 
-jx ns jx
+      jx ns jx
 
-# lets wait for things to be installed correctly
-make verify-install
+      # lets wait for things to be installed correctly
+      make verify-install
 
-jx secret verify
+      jx secret verify
+fi
+
 
 # diagnostic commands to test the image's kubectl
 kubectl version
