@@ -97,9 +97,10 @@ echo "using GitOps template: $GITOPS_TEMPLATE_URL version: $GITOPS_TEMPLATE_VERS
 # create the boot git repository to mimic creating the git repository via the github create repository wizard
 jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --version-stream-ref=$PULL_PULL_SHA --version-stream-url=${PR_SOURCE_URL//[[:space:]]} --env-git-owner=$GH_OWNER --repo env-$CLUSTER_NAME-dev --no-operator $JX_ADMIN_CREATE_ARGS
 
+
 export GITOPS_REPO=https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@${GIT_SERVER_HOST}/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
 
-echo "going to clone git repo $GITOPS_REPO"
+echo "gitops cluster git repo $GITOPS_REPO"
 
 if [ -z "$NO_JX_TEST" ]
 then
@@ -125,9 +126,35 @@ cp -R $SOURCE_DIR versionStream
 rm -rf versionStream/.git versionStream/.github
 git add versionStream/
 
+
+# lets add some testing charts....
+jx gitops helmfile add --chart jx3/jx-test-collector
+
+# lets add / commit any cloud resource specific changes
+git add * || true
+git commit -a -m "chore: cluster changes" || true
+git push
+
+# if there is an infra gitops project then use that to create cloud resources rather than the cluster gitops template
+if [ -z "$GITOPS_INFRA_PROJECT" ]
+then
+    echo "this is not a multi repo terraform test"
+else
+    cd ..
+
+    export GITOPS_INFRA_URL="https://github.com/${GITOPS_INFRA_PROJECT}.git"
+
+    echo "going to clone git repo $GITOPS_INFRA_URL"
+
+    git clone $GITOPS_INFRA_URL ${CLUSTER_NAME}-infra
+    cd ${CLUSTER_NAME}-infra
+
+    # lets protect against pushing local files like state etc to a git repo
+    rm -rf .git
+fi
+
 export GITOPS_DIR=`pwd`
 export GITOPS_BIN=$GITOPS_DIR/bin
-
 
 if [ -z "$CUSTOMISE_GITOPS_REPO" ]
 then
@@ -138,33 +165,30 @@ else
       $CUSTOMISE_GITOPS_REPO
 fi
 
-# lets configure git to use the project/cluster
-$GITOPS_BIN/configure.sh
+# lets configure the cluster
+source $GITOPS_BIN/configure.sh
 
 # lets create the cluster
 $GITOPS_BIN/create.sh
 
-# lets add some testing charts....
-jx gitops helmfile add --chart jx3/jx-test-collector
+# if terraform then we automaticaly install the git operator and verify
+if [ -z "$GITOPS_INFRA_PROJECT" ]
+then
+      # now lets install the operator
+      # --username is found from $GIT_USERNAME or git clone URL
+      # --token is found from $GIT_TOKEN or git clone URL
+      jx admin operator
 
-# lets add / commit any cloud resource specific changes
-git add * || true
-git commit -a -m "chore: cluster changes" || true
-git push
+      sleep 90
 
-# now lets install the operator
-# --username is found from $GIT_USERNAME or git clone URL
-# --token is found from $GIT_TOKEN or git clone URL
-jx admin operator
+      jx ns jx
 
-sleep 90
+      # lets wait for things to be installed correctly
+      make verify-install
 
-jx ns jx
+      jx secret verify
+fi
 
-# lets wait for things to be installed correctly
-make verify-install
-
-jx secret verify
 
 # diagnostic commands to test the image's kubectl
 kubectl version
@@ -197,7 +221,6 @@ echo "about to run the bdd tests...."
 if [ -z "$RUN_TEST" ]
 then
       bddjx -ginkgo.focus=golang -test.v
-      #bddjx -ginkgo.focus=javascript -test.v
 else
       $RUN_TEST
 fi
@@ -213,7 +236,6 @@ gcloud container clusters get-credentials tf-jx-gentle-titmouse --zone us-centra
 
 jx ns jx
 
-
 if [ -z "$NO_JX_TEST" ]
 then
     echo "cleaning up cloud resources"
@@ -221,6 +243,3 @@ then
 else
     echo "not using jx-test to gc test resources"
 fi
-
-
-

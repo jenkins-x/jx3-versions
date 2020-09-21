@@ -8,7 +8,7 @@ echo "recreating the version streams in the https://github.com/jx3-gitops-reposi
 
 declare -a xrepos=(
   # GKE
-  "jx3-gke-terraform-vault" "jx3-gke-gcloud-vault"
+  "jx3-gke-gsm" "jx3-gke-vault" "jx3-gke-gcloud-vault"
   # EKS
   "jx3-eks-terraform-vault"
   # local
