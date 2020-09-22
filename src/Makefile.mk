@@ -149,10 +149,16 @@ git-setup:
 
 .PHONY: regen-check
 regen-check:
-	jx gitops condition --last-commit-msg-prefix '!Merge pull request' -- make git-setup resolve-metadata all kubectl-apply verify-ingress-ignore commit
+	jx gitops apply
 
-	# lets run this twice to ensure that ingress is setup after applying nginx if not using a custom domain yet
-	jx gitops condition --last-commit-msg-prefix '!Merge pull request' -- make verify-ingress-ignore all verify-ignore secrets-populate commit push secrets-wait
+.PHONY: regen-phase-1
+regen-phase-1: git-setup resolve-metadata all kubectl-apply verify-ingress-ignore commit
+
+.PHONY: regen-phase-2
+regen-phase-2: verify-ingress-ignore all verify-ignore secrets-populate commit
+
+.PHONY: regen-phase-3
+regen-phase-2: push secrets-wait
 
 .PHONY: apply
 apply: regen-check kubectl-apply verify
