@@ -195,8 +195,8 @@ all: clean fetch build lint
 pr:
 	jx gitops apply --pull-request
 
-.PHONY: pr-generate
-pr-generate: all commit push-pr-branch
+.PHONY: pr-regen
+pr-regen: all commit push-pr-branch
 
 .PHONY: push-pr-branch
 push-pr-branch:
