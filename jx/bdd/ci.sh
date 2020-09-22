@@ -135,24 +135,6 @@ git add * || true
 git commit -a -m "chore: cluster changes" || true
 git push
 
-# if there is an infra gitops project then use that to create cloud resources rather than the cluster gitops template
-if [ -z "$GITOPS_INFRA_PROJECT" ]
-then
-    echo "this is not a multi repo terraform test"
-else
-    cd ..
-
-    export GITOPS_INFRA_URL="https://github.com/${GITOPS_INFRA_PROJECT}.git"
-
-    echo "going to clone git repo $GITOPS_INFRA_URL"
-
-    git clone $GITOPS_INFRA_URL ${CLUSTER_NAME}-infra
-    cd ${CLUSTER_NAME}-infra
-
-    # lets protect against pushing local files like state etc to a git repo
-    rm -rf .git
-fi
-
 export GITOPS_DIR=`pwd`
 export GITOPS_BIN=$GITOPS_DIR/bin
 
@@ -171,24 +153,15 @@ source $GITOPS_BIN/configure.sh
 # lets create the cluster
 $GITOPS_BIN/create.sh
 
-# if terraform then we automaticaly install the git operator and verify
-if [ -z "$GITOPS_INFRA_PROJECT" ]
-then
-      # now lets install the operator
-      # --username is found from $GIT_USERNAME or git clone URL
-      # --token is found from $GIT_TOKEN or git clone URL
-      jx admin operator
-
-      sleep 90
-
-      jx ns jx
-
-      # lets wait for things to be installed correctly
-      make verify-install
-
-      jx secret verify
-fi
-
+# now lets install the operator
+# --username is found from $GIT_USERNAME or git clone URL
+# --token is found from $GIT_TOKEN or git clone URL
+jx admin operator
+sleep 90
+jx ns jx
+# lets wait for things to be installed correctly
+make verify-install
+jx secret verify
 
 # diagnostic commands to test the image's kubectl
 kubectl version
@@ -230,8 +203,6 @@ echo "completed the bdd tests"
 echo "switching context back to the infra cluster"
 
 # lets connect back to the infra cluster so we can find the TestRun CRDs
-#gcloud container clusters get-credentials flash --zone europe-west1-b --project jx-labs-infra
-#gcloud container clusters get-credentials tf-jx-growing-ant --zone us-central1-a --project jx-labs-infra
 gcloud container clusters get-credentials tf-jx-gentle-titmouse --zone us-central1-a --project jx-labs-infra
 
 jx ns jx
@@ -240,6 +211,7 @@ if [ -z "$NO_JX_TEST" ]
 then
     echo "cleaning up cloud resources"
     jx test delete --test-url $GITOPS_REPO --dir=$GITOPS_DIR --script=$GITOPS_BIN/destroy.sh
+
 else
     echo "not using jx-test to gc test resources"
 fi
