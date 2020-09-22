@@ -158,7 +158,7 @@ regen-phase-1: git-setup resolve-metadata all kubectl-apply verify-ingress-ignor
 regen-phase-2: verify-ingress-ignore all verify-ignore secrets-populate commit
 
 .PHONY: regen-phase-3
-regen-phase-2: push secrets-wait
+regen-phase-3: push secrets-wait
 
 .PHONY: apply
 apply: regen-check kubectl-apply verify
@@ -185,14 +185,18 @@ commit:
 	-git add --all
 	-git status
 	# lets ignore commit errors in case there's no changes and to stop pipelines failing
-	-git commit -m "chore: regenerated"
+	-git commit -m "chore: regenerated" -m "/pipeline cancel"
 
 .PHONY: all
 all: clean fetch build lint
 
 
 .PHONY: pr
-pr: all commit push-pr-branch
+pr:
+	jx gitops apply --pull-request
+
+.PHONY: pr-generate
+pr-generate: all commit push-pr-branch
 
 .PHONY: push-pr-branch
 push-pr-branch:
