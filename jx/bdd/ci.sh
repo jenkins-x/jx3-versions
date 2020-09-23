@@ -64,8 +64,12 @@ export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
 export ZONE=europe-west1-c
 export LABELS="branch=${BRANCH_NAME,,},cluster=$BDD_NAME,create-time=${CREATED_TIME,,}"
 
+# lets pass values into terraform
+#export TF_VAR_cluster_name="${CLUSTER_NAME}"
+#export TF_VAR_resource_labels='{ branch = "${BRANCH_NAME,,}", cluster = "$BDD_NAME" , created = "${CREATED_TIME,,}" }'
+
 # lets setup git
-git config --global --add user.name JenkinsXBot
+git config --global --add user.name $GIT_USERNAME
 git config --global --add user.email jenkins-x@googlegroups.com
 
 echo "running the BDD test with JX_HOME = $JX_HOME"
