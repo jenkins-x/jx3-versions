@@ -9,4 +9,4 @@ export BDD_NAME="gke-vault"
 export GITOPS_INFRA_PROJECT="jx3-gitops-repositories/jx3-terraform-gke"
 export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-vault"
 
-`dirname "$0"`/../ci.sh
+`dirname "$0"`/../terraform-ci.sh

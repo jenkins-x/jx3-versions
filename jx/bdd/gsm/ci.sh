@@ -12,7 +12,7 @@ export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-gsm"
 # enable the terraform gsm config
 export TF_VAR_gsm=true
 
-`dirname "$0"`/../ci.sh
+`dirname "$0"`/../terraform-ci.sh
 
 ## cleanup secrets in google secrets manager if it was enabled
 export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
