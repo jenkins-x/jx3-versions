@@ -136,6 +136,7 @@ export GITOPS_REPO=https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@${GIT_SERVE
 # lets garbage collect any old tests or previous failed tests of this repo/PR/context...
 echo "for cleaning up cloud resources"
 jx test create --test-url $GITOPS_REPO
+jx test gc
 
 # create the cluster 
 pushd `pwd`/infra-${CLUSTER_NAME}-dev
