@@ -1,0 +1,51 @@
+# Source: jxboot-helmfile-resources/templates/default-scheduler.yaml
+apiVersion: jenkins.io/v1
+kind: Scheduler
+metadata:
+  name: in-repo
+spec:
+  approve:
+    issueRequired: false
+    lgtmActsAsApprove: true
+    requireSelfApproval: true
+  merger:
+    blockerLabel: ""
+    maxGoroutines: 0
+    merge_method: merge
+    policy:
+      fromBranchProtection: true
+      optionalContexts: { }
+      requiredContexts: { }
+      requiredIfPresentContexts: { }
+      skipUnknownContexts: false
+    prStatusBaseUrl: ""
+    squashLabel: ""
+    targetUrl: http://deck-jx.35.192.148.208.nip.io
+  plugins:
+    entries:
+      - approve
+      - assign
+      - blunderbuss
+      - help
+      - hold
+      - lgtm
+      - lifecycle
+      - override
+      - size
+      - trigger
+      - wip
+      - heart
+      - cat
+      - dog
+      - pony
+  policy:
+    protectTested: true
+  schedulerAgent:
+    agent: tekton
+  trigger:
+    ignoreOkToTest: false
+    joinOrgUrl: ""
+    onlyOrgMembers: false
+    trustedOrg: todo
+  welcome:
+    - message_template: Welcome
