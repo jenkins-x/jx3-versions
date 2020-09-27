@@ -46,7 +46,8 @@ spec:
           - master
         cluster: ""
         context: ""
-        labels: { }
+        labels:
+          aadpodidbinding: tekton-bot
         max_concurrency: 0
         name: release
         report: false
@@ -59,7 +60,8 @@ spec:
         branches: [ ]
         cluster: ""
         context: pr-build
-        labels: { }
+        labels:
+          aadpodidbinding: tekton-bot
         max_concurrency: 0
         merge_method: ""
         name: pr-build
