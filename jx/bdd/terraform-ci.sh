@@ -56,6 +56,8 @@ fi
 # batch mode for terraform
 export TERRAFORM_APPROVE="-auto-approve"
 export TERRAFORM_INPUT="-input=false"
+# ensure buckets are cleaned up for CI
+export TF_VAR_force_destroy=true
 
 export PROJECT_ID=jenkins-x-labs-bdd
 export CREATED_TIME=$(date '+%a-%b-%d-%Ybin/ main.tf values.auto.tfvars terraform.tfstate variables.tf-%H-%M-%S')
