@@ -46,7 +46,8 @@ spec:
           - master
         cluster: ""
         context: ""
-        labels: { }
+        labels:
+          aadpodidbinding: tekton-bot
         max_concurrency: 0
         name: promotion
         report: false
@@ -60,7 +61,8 @@ spec:
         branches: [ ]
         cluster: ""
         context: promotion-build
-        labels: { }
+        labels:
+          aadpodidbinding: tekton-bot
         max_concurrency: 0
         merge_method: ""
         name: promotion-build
