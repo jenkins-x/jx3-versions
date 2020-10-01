@@ -200,7 +200,7 @@ pr-regen: all commit push-pr-branch
 
 .PHONY: push-pr-branch
 push-pr-branch:
-	jx gitops pr push
+	jx gitops pr push --ignore-no-pr
 
 .PHONY: push
 push:
