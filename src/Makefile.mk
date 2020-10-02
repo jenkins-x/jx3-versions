@@ -125,8 +125,9 @@ verify-install:
 
 .PHONY: verify
 verify: dev-ns verify-ingress
+	# TODO not sure we need this...
 	jx verify env
-	jx verify webhooks --verbose --warn-on-fail
+	jx gitops webhook update --warn-on-fail
 
 .PHONY: dev-ns verify-ignore
 verify-ignore: verify-ingress-ignore
