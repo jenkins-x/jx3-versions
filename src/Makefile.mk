@@ -150,6 +150,7 @@ git-setup:
 
 .PHONY: regen-check
 regen-check:
+	jx gitops git setup
 	jx gitops apply
 
 .PHONY: regen-phase-1
