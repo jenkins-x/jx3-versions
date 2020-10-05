@@ -295,6 +295,7 @@ spec:
                         fieldPath: metadata.labels
                       path: labels
                   name: podinfo
+          serviceAccountName: tekton-bot
 
   presubmits:
     entries:
@@ -551,6 +552,7 @@ spec:
                         fieldPath: metadata.labels
                       path: labels
                   name: podinfo
+          serviceAccountName: tekton-bot
         report: true
         rerun_command: /test this
         run_if_changed: ""
