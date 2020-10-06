@@ -44,6 +44,7 @@ spec:
       - agent: tekton-pipeline
         branches:
           - master
+          - main
         labels:
           aadpodidbinding: tekton-bot
         max_concurrency: 0
