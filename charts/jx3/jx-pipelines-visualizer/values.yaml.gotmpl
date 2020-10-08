@@ -11,5 +11,5 @@ ingress:
     nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - Jenkins X Pipeline Dashboard'
 
   hosts:
-  - "dashboard{{ .Values.jxRequirements.ingress.namespaceSubDomain | default "." }}{{ .Values.jxRequirements.ingress.domain }}"
+  - "dashboard{{ .Values.jxRequirements.ingress.namespaceSubDomain | default "." }}{{ .Values.jxRequirements.ingress.domain | default "cluster.local" }}"
 
