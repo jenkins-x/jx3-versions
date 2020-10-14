@@ -25,10 +25,10 @@ pipelineConfig:
                 name: bdd-admin-password
                 key: password
         agent:
-          image: gcr.io/jenkinsxio/jx-cli:3.0.582
+          image: gcr.io/jenkinsxio/jx-cli:3.0.584
         stages:
           - name: ci
             steps:
               - command: jx/bdd/gsm/ci.sh
-                image: gcr.io/jenkinsxio/jx-cli:3.0.582
+                image: gcr.io/jenkinsxio/jx-cli:3.0.584
                 name: runci
