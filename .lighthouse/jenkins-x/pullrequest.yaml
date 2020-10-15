@@ -225,6 +225,12 @@ spec:
           resources: {}
         - command:
           - /workspace/source/jx/bdd/gsm/ci.sh
+          env:
+          - name: GH_ACCESS_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: bdd-pipeline-token-github
+                key: password
           image: gcr.io/jenkinsxio/jx-cli:latest
           name: runci
           resources: {}
