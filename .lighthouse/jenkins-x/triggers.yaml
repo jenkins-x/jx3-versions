@@ -3,7 +3,7 @@ kind: TriggerConfig
 spec:
   presubmits:
   - name: gsm
-    context: "gms"
+    context: "gsm"
     always_run: true
     optional: false
     trigger: (?m)^/test( all| gsm),?(s+|$)
