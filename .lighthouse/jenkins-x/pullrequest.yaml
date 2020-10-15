@@ -226,7 +226,7 @@ spec:
         - args:
           - 'source .jx/variables.sh  && /workspace/source/jx/bdd/gsm/ci.sh'
           command:
-          - /bin/sh
+          - /bin/bash
           - -c
           env:
           - name: GH_ACCESS_TOKEN
