@@ -223,8 +223,11 @@ spec:
           image: gcr.io/jenkinsxio/jx-cli:latest
           name: jx-variables
           resources: {}
-        - command:
-          - /workspace/source/jx/bdd/gsm/ci.sh
+        - args:
+          - 'source .jx/variables.sh  && /workspace/source/jx/bdd/gsm/ci.sh'
+          command:
+          - /bin/sh
+          - -c
           env:
           - name: GH_ACCESS_TOKEN
             valueFrom:
