@@ -220,7 +220,7 @@ spec:
           - variables
           command:
           - jx
-          image: gcr.io/jenkinsxio/jx-cli:3.0.608
+          image: gcr.io/jenkinsxio/jx-cli:latest
           name: jx-variables
           resources: {}
         - args:
