@@ -243,7 +243,7 @@ spec:
           name: jx-variables
           resources: {}
         - args:
-          - ./jx/scripts/get-jx-prerelease-state.sh
+          - ./.lighthouse/jenkins-x/release/get-jx-prerelease-state.sh
           command:
           - /bin/sh
           - -c
@@ -273,7 +273,7 @@ spec:
           name: changelog
           resources: {}
         - args:
-          - ./jx/scripts/promote-vs.sh
+          - ./.lighthouse/jenkins-x/release/promote-vs.sh
           command:
           - /bin/sh
           - -c
@@ -288,7 +288,7 @@ spec:
           name: promote-vs
           resources: {}
         - args:
-          - ./jx/scripts/update-bot-fork.sh
+          - ./.lighthouse/jenkins-x/release/update-bot-fork.sh
           command:
           - /bin/sh
           - -c
@@ -303,7 +303,7 @@ spec:
           name: update-bot-fork
           resources: {}
         - args:
-          - ./jx/scripts/release-resources.sh
+          - ./.lighthouse/jenkins-x/release/release-resources.sh
           command:
           - /bin/sh
           - -c
@@ -318,7 +318,7 @@ spec:
           name: release-resources
           resources: {}
         - args:
-          - ./jx/scripts/release-jx.sh
+          - ./.lighthouse/jenkins-x/release/release-jx.sh
           command:
           - /bin/sh
           - -c
@@ -333,7 +333,7 @@ spec:
           name: release-jx
           resources: {}
         - args:
-          - ./jx/scripts/update-jx-bot.sh
+          - ./.lighthouse/jenkins-x/release/update-jx-bot.sh
           command:
           - /bin/sh
           - -c
@@ -348,7 +348,7 @@ spec:
           name: update-jx-bot
           resources: {}
         - args:
-          - ./jx/scripts/update-jx-website.sh
+          - ./.lighthouse/jenkins-x/release/update-jx-website.sh
           command:
           - /bin/sh
           - -c

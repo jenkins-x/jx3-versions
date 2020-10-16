@@ -224,7 +224,7 @@ spec:
           name: jx-variables
           resources: {}
         - args:
-          - 'source .jx/variables.sh  && /workspace/source/jx/bdd/gsm/ci.sh'
+          - 'source .jx/variables.sh && echo running bdd test $JOB_NAME && /workspace/source/.lighthouse/jenkins-x/bdd/$JOB_NAME/ci.sh'
           command:
           - /bin/bash
           - -c

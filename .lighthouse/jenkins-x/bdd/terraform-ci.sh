@@ -226,4 +226,3 @@ echo "**                                                 **"
 echo "*****************************************************"
 
 jx test delete --test-url $GITOPS_REPO --dir=$GITOPS_DIR --script=$GITOPS_BIN/destroy.sh
-jx test gc
