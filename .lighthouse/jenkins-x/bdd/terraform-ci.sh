@@ -173,6 +173,8 @@ echo "*********************"
 # # diagnostic commands to test the image's kubectl
 # kubectl version
 
+jx ns jx
+
 # # for some reason we need to use the full name once for the second command to work!
 kubectl get environments
 kubectl get env dev -oyaml
