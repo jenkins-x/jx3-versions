@@ -33,8 +33,9 @@ do
   jx gitops kpt update || true
 
   kpt pkg get https://github.com/jenkins-x/jxr-versions.git/ versionStream
-  rm -rf versionStream/jenkins*.yml versionStream/jx versionStream/.github versionStream/.pre* versionStream/.secrets* versionStream/OWNER*
-  
+  rm -rf versionStream/jenkins*.yml versionStream/jx versionStream/.github versionStream/.pre* versionStream/.secrets* versionStream/OWNER* versionStream/.lighthouse
+  jx gitops helmfile resolve --update
+
   git add * || true
   git commit -a -m "chore: upgrade version stream" || true
   git push || true
