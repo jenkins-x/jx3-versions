@@ -16,6 +16,13 @@ spec:
     trigger: (?m)^/test( all| vault),?(s+|$)
     rerun_command: /test vault
     source: "pullrequest.yaml"
+  - name: kube
+    context: "kube"
+    always_run: false
+    optional: false
+    trigger: (?m)^/test( all| kube),?(s+|$)
+    rerun_command: /test kube
+    source: "pullrequest.yaml"
   postsubmits:
   - name: release
     context: "release"
