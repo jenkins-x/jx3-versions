@@ -119,7 +119,7 @@ fi
 export SOURCE_DIR=`pwd`
 
 # avoid cloning cluster repo into the working CI folder
-cd ..
+cd /workspace
 
 git clone $GITOPS_REPO
 cd env-${CLUSTER_NAME}-dev
@@ -132,6 +132,9 @@ git add versionStream/
 
 
 # lets add some testing charts....
+echo "about to add helm chart in dir $(pwd)"
+echo ls -al *.yml
+
 jx gitops helmfile add --chart jx3/jx-test-collector
 
 # lets add / commit any cloud resource specific changes
