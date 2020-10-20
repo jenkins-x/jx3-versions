@@ -110,8 +110,8 @@ export SOURCE_DIR=`pwd`
 # avoid cloning cluster repo into the working CI folder
 cd /workspace
 
-git clone -b master $GITOPS_REPO tmp-env-dev-clone
-cd tmp-env-dev-clone
+git clone -b master $GITOPS_REPO env-dev-repo
+cd env-dev-repo
 
 # use the changes from this PR in the version stream for the cluster repo when resolving the helmfile
 rm -rf versionStream
@@ -141,6 +141,13 @@ fi
 # lets configure the cluster
 source $GITOPS_BIN/configure.sh
 
+
+echo "****************************************"
+echo "**                                    **"
+echo "**         configured cluster         **"
+echo "**                                    **"
+echo "****************************************"
+
 # lets add / commit any cloud resource specific changes
 git add * || true
 git commit -a -m "chore: cluster changes" || true
@@ -155,6 +162,12 @@ then
 else
       echo "not using jx-test to gc old tests"
 fi
+
+echo "****************************************"
+echo "**                                    **"
+echo "**          creating cluster          **"
+echo "**                                    **"
+echo "****************************************"
 
 # lets create the cluster
 $GITOPS_BIN/create.sh
