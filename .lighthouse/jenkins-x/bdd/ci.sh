@@ -111,7 +111,7 @@ then
     jx test create --test-url $GITOPS_REPO
 
     # lets garbage collect any old tests or previous failed tests of this repo/PR/context...
-    jx test gc
+    #jx test gc
 else
       echo "not using jx-test to gc old tests"
 fi
