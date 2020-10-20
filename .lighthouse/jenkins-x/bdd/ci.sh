@@ -138,6 +138,9 @@ else
       $CUSTOMISE_GITOPS_REPO
 fi
 
+ls -al
+ls -al bin
+
 # lets configure the cluster
 source $GITOPS_BIN/configure.sh
 
