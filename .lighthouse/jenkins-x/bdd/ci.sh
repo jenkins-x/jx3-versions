@@ -121,7 +121,7 @@ export SOURCE_DIR=`pwd`
 # avoid cloning cluster repo into the working CI folder
 cd /workspace
 
-git clone $GITOPS_REPO
+git clone -b master $GITOPS_REPO env-${CLUSTER_NAME}-dev
 cd env-${CLUSTER_NAME}-dev
 
 # use the changes from this PR in the version stream for the cluster repo when resolving the helmfile
@@ -133,7 +133,7 @@ git add versionStream/
 
 # lets add some testing charts....
 echo "about to add helm chart in dir $(pwd)"
-echo ls -al *.yml
+ls -al
 
 jx gitops helmfile add --chart jx3/jx-test-collector
 
