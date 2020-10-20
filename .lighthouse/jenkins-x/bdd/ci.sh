@@ -138,12 +138,15 @@ else
       $CUSTOMISE_GITOPS_REPO
 fi
 
-ls -al
 ls -al bin
 
-# lets configure the cluster
-source $GITOPS_BIN/configure.sh
 
+# lets modify the setup
+sed -i -e "s/PROJECT_ID=\".*\"/PROJECT_ID=\"${PROJECT_ID}\"/" bin/setenv.sh
+sed -i -e "s/CLUSTER_NAME=\".*\"/CLUSTER_NAME=\"${CLUSTER_NAME}\"/" bin/setenv.sh
+
+echo "the new setenv script is:"
+cat bin/setenv.sh
 
 echo "****************************************"
 echo "**                                    **"
