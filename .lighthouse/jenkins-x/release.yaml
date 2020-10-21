@@ -216,7 +216,7 @@ spec:
           resources: {}
         - command:
           - jx step next-version --use-git-tag-only --tag
-          image: gcr.io/jenkinsxio-labs-private/jxl:0.0.136
+          image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
           name: next-version
           resources: {}
         - args:
