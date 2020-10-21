@@ -214,13 +214,13 @@ spec:
           image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
           name: git-merge
           resources: {}
-        - command:
-          - jx 
-          args: 
+        - args: 
           - step 
           - next-version 
           - --use-git-tag-only 
           - --tag
+          command:
+          - jx 
           image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
           name: next-version
           resources: {}
