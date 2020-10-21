@@ -246,7 +246,7 @@ spec:
           command:
           - /bin/sh
           - -c
-          image: gcr.io/jenkinsxio/builder-jx:0.1.792
+          image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
           name: changelog
           resources: {}
         - args:
@@ -262,7 +262,7 @@ spec:
           command:
           - /bin/sh
           - -c
-          image: gcr.io/jenkinsxio/builder-jx:0.1.792
+          image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
           name: update-bot-fork
           resources: {}
         - args:
@@ -278,7 +278,7 @@ spec:
           command:
           - /bin/sh
           - -c
-          image: gcr.io/jenkinsxio/builder-jx:0.1.792
+          image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
           name: release-jx
           resources: {}
         - args:
@@ -286,7 +286,7 @@ spec:
           command:
           - /bin/sh
           - -c
-          image: gcr.io/jenkinsxio/builder-jx:0.1.792
+          image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
           name: update-jx-bot
           resources: {}
         - args:
