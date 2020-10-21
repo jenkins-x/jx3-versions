@@ -238,7 +238,7 @@ spec:
           command:
           - /bin/sh
           - -c
-          image: gcr.io/jenkinsxio/builder-jx:0.1.792
+          image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
           name: get-jx-prerelease-state
           resources: {}
         - args:
