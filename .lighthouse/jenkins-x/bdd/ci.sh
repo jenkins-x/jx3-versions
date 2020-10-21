@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -e
-set -x
 
 echo PATH=$PATH
 echo HOME=$HOME
@@ -106,23 +105,13 @@ export GITOPS_REPO=https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@${GIT_SERVE
 
 echo "gitops cluster git repo $GITOPS_REPO"
 
-if [ -z "$NO_JX_TEST" ]
-then
-    jx test create --test-url $GITOPS_REPO
-
-    # lets garbage collect any old tests or previous failed tests of this repo/PR/context...
-    jx test gc
-else
-      echo "not using jx-test to gc old tests"
-fi
-
 export SOURCE_DIR=`pwd`
 
 # avoid cloning cluster repo into the working CI folder
-cd ..
+cd /workspace
 
-git clone $GITOPS_REPO
-cd env-${CLUSTER_NAME}-dev
+git clone -b master $GITOPS_REPO env-dev-repo
+cd env-dev-repo
 
 # use the changes from this PR in the version stream for the cluster repo when resolving the helmfile
 rm -rf versionStream
@@ -132,12 +121,10 @@ git add versionStream/
 
 
 # lets add some testing charts....
-jx gitops helmfile add --chart jx3/jx-test-collector
+echo "about to add helm chart in dir $(pwd)"
+ls -al
 
-# lets add / commit any cloud resource specific changes
-git add * || true
-git commit -a -m "chore: cluster changes" || true
-git push
+jx gitops helmfile add --chart jx3/jx-test-collector
 
 export GITOPS_DIR=`pwd`
 export GITOPS_BIN=$GITOPS_DIR/bin
@@ -151,8 +138,42 @@ else
       $CUSTOMISE_GITOPS_REPO
 fi
 
-# lets configure the cluster
-source $GITOPS_BIN/configure.sh
+ls -al bin
+
+
+# lets modify the setup
+sed -i -e "s/PROJECT_ID=\".*\"/PROJECT_ID=\"${PROJECT_ID}\"/" bin/setenv.sh
+sed -i -e "s/CLUSTER_NAME=\".*\"/CLUSTER_NAME=\"${CLUSTER_NAME}\"/" bin/setenv.sh
+
+echo "the new setenv script is:"
+cat bin/setenv.sh
+
+echo "****************************************"
+echo "**                                    **"
+echo "**         configured cluster         **"
+echo "**                                    **"
+echo "****************************************"
+
+# lets add / commit any cloud resource specific changes
+git add * || true
+git commit -a -m "chore: cluster changes" || true
+git push
+
+if [ -z "$NO_JX_TEST" ]
+then
+    jx test create --test-url $GITOPS_REPO
+
+    # lets garbage collect any old tests or previous failed tests of this repo/PR/context...
+    #jx test gc
+else
+      echo "not using jx-test to gc old tests"
+fi
+
+echo "****************************************"
+echo "**                                    **"
+echo "**          creating cluster          **"
+echo "**                                    **"
+echo "****************************************"
 
 # lets create the cluster
 $GITOPS_BIN/create.sh
