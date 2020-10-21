@@ -242,7 +242,7 @@ spec:
           name: get-jx-prerelease-state
           resources: {}
         - args:
-          - jx step changelog --verbose --version ${VERSION} --rev v${VERSION}
+          - source .jx/variables.sh && jx step changelog --verbose --version ${VERSION} --rev v${VERSION}
           command:
           - /bin/sh
           - -c
