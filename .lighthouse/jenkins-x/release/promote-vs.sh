@@ -15,7 +15,6 @@ declare -a repos=(
   # Azure
   "jx3-azure-terraform"
 )
-
 export TMPDIR=/tmp/jx3-gitops-promote
 rm -rf $TMPDIR
 mkdir -p $TMPDIR
@@ -40,3 +39,13 @@ do
   git commit -a -m "chore: upgrade version stream" || true
   git push || true
 done
+
+# lets upgarde our own infra automatically
+LOCAL_BRANCH_NAME="jx-vs_$VERSION"
+cd $TMPDIR
+git clone https://github.com/jenkins-x/jx3-eagle.git
+cd "jx3-eagle"
+git checkout -b $LOCAL_BRANCH_NAME
+jx gitops upgrade
+git push origin $LOCAL_BRANCH_NAME
+jx create pullrequest -t "chore: version stream upgrade" -l updatebot
