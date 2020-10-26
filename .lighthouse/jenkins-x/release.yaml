@@ -241,14 +241,14 @@ spec:
         #   image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
         #   name: get-jx-prerelease-state
         #   resources: {}
-        - args:
-          - source .jx/variables.sh && jx step changelog --verbose --version ${VERSION} --rev v${VERSION}
-          command:
-          - /bin/sh
-          - -c
-          image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-          name: changelog
-          resources: {}
+        # - args:
+        #   - source .jx/variables.sh && jx step changelog --verbose --version ${VERSION} --rev v${VERSION}
+        #   command:
+        #   - /bin/sh
+        #   - -c
+        #   image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
+        #   name: changelog
+        #   resources: {}
         - command:
           - .lighthouse/jenkins-x/release/promote-vs.sh
           image: gcr.io/jenkinsxio/jx-cli:latest
