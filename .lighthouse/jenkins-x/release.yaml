@@ -249,10 +249,13 @@ spec:
           image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
           name: changelog
           resources: {}
-        - command:
+        - args:
           - source .jx/variables.sh && .lighthouse/jenkins-x/release/promote-vs.sh
           image: gcr.io/jenkinsxio/jx-cli:latest
           name: promote-vs
+          command:
+          - /bin/sh
+          - -c
           resources: {}
         - args:
           - ./.lighthouse/jenkins-x/release/update-bot-fork.sh
