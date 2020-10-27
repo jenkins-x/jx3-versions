@@ -191,32 +191,32 @@ spec:
         #   name: git-setup
         #   resources: {}
         #   workingDir: /workspace
-        - args:
-          - step
-          - git
-          - merge
-          - --verbose
-          - --baseSHA
-          - $(params.PULL_BASE_SHA)
-          - --sha
-          - $(params.PULL_PULL_SHA)
-          - --baseBranch
-          - $(params.PULL_BASE_REF)
-          command:
-          - jx
-          image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-          name: git-merge
-          resources: {}
-        # - args: 
-        #   - step 
-        #   - next-version 
-        #   - --use-git-tag-only 
-        #   - --tag
+        # - args:
+        #   - step
+        #   - git
+        #   - merge
+        #   - --verbose
+        #   - --baseSHA
+        #   - $(params.PULL_BASE_SHA)
+        #   - --sha
+        #   - $(params.PULL_PULL_SHA)
+        #   - --baseBranch
+        #   - $(params.PULL_BASE_REF)
         #   command:
-        #   - jx 
+        #   - jx
         #   image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-        #   name: next-version
+        #   name: git-merge
         #   resources: {}
+        - args: 
+          - step 
+          - next-version 
+          - --use-git-tag-only 
+          - --tag
+          command:
+          - jx 
+          image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
+          name: next-version
+          resources: {}
         # - args:
         #   - '[ -d /builder/home ] || mkdir -p /builder && ln -s /tekton/home /builder/home'
         #   command:
@@ -233,67 +233,67 @@ spec:
           image: gcr.io/jenkinsxio/jx-cli:latest
           name: jx-variables
           resources: {}
-        # - args:
-        #   - ./.lighthouse/jenkins-x/release/get-jx-prerelease-state.sh
-        #   command:
-        #   - /bin/sh
-        #   - -c
-        #   image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-        #   name: get-jx-prerelease-state
-        #   resources: {}
-        # - args:
-        #   - source .jx/variables.sh && jx step changelog --verbose --version ${VERSION} --rev v${VERSION}
-        #   command:
-        #   - /bin/sh
-        #   - -c
-        #   image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-        #   name: changelog
-        #   resources: {}
+        - args:
+          - ./.lighthouse/jenkins-x/release/get-jx-prerelease-state.sh
+          command:
+          - /bin/sh
+          - -c
+          image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
+          name: get-jx-prerelease-state
+          resources: {}
+        - args:
+          - source .jx/variables.sh && jx step changelog --verbose --version ${VERSION} --rev v${VERSION}
+          command:
+          - /bin/sh
+          - -c
+          image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
+          name: changelog
+          resources: {}
         - command:
           - .lighthouse/jenkins-x/release/promote-vs.sh
           image: gcr.io/jenkinsxio/jx-cli:latest
           name: promote-vs
           resources: {}
-        # - args:
-        #   - ./.lighthouse/jenkins-x/release/update-bot-fork.sh
-        #   command:
-        #   - /bin/sh
-        #   - -c
-        #   image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-        #   name: update-bot-fork
-        #   resources: {}
-        # - args:
-        #   - ./.lighthouse/jenkins-x/release/release-resources.sh
-        #   command:
-        #   - /bin/sh
-        #   - -c
-        #   image: gcr.io/jenkinsxio/jx-cli:latest
-        #   name: release-resources
-        #   resources: {}
-        # - args:
-        #   - ./.lighthouse/jenkins-x/release/release-jx.sh
-        #   command:
-        #   - /bin/sh
-        #   - -c
-        #   image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-        #   name: release-jx
-        #   resources: {}
-        # - args:
-        #   - ./.lighthouse/jenkins-x/release/update-jx-bot.sh
-        #   command:
-        #   - /bin/sh
-        #   - -c
-        #   image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-        #   name: update-jx-bot
-        #   resources: {}
-        # - args:
-        #   - ./.lighthouse/jenkins-x/release/update-jx-website.sh
-        #   command:
-        #   - /bin/sh
-        #   - -c
-        #   image: gcr.io/jenkinsxio/builder-go:2.1.142-761
-        #   name: update-jx-website
-        #   resources: {}
+        - args:
+          - ./.lighthouse/jenkins-x/release/update-bot-fork.sh
+          command:
+          - /bin/sh
+          - -c
+          image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
+          name: update-bot-fork
+          resources: {}
+        - args:
+          - ./.lighthouse/jenkins-x/release/release-resources.sh
+          command:
+          - /bin/sh
+          - -c
+          image: gcr.io/jenkinsxio/jx-cli:latest
+          name: release-resources
+          resources: {}
+        - args:
+          - ./.lighthouse/jenkins-x/release/release-jx.sh
+          command:
+          - /bin/sh
+          - -c
+          image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
+          name: release-jx
+          resources: {}
+        - args:
+          - ./.lighthouse/jenkins-x/release/update-jx-bot.sh
+          command:
+          - /bin/sh
+          - -c
+          image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
+          name: update-jx-bot
+          resources: {}
+        - args:
+          - ./.lighthouse/jenkins-x/release/update-jx-website.sh
+          command:
+          - /bin/sh
+          - -c
+          image: gcr.io/jenkinsxio/builder-go:2.1.142-761
+          name: update-jx-website
+          resources: {}
         volumes:
         - downwardAPI:
             items:

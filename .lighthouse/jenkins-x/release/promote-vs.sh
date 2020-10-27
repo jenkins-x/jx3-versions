@@ -42,7 +42,6 @@ cd $TMPDIR
 git clone https://github.com/jenkins-x/jx3-eagle.git
 cd "jx3-eagle"
 git checkout -b $LOCAL_BRANCH_NAME
-sleep infinity
 jx gitops upgrade
 git push origin $LOCAL_BRANCH_NAME
 jx create pullrequest -t "chore: version stream upgrade" -l updatebot
