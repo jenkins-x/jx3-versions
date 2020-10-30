@@ -113,6 +113,9 @@ pushd `pwd`/cluster-${CLUSTER_NAME}-dev
       # lets add some testing charts....
       jx gitops helmfile add --chart jx3/jx-test-collector
 
+      # lets upgrade any versions in helmfile.yaml
+      jx gitops helmfile resolve --update 
+
       # lets add / commit any cloud resource specific changes
       git add * || true
       git commit -a -m "chore: cluster changes" || true
