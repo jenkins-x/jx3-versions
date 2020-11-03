@@ -15,7 +15,7 @@ declare -a repos=(
   # Azure
   "jx3-azure-terraform"
   # OpenShift
-  "jx3-openshift"
+  "jx3-openshift" "jx3-openshift-crc"
 )
 export TMPDIR=/tmp/jx3-gitops-promote
 rm -rf $TMPDIR
