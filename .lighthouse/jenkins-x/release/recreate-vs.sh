@@ -32,10 +32,11 @@ do
   git clone https://github.com/jx3-gitops-repositories/$r.git
   cd "$r"
 
-  rm -rf .jx/git-operator src versionStream
+  rm -rf .jx/git-operator .lighthouse/jenkins-x src versionStream
 
+  kpt pkg get https://github.com/jenkins-x/jx3-pipeline-catalog.git/.lighthouse/jenkins-x .lighthouse/jenkins-x
   kpt pkg get https://github.com/jenkins-x/jxr-versions.git/ versionStream
-  git add * || true
+  git add * .lighthouse || true
   git commit -a -m "chore: upgrade version stream" || true
   git push || true
 done

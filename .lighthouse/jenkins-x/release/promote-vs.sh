@@ -28,12 +28,13 @@ do
   git clone https://github.com/jx3-gitops-repositories/$r.git
   cd "$r"
   echo "recreating a clean version stream"
-  rm -rf versionStream
+  rm -rf versionStream .lighthouse/jenkins-x .lighthouse/Kptfile
   jx gitops kpt update || true
+  kpt pkg get https://github.com/jenkins-x/jx3-pipeline-catalog.git/environment/.lighthouse/jenkins-x .lighthouse/jenkins-x
   kpt pkg get https://github.com/jenkins-x/jxr-versions.git/ versionStream
   rm -rf versionStream/jenkins*.yml versionStream/jx versionStream/.github versionStream/.pre* versionStream/.secrets* versionStream/OWNER* versionStream/.lighthouse
   jx gitops helmfile resolve --update
-  git add * || true
+  git add * .lighthouse || true
   git commit -a -m "chore: upgrade version stream" || true
   git push || true
 done
