@@ -97,9 +97,9 @@ echo "**  version stream with contents of this pull request **"
 echo "**                                                    **"
 echo "********************************************************"
 
-gh repo create $GH_OWNER/cluster-$CLUSTER_NAME-dev --template $GIT_PROVIDER_URL/${GITOPS_TEMPLATE_PROJECT} --private --confirm
+gh repo create ${GH_HOST}/${GH_OWNER}/cluster-$CLUSTER_NAME-dev --template $GIT_PROVIDER_URL/${GITOPS_TEMPLATE_PROJECT} --private --confirm
 sleep 5
-gh repo clone $GH_OWNER/cluster-$CLUSTER_NAME-dev
+gh repo clone ${GH_HOST}/${GH_OWNER}/cluster-$CLUSTER_NAME-dev
 
 pushd `pwd`/cluster-${CLUSTER_NAME}-dev
 
@@ -129,9 +129,9 @@ echo "**  clone and create cloud resources               **"
 echo "**                                                 **"
 echo "*****************************************************"
 
-gh repo create $GH_OWNER/infra-$CLUSTER_NAME-dev --template $GIT_PROVIDER_URL/${GITOPS_INFRA_PROJECT} --private --confirm
+gh repo create ${GH_HOST}/${GH_OWNER}/infra-$CLUSTER_NAME-dev --template $GIT_PROVIDER_URL/${GITOPS_INFRA_PROJECT} --private --confirm
 sleep 5
-gh repo clone $GH_OWNER/infra-$CLUSTER_NAME-dev
+gh repo clone ${GH_HOST}/${GH_OWNER}/infra-$CLUSTER_NAME-dev
 
 ########
 # setting up test resources and garbage collect previous runs
