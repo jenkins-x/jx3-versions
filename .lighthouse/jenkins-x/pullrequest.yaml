@@ -12,6 +12,10 @@ metadata:
 spec:
   pipelineSpec:
     params:
+    - default: bdd-pipeline-token-github
+      name: BDD_GIT_TOKEN_SECRET
+      description: the Secret name used for the git token  unique build number
+      type: string
     - description: the unique build number
       name: BUILD_ID
       type: string
@@ -58,6 +62,8 @@ spec:
     tasks:
     - name: test
       params:
+      - name: BDD_GIT_TOKEN_SECRET
+        value: $(params.BDD_GIT_TOKEN_SECRET)
       - name: BUILD_ID
         value: $(params.BUILD_ID)
       - name: JOB_NAME
@@ -87,6 +93,10 @@ spec:
       resources: {}
       taskSpec:
         params:
+        - default: bdd-pipeline-token-github
+          name: BDD_GIT_TOKEN_SECRET
+          description: the Secret name used for the git token  unique build number
+          type: string
         - description: git url to clone
           name: REPO_URL
           type: string
@@ -136,6 +146,8 @@ spec:
           type: string
         stepTemplate:
           env:
+          - name: BDD_GIT_TOKEN_SECRET
+            value: $(params.BDD_GIT_TOKEN_SECRET)
           - name: BUILD_ID
             value: $(params.BUILD_ID)
           - name: JOB_NAME
@@ -232,7 +244,7 @@ spec:
           - name: GH_ACCESS_TOKEN
             valueFrom:
               secretKeyRef:
-                name: bdd-pipeline-token-github
+                name: $(params.BDD_GIT_TOKEN_SECRET)
                 key: password
           image: gcr.io/jenkinsxio/jx-cli:latest
           name: runci
