@@ -124,7 +124,7 @@ verify-ingress-ignore:
 verify-install:
 	# TODO lets disable errors for now
 	# as some pods stick around even though they are failed causing errors
-	-jx verify install --pod-wait-time=2m
+	-jx verify install
 
 .PHONY: verify
 verify: dev-ns verify-ingress
