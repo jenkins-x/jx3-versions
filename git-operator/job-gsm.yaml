@@ -55,7 +55,7 @@ spec:
           value: jenkins-x-labs-bot
         - name: XDG_CONFIG_HOME
           value: /workspace/xdg_config
-        image: gcr.io/jenkinsxio/jx-boot:3.0.733
+        image: gcr.io/jenkinsxio/jx-boot:3.0.734
         name: git-clone
         volumeMounts:
         - mountPath: /workspace
@@ -75,7 +75,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        image: gcr.io/jenkinsxio/jx-boot:3.0.733
+        image: gcr.io/jenkinsxio/jx-boot:3.0.734
         imagePullPolicy: Always
         name: job
         volumeMounts:
