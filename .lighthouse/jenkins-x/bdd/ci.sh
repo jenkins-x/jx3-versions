@@ -28,7 +28,7 @@ jx secret --help
 
 if [ -z "$GIT_USERNAME" ]
 then
-    export GIT_USERNAME="jenkins-x-labs-bot"
+    export GIT_USERNAME="jenkins-x-bot-bdd"
 fi
 
 if [ -z "$GIT_SERVER_HOST" ]
@@ -38,7 +38,7 @@ fi
 
 if [ -z "$GH_OWNER" ]
 then
-    export GH_OWNER="cb-kubecd"
+    export GH_OWNER="jenkins-x-bdd"
 fi
 
 export GIT_USER_EMAIL="jenkins-x@googlegroups.com"
