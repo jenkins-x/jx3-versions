@@ -11,7 +11,7 @@ jx --version
 
 export GH_USERNAME="jenkins-x-labs-bot"
 export GH_EMAIL="jenkins-x@googlegroups.com"
-export GH_OWNER="cb-kubecd"
+export GH_OWNER="jenkins-x-bdd"
 
 export PROJECT_ID=jenkins-x-labs-bdd
 export CREATED_TIME=$(date '+%a-%b-%d-%Y-%H-%M-%S')

@@ -8,7 +8,7 @@ metadata:
 spec:
   pipelineSpec:
     params:
-    - default: bdd-pipeline-token-github
+    - default: bdd-git
       description: the Secret name used for the git token  unique build number
       name: BDD_GIT_TOKEN_SECRET
       type: string
@@ -21,7 +21,7 @@ spec:
       taskSpec:
         metadata: {}
         params:
-        - default: bdd-pipeline-token-github
+        - default: bdd-git
           description: the Secret name used for the git token  unique build number
           name: BDD_GIT_TOKEN_SECRET
           type: string
@@ -37,7 +37,7 @@ spec:
             readOnly: true
           workingDir: /workspace/source
         steps:
-        - image: gcr.io/jenkinsxio/jx-cli:latest
+        - image: gcr.io/jenkinsxio/jx-cli:3.0.734
           name: jx-variables
           resources: {}
           script: |
@@ -65,6 +65,6 @@ spec:
               path: labels
           name: podinfo
   podTemplate: {}
-  serviceAccountName: tekton-bot
+  serviceAccountName: bdd-bot
   timeout: 240h0m0s
 status: {}

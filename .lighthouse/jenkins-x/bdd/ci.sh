@@ -38,7 +38,7 @@ fi
 
 if [ -z "$GH_OWNER" ]
 then
-    export GH_OWNER="cb-kubecd"
+    export GH_OWNER="jenkins-x-bdd"
 fi
 
 export GIT_USER_EMAIL="jenkins-x@googlegroups.com"
