@@ -3,7 +3,7 @@ set -e
 set -x
 
 export GH_USERNAME="jenkins-x-versions-bot-test"
-export GH_OWNER="cb-kubecd"
+export GH_OWNER="jenkins-x-bdd"
 
 # fix broken `BUILD_NUMBER` env var
 export BUILD_NUMBER="$BUILD_ID"
