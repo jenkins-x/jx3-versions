@@ -28,7 +28,7 @@ spec:
     source: "pullrequest.yaml"
   - name: kube
     context: "kube"
-    always_run: false
+    always_run: true
     optional: false
     trigger: (?m)^/test( all| kube),?(s+|$)
     rerun_command: /test kube
