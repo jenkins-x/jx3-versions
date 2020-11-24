@@ -14,14 +14,14 @@ spec:
       value_template: "bdd-pipeline-token-github-ghe"
   - name: gsm
     context: "gsm"
-    always_run: false
+    always_run: true
     optional: false
     trigger: (?m)^/test( all| gsm),?(s+|$)
     rerun_command: /test gsm
     source: "pullrequest.yaml"
   - name: vault
     context: "vault"
-    always_run: false
+    always_run: true
     optional: false
     trigger: (?m)^/test( all| vault),?(s+|$)
     rerun_command: /test vault
