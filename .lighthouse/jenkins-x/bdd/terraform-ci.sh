@@ -127,6 +127,9 @@ pushd `pwd`/cluster-${CLUSTER_NAME}-dev
       # lets upgrade any versions in helmfile.yaml
       jx gitops helmfile resolve --update 
 
+      # lets add a custom pipeline catalog for the test...
+      cp $SOURCE_DIR/.lighthouse/jenkins-x/bdd/pipeline-catalog.yaml extensions
+
       # lets add / commit any cloud resource specific changes
       git add * || true
       git commit -a -m "chore: cluster changes" || true

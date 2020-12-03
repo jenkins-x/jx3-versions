@@ -119,6 +119,8 @@ cp -R $SOURCE_DIR versionStream
 rm -rf versionStream/.git versionStream/.github
 git add versionStream/
 
+# lets add a custom pipeline catalog for the test...
+cp $SOURCE_DIR/.lighthouse/jenkins-x/bdd/pipeline-catalog.yaml extensions
 
 # lets add some testing charts....
 echo "about to add helm chart in dir $(pwd)"
