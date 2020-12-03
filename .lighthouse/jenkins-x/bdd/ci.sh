@@ -110,6 +110,9 @@ export SOURCE_DIR=`pwd`
 # avoid cloning cluster repo into the working CI folder
 cd /workspace
 
+# lets git clone the pipeline catalog so we can upgrade to the latest pipelines for the environment...
+git clone -b beta https://github.com/jstrachan/jx3-pipeline-catalog
+
 git clone -b master $GITOPS_REPO env-dev-repo
 cd env-dev-repo
 
@@ -121,6 +124,7 @@ git add versionStream/
 
 # lets add a custom pipeline catalog for the test...
 cp $SOURCE_DIR/.lighthouse/jenkins-x/bdd/pipeline-catalog.yaml extensions
+cp -r $SOURCE_DIR/../jx3-pipeline-catalog/environment/.lighthouse .
 
 # lets add some testing charts....
 echo "about to add helm chart in dir $(pwd)"
