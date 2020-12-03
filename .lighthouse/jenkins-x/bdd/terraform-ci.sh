@@ -90,6 +90,9 @@ echo "using the version stream url $PR_SOURCE_URL ref: $PULL_PULL_SHA"
 export SOURCE_DIR=`pwd`
 cd ..
 
+# lets git clone the pipeline catalog so we can upgrade to the latest pipelines for the environment...
+git clone -b beta https://github.com/jstrachan/jx3-pipeline-catalog
+
 echo "********************************************************"
 echo "**                                                    **"
 echo "**  create cluster git repo from template and update  **"
@@ -126,6 +129,10 @@ pushd `pwd`/cluster-${CLUSTER_NAME}-dev
 
       # lets upgrade any versions in helmfile.yaml
       jx gitops helmfile resolve --update 
+
+      # lets add a custom pipeline catalog for the test...
+      cp $SOURCE_DIR/.lighthouse/jenkins-x/bdd/pipeline-catalog.yaml extensions
+      cp -r $SOURCE_DIR/../jx3-pipeline-catalog/environment/.lighthouse .
 
       # lets add / commit any cloud resource specific changes
       git add * || true
