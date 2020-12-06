@@ -122,6 +122,9 @@ cp -R $SOURCE_DIR versionStream
 rm -rf versionStream/.git versionStream/.github
 git add versionStream/
 
+# lets upgrade any versions in helmfile.yaml
+jx gitops helmfile resolve --update 
+
 # lets add a custom pipeline catalog for the test...
 cp $SOURCE_DIR/.lighthouse/jenkins-x/bdd/pipeline-catalog.yaml extensions
 cp -r $SOURCE_DIR/../jx3-pipeline-catalog/environment/.lighthouse .
