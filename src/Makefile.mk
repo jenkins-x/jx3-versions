@@ -51,6 +51,7 @@ fetch: init
 	# this line avoids the next helmfile command failing...
 	helm repo add jx http://chartmuseum.jenkins-x.io
 
+	sleep infinity
 	# generate the yaml from the charts in helmfile.yaml and moves them to the right directory tree (cluster or namespaces/foo)
 	jx gitops helmfile template $(HELMFILE_TEMPLATE_FLAGS) --args="--values=/workspace/source/jx-values.yaml --values=/workspace/source/versionStream/src/fake-secrets.yaml.gotmpl --values=/workspace/source/imagePullSecrets.yaml" --output-dir $(OUTPUT_DIR)
 	
