@@ -7,6 +7,7 @@ VAULT_ADDR ?= https://vault.secret-infra:8200
 # You can disable force mode on kubectl apply by modifying this line:
 KUBECTL_APPLY_FLAGS ?= --force
 
+
 # NOTE to enable debug logging of 'helmfile template' to diagnose any issues with values.yaml templating
 # you can run:
 #
@@ -54,8 +55,10 @@ fetch: init
 	#sleep infinity
 	# generate the yaml from the charts in helmfile.yaml and moves them to the right directory tree (cluster or namespaces/foo)
 	#jx gitops helmfile template $(HELMFILE_TEMPLATE_FLAGS) --args="--values=/workspace/source/jx-values.yaml --values=/workspace/source/versionStream/src/fake-secrets.yaml.gotmpl --values=/workspace/source/imagePullSecrets.yaml" --output-dir $(OUTPUT_DIR)
-	helmfile --file helmfile.yaml template --include-crds --values=/workspace/source/jx-values.yaml --values=/workspace/source/versionStream/src/fake-secrets.yaml.gotmpl --values=/workspace/source/imagePullSecrets.yaml --output-dir-template $(pwd)/$(OUTPUT_DIR)/{{.Release.Namespace}}
+	helmfile --file helmfile.yaml template --include-crds --values=/workspace/source/jx-values.yaml --values=/workspace/source/versionStream/src/fake-secrets.yaml.gotmpl --values=/workspace/source/imagePullSecrets.yaml --output-dir-template /tmp/generate/{{.Release.Namespace}}
 	
+	jx gitops helmfile move --output-dir config-root --dir /tmp/generate
+
 	# convert k8s Secrets => ExternalSecret resources using secret mapping + schemas
 	# see: https://github.com/jenkins-x/jx-secret#mappings
 	jx secret convert --source-dir $(OUTPUT_DIR)
@@ -68,7 +71,7 @@ fetch: init
 
 	# lets publish the requirements metadata into the dev Environment.Spec.TeamSettings.BootRequirements so its easy to access them via CRDs
 	# we dont use team settings on the dev environment anymore so maybe we can get rid of this?
-	# jx gitops requirements publish
+	jx gitops requirements publish
 
 .PHONY: build
 # uncomment this line to enable kustomize
