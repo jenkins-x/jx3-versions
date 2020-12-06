@@ -71,7 +71,7 @@ fetch: init
 
 	# lets publish the requirements metadata into the dev Environment.Spec.TeamSettings.BootRequirements so its easy to access them via CRDs
 	# we dont use team settings on the dev environment anymore so maybe we can get rid of this?
-	jx gitops requirements publish
+	# jx gitops requirements publish
 
 .PHONY: build
 # uncomment this line to enable kustomize
