@@ -57,10 +57,17 @@ fetch: init
 	#sleep infinity
 	# generate the yaml from the charts in helmfile.yaml and moves them to the right directory tree (cluster or namespaces/foo)
 	#jx gitops helmfile template $(HELMFILE_TEMPLATE_FLAGS) --args="--values=/workspace/source/jx-values.yaml --values=/workspace/source/versionStream/src/fake-secrets.yaml.gotmpl --values=/workspace/source/imagePullSecrets.yaml" --output-dir $(OUTPUT_DIR)
-	helmfile --file helmfile.yaml template --include-crds --values=$(SOURCE_DIR)/jx-values.yaml --values=$(SOURCE_DIR)/versionStream/src/fake-secrets.yaml.gotmpl --values=$(SOURCE_DIR)/imagePullSecrets.yaml --output-dir-template /tmp/generate/{{.Release.Namespace}}
-	
+	#helmfile --file helmfile.yaml template --include-crds --values=$(SOURCE_DIR)/jx-values.yaml --values=$(SOURCE_DIR)/versionStream/src/fake-secrets.yaml.gotmpl --values=$(SOURCE_DIR)/imagePullSecrets.yaml --output-dir-template /tmp/generate/{{.Release.Namespace}}
+	helmfile --file helmfile.yaml template --include-crds --output-dir-template /tmp/generate/{{.Release.Namespace}}
+
+	# lets split the files output from helmfile template so that we only have one k8s resource per file
 	jx gitops split --dir /tmp/generate
+	
+	# lets rename the output files to use canonical names based on the resource name and kind	
 	jx gitops rename --dir /tmp/generate
+	
+	# lets move the output of the helmfile template to a canonical directory tree
+	# using separate folders for CRDs, cluster scoped resources and resources in each namespace
 	jx gitops helmfile move --output-dir config-root --dir /tmp/generate
 
 	# convert k8s Secrets => ExternalSecret resources using secret mapping + schemas
@@ -72,10 +79,6 @@ fetch: init
 
 	# lets make sure all the namespaces exist for environments of the replicated secrets
 	jx gitops namespace --dir-mode --dir $(OUTPUT_DIR)/namespaces
-
-	# lets publish the requirements metadata into the dev Environment.Spec.TeamSettings.BootRequirements so its easy to access them via CRDs
-	# we dont use team settings on the dev environment anymore so maybe we can get rid of this?
-	# jx gitops requirements publish
 
 .PHONY: build
 # uncomment this line to enable kustomize
