@@ -39,14 +39,14 @@ spec:
           script: |
             #!/bin/sh
             ./.lighthouse/jenkins-x/release/get-jx-prerelease-state.sh
-        - image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
+        - image: gcr.io/jenkinsxio/jx-changelog:0.0.11
           name: changelog
           resources: {}
           script: |
             #!/bin/sh
             source .jx/variables.sh
-            jx step changelog --verbose --version ${VERSION} --rev v${VERSION}
-        - image: gcr.io/jenkinsxio/jx-cli:3.0.798
+            jx changelog create --verbose --version ${VERSION} --rev v${VERSION}
+        - image: gcr.io/jenkinsxio/jx-cli:3.0.795
           name: promote-vs
           resources: {}
           script: |
