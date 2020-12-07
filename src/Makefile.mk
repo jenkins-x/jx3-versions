@@ -7,7 +7,7 @@ VAULT_ADDR ?= https://vault.secret-infra:8200
 # You can disable force mode on kubectl apply by modifying this line:
 KUBECTL_APPLY_FLAGS ?= --force
 
-SOURCE_DIR ?= /workspaces/source
+SOURCE_DIR ?= /workspace/source
 
 
 # NOTE to enable debug logging of 'helmfile template' to diagnose any issues with values.yaml templating
