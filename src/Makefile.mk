@@ -45,6 +45,9 @@ fetch: init
 	# set any missing defaults in the secrets mapping file
 	jx secret convert edit
 
+	# lets merge in any output from Terraform in the ConfigMap default/terraform-jx-requirements if it exists
+	jx gitops requirements merge
+	
 	# lets resolve chart versions and values from the version stream
 	jx gitops helmfile resolve
 
