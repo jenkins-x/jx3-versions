@@ -57,7 +57,7 @@ fetch: init
 	#sleep infinity
 	# generate the yaml from the charts in helmfile.yaml and moves them to the right directory tree (cluster or namespaces/foo)
 	#jx gitops helmfile template $(HELMFILE_TEMPLATE_FLAGS) --args="--values=/workspace/source/jx-values.yaml --values=/workspace/source/versionStream/src/fake-secrets.yaml.gotmpl --values=/workspace/source/imagePullSecrets.yaml" --output-dir $(OUTPUT_DIR)
-	helmfile --file helmfile.yaml template --include-crds --values=$(SOURCE_DIR)/jx-values.yaml --values=$(SOURCE_DIR)/versionStream/src/fake-secrets.yaml.gotmpl --values=$(SOURCE_DIR)/imagePullSecrets.yaml --output-dir-template /tmp/generate/{{.Release.Namespace}}
+	helmfile --file helmfile.yaml template --include-crds --output-dir-template /tmp/generate/{{.Release.Namespace}}
 	
 	jx gitops split --dir /tmp/generate
 	jx gitops rename --dir /tmp/generate
