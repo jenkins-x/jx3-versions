@@ -11,5 +11,4 @@ export PATH=$PATH:/usr/local/bin
 kubectl get issuer letsencrypt-staging -ojsonpath='{.status.conditions[0].status}'
 kubectl get issuer letsencrypt-staging -ojsonpath='{.status.conditions[0].message}'
 
-# TODO
-#jxl verify tls hook-jx.$CLUSTER_NAME.jenkinsxlabs-test.com  --production=false --issuer 'Fake LE Intermediate X1'
+jx verify tls hook-jx.dev.jenkins-x.me  --production=false
