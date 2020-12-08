@@ -91,7 +91,7 @@ export SOURCE_DIR=`pwd`
 cd ..
 
 # lets git clone the pipeline catalog so we can upgrade to the latest pipelines for the environment...
-git clone -b beta https://github.com/jstrachan/jx3-pipeline-catalog
+#git clone -b beta https://github.com/jstrachan/jx3-pipeline-catalog
 
 echo "********************************************************"
 echo "**                                                    **"
@@ -131,8 +131,8 @@ pushd `pwd`/cluster-${CLUSTER_NAME}-dev
       jx gitops helmfile resolve --update 
 
       # lets add a custom pipeline catalog for the test...
-      cp $SOURCE_DIR/.lighthouse/jenkins-x/bdd/pipeline-catalog.yaml extensions
-      cp -r $SOURCE_DIR/../jx3-pipeline-catalog/environment/.lighthouse .
+      #cp $SOURCE_DIR/.lighthouse/jenkins-x/bdd/pipeline-catalog.yaml extensions
+      #cp -r $SOURCE_DIR/../jx3-pipeline-catalog/environment/.lighthouse .
 
       # lets add / commit any cloud resource specific changes
       git add * || true
