@@ -128,11 +128,11 @@ lint:
 
 .PHONY: dev-ns verify-ingress
 verify-ingress:
-	jx verify ingress --ingress-service nginx-ingress-ingress-nginx-controller
+	jx verify ingress --ingress-service ingress-nginx-controller
 
 .PHONY: dev-ns verify-ingress-ignore
 verify-ingress-ignore:
-	-jx verify ingress --ingress-service nginx-ingress-ingress-nginx-controller
+	-jx verify ingress --ingress-service ingress-nginx-controller
 
 .PHONY: dev-ns verify-install
 verify-install:
