@@ -19,6 +19,13 @@ spec:
     trigger: (?m)^/test( all| gsm),?(s+|$)
     rerun_command: /test gsm
     source: "pullrequest.yaml"
+  - name: tls
+    context: "tls"
+    always_run: true
+    optional: false
+    trigger: (?m)^/test( all| tls),?(s+|$)
+    rerun_command: /test tls
+    source: "pullrequest.yaml"
   - name: vault
     context: "vault"
     always_run: true
