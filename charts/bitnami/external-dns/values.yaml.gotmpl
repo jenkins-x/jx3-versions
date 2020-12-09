@@ -37,8 +37,9 @@ serviceAccount:
 domainFilters:
 - {{ .Values.jxRequirements.ingress.domain }}
 {{- range .Values.jxRequirements.environments }}
-{{- if .ingress.domain }}
+{{- if hasKey . "ingress" }}
+{{- if hasKey .ingress "domain" }}
 - "{{ .ingress.domain }}"
 {{- end }}
 {{- end }}
-
+{{- end }}
