@@ -27,7 +27,7 @@ spec:
           script: |
             #!/usr/bin/env bash
             jx step next-version --use-git-tag-only --tag
-        - image: gcr.io/jenkinsxio/jx-cli:3.1.43
+        - image: gcr.io/jenkinsxio/jx-cli:3.1.44
           name: jx-variables
           resources: {}
           script: |
@@ -46,7 +46,7 @@ spec:
             #!/bin/sh
             source .jx/variables.sh
             jx changelog create --verbose --version ${VERSION} --rev v${VERSION}
-        - image: gcr.io/jenkinsxio/jx-cli:3.1.43
+        - image: gcr.io/jenkinsxio/jx-cli:3.1.44
           name: promote-vs
           resources: {}
           script: |
@@ -59,7 +59,7 @@ spec:
           script: |
             #!/bin/sh
             ./.lighthouse/jenkins-x/release/update-bot-fork.sh
-        - image: gcr.io/jenkinsxio/jx-cli:3.1.43
+        - image: gcr.io/jenkinsxio/jx-cli:3.1.44
           name: release-resources
           resources: {}
           script: |
