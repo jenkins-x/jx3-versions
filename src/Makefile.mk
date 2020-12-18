@@ -176,7 +176,7 @@ regen-phase-3: push secrets-wait
 
 .PHONY: regen-none
 regen-none:
-	# we just merged a PR so lets perform any extra checks after the merge and apply
+	# we just merged a PR so lets perform any extra checks after the merge but before the kubectl apply
 
 .PHONY: apply
 apply: regen-check kubectl-apply secrets-populate verify write-completed
