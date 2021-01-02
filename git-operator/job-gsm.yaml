@@ -47,6 +47,11 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        envFrom:
+        - secretRef:
+            name: jx-boot-oci-registries
+        - configMapRef:
+            name: jx-boot-config-env
         image: gcr.io/jenkinsxio/jx-boot:3.1.78
         imagePullPolicy: Always
         name: job
