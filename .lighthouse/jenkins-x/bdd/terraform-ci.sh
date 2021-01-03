@@ -183,7 +183,7 @@ pushd `pwd`/infra-${CLUSTER_NAME}-dev
       echo "tf: $(terraform output -raw connect)"
 
       # need to strip " around the TF output 
-      bash -c $(terraform output connect)
+      $(terraform output -raw connect)
 
       $(terraform output follow_install_logs)
 popd
