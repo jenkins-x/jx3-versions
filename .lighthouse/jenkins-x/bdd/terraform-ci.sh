@@ -180,7 +180,7 @@ pushd `pwd`/infra-${CLUSTER_NAME}-dev
       git rebase origin/master
       git push
 
-      echo "tf: $(terraform output connect)"
+      echo "tf: $(terraform output -raw connect)"
 
       # need to strip " around the TF output 
       bash -c $(terraform output connect)
