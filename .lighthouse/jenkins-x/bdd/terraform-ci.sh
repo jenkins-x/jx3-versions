@@ -180,9 +180,9 @@ pushd `pwd`/infra-${CLUSTER_NAME}-dev
       git rebase origin/master
       git push
 
-      $(terraform output connect)
+      $(terraform output -raw connect)
 
-      $(terraform output follow_install_logs)
+      $(terraform output -raw follow_install_logs)
 popd
 
 echo "*********************"
