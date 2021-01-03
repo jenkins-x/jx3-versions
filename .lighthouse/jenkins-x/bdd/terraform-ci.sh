@@ -11,7 +11,7 @@ echo "****************************************"
 echo PATH=$PATH
 echo HOME=$HOME
 
-export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:/usr/local/bin:/usr/bin
 
 # generic stuff...
 
