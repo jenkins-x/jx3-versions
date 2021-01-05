@@ -68,36 +68,6 @@ spec:
             #!/bin/bash
             source .jx/variables.sh
             ./.lighthouse/jenkins-x/release/promote-vs.sh
-        - image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-          name: update-bot-fork
-          resources: {}
-          script: |
-            #!/bin/sh
-            ./.lighthouse/jenkins-x/release/update-bot-fork.sh
-        - image: gcr.io/jenkinsxio/jx-cli:3.1.87
-          name: release-resources
-          resources: {}
-          script: |
-            #!/bin/sh
-            ./.lighthouse/jenkins-x/release/release-resources.sh
-        - image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-          name: release-jx
-          resources: {}
-          script: |
-            #!/bin/sh
-            ./.lighthouse/jenkins-x/release/release-jx.sh
-        - image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-          name: update-jx-bot
-          resources: {}
-          script: |
-            #!/bin/sh
-            ./.lighthouse/jenkins-x/release/update-jx-bot.sh
-        - image: gcr.io/jenkinsxio/builder-go:2.1.142-761
-          name: update-jx-website
-          resources: {}
-          script: |
-            #!/bin/sh
-            ./.lighthouse/jenkins-x/release/update-jx-website.sh
         volumes:
         - downwardAPI:
             items:
