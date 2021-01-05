@@ -39,6 +39,21 @@ spec:
           script: |
             #!/bin/sh
             ./.lighthouse/jenkins-x/release/get-jx-prerelease-state.sh
+        - image: gcr.io/jenkinsxio/jx-scm:0.0.7
+          name: changelog
+          resources: {}
+          env:
+          - name: GOPATH
+            value: /workspace
+          - name: GITHUB_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: tekton-git
+                key: password
+          script: |
+            #!/bin/sh
+            export JX_VERSION=$(grep 'version: ' packages/jx-cli.yml | awk '{ print $2}')
+            jx scm release update --owner jenkins-x --name jx-cli --tag v$JX_VERSION --prerelease=false --kind github --server https://github.com --token $GITHUB_TOKEN
         - image: gcr.io/jenkinsxio/jx-changelog:0.0.11
           name: changelog
           resources: {}
