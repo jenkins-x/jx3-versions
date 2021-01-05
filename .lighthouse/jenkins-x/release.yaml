@@ -40,7 +40,7 @@ spec:
             #!/bin/sh
             ./.lighthouse/jenkins-x/release/get-jx-prerelease-state.sh
         - image: gcr.io/jenkinsxio/jx-scm:0.0.7
-          name: changelog
+          name: release-jx-cli
           resources: {}
           env:
           - name: GOPATH
