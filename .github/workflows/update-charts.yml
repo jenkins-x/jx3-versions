@@ -16,5 +16,4 @@ jobs:
         name: updatebot
         uses: docker://gcr.io/jenkinsxio/jx-updatebot:0.0.22
         with:
-          args: updatebot -c .github/workflows/update-charts/updatebot.yaml
-          entrypoint: jx
+          args: -c .github/workflows/update-charts/updatebot.yaml
