@@ -10,7 +10,7 @@ spec:
             repositories:
               include:
                 - "jx-*"
-            package: github.com/jenkins-x/
+            package: github.com/jenkins-x
             upgradePackages:
               include:
                 - "github.com/jenkins-x/*"
