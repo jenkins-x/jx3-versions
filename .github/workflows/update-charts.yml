@@ -11,11 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - run: git config --global user.email "jenkins-x@googlegroups.com"
-      - run: git config --global user.name "jenkins-x-bot-bdd"
       - env:
           GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
         name: updatebot
-        uses: docker://gcr.io/jenkinsxio/jx-updatebot:0.0.24
+        uses: docker://gcr.io/jenkinsxio/jx-updatebot:0.0.25
         with:
           args: pr -c .github/workflows/update-charts/updatebot.yaml --no-version
