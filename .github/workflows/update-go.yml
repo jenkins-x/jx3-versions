@@ -13,7 +13,6 @@ jobs:
       - uses: actions/checkout@v1
       - env:
           GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
-          XDG_CONFIG_HOME: /home/.config
         name: updatebot
         uses: docker://gcr.io/jenkinsxio/jx-updatebot:0.0.34
         with:
