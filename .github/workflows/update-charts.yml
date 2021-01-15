@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - run: git config --global user.email "jenkins-x@googlegroups.com"
+      - run: git config --global user.name "jenkins-x-bot-bdd"
       - env:
           GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
         name: updatebot
