@@ -11,9 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        name: updatebot
-        uses: docker://gcr.io/jenkinsxio/jx-updatebot:0.0.22
+      - name: updatebot
+        uses: docker://gcr.io/jenkinsxio/jx-updatebot:0.0.24
         with:
-          args: pr -c .github/workflows/update-charts/updatebot.yaml --version 1.0.0
+          args: pr -c .github/workflows/update-charts/updatebot.yaml --no-version
