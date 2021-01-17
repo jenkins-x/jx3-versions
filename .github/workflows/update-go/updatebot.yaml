@@ -6,8 +6,10 @@ spec:
         - go:
             owner:
               - jenkins-x
+              - jenkins-x-plugins
             repositories:
-              name: jx-project
+              include:
+                - "jx-*"
             package: github.com/jenkins-x
             upgradePackages:
               include:
