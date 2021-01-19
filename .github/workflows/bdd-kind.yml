@@ -23,4 +23,4 @@ jobs:
               echo "has valid git token for kind.yaml"
         fi
 
-        sudo -E ./jx/bdd/kind/ci.sh
+        sudo -E .lighthouse/jenkins-x/bdd/kind/ci.sh
