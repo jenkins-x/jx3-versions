@@ -112,7 +112,7 @@ fi
 
 
 gh repo create ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev --template $GIT_PROVIDER_URL/${GITOPS_TEMPLATE_PROJECT} --private --confirm
-sleep 5
+sleep 15
 gh repo clone ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev
 
 pushd `pwd`/cluster-${CLUSTER_NAME}-dev
@@ -128,7 +128,7 @@ pushd `pwd`/cluster-${CLUSTER_NAME}-dev
       jx gitops helmfile add --chart jx3/jx-test-collector
 
       # lets upgrade any versions in helmfile.yaml
-      jx gitops helmfile resolve --update 
+      jx gitops helmfile resolve --update
 
       # lets add a custom pipeline catalog for the test...
       #cp $SOURCE_DIR/.lighthouse/jenkins-x/bdd/pipeline-catalog.yaml extensions
@@ -160,7 +160,7 @@ export GITOPS_REPO=https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@${GIT_SERVE
 echo "for cleaning up cloud resources"
 jx test create --test-url $GITOPS_REPO
 
-# create the cluster 
+# create the cluster
 pushd `pwd`/infra-${CLUSTER_NAME}-dev
       git pull origin master
       export GITOPS_DIR=`pwd`
