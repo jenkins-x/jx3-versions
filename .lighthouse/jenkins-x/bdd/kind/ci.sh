@@ -14,6 +14,8 @@ fi
 export WORKING_DIR=/home/runner/work/jx3-versions
 
 
+export JX_KUBERNETES="true"
+
 export NO_JX_TEST="true"
 export KIND_VERSION=0.9.0
 
