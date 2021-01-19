@@ -11,11 +11,15 @@ else
       echo "has valid git token for kind/ci.sh"
 fi
 
+export WORKING_DIR=$(pwd)
+
+
 export NO_JX_TEST="true"
 export KIND_VERSION=0.9.0
 export JX_VERSION=$(grep 'version: ' packages/jx-cli.yml | awk '{ print $2}')
 
-echo "using jx verison: ${JX_VERSION}"
+echo "using working dir: ${WORKING_DIR}"
+echo "using jx version:  ${JX_VERSION}"
 
 mkdir $HOME/bin
 export PATH=$PATH:$HOME/bin
