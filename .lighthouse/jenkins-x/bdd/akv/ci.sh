@@ -16,4 +16,5 @@ export TF_VAR_key_vault_enabled=true
 
 echo "hello world"
 
+
 export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
