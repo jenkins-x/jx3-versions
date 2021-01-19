@@ -56,4 +56,4 @@ export BUILD_NUMBER="${BUILD_NUMBER:-1}"
 export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-kind-vault"
 
 mkdir -p /builder/home
-jx/bdd/ci.sh
+.lighthouse/jenkins-x/bdd/ci.sh
