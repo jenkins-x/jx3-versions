@@ -19,7 +19,7 @@ export KIND_VERSION=0.9.0
 
 #export JX_VERSION=$(grep 'version: ' packages/jx-cli.yml | awk '{ print $2}')
 # TODO temporary use new version...
-export JX_VERSION="3.1.154"
+export JX_VERSION="3.1.155"
 
 echo "using working dir: ${WORKING_DIR}"
 echo "using jx version:  ${JX_VERSION}"
