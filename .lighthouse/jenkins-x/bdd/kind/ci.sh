@@ -11,7 +11,7 @@ else
       echo "has valid git token for kind/ci.sh"
 fi
 
-export WORKING_DIR=$(pwd)
+export WORKING_DIR=/home/runner/work/jx3-versions
 
 
 export NO_JX_TEST="true"

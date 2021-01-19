@@ -107,9 +107,10 @@ jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --env-git-ow
 
 export GITOPS_REPO=https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@${GIT_SERVER_HOST}/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
 
-echo "gitops cluster git repo $GITOPS_REPO"
-
 export SOURCE_DIR=`pwd`
+
+echo "gitops cluster git repo $GITOPS_REPO"
+echo "current source dir: ${SOURCE_DIR} and root workdir: ${WORKING_DIR}"
 
 # avoid cloning cluster repo into the working CI folder
 cd ${WORKING_DIR}
@@ -120,6 +121,10 @@ cd ${WORKING_DIR}
 git clone -b master $GITOPS_REPO env-dev-repo
 cd env-dev-repo
 
+echo "cloned to ${pwd}"
+ls -al
+
+echo "now removing the local versionStream and copying "
 # use the changes from this PR in the version stream for the cluster repo when resolving the helmfile
 rm -rf versionStream
 cp -R $SOURCE_DIR versionStream
