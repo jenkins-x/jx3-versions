@@ -8,6 +8,9 @@ spec:
               - jenkins-x
               - jenkins-x-plugins
             repositories:
+              exclude:
+                - jx-v2-tekton-converter
+                - jx-kh-check
               include:
                 - "jx-*"
             package: github.com/jenkins-x
