@@ -19,9 +19,7 @@ export JX_KUBERNETES="true"
 export NO_JX_TEST="true"
 export KIND_VERSION=0.9.0
 
-#export JX_VERSION=$(grep 'version: ' packages/jx-cli.yml | awk '{ print $2}')
-# TODO temporary use new version...
-export JX_VERSION="3.1.155"
+export JX_VERSION=$(grep 'version: ' packages/jx-cli.yml | awk '{ print $2}')
 
 echo "using working dir: ${WORKING_DIR}"
 echo "using jx version:  ${JX_VERSION}"
