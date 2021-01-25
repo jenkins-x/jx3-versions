@@ -102,6 +102,7 @@ echo "using GitOps template: $GITOPS_TEMPLATE_URL version: $GITOPS_TEMPLATE_VERS
 #git clone -b v${GITOPS_TEMPLATE_VERSION} $GITOPS_TEMPLATE_URL
 
 # create the boot git repository to mimic creating the git repository via the github create repository wizard
+echo "about to run: jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --env-git-owner=$GH_OWNER --repo env-$CLUSTER_NAME-dev --no-operator $JX_ADMIN_CREATE_ARGS"
 jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --env-git-owner=$GH_OWNER --repo env-$CLUSTER_NAME-dev --no-operator $JX_ADMIN_CREATE_ARGS
 
 
