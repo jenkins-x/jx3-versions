@@ -8,7 +8,7 @@ spec:
     optional: false
     trigger: (?m)^/test( all| ghe),?(s+|$)
     rerun_command: /test ghe
-    source: "pullrequest.yaml"
+    source: "pullrequest-ghe.yaml"
     pipeline_run_params:
     - name: "BDD_GIT_TOKEN_SECRET"
       value_template: "bdd-pipeline-token-github-ghe"
