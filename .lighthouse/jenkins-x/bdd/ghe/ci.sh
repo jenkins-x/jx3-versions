@@ -8,7 +8,7 @@ export BDD_NAME="ghe"
 export GIT_USERNAME="dev1"
 export GH_OWNER="${GIT_USERNAME}"
 
-export GH_HOST="https://github.beescloud.com/"
+export GH_HOST="https://github.beescloud.com"
 export GIT_SERVER_HOST="github.beescloud.com"
 
 export JX_ADMIN_CREATE_ARGS="--git-server $GH_HOST --git-name ghe"
