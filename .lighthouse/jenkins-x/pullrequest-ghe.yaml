@@ -7,28 +7,11 @@ metadata:
   name: pullrequest
 spec:
   pipelineSpec:
-    params:
-    - default: bdd-pipeline-token-github-ghe
-      description: the Secret name used for the git token  unique build number
-      name: BDD_GIT_TOKEN_SECRET
-      type: string
     tasks:
     - name: test
-      params:
-      - name: BDD_GIT_TOKEN_SECRET
-        value: $(params.BDD_GIT_TOKEN_SECRET)
       resources: {}
       taskSpec:
-        metadata: {}
-        params:
-        - default: bdd-pipeline-token-github-ghe
-          description: the Secret name used for the git token  unique build number
-          name: BDD_GIT_TOKEN_SECRET
-          type: string
         stepTemplate:
-          env:
-          - name: BDD_GIT_TOKEN_SECRET
-            value: $(params.BDD_GIT_TOKEN_SECRET)
           name: ""
           resources: {}
           volumeMounts:
@@ -37,7 +20,7 @@ spec:
             readOnly: true
           workingDir: /workspace/source
         steps:
-        - image: gcr.io/jenkinsxio/jx-cli:3.1.163
+        - image: gcr.io/jenkinsxio/jx-cli:3.1.164
           name: jx-variables
           resources: {}
           script: |
@@ -48,8 +31,8 @@ spec:
             valueFrom:
               secretKeyRef:
                 key: password
-                name: $(params.BDD_GIT_TOKEN_SECRET)
-          image: gcr.io/jenkinsxio/jx-cli:3.1.163
+                name: bdd-pipeline-token-github-ghe
+          image: gcr.io/jenkinsxio/jx-cli:3.1.164
           name: runci
           resources: {}
           script: |
