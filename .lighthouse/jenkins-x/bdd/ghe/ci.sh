@@ -11,6 +11,8 @@ export GH_OWNER="${GIT_USERNAME}"
 export GH_HOST="https://github.beescloud.com/"
 export GIT_SERVER_HOST="github.beescloud.com"
 
+export JX_ADMIN_CREATE_ARGS="-git-server $GH_HOST --git-name ghe"
+
 # the gitops repository template to use
 export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-kubernetes"
 
