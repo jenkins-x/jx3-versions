@@ -5,23 +5,18 @@ set -x
 # BDD test specific part
 export BDD_NAME="ghe"
 
-# the gitops repository template to use
-export GITOPS_INFRA_PROJECT="jx3-gitops-repositories/jx3-terraform-gke"
-export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-gsm"
-
-# enable the terraform gsm config
-export TF_VAR_gsm=true
-
 export GIT_USERNAME="dev1"
 export GH_OWNER="${GIT_USERNAME}"
 
 export GH_HOST="https://github.beescloud.com/"
 export GIT_SERVER_HOST="github.beescloud.com"
 
+# the gitops repository template to use
+export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-kubernetes"
 
-`dirname "$0"`/../terraform-ci.sh
+export CUSTOMISE_GITOPS_REPO="kpt pkg get https://github.com/jenkins-x/jx3-gitops-template.git/infra/gcloud-cluster-only/bin@master bin"
 
-## cleanup secrets in google secrets manager if it was enabled
-export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
-export PROJECT_ID=jenkins-x-labs-bdd
-gcloud secrets list --project $PROJECT_ID --format='get(NAME)' --limit=unlimited --filter=$CLUSTER_NAME | xargs -I {arg} gcloud secrets delete  "{arg}" --quiet
+# to enable spring / gradle...
+#export RUN_TEST="bddjx -ginkgo.focus=spring-boot-http-gradle -test.v"
+
+`dirname "$0"`/../ci.sh
