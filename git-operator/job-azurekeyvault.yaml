@@ -38,6 +38,8 @@ spec:
         env:
         - name: XDG_CONFIG_HOME
           value: /workspace/xdg_config
+        - name: JX_SECRET_VERSION
+          value: 0.0.215
         - name: AZURE_AD_RESOURCE
           value: https://vault.azure.net
         envFrom:
