@@ -203,6 +203,11 @@ echo "****************************************"
 $GITOPS_BIN/create.sh
 
 echo "created cluster now creating custom resources"
+
+kubectl get ns
+
+echo "about to execute: $JX_ADD_CUSTOM_RESOURCES"
+
 $JX_ADD_CUSTOM_RESOURCES
 
 # now lets install the operator
