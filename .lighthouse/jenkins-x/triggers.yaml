@@ -2,9 +2,16 @@ apiVersion: config.lighthouse.jenkins-x.io/v1alpha1
 kind: TriggerConfig
 spec:
   presubmits:
+  - name: bbs
+    context: "bbs"
+    always_run: true
+    optional: false
+    trigger: (?m)^/test( all| bbs),?(s+|$)
+    rerun_command: /test bbs
+    source: "pullrequest-bbs.yaml"
   - name: ghe
     context: "ghe"
-    always_run: false
+    always_run: true
     optional: false
     trigger: (?m)^/test( all| ghe),?(s+|$)
     rerun_command: /test ghe

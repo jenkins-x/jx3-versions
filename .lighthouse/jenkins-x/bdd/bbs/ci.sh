@@ -3,18 +3,18 @@ set -e
 set -x
 
 # BDD test specific part
-export BDD_NAME="ghe"
+export BDD_NAME="bbs"
 
-export GIT_USERNAME="dev1"
+export GIT_USERNAME="jenkins-x-bdd"
 export GH_OWNER="${GIT_USERNAME}"
 
-export GIT_SERVER_HOST="github.beescloud.com"
+export GIT_SERVER_HOST="bitbucket.beescloud.com"
 export GH_HOST="https://${GIT_SERVER_HOST}/"
 
 # configure the scm client
 export JX_SCM="jx-scm"
 export GIT_SERVER="https://${GIT_SERVER_HOST}"
-export GIT_NAME="ghe"
+export GIT_NAME="bbs"
 export GIT_KIND="github"
 export GIT_TOKEN="${GH_ACCESS_TOKEN}"
 
