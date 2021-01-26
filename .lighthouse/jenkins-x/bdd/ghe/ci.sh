@@ -27,6 +27,13 @@ export TF_VAR_gsm=true
 
 `dirname "$0"`/../terraform-ci.sh
 
+echo "downloading the jx-scm binary to the PATH"
+
+curl -L https://github.com/jenkins-x-plugins/jx-scm/releases/download/v0.0.16/jx-scm-linux-amd64.tar.gz | tar xzv
+sudo mv jx-scm /usr/local/bin
+
+$JX_SCM repo help
+
 ## cleanup secrets in google secrets manager if it was enabled
 export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
 export PROJECT_ID=jenkins-x-labs-bdd
