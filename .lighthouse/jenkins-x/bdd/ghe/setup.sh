@@ -5,7 +5,7 @@ set -x
 
 echo "creating jx namespace"
 
-jx ns -c jx
+kubectl create namespace jx
 
 export REGISTRY_URL="ghcr.io"
 export REGISTRY_USER="jenkins-x-bot-bdd"
