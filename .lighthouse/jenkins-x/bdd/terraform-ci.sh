@@ -50,6 +50,21 @@ then
     export GIT_PROVIDER_URL="https://github.com"
 fi
 
+if [ -z "$GIT_SERVER" ]
+then
+    export GIT_SERVER="https://github.com"
+fi
+
+if [ -z "$GIT_KIND" ]
+then
+    export GIT_KIND="github"
+fi
+
+if [ -z "$GIT_NAME" ]
+then
+    export GIT_NAME="github"
+fi
+
 
 
 export GIT_USER_EMAIL="jenkins-x@googlegroups.com"
@@ -139,6 +154,9 @@ pushd `pwd`/cluster-${CLUSTER_NAME}-dev
 
       # lets add some testing charts....
       jx gitops helmfile add --chart jx3/jx-test-collector
+
+      # configure the git server
+      jx gitops requirements edit --git-server $GIT_SERVER --git-kind $GIT_KIND --git-name $GIT_NAME
 
       # lets upgrade any versions in helmfile.yaml
       jx gitops helmfile resolve --update

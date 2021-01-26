@@ -7,12 +7,15 @@ export BDD_NAME="ghe"
 
 export GIT_USERNAME="dev1"
 export GH_OWNER="${GIT_USERNAME}"
+
 export GH_HOST="https://github.beescloud.com/"
 export GIT_SERVER_HOST="github.beescloud.com"
 
 # configure the scm client
-export GIT_KIND="github"
 export JX_SCM="jx scm"
+export GIT_SERVER="https://${GIT_SERVER_HOST}"
+export GIT_NAME="ghe"
+export GIT_KIND="github"
 export GIT_TOKEN="${GH_ACCESS_TOKEN}"
 
 # the gitops repository template to use
