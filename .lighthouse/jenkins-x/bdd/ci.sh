@@ -30,6 +30,11 @@ then
     export WORKING_DIR="/workspace"
 fi
 
+if [ -z "$JX_ADD_CUSTOM_RESOURCES" ]
+then
+    export JX_ADD_CUSTOM_RESOURCES="echo no custom resources being created"
+fi
+
 if [ -z "$GIT_USERNAME" ]
 then
     export GIT_USERNAME="jenkins-x-bot-bdd"
@@ -196,6 +201,8 @@ echo "****************************************"
 
 # lets create the cluster
 $GITOPS_BIN/create.sh
+
+$JX_ADD_CUSTOM_RESOURCES
 
 # now lets install the operator
 # --username is found from $GIT_USERNAME or git clone URL
