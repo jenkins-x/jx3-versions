@@ -11,8 +11,8 @@ spec:
     - name: test
       resources: {}
       taskSpec:
-        metadata: {}
         stepTemplate:
+          name: ""
           resources: {}
           volumeMounts:
           - mountPath: /etc/podinfo
@@ -31,7 +31,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 key: password
-                name: bdd-git
+                name: bdd-pipeline-token-github-ghe
           image: gcr.io/jenkinsxio/jx-cli:3.1.166
           name: runci
           resources: {}
