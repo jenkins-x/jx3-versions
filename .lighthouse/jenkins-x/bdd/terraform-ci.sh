@@ -47,7 +47,12 @@ fi
 
 if [ -z "$GIT_PROVIDER_URL" ]
 then
-    export GIT_PROVIDER_URL="https://github.com"
+    export GIT_PROVIDER_URL="https://${GIT_SERVER_HOST}"
+fi
+
+if [ -z "$GIT_TEMPLATE_SERVER_URLL" ]
+then
+    export GIT_TEMPLATE_SERVER_URL="https://github.com"
 fi
 
 if [ -z "$GIT_SERVER" ]
@@ -139,7 +144,7 @@ else
 fi
 
 
-$JX_SCM repo create ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev --template $GIT_PROVIDER_URL/${GITOPS_TEMPLATE_PROJECT} --private --confirm
+$JX_SCM repo create ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev --template $GIT_TEMPLATE_SERVER_URL/${GITOPS_TEMPLATE_PROJECT} --private --confirm
 sleep 15
 $JX_SCM repo clone ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev
 
@@ -178,7 +183,7 @@ echo "**  clone and create cloud resources               **"
 echo "**                                                 **"
 echo "*****************************************************"
 
-$JX_SCM repo create ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev --template $GIT_PROVIDER_URL/${GITOPS_INFRA_PROJECT} --private --confirm
+$JX_SCM repo create ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev --template $GIT_TEMPLATE_SERVER_URL/${GITOPS_INFRA_PROJECT} --private --confirm
 sleep 15
 
 echo "about to run: $JX_SCM repo clone ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev"
