@@ -22,7 +22,7 @@ export CUSTOMISE_GITOPS_REPO="kpt pkg get https://github.com/jenkins-x/jx3-gitop
 export REGISTRY_URL="ghcr.io"
 export REGISTRY_USER="jenkins-x-bot-bdd"
 
-export JX_ADD_CUSTOM_RESOURCES="kubectl create ns jx && kubectl create secret generic container-registry-auth --from-literal=url=$REGISTRY_URL --from-literal=username=$REGISTRY_USER   --from-literal=password=$REGISTRY_TOKEN"
+export JX_ADD_CUSTOM_RESOURCES="kubectl create namespace jx && jx ns jx && kubectl create secret generic container-registry-auth --from-literal=url=$REGISTRY_URL --from-literal=username=$REGISTRY_USER   --from-literal=password=$REGISTRY_TOKEN"
 
 # to enable spring / gradle...
 #export RUN_TEST="bddjx -ginkgo.focus=spring-boot-http-gradle -test.v"
