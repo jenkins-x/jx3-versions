@@ -161,7 +161,11 @@ echo "**                                                 **"
 echo "*****************************************************"
 
 $JX_SCM repo create ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev --template $GIT_PROVIDER_URL/${GITOPS_INFRA_PROJECT} --private --confirm
-sleep 5
+sleep 15
+
+$JX_SCM repo --help
+echo "about to run: $JX_SCM repo clone ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev"
+
 $JX_SCM repo clone ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev
 
 ########
