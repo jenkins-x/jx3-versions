@@ -202,6 +202,7 @@ echo "****************************************"
 # lets create the cluster
 $GITOPS_BIN/create.sh
 
+echo "craeted cluster now creating custom resources"
 $JX_ADD_CUSTOM_RESOURCES
 
 # now lets install the operator
