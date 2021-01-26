@@ -12,7 +12,7 @@ export GH_HOST="https://github.beescloud.com/"
 export GIT_SERVER_HOST="github.beescloud.com"
 
 # configure the scm client
-export JX_SCM="jx scm"
+export JX_SCM="jx-scm"
 export GIT_SERVER="https://${GIT_SERVER_HOST}"
 export GIT_NAME="ghe"
 export GIT_KIND="github"
