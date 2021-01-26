@@ -25,6 +25,11 @@ cp -r /home/.config /builder/home/.config
 
 jx version
 
+if [ -z "$JX_SCM" ]
+then
+    export JX_SCM="gh"
+fi
+
 if [ -z "$GIT_USERNAME" ]
 then
     export GIT_USERNAME="jenkins-x-bot-bdd"
@@ -40,10 +45,37 @@ then
     export GH_OWNER="jenkins-x-bdd"
 fi
 
+if [ -z "$GIT_PROVIDER_URL" ]
+then
+    export GIT_PROVIDER_URL="https://${GIT_SERVER_HOST}"
+fi
+
+if [ -z "$GIT_TEMPLATE_SERVER_URLL" ]
+then
+    export GIT_TEMPLATE_SERVER_URL="https://github.com"
+fi
+
+if [ -z "$GIT_SERVER" ]
+then
+    export GIT_SERVER="https://github.com"
+fi
+
+if [ -z "$GIT_KIND" ]
+then
+    export GIT_KIND="github"
+fi
+
+if [ -z "$GIT_NAME" ]
+then
+    export GIT_NAME="github"
+fi
+
+
+
 export GIT_USER_EMAIL="jenkins-x@googlegroups.com"
 export GIT_TOKEN="${GH_ACCESS_TOKEN//[[:space:]]}"
 export GITHUB_TOKEN="${GH_ACCESS_TOKEN//[[:space:]]}"
-export GIT_PROVIDER_URL="https://${GIT_SERVER_HOST}"
+
 
 
 if [ -z "$GIT_TOKEN" ]
@@ -106,14 +138,15 @@ if [ -z "$GH_HOST" ]
 then
       echo "no need to gh auth as using github.com"
 else
-      echo "echo lets auth with the git server $GIT_SERVER_HOST"
-      gh auth login --hostname $GIT_SERVER_HOST --with-token $GH_ACCESS_TOKEN
+      echo "not using gh auth for now"
+      #echo "echo lets auth with the git server $GIT_SERVER_HOST"
+      #gh auth login --hostname $GIT_SERVER_HOST --with-token $GH_ACCESS_TOKEN
 fi
 
 
-gh repo create ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev --template $GIT_PROVIDER_URL/${GITOPS_TEMPLATE_PROJECT} --private --confirm
+$JX_SCM repo create ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev --template $GIT_TEMPLATE_SERVER_URL/${GITOPS_TEMPLATE_PROJECT} --private --confirm
 sleep 15
-gh repo clone ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev
+$JX_SCM repo clone ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev
 
 pushd `pwd`/cluster-${CLUSTER_NAME}-dev
 
@@ -126,6 +159,9 @@ pushd `pwd`/cluster-${CLUSTER_NAME}-dev
 
       # lets add some testing charts....
       jx gitops helmfile add --chart jx3/jx-test-collector
+
+      # configure the git server
+      jx gitops requirements edit --git-server $GIT_SERVER --git-kind $GIT_KIND --git-name $GIT_NAME
 
       # lets upgrade any versions in helmfile.yaml
       jx gitops helmfile resolve --update
@@ -147,9 +183,12 @@ echo "**  clone and create cloud resources               **"
 echo "**                                                 **"
 echo "*****************************************************"
 
-gh repo create ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev --template $GIT_PROVIDER_URL/${GITOPS_INFRA_PROJECT} --private --confirm
-sleep 5
-gh repo clone ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev
+$JX_SCM repo create ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev --template $GIT_TEMPLATE_SERVER_URL/${GITOPS_INFRA_PROJECT} --private --confirm
+sleep 15
+
+echo "about to run: $JX_SCM repo clone ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev"
+
+$JX_SCM repo clone ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev
 
 ########
 # setting up test resources and garbage collect previous runs

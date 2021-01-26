@@ -30,6 +30,11 @@ then
     export WORKING_DIR="/workspace"
 fi
 
+if [ -z "$JX_ADD_CUSTOM_RESOURCES" ]
+then
+    export JX_ADD_CUSTOM_RESOURCES="echo no custom resources being created"
+fi
+
 if [ -z "$GIT_USERNAME" ]
 then
     export GIT_USERNAME="jenkins-x-bot-bdd"
@@ -102,6 +107,7 @@ echo "using GitOps template: $GITOPS_TEMPLATE_URL version: $GITOPS_TEMPLATE_VERS
 #git clone -b v${GITOPS_TEMPLATE_VERSION} $GITOPS_TEMPLATE_URL
 
 # create the boot git repository to mimic creating the git repository via the github create repository wizard
+echo "about to run: jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --env-git-owner=$GH_OWNER --repo env-$CLUSTER_NAME-dev --no-operator $JX_ADMIN_CREATE_ARGS"
 jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --env-git-owner=$GH_OWNER --repo env-$CLUSTER_NAME-dev --no-operator $JX_ADMIN_CREATE_ARGS
 
 
@@ -195,6 +201,14 @@ echo "****************************************"
 
 # lets create the cluster
 $GITOPS_BIN/create.sh
+
+echo "created cluster now creating custom resources"
+
+kubectl get ns
+
+echo "about to execute: $JX_ADD_CUSTOM_RESOURCES"
+
+$JX_ADD_CUSTOM_RESOURCES
 
 # now lets install the operator
 # --username is found from $GIT_USERNAME or git clone URL
