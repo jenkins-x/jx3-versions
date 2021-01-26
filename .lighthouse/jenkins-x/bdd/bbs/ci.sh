@@ -8,6 +8,7 @@ export BDD_NAME="bbs"
 export GIT_USERNAME="jenkins-x-bdd"
 export GH_OWNER="${GIT_USERNAME}"
 
+export GIT_KIND="bitbucketserver"
 export GIT_SERVER_HOST="bitbucket.beescloud.com"
 export GH_HOST="https://${GIT_SERVER_HOST}/"
 
@@ -15,7 +16,6 @@ export GH_HOST="https://${GIT_SERVER_HOST}/"
 export JX_SCM="jx-scm"
 export GIT_SERVER="https://${GIT_SERVER_HOST}"
 export GIT_NAME="bbs"
-export GIT_KIND="github"
 export GIT_TOKEN="${GH_ACCESS_TOKEN}"
 
 # the gitops repository template to use
