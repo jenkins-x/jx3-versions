@@ -118,6 +118,7 @@ if [ -z "$GH_HOST" ]
 then
       echo "no need to gh auth as using github.com"
 else
+      echo "not using gh auth for now"
       #echo "echo lets auth with the git server $GIT_SERVER_HOST"
       #gh auth login --hostname $GIT_SERVER_HOST --with-token $GH_ACCESS_TOKEN
 fi
