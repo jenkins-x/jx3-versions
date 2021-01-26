@@ -7,24 +7,25 @@ export BDD_NAME="ghe"
 
 export GIT_USERNAME="dev1"
 export GH_OWNER="${GIT_USERNAME}"
-
-export GH_HOST="https://github.beescloud.com"
+export GH_HOST="https://github.beescloud.com/"
 export GIT_SERVER_HOST="github.beescloud.com"
 
-export JX_ADMIN_CREATE_ARGS="--git-server $GH_HOST --git-name ghe"
+# configure the scm client
+export GIT_KIND="github"
+export JX_SCM="jx scm"
+export GIT_TOKEN="${GH_ACCESS_TOKEN}"
 
 # the gitops repository template to use
-export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-kubernetes"
+export GITOPS_INFRA_PROJECT="jx3-gitops-repositories/jx3-terraform-gke"
+export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-gsm"
 
-export CUSTOMISE_GITOPS_REPO="kpt pkg get https://github.com/jenkins-x/jx3-gitops-template.git/infra/gcloud-cluster-only/bin@master bin"
+# enable the terraform gsm config
+export TF_VAR_gsm=true
 
+`dirname "$0"`/../terraform-ci.sh
 
-export REGISTRY_URL="ghcr.io"
-export REGISTRY_USER="jenkins-x-bot-bdd"
+## cleanup secrets in google secrets manager if it was enabled
+export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
+export PROJECT_ID=jenkins-x-labs-bdd
+gcloud secrets list --project $PROJECT_ID --format='get(NAME)' --limit=unlimited --filter=$CLUSTER_NAME | xargs -I {arg} gcloud secrets delete  "{arg}" --quiet
 
-export JX_ADD_CUSTOM_RESOURCES="$(dirname "$0")/setup.sh"
-
-# to enable spring / gradle...
-#export RUN_TEST="bddjx -ginkgo.focus=spring-boot-http-gradle -test.v"
-
-`dirname "$0"`/../ci.sh

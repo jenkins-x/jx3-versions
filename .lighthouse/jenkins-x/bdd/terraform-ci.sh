@@ -25,6 +25,11 @@ cp -r /home/.config /builder/home/.config
 
 jx version
 
+if [ -z "$JX_SCM" ]
+then
+    export JX_SCM="gh"
+fi
+
 if [ -z "$GIT_USERNAME" ]
 then
     export GIT_USERNAME="jenkins-x-bot-bdd"
@@ -40,10 +45,17 @@ then
     export GH_OWNER="jenkins-x-bdd"
 fi
 
+if [ -z "$GIT_PROVIDER_URL" ]
+then
+    export GIT_PROVIDER_URL="https://github.com"
+fi
+
+
+
 export GIT_USER_EMAIL="jenkins-x@googlegroups.com"
 export GIT_TOKEN="${GH_ACCESS_TOKEN//[[:space:]]}"
 export GITHUB_TOKEN="${GH_ACCESS_TOKEN//[[:space:]]}"
-export GIT_PROVIDER_URL="https://${GIT_SERVER_HOST}"
+
 
 
 if [ -z "$GIT_TOKEN" ]
@@ -106,14 +118,14 @@ if [ -z "$GH_HOST" ]
 then
       echo "no need to gh auth as using github.com"
 else
-      echo "echo lets auth with the git server $GIT_SERVER_HOST"
-      gh auth login --hostname $GIT_SERVER_HOST --with-token $GH_ACCESS_TOKEN
+      #echo "echo lets auth with the git server $GIT_SERVER_HOST"
+      #gh auth login --hostname $GIT_SERVER_HOST --with-token $GH_ACCESS_TOKEN
 fi
 
 
-gh repo create ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev --template $GIT_PROVIDER_URL/${GITOPS_TEMPLATE_PROJECT} --private --confirm
+$JX_SCM repo create ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev --template $GIT_PROVIDER_URL/${GITOPS_TEMPLATE_PROJECT} --private --confirm
 sleep 15
-gh repo clone ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev
+$JX_SCM repo clone ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev
 
 pushd `pwd`/cluster-${CLUSTER_NAME}-dev
 
@@ -147,9 +159,9 @@ echo "**  clone and create cloud resources               **"
 echo "**                                                 **"
 echo "*****************************************************"
 
-gh repo create ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev --template $GIT_PROVIDER_URL/${GITOPS_INFRA_PROJECT} --private --confirm
+$JX_SCM repo create ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev --template $GIT_PROVIDER_URL/${GITOPS_INFRA_PROJECT} --private --confirm
 sleep 5
-gh repo clone ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev
+$JX_SCM repo clone ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev
 
 ########
 # setting up test resources and garbage collect previous runs
