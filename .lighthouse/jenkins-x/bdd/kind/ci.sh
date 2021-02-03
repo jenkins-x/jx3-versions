@@ -66,4 +66,7 @@ export BUILD_NUMBER="${GITHUB_RUN_NUMBER}"
 export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-kind-vault"
 
 mkdir -p /builder/home
+
+export RUN_TEST=".lighthouse/jenkins-x/bdd/test.sh"
+
 .lighthouse/jenkins-x/bdd/ci.sh
