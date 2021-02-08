@@ -1,7 +1,7 @@
 FETCH_DIR := build/base
 TMP_TEMPLATE_DIR := build/tmp
 OUTPUT_DIR := config-root
-KUBEAPPLY ?= kubectl-apply
+KUBEAPPLY ?= kapp-apply
 VAULT_ADDR ?= https://vault.jx-vault:8200
 VAULT_NAMESPACE ?= jx-vault
 VAULT_ROLE ?= jx-vault
@@ -188,7 +188,7 @@ regen-none:
 	# we just merged a PR so lets perform any extra checks after the merge but before the kubectl apply
 
 .PHONY: apply
-apply: regen-check kubectl-apply secrets-populate verify write-completed
+apply: regen-check $(KUBEAPPLY) secrets-populate verify write-completed
 
 .PHONY: report
 report:
