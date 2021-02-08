@@ -8,7 +8,7 @@ export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
 
 # the gitops repository template to use
 # TODO add proper repos back after testing
-export GITOPS_INFRA_PROJECT="jx3-gitops-repositories/jx3-terraform-gke"
+export GITOPS_INFRA_PROJECT="rawlingsj/jx3-terraform-gke"
 export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-gsm"
 
 # enable the terraform gsm config
