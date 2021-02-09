@@ -259,7 +259,8 @@ echo "about to run the bdd tests...."
 # run the BDD tests
 if [ -z "$RUN_TEST" ]
 then
-      bddjx -ginkgo.focus=golang -test.v
+#      bddjx -ginkgo.focus=golang -test.v
+      bddjx -ginkgo.focus=spring-boot-rest-prometheus -test.v
 else
       $RUN_TEST
 fi
