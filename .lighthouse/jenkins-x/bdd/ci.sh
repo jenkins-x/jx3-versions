@@ -254,7 +254,8 @@ echo "about to run the bdd tests...."
 if [ -z "$TEST_NAME" ]
 then
   #export TEST_NAME="test-quickstart-golang-http"
-  export TEST_NAME="test-quickstart-spring"
+  #export TEST_NAME="test-quickstart-spring"
+  export TEST_NAME="test-create-spring"
 fi
 
 if [ -z "$RUN_TEST" ]
