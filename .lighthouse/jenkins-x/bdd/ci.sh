@@ -253,8 +253,10 @@ echo "about to run the bdd tests...."
 # run the BDD tests
 if [ -z "$RUN_TEST" ]
 then
+    helm install bdd jx3/jx-bdd --set bdd.owner=$GIT_ORGANISATION --set command.test="make test-create-spring"
+    jx verify job -l app=jx-bdd
 #      bddjx -ginkgo.focus=golang -test.v
-      bddjx -ginkgo.focus=spring-boot-rest-prometheus -test.v
+#      bddjx -ginkgo.focus=spring -test.v
 else
       $RUN_TEST
 fi
