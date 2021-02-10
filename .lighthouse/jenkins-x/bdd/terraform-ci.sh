@@ -257,11 +257,19 @@ export TERM=dumb
 echo "about to run the bdd tests...."
 
 # run the BDD tests
+if [ -z "$TEST_NAME" ]
+then
+  #export TEST_NAME="test-quickstart-golang-http"
+  #export TEST_NAME="test-quickstart-spring"
+  export TEST_NAME="test-create-spring"
+fi
+
 if [ -z "$RUN_TEST" ]
 then
-      bddjx -ginkgo.focus=golang -test.v
+    helm install bdd jx3/jx-bdd  --set bdd.owner="$GIT_ORGANISATION",command.test="make $TEST_NAME"
+    jx verify job -l app=jx-bdd
 else
-      $RUN_TEST
+    $RUN_TEST
 fi
 
 echo "completed the bdd tests"
