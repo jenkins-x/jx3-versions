@@ -72,5 +72,11 @@ spec:
     helm repo add jx3 https://storage.googleapis.com/jenkinsxio/charts
     helm install bdd jx3/jx-bdd  --namespace jx --create-namespace --set bdd.owner="$GIT_ORGANISATION",command.test="make $TEST_NAME"
 
+    echo "pods in jx namespace"
+    kubectl get pod -n jx
+
+    echo "jobs in jx namespace"
+    kubectl get job -n jx
+
     echo "about to wait for the BDD test to run"
     jx verify job -l app=jx-bdd -n jx
