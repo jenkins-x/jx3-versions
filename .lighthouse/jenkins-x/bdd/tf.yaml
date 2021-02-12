@@ -27,7 +27,7 @@ spec:
           key: password
 
   terraformRunner: ghcr.io/jenkins-x/terraform-operator-gcp
-  terraformVersion: 0.0.9
+  terraformVersion: 0.0.10
 
   terraformModule:
     address: https://github.com/jenkins-x-bdd/infra-{{ .Env.TF_VAR_cluster_name }}-dev
