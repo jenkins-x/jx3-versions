@@ -2,6 +2,8 @@ apiVersion: tf.isaaguilar.com/v1alpha1
 kind: Terraform
 spec:
   env:
+  - name: KUBECONFIG
+    value: "/tmp/kubecfg"
   - name: TF_VAR_jx_git_url
     value: https://github.com/jenkins-x-bdd/cluster-{{ .Env.TF_VAR_cluster_name }}-dev.git
   - name: TF_VAR_jx_bot_username
@@ -27,7 +29,7 @@ spec:
           key: password
 
   terraformRunner: ghcr.io/jenkins-x/terraform-operator-gcp
-  terraformVersion: 0.0.10
+  terraformVersion: 0.0.11
 
   terraformModule:
     address: https://github.com/jenkins-x-bdd/infra-{{ .Env.TF_VAR_cluster_name }}-dev
