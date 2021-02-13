@@ -186,4 +186,7 @@ echo "*****************************************************"
 $JX_SCM repo create ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev --template $GIT_TEMPLATE_SERVER_URL/${GITOPS_INFRA_PROJECT} --private --confirm
 sleep 15
 
-jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/tf.yaml --log --name-prefix=tf- -e TF_VAR_gcp_project=$PROJECT_ID -e TF_VAR_cluster_name=$CLUSTER_NAME -e TF_VAR_gsm=$TF_VAR_gsm
+export TF_VAR_gcp_project=$PROJECT_ID
+export TF_VAR_cluster_name=$CLUSTER_NAME
+
+jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/tf.yaml
