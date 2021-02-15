@@ -71,7 +71,7 @@ spec:
     jx ctx -b
 
     echo "lets install the operator"
-    jx admin operator
+    jx admin operator --url $TF_VAR_jx_git_url
 
     echo "installing the BDD test"
     export GIT_ORGANISATION="jenkins-x-bdd"
