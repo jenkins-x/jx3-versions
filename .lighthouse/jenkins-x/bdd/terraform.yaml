@@ -72,7 +72,6 @@ spec:
     helm repo add jx3 https://storage.googleapis.com/jenkinsxio/charts
     helm upgrade --install bdd jx3/jx-bdd  --namespace jx --create-namespace --set bdd.owner="$GIT_ORGANISATION",command.test="make $TEST_NAME"
 
-    sleep 20
-
     echo "about to wait for the BDD test to run"
+    sleep 20
     jx verify job --name jx-bdd -n jx --log-fail

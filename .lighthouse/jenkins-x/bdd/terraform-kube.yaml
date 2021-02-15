@@ -13,6 +13,13 @@ spec:
       secretKeyRef:
         name: bdd-git
         key: password
+  - name: GIT_USERNAME
+    value: jenkins-x-bot-bdd
+  - name: GIT_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: bdd-git
+        key: password
 {{- range $pkey, $pval := .Env }}
   - name: {{ $pkey }}
     value: {{ quote $pval }}
@@ -63,9 +70,9 @@ spec:
     echo "now connected to cluster:"
     jx ctx -b
 
-    echo "lets verify the log completes"
-    jx admin log -b
-    
+    echo "lets install the operator"
+    jx admin operator
+
     echo "installing the BDD test"
     export GIT_ORGANISATION="jenkins-x-bdd"
     export TEST_NAME="test-create-spring"
@@ -73,4 +80,5 @@ spec:
     helm upgrade --install bdd jx3/jx-bdd  --namespace jx --create-namespace --set bdd.owner="$GIT_ORGANISATION",command.test="make $TEST_NAME"
 
     echo "about to wait for the BDD test to run"
-    jx verify job --name app=jx-bdd -n jx --log-fail
+    sleep 20
+    jx verify job --name jx-bdd -n jx --log-fail
