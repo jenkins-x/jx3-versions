@@ -29,7 +29,7 @@ spec:
           key: password
 
   terraformRunner: ghcr.io/jenkins-x/terraform-operator-gcp
-  terraformVersion: 0.0.12
+  terraformVersion: 3.1.249
 
   terraformModule:
     address: https://github.com/jenkins-x-bdd/infra-{{ .Env.TF_VAR_cluster_name }}-dev
@@ -73,4 +73,4 @@ spec:
     helm upgrade --install bdd jx3/jx-bdd  --namespace jx --create-namespace --set bdd.owner="$GIT_ORGANISATION",command.test="make $TEST_NAME"
 
     echo "about to wait for the BDD test to run"
-    jx verify job --name app=jx-bdd -n jx
+    jx verify job --name app=jx-bdd -n jx --log-fail

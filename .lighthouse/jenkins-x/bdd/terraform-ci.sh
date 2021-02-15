@@ -189,4 +189,4 @@ sleep 15
 export TF_VAR_gcp_project=$PROJECT_ID
 export TF_VAR_cluster_name=$CLUSTER_NAME
 
-jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/tf.yaml
+jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/tf.yaml --verify-result
