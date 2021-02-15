@@ -72,7 +72,10 @@ spec:
     # switch to jx namespace to be sure
     jx ns jx
 
+    echo "checking the clusterissuer"
+
     kubectl get clusterissuer letsencrypt-staging -ojsonpath='{.status.conditions[0].status}'
     kubectl get clusterissuer letsencrypt-staging -ojsonpath='{.status.conditions[0].message}'
 
-    jx verify tls hook-jx.$CLUSTER_NAME.jenkinsxlabs.com  --production=false --timeout 20m
+    echo "now checking for host hook-jx.${TF_VAR_cluster_name}.jenkinsxlabs.com"
+    jx verify tls hook-jx.${TF_VAR_cluster_name}.jenkinsxlabs.com  --production=false --timeout 20m
