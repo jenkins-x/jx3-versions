@@ -10,6 +10,7 @@ export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-kubernetes"
 
 export TERRAFORM_FILE="terraform-kube.yaml"
 
+export PROJECT_ID=jenkins-x-labs-bdd
 export TF_VAR_project_id=$PROJECT_ID
 
 `dirname "$0"`/../terraform-ci.sh

@@ -32,7 +32,7 @@ spec:
   terraformVersion: 3.1.249
 
   terraformModule:
-    address: https://github.com/hashicorp/learn-terraform-provision-gke-cluster
+    address: https://github.com/jenkins-x/learn-terraform-provision-gke-cluster
 
   customBackend: |-
     terraform {
