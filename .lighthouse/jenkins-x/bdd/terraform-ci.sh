@@ -196,9 +196,15 @@ if [ -z "$TERRAFORM_FILE" ]
 then
     export TERRAFORM_FILE="terraform.yaml"
 fi
-echo "using terraform file $TERRAFORM_FILE"
+
+if [ -z "$JX_TEST_COMMAND" ]
+then
+  export JX_TEST_COMMAND="jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/$TERRAFORM_FILE --verify-result"
+fi
+
+echo "testing terraform with: $JX_TEST_COMMAND"
 
 export TF_VAR_gcp_project=$PROJECT_ID
 export TF_VAR_cluster_name=$CLUSTER_NAME
 
-jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/$TERRAFORM_FILE --verify-result
+$JX_TEST_COMMAND
