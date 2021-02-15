@@ -11,6 +11,8 @@ export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
 export GITOPS_INFRA_PROJECT="jx3-gitops-repositories/jx3-terraform-gke"
 export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-gsm"
 
+export JX_TEST_COMMAND="jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/terraform-tls.yaml"
+
 # enable the terraform gsm config
 export TF_VAR_gsm=true
 export TF_VAR_apex_domain=jenkinsxlabs.com
