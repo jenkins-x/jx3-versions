@@ -52,7 +52,10 @@ spec:
 
 
   postrunScript: |-
-    #!/usr/bin/env bash
+    #!/bin/bash
+    set -e
+    set -x
+
     echo "Terraform is done!"
 
     echo "lets connect to the remote cluster"
@@ -65,7 +68,10 @@ spec:
 
     echo "lets verify the log completes"
     jx admin log -b
-    
+
+    # switch to jx namespace to be sure
+    jx ns jx
+
     kubectl get clusterissuer letsencrypt-staging -ojsonpath='{.status.conditions[0].status}'
     kubectl get clusterissuer letsencrypt-staging -ojsonpath='{.status.conditions[0].message}'
 

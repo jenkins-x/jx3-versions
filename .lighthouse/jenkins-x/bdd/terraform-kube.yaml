@@ -59,7 +59,10 @@ spec:
 
 
   postrunScript: |-
-    #!/usr/bin/env bash
+    #!/bin/bash
+    set -e
+    set -x
+
     echo "Terraform is done!"
 
     echo "lets connect to the remote cluster"
@@ -76,6 +79,8 @@ spec:
     echo "installing the BDD test"
     export GIT_ORGANISATION="jenkins-x-bdd"
     export TEST_NAME="test-create-spring"
+    echo "PATH=$PATH"
+    helm version
     helm repo add jx3 https://storage.googleapis.com/jenkinsxio/charts
     helm upgrade --install bdd jx3/jx-bdd  --namespace jx --create-namespace --set bdd.owner="$GIT_ORGANISATION",command.test="make $TEST_NAME"
 
