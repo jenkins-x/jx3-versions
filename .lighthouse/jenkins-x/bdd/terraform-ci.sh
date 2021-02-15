@@ -183,10 +183,22 @@ echo "**  clone and create cloud resources               **"
 echo "**                                                 **"
 echo "*****************************************************"
 
-$JX_SCM repo create ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev --template $GIT_TEMPLATE_SERVER_URL/${GITOPS_INFRA_PROJECT} --private --confirm
-sleep 15
+
+if [ -z "$GITOPS_INFRA_PROJECT" ]
+then
+      echo "no custom gitops infra repository to be created for this test"
+else
+      $JX_SCM repo create ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev --template $GIT_TEMPLATE_SERVER_URL/${GITOPS_INFRA_PROJECT} --private --confirm
+      sleep 15
+fi
+
+if [ -z "$TERRAFORM_FILE" ]
+then
+    export TERRAFORM_FILE="terraform.yaml"
+fi
+echo "using terraform file $TERRAFORM_FILE"
 
 export TF_VAR_gcp_project=$PROJECT_ID
 export TF_VAR_cluster_name=$CLUSTER_NAME
 
-jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/tf.yaml --verify-result
+jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/$TERRAFORM_FILE --verify-result
