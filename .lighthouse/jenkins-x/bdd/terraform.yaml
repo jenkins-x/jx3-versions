@@ -61,10 +61,11 @@ spec:
     echo "lets connect to the remote cluster"
     $(terraform output -raw connect)
 
-    #TODO can we fail fast if we can't connect?
-
     echo "now connected to cluster:"
     jx ctx -b
+
+    # verify we have the correct context
+    jx verify ctx -c "gke_${TF_VAR_gcp_project}_us-central1-a_${TF_VAR_cluster_name}"
 
     echo "lets verify the log completes"
     jx admin log -b
