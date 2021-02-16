@@ -1,91 +1,52 @@
-apiVersion: tf.isaaguilar.com/v1alpha1
-kind: Terraform
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: pullrequest
 spec:
-  env:
-  - name: KUBECONFIG
-    value: "/tmp/kubecfg"
-  - name: TF_VAR_jx_git_url
-    value: https://github.com/jenkins-x-bdd/cluster-{{ .Env.TF_VAR_cluster_name }}-dev.git
-  - name: TF_VAR_jx_bot_username
-    value: jenkins-x-bot-bdd
-   - name: VAULT_USER
-     valueFrom:
-       secretKeyRef:
-         name: aws-bdd-user-creds
-         key: vault_user
-  - name: TF_VAR_jx_bot_token
-    valueFrom:
-      secretKeyRef:
-        name: bdd-git
-        key: password
-{{- range $pkey, $pval := .Env }}
-  - name: {{ $pkey }}
-    value: {{ quote $pval }}
-{{- end }}
-
-  credentials:
-  - secretNameRef:
-      name: aws-bdd-user-creds
-
-  scmAuthMethods:
-  - host: github.com
-    git:
-      https:
-        requireProxy: false
-        tokenSecretRef:
-          name: bdd-git
-          namespace: jx
-          key: password
-
-  terraformRunner: ghcr.io/jenkins-x/terraform-operator-aws
-  terraformVersion: 3.1.253
-
-  terraformModule:
-    address: https://github.com/jenkins-x-bdd/infra-{{ .Env.TF_VAR_cluster_name }}-dev
-
-  customBackend: |-
-    terraform {
-      backend "kubernetes" {
-        secret_suffix = "{{ .Name }}-state"
-        namespace = "{{ .Namespace }}"
-        in_cluster_config = true
-      }
-    }
-
-  serviceAccount: tekton-bot
-
-  applyOnCreate: true
-  applyOnUpdate: true
-  applyOnDelete: true
-  ignoreDelete: false
-
-
-  postrunScript: |-
-    #!/bin/bash
-    set -e
-    set -x
-
-    echo "Terraform is done!"
-
-    echo "lets connect to the remote cluster"
-    $(terraform output -raw connect)
-
-    echo "now connected to cluster:"
-    jx ctx -b
-
-    # verify we have the correct context
-    #jx verify ctx -c "gke_${TF_VAR_gcp_project}_us-central1-a_${TF_VAR_cluster_name}"
-
-    echo "lets verify the log completes"
-    jx admin log -b
-    
-    echo "installing the BDD test"
-    export GIT_ORGANISATION="jenkins-x-bdd"
-    export TEST_NAME="test-create-spring"
-    helm version
-    helm repo add jx3 https://storage.googleapis.com/jenkinsxio/charts
-    helm upgrade --install bdd jx3/jx-bdd  --namespace jx --create-namespace --set bdd.owner="$GIT_ORGANISATION",command.test="make $TEST_NAME"
-
-    echo "about to wait for the BDD test to run"
-    sleep 20
-    jx verify job --name jx-bdd -n jx --log-fail
+  pipelineSpec:
+    tasks:
+    - name: test
+      resources: {}
+      taskSpec:
+        metadata: {}
+        stepTemplate:
+          resources: {}
+          volumeMounts:
+          - mountPath: /etc/podinfo
+            name: podinfo
+            readOnly: true
+          workingDir: /workspace/source
+        steps:
+        - image: uses:jenkins-x/jx3-pipeline-catalog/tasks/git-clone/git-clone-pr.yaml@versionStream
+          name: ""
+        - image: ghcr.io/jenkins-x/jx-cli:3.1.258
+          name: jx-variables
+          resources: {}
+          script: |
+            #!/usr/bin/env bash
+            jx gitops variables
+        - env:
+          - name: GH_ACCESS_TOKEN
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: bdd-git
+          image: ghcr.io/jenkins-x/jx-cli:3.1.258
+          name: runci
+          resources: {}
+          script: |
+            #!/bin/bash
+            source .jx/variables.sh
+            echo running bdd test $JOB_NAME
+            /workspace/source/.lighthouse/jenkins-x/bdd/$JOB_NAME/ci.sh
+        volumes:
+        - downwardAPI:
+            items:
+            - fieldRef:
+                fieldPath: metadata.labels
+              path: labels
+          name: podinfo
+  podTemplate: {}
+  serviceAccountName: bdd-bot
+  timeout: 240h0m0s
+status: {}
