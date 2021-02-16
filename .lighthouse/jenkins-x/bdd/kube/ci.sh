@@ -8,7 +8,7 @@ export BDD_NAME="bdd-kube"
 # the gitops repository template to use
 export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-kubernetes"
 
-export TERRAFORM_FILE="terraform-kube.yaml"
+export TERRAFORM_FILE="terraform-kube.yaml.gotmpl"
 
 export PROJECT_ID=jenkins-x-labs-bdd
 export TF_VAR_project_id=$PROJECT_ID

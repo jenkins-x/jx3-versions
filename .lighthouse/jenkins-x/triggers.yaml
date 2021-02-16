@@ -2,6 +2,13 @@ apiVersion: config.lighthouse.jenkins-x.io/v1alpha1
 kind: TriggerConfig
 spec:
   presubmits:
+  - name: eks
+    context: "eks"
+    always_run: false
+    optional: false
+    trigger: (?m)^/test( all| eks),?(s+|$)
+    rerun_command: /test eks
+    source: "pullrequest-eks.yaml"
   - name: ghe
     context: "ghe"
     always_run: false

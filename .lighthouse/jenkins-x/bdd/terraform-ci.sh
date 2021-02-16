@@ -194,7 +194,7 @@ fi
 
 if [ -z "$TERRAFORM_FILE" ]
 then
-    export TERRAFORM_FILE="terraform.yaml"
+    export TERRAFORM_FILE="terraform.yaml.gotmpl"
 fi
 
 if [ -z "$JX_TEST_COMMAND" ]

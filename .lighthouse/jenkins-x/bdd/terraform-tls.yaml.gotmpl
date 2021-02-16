@@ -13,13 +13,6 @@ spec:
       secretKeyRef:
         name: bdd-git
         key: password
-  - name: GIT_USERNAME
-    value: jenkins-x-bot-bdd
-  - name: GIT_TOKEN
-    valueFrom:
-      secretKeyRef:
-        name: bdd-git
-        key: password
 {{- range $pkey, $pval := .Env }}
   - name: {{ $pkey }}
     value: {{ quote $pval }}
@@ -39,7 +32,7 @@ spec:
   terraformVersion: 3.1.251
 
   terraformModule:
-    address: https://github.com/jenkins-x/learn-terraform-provision-gke-cluster
+    address: https://github.com/jenkins-x-bdd/infra-{{ .Env.TF_VAR_cluster_name }}-dev
 
   customBackend: |-
     terraform {
@@ -68,22 +61,22 @@ spec:
     echo "lets connect to the remote cluster"
     $(terraform output -raw connect)
 
-    #TODO can we fail fast if we can't connect?
-
     echo "now connected to cluster:"
     jx ctx -b
 
-    echo "lets install the operator"
-    jx admin operator --url $TF_VAR_jx_git_url
+    # verify we have the correct context
+    jx verify ctx -c "gke_${TF_VAR_gcp_project}_us-central1-a_${TF_VAR_cluster_name}"
 
-    echo "installing the BDD test"
-    export GIT_ORGANISATION="jenkins-x-bdd"
-    export TEST_NAME="test-create-spring"
-    echo "PATH=$PATH"
-    helm version
-    helm repo add jx3 https://storage.googleapis.com/jenkinsxio/charts
-    helm upgrade --install bdd jx3/jx-bdd  --namespace jx --create-namespace --set bdd.owner="$GIT_ORGANISATION",command.test="make $TEST_NAME"
+    echo "lets verify the log completes"
+    jx admin log -b
 
-    echo "about to wait for the BDD test to run"
-    sleep 20
-    jx verify job --name jx-bdd -n jx --log-fail
+    # switch to jx namespace to be sure
+    jx ns jx
+
+    echo "checking the clusterissuer"
+
+    kubectl get clusterissuer letsencrypt-staging -ojsonpath='{.status.conditions[0].status}'
+    kubectl get clusterissuer letsencrypt-staging -ojsonpath='{.status.conditions[0].message}'
+
+    echo "now checking for host hook-jx.${TF_VAR_cluster_name}.jenkinsxlabs.com"
+    jx verify tls hook-jx.${TF_VAR_cluster_name}.jenkinsxlabs.com  --production=false --timeout 20m
