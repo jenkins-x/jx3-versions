@@ -8,6 +8,8 @@ spec:
     value: https://github.com/jenkins-x-bdd/cluster-{{ .Env.TF_VAR_cluster_name }}-dev.git
   - name: TF_VAR_jx_bot_username
     value: jenkins-x-bot-bdd
+  - name: TF_VAR_vault_user
+    value: jx-bdd-test
   - name: TF_VAR_jx_bot_token
     valueFrom:
       secretKeyRef:
