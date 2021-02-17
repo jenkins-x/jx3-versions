@@ -63,7 +63,10 @@ spec:
     echo "Terraform is done!"
 
     echo "lets connect to the remote cluster"
-    $(terraform output -raw connect)
+    aws eks --region $AWS_REGION update-kubeconfig --name ${TF_VAR_cluster_name}
+
+    echo "connected to the remote cluster"
+    kubectl get ns
 
     echo "now connected to cluster:"
     jx ctx -b
