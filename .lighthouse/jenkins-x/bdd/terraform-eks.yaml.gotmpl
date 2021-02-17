@@ -10,6 +10,9 @@ spec:
     value: jenkins-x-bot-bdd
   - name: TF_VAR_vault_user
     value: jx-bdd-test
+  # TODO until we get auto scaling working lets use 4 nodes to make sure we can fit the BDD test as well
+  - name: TF_VAR_desired_node_count
+    value: "4"
   - name: TF_VAR_jx_bot_token
     valueFrom:
       secretKeyRef:
