@@ -86,7 +86,7 @@ spec:
     echo "PATH=$PATH"
     helm version
     helm repo add jx3 https://storage.googleapis.com/jenkinsxio/charts
-    helm upgrade --install bdd jx3/jx-bdd  --namespace jx --create-namespace --set bdd.owner="$GIT_ORGANISATION",command.test="make $TEST_NAME",image.tag="${$JX_VERSION//[[:space:]]}"
+    helm upgrade --install bdd jx3/jx-bdd  --namespace jx --create-namespace --set bdd.owner="$GIT_ORGANISATION",command.test="make $TEST_NAME",image.tag="$JX_VERSION"
 
     echo "about to wait for the BDD test to run"
     sleep 20
