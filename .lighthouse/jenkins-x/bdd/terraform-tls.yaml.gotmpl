@@ -29,7 +29,7 @@ spec:
           key: password
 
   terraformRunner: ghcr.io/jenkins-x/terraform-operator-gcp
-  terraformVersion: 3.1.263
+  terraformVersion: 3.1.266
 
   terraformModule:
     address: https://github.com/jenkins-x-bdd/infra-{{ .Env.TF_VAR_cluster_name }}-dev
@@ -79,4 +79,4 @@ spec:
     kubectl get clusterissuer letsencrypt-staging -ojsonpath='{.status.conditions[0].message}'
 
     echo "now checking for host hook-jx.${TF_VAR_cluster_name}.jenkinsxlabs.com"
-    jx verify tls hook-jx.${TF_VAR_cluster_name}.jenkinsxlabs.com  --production=false --timeout 20m
+    jx verify tls hook-jx.${TF_VAR_cluster_name}.jenkinsxlabs.com  --production=false --timeout 20m --issuer "(STAGING) Artificial Apricot R3"
