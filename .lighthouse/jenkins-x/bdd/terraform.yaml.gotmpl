@@ -64,8 +64,7 @@ spec:
     echo "now connected to cluster:"
     jx ctx -b
 
-    export JX_VERSION="$(jx version -q)"
-    echo "using jx ${JX_VERSION}"
+    echo "using jx version: $JX_VERSION"
 
     # verify we have the correct context
     jx verify ctx -c "gke_${TF_VAR_gcp_project}_us-central1-a_${TF_VAR_cluster_name}"
