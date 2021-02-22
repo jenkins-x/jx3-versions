@@ -5,6 +5,7 @@ KUBEAPPLY ?= kubectl-apply
 VAULT_ADDR ?= https://vault.jx-vault:8200
 VAULT_NAMESPACE ?= jx-vault
 VAULT_ROLE ?= jx-vault
+GIT_SHA ?= $(shell git rev-parse HEAD)
 
 # You can disable force mode on kubectl apply by modifying this line:
 KUBECTL_APPLY_FLAGS ?= --force
@@ -175,7 +176,7 @@ regen-check:
 	jx gitops apply
 
 .PHONY: regen-phase-1
-regen-phase-1: git-setup resolve-metadata all $(KUBEAPPLY) verify-ingress-ignore commit
+regen-phase-1: git-setup resolve-metadata all $(KUBEAPPLY) annotate-resources verify-ingress-ignore commit
 
 .PHONY: regen-phase-2
 regen-phase-2: verify-ingress-ignore all verify-ignore report commit
@@ -188,7 +189,7 @@ regen-none:
 	# we just merged a PR so lets perform any extra checks after the merge but before the kubectl apply
 
 .PHONY: apply
-apply: regen-check kubectl-apply secrets-populate verify write-completed
+apply: regen-check $(KUBEAPPLY) annotate-resources secrets-populate verify write-completed
 
 .PHONY: report
 report:
@@ -223,6 +224,11 @@ kapp-apply:
 
 	# lets apply any infrastructure specific labels or annotations to enable IAM roles on ServiceAccounts etc
 	jx gitops postprocess
+
+.PHONY: annotate-resources
+annotate-resources:
+	echo "annotating some deployments with the latest git SHA: $(GIT_SHA)"
+	kubectl annotate deploy --overwrite -n jx -l git.jenkins-x.io/sha=annotate git.jenkins-x.io/sha=$(GIT_SHA)
 
 .PHONY: resolve-metadata
 resolve-metadata:
