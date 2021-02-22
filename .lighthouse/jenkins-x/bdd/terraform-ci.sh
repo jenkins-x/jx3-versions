@@ -143,11 +143,6 @@ else
       #gh auth login --hostname $GIT_SERVER_HOST --with-token $GH_ACCESS_TOKEN
 fi
 
-if [ -z "$JX_GIT_OVERRIDES" ]
-then
-    export JX_GIT_OVERRIDES="echo no git overrides"
-fi
-
 
 $JX_SCM repo create ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev --template $GIT_TEMPLATE_SERVER_URL/${GITOPS_TEMPLATE_PROJECT} --private --confirm
 sleep 15
@@ -175,7 +170,13 @@ pushd `pwd`/cluster-${CLUSTER_NAME}-dev
       jx gitops helmfile resolve --update
 
       # any git repo overrides...
-      $JX_GIT_OVERRIDES
+      if [ -z "$JX_GIT_OVERRIDES" ]
+      then
+          export JX_GIT_OVERRIDES="echo no git overrides"
+      else
+          echo "invoking: ${SOURCE_DIR}/${JX_GIT_OVERRIDES}"
+          ${SOURCE_DIR}/${JX_GIT_OVERRIDES}
+      fi
 
       # lets add a custom pipeline catalog for the test...
       #cp $SOURCE_DIR/.lighthouse/jenkins-x/bdd/pipeline-catalog.yaml extensions
