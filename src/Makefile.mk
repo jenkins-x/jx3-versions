@@ -205,6 +205,8 @@ failed: write-completed
 
 .PHONY: kubectl-apply
 kubectl-apply:
+	echo "using kubectl to apply resources"
+
 	# NOTE be very careful about these 2 labels as getting them wrong can remove stuff in you cluster!
 	kubectl apply $(KUBECTL_APPLY_FLAGS) --prune -l=gitops.jenkins-x.io/pipeline=customresourcedefinitions -R -f $(OUTPUT_DIR)/customresourcedefinitions
 	kubectl apply $(KUBECTL_APPLY_FLAGS) --prune -l=gitops.jenkins-x.io/pipeline=cluster                   -R -f $(OUTPUT_DIR)/cluster
@@ -215,6 +217,7 @@ kubectl-apply:
 
 .PHONY: kapp-apply
 kapp-apply:
+	echo "using kapp to apply resources"
 
 	kapp deploy -a jx -f $(OUTPUT_DIR) -y
 
