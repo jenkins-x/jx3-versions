@@ -5,6 +5,6 @@ spec:
     spec:
       containers:
       - env:
-        - name: MY_VAR
-          value: cheese
+        - name: KUBEAPPLY
+          value: kapp-apply
         name: job
