@@ -12,4 +12,4 @@ cp $OVERLAY .jx/git-operator
 echo "now has overlay files at .jx/git-operator"
 ls -al .jx/git-operator
 
-git add .jx/git-operator
+git add .jx/git-operator/*.yaml
