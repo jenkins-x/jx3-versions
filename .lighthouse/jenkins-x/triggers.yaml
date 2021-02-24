@@ -44,6 +44,13 @@ spec:
     trigger: (?m)^/test( all| vault),?(s+|$)
     rerun_command: /test vault
     source: "pullrequest.yaml"
+  - name: vault-kapp
+    context: "vault-kapp"
+    always_run: true
+    optional: false
+    trigger: (?m)^/test( all| vault-kapp),?(s+|$)
+    rerun_command: /test vault-kapp
+    source: "pullrequest.yaml"
   - name: kube
     context: "kube"
     always_run: true
