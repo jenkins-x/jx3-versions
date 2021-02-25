@@ -2,6 +2,13 @@ apiVersion: config.lighthouse.jenkins-x.io/v1alpha1
 kind: TriggerConfig
 spec:
   presubmits:
+  - name: bbs
+    context: "bbs"
+    always_run: false
+    optional: false
+    trigger: (?m)^/test( all| bbs),?(s+|$)
+    rerun_command: /test bbs
+    source: "pullrequest-bbs.yaml"
   - name: eks
     context: "eks"
     always_run: false
@@ -43,6 +50,13 @@ spec:
     optional: false
     trigger: (?m)^/test( all| vault),?(s+|$)
     rerun_command: /test vault
+    source: "pullrequest.yaml"
+  - name: vault-kapp
+    context: "vault-kapp"
+    always_run: true
+    optional: false
+    trigger: (?m)^/test( all| vault-kapp),?(s+|$)
+    rerun_command: /test vault-kapp
     source: "pullrequest.yaml"
   - name: kube
     context: "kube"
