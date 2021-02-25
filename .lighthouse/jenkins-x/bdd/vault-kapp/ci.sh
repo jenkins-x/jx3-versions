@@ -3,7 +3,7 @@ set -e
 set -x
 
 # BDD test specific part
-export BDD_NAME="gke-vault-kapp"
+export BDD_NAME="gkev-kapp"
 
 # the gitops repository template to use
 export GITOPS_INFRA_PROJECT="jx3-gitops-repositories/jx3-terraform-gke"
