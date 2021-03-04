@@ -25,6 +25,7 @@ export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-gsm"
 export TF_VAR_gsm=true
 
 # scm changes
+export JX_SCM="jx-scm"
 echo "downloading the jx-scm binary to the PATH"
 
 curl -L https://github.com/jenkins-x-plugins/jx-scm/releases/download/v0.0.16/jx-scm-linux-amd64.tar.gz | tar xzv
