@@ -26,5 +26,5 @@ export RUN_TEST="`dirname "$0"`/test.sh"
 `dirname "$0"`/../terraform-ci.sh
 
 ## cleanup secrets in google secrets manager if it was enabled
-export PROJECT_ID=jenkins-x-labs-bdd
+export PROJECT_ID=jenkins-x-labs-bdd1
 gcloud secrets list --project $PROJECT_ID --format='get(NAME)' --limit=unlimited --filter=$CLUSTER_NAME | xargs -I {arg} gcloud secrets delete  "{arg}" --quiet
