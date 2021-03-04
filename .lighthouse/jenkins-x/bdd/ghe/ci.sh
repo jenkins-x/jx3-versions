@@ -24,6 +24,13 @@ export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-gsm"
 # enable the terraform gsm config
 export TF_VAR_gsm=true
 
+# scm changes
+echo "downloading the jx-scm binary to the PATH"
+
+curl -L https://github.com/jenkins-x-plugins/jx-scm/releases/download/v0.0.16/jx-scm-linux-amd64.tar.gz | tar xzv
+mv jx-scm /usr/local/bin
+
+$JX_SCM repo help
 export JX_TEST_COMMAND="jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/$TERRAFORM_FILE --verify-result -e JX_SCM=jx-scm -e GIT_KIND=$GIT_KIND -e GIT_PROVIDER_URL=$GIT_SERVER -e GIT_ORGANISATION=$GH_OWNER"
 
 
