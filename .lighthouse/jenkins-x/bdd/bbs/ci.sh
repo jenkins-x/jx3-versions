@@ -8,7 +8,9 @@ export BDD_NAME="bbs"
 export GIT_USERNAME="jenkins-x-bdd"
 export GH_OWNER="jxbdd"
 
-export GH_HOST="https://bitbucket.beescloud.com/scm/"
+export GH_HOST="https://bitbucket.beescloud.com/"
+export GH_CLONE_HOST="${GH_HOST}scm/"
+
 export GIT_KIND="bitbucketserver"
 export GIT_SERVER_HOST="bitbucket.beescloud.com"
 export GIT_NAME="bbs"

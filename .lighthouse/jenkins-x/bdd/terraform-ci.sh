@@ -143,10 +143,15 @@ else
       #gh auth login --hostname $GIT_SERVER_HOST --with-token $GH_ACCESS_TOKEN
 fi
 
+if [ -z "$GH_CLONE_HOST" ]
+then
+      export GH_CLONE_HOST=${GH_HOST}
+fi
+
 
 $JX_SCM repo create ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev --template $GIT_TEMPLATE_SERVER_URL/${GITOPS_TEMPLATE_PROJECT} --private --confirm
 sleep 15
-$JX_SCM repo clone ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev
+$JX_SCM repo clone ${GH_CLONE_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev
 
 pushd `pwd`/cluster-${CLUSTER_NAME}-dev
 
