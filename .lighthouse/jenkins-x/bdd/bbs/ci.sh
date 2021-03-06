@@ -6,7 +6,7 @@ set -x
 export BDD_NAME="bbs"
 
 export GIT_USERNAME="jenkins-x-bdd"
-export GH_OWNER="${GIT_USERNAME}"
+export GH_OWNER="jxbdd"
 
 export GH_HOST="https://bitbucket.beescloud.com/"
 export GIT_KIND="bitbucketserver"
