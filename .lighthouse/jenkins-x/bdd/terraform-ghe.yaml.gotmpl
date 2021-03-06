@@ -5,7 +5,7 @@ spec:
   - name: KUBECONFIG
     value: "/tmp/kubecfg"
   - name: TF_VAR_jx_git_url
-    value: https://github.com/jenkins-x-bdd/cluster-{{ .Env.TF_VAR_cluster_name }}-dev.git
+    value: https://github.beescloud.com/dev1/cluster-{{ .Env.TF_VAR_cluster_name }}-dev.git
   - name: TF_VAR_jx_bot_username
     value: jenkins-x-bot-bdd
   - name: TF_VAR_jx_bot_token
@@ -32,7 +32,7 @@ spec:
   terraformVersion: 3.1.291
 
   terraformModule:
-    address: https://github.com/jenkins-x-bdd/infra-{{ .Env.TF_VAR_cluster_name }}-dev
+    address: https://github.beescloud.com/dev1/infra-{{ .Env.TF_VAR_cluster_name }}-dev
 
   customBackend: |-
     terraform {
