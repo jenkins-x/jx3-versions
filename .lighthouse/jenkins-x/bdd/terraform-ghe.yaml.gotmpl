@@ -11,7 +11,7 @@ spec:
   - name: TF_VAR_jx_bot_token
     valueFrom:
       secretKeyRef:
-        name: bdd-git
+        name: bdd-pipeline-token-github-ghe
         key: password
 {{- range $pkey, $pval := .Env }}
   - name: {{ $pkey }}
