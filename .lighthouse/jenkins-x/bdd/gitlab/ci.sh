@@ -3,17 +3,17 @@ set -e
 set -x
 
 # BDD test specific part
-export BDD_NAME="bbs"
+export BDD_NAME="gitlab"
 
 export GIT_USERNAME="jenkins-x-bot-test"
 export GH_OWNER="jxbdd"
 
-export GH_HOST="https://bitbucket.beescloud.com/"
+export GH_HOST="https://gitlab.com/"
 export GH_CLONE_HOST="${GH_HOST}scm/"
 
 export GIT_KIND="gitlab"
-export GIT_SERVER_HOST="bitbucket.beescloud.com"
-export GIT_NAME="gitbal"
+export GIT_SERVER_HOST="gitlab.com"
+export GIT_NAME="gitlab"
 
 
 export GIT_SERVER="https://${GIT_SERVER_HOST}"
