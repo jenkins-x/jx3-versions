@@ -25,7 +25,7 @@ spec:
     source: "pullrequest-ghe.yaml"
   - name: gitlab
     context: "gitlab"
-    always_run: false
+    always_run: true
     optional: false
     trigger: (?m)^/test( all| gitlab),?(s+|$)
     rerun_command: /test gitlab
