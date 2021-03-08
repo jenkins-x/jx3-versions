@@ -32,42 +32,42 @@ spec:
     source: "pullrequest-gitlab.yaml"
   - name: gsm
     context: "gsm"
-    always_run: false
+    always_run: true
     optional: false
     trigger: (?m)^/test( all| gsm),?(s+|$)
     rerun_command: /test gsm
     source: "pullrequest.yaml"
   - name: gsm-kapp
     context: "gsm-kapp"
-    always_run: false
+    always_run: true
     optional: false
     trigger: (?m)^/test( all| gsm-kapp),?(s+|$)
     rerun_command: /test gsm-kapp
     source: "pullrequest.yaml"
   - name: tls
     context: "tls"
-    always_run: false
+    always_run: true
     optional: false
     trigger: (?m)^/test( all| tls),?(s+|$)
     rerun_command: /test tls
     source: "pullrequest.yaml"
   - name: vault
     context: "vault"
-    always_run: false
+    always_run: true
     optional: false
     trigger: (?m)^/test( all| vault),?(s+|$)
     rerun_command: /test vault
     source: "pullrequest.yaml"
   - name: vault-kapp
     context: "vault-kapp"
-    always_run: false
+    always_run: true
     optional: false
     trigger: (?m)^/test( all| vault-kapp),?(s+|$)
     rerun_command: /test vault-kapp
     source: "pullrequest.yaml"
   - name: kube
     context: "kube"
-    always_run: false
+    always_run: true
     optional: false
     trigger: (?m)^/test( all| kube),?(s+|$)
     rerun_command: /test kube
