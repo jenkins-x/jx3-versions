@@ -23,6 +23,13 @@ spec:
     trigger: (?m)^/test( all| ghe),?(s+|$)
     rerun_command: /test ghe
     source: "pullrequest-ghe.yaml"
+  - name: gitlab
+    context: "gitlab"
+    always_run: true
+    optional: false
+    trigger: (?m)^/test( all| gitlab),?(s+|$)
+    rerun_command: /test gitlab
+    source: "pullrequest-gitlab.yaml"
   - name: gsm
     context: "gsm"
     always_run: true

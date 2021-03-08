@@ -3,17 +3,16 @@ set -e
 set -x
 
 # BDD test specific part
-export BDD_NAME="bbs"
+export BDD_NAME="gitlab"
 
-export GIT_USERNAME="jenkins-x-bdd"
+export GIT_USERNAME="jenkins-x-bot-test"
 export GH_OWNER="jxbdd"
 
-export GH_HOST="https://bitbucket.beescloud.com/"
-export GH_CLONE_HOST="${GH_HOST}scm/"
+export GH_HOST="https://gitlab.com/"
 
-export GIT_KIND="bitbucketserver"
-export GIT_SERVER_HOST="bitbucket.beescloud.com"
-export GIT_NAME="bbs"
+export GIT_KIND="gitlab"
+export GIT_SERVER_HOST="gitlab.com"
+export GIT_NAME="gitlab"
 
 
 export GIT_SERVER="https://${GIT_SERVER_HOST}"
@@ -35,7 +34,7 @@ mv jx-scm /usr/local/bin
 
 $JX_SCM repo help
 
-export JX_TEST_COMMAND="jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/terraform-bbs.yaml.gotmpl --verify-result -e JX_SCM=jx-scm -e GIT_KIND=$GIT_KIND -e GIT_PROVIDER_URL=$GIT_SERVER -e GIT_ORGANISATION=$GH_OWNER"
+export JX_TEST_COMMAND="jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/terraform-gitlab.yaml.gotmpl --verify-result -e JX_SCM=jx-scm -e GIT_KIND=$GIT_KIND -e GIT_PROVIDER_URL=$GIT_SERVER -e GIT_ORGANISATION=$GH_OWNER"
 
 `dirname "$0"`/../terraform-ci.sh
 

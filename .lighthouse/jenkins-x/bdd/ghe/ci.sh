@@ -12,7 +12,6 @@ export GH_HOST="https://github.beescloud.com/"
 export GIT_SERVER_HOST="github.beescloud.com"
 
 # configure the scm client
-export JX_SCM="jx-scm"
 export GIT_SERVER="https://${GIT_SERVER_HOST}"
 export GIT_NAME="ghe"
 export GIT_KIND="github"
@@ -25,12 +24,15 @@ export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-gsm"
 # enable the terraform gsm config
 export TF_VAR_gsm=true
 
+# scm changes
+export JX_SCM="jx-scm"
 echo "downloading the jx-scm binary to the PATH"
 
 curl -L https://github.com/jenkins-x-plugins/jx-scm/releases/download/v0.0.16/jx-scm-linux-amd64.tar.gz | tar xzv
 mv jx-scm /usr/local/bin
 
 $JX_SCM repo help
+export JX_TEST_COMMAND="jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/terraform-ghe.yaml.gotmpl --verify-result -e JX_SCM=jx-scm -e GIT_KIND=$GIT_KIND -e GIT_PROVIDER_URL=$GIT_SERVER -e GIT_ORGANISATION=$GH_OWNER"
 
 
 `dirname "$0"`/../terraform-ci.sh

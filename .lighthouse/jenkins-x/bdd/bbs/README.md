@@ -1,1 +1,1 @@
-## BDD test using GKE with local secrets and no storage but GCS
+## BDD test using GKE with GSM and BitBucket Server (stash) as the git provider
