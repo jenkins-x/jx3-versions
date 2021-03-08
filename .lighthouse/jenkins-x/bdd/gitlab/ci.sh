@@ -9,7 +9,6 @@ export GIT_USERNAME="jenkins-x-bot-test"
 export GH_OWNER="jxbdd"
 
 export GH_HOST="https://gitlab.com/"
-export GH_CLONE_HOST="${GH_HOST}scm/"
 
 export GIT_KIND="gitlab"
 export GIT_SERVER_HOST="gitlab.com"
