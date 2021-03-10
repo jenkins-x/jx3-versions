@@ -25,7 +25,7 @@ spec:
     source: "pullrequest-ghe.yaml"
   - name: gitlab
     context: "gitlab"
-    always_run: true
+    always_run: false
     optional: false
     trigger: (?m)^/test( all| gitlab),?(s+|$)
     rerun_command: /test gitlab
@@ -60,7 +60,7 @@ spec:
     source: "pullrequest.yaml"
   - name: vault-kapp
     context: "vault-kapp"
-    always_run: true
+    always_run: false
     optional: false
     trigger: (?m)^/test( all| vault-kapp),?(s+|$)
     rerun_command: /test vault-kapp
