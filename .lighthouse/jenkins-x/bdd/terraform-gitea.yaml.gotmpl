@@ -56,10 +56,12 @@ spec:
     # verify we have the correct context
     jx verify ctx -c "gke_${TF_VAR_gcp_project}_us-central1-a_${TF_VAR_cluster_name}"
 
+    echo "lets setup gitea..."
     # lets setup the cluster...
     git clone https://github.com/jx3-gitops-repositories/jx3-gke-gsm-gitea
     cd jx3-gke-gsm-gitea
     ./setup.sh create
+
 
     echo "installing the BDD test"
     export GIT_ORGANISATION="coders"

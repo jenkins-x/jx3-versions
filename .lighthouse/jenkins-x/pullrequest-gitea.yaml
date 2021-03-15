@@ -38,7 +38,7 @@ spec:
             #!/bin/bash
             source .jx/variables.sh
             echo running bdd test $JOB_NAME
-            /workspace/source/.lighthouse/jenkins-x/bdd/$JOB_NAME/ci.sh
+            /workspace/source/.lighthouse/jenkins-x/bdd/gitea/ci.sh
         volumes:
         - downwardAPI:
             items:
