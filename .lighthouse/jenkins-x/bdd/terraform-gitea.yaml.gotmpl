@@ -65,12 +65,9 @@ spec:
 
     echo "variables are:"
     cat variables.sh
-
     source variables.sh
 
-    export GIT_TOKEN="$(cat .bot.token)"
-
-    echo "using git server ${GIT_SERVER_URL} user ${GIT_USER} and token ${TOKEN}"
+    echo "using git server ${GIT_SERVER_URL} user: ${GIT_USER} and token: ${GIT_TOKEN}"
 
     echo "installing the BDD test"
     export GIT_KIND="gitea"
