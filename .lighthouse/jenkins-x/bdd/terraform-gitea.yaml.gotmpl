@@ -63,17 +63,23 @@ spec:
     ./setup.sh create
 
 
-    export GIT_USER="developer"
+    echo "variables are:"
+    cat variables.sh
+
+    source variables.sh
+
     export GIT_TOKEN="$(cat .bot.token)"
-    echo "using git user ${GIT_USER} and token ${TOKEN}"
+
+    echo "using git server ${GIT_SERVER_URL} user ${GIT_USER} and token ${TOKEN}"
 
     echo "installing the BDD test"
+    export GIT_KIND="gitea"
     export GIT_ORGANISATION="coders"
     export TEST_NAME="test-create-spring"
     echo "PATH=$PATH"
     helm version
     helm repo add jx3 https://storage.googleapis.com/jenkinsxio/charts
-    helm upgrade --install bdd jx3/jx-bdd  --namespace jx --create-namespace --set bdd.owner="$GIT_ORGANISATION",command.test="make $TEST_NAME",jxgoTag="$JX_VERSION",bdd.user="${GIT_USER}",bdd.token="${GIT_TOKEN}"
+    helm upgrade --install bdd jx3/jx-bdd  --namespace jx --create-namespace --set bdd.approverSecret="bdd-git-gitea-approver",bdd.kind="$GIT_KIND",bdd.owner="$GIT_ORGANISATION",bdd.gitServerHost="$GIT_SERVER_HOST",bdd.gitServerURL="$GIT_SERVER_URL",command.test="make $TEST_NAME",jxgoTag="$JX_VERSION",bdd.user="${GIT_USER}",bdd.token="${GIT_TOKEN}"
 
     echo "about to wait for the BDD test to run"
     sleep 20
