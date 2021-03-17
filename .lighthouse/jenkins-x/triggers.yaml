@@ -30,6 +30,13 @@ spec:
     trigger: (?m)^/test( all| gitlab),?(s+|$)
     rerun_command: /test gitlab
     source: "pullrequest-gitlab.yaml"
+  - name: gitea
+    context: "gitea"
+    always_run: false
+    optional: false
+    trigger: (?m)^/test( all| gitea),?(s+|$)
+    rerun_command: /test gitea
+    source: "pullrequest-gitea.yaml"
   - name: gsm
     context: "gsm"
     always_run: true
