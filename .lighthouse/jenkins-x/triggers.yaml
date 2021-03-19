@@ -2,6 +2,13 @@ apiVersion: config.lighthouse.jenkins-x.io/v1alpha1
 kind: TriggerConfig
 spec:
   presubmits:
+  - name: bbc
+    context: "bbc"
+    always_run: false
+    optional: false
+    trigger: (?m)^/test( all| bbc),?(s+|$)
+    rerun_command: /test bbc
+    source: "pullrequest-bbc.yaml"
   - name: bbs
     context: "bbs"
     always_run: false

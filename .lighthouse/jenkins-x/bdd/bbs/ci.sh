@@ -30,7 +30,7 @@ export TF_VAR_gsm=true
 export JX_SCM="jx-scm"
 echo "downloading the jx-scm binary to the PATH"
 
-curl -L https://github.com/jenkins-x-plugins/jx-scm/releases/download/v0.0.16/jx-scm-linux-amd64.tar.gz | tar xzv
+curl -L https://github.com/jenkins-x-plugins/jx-scm/releases/download/v0.0.24/jx-scm-linux-amd64.tar.gz | tar xzv
 mv jx-scm /usr/local/bin
 
 $JX_SCM repo help
