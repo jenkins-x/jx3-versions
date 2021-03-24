@@ -16,6 +16,8 @@ declare -a repos=(
   "jx3-azure-vault" "jx3-azure-akv"
   # OpenShift
   "jx3-openshift" "jx3-openshift-crc"
+  # IKS
+  "jx3-iks"
 )
 export TMPDIR=/tmp/jx3-gitops-promote
 rm -rf $TMPDIR
