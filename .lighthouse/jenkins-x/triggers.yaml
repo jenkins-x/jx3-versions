@@ -4,7 +4,7 @@ spec:
   presubmits:
   - name: bbc
     context: "bbc"
-    always_run: false
+    always_run: true
     optional: false
     trigger: (?m)^/test( all| bbc),?(s+|$)
     rerun_command: /test bbc
