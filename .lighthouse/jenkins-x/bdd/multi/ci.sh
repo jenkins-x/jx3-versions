@@ -16,9 +16,12 @@ export TF_VAR_gsm=true
 export PROJECT_ID=jenkins-x-labs-bdd1
 export TF_VAR_project_id=$PROJECT_ID
 
+export JX_TEST_COMMAND="jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/terraform-multi-prod.yaml.gotmpl --verify-result --name-prefix tf-prod-"
+
 # lets setup the production cluster
 `dirname "$0"`/../terraform-ci.sh
 
+export JX_TEST_COMMAND=""
 
 export BDD_NAME="multi-dev"
 export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-gsm"
