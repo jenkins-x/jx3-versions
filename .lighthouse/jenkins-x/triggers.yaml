@@ -58,6 +58,13 @@ spec:
     trigger: (?m)^/test( all| gsm-kapp),?(s+|$)
     rerun_command: /test gsm-kapp
     source: "pullrequest.yaml"
+  - name: multi
+    context: "multi"
+    always_run: true
+    optional: false
+    trigger: (?m)^/test( all| multi),?(s+|$)
+    rerun_command: /test multi
+    source: "pullrequest.yaml"
   - name: tls
     context: "tls"
     always_run: true
