@@ -3,7 +3,7 @@ set -e
 set -x
 
 
-export PROD_CLUSTER_NAME=${CLUSTER_NAME%-dev}-prod
+export PROD_CLUSTER_NAME=cluster-${CLUSTER_NAME%-dev}-prod-dev
 
 echo "importing the remote production repository for cluster ${PROD_CLUSTER_NAME}"
 
