@@ -60,7 +60,7 @@ spec:
     source: "pullrequest.yaml"
   - name: multi
     context: "multi"
-    always_run: true
+    always_run: false
     optional: false
     trigger: (?m)^/test( all| multi),?(s+|$)
     rerun_command: /test multi
