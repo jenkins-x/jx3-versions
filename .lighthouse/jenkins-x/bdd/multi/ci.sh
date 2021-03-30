@@ -4,6 +4,7 @@ set -x
 
 # BDD test specific part
 export BDD_NAME="multi-prod"
+export JOB_NAME="multi-prod"
 
 # the gitops repository template to use
 export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-kubernetes-production"
@@ -24,6 +25,8 @@ export JX_TEST_COMMAND="jx test create -f /workspace/source/.lighthouse/jenkins-
 export JX_TEST_COMMAND=""
 
 export BDD_NAME="multi-dev"
+export JOB_NAME="multi"
+
 export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-gsm"
 export TERRAFORM_FILE="terraform-multi-dev.yaml.gotmpl"
 
@@ -35,7 +38,7 @@ export JX_GIT_OVERRIDES=".lighthouse/jenkins-x/bdd/multi/overlay.sh"
 `dirname "$0"`/../terraform-ci.sh
 
 # now lets delete the BDD production cluster
-kubectl delete terraform tf-prod-jx3-versions-${BRANCH_NAME,,}-multi-$BUILD_NUMBER
+kubectl delete terraform tf-prod-jx3-versions-${BRANCH_NAME,,}-multi-prod-$BUILD_NUMBER
 
 ## cleanup secrets in google secrets manager if it was enabled
 export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
