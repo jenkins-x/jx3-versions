@@ -38,7 +38,7 @@ export JX_GIT_OVERRIDES=".lighthouse/jenkins-x/bdd/multi/overlay.sh"
 `dirname "$0"`/../terraform-ci.sh
 
 # now lets delete the BDD production cluster
-kubectl delete terraform tf-prod-jx3-versions-${BRANCH_NAME,,}-multi-prod-$BUILD_NUMBER
+kubectl delete terraform tf-prod-jx3-versions-pr$PULL_NUMBER-multi-prod-$BUILD_NUMBER
 
 ## cleanup secrets in google secrets manager if it was enabled
 export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
