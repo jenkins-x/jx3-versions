@@ -56,7 +56,7 @@ spec:
             export LH_VERSION=$(grep 'version: ' charts/jx3/lighthouse/defaults.yaml | awk '{ print $2}')
             echo "using versions JX: ${JX_VERSION} lighthouse: ${LH_VERSION}"
             jx scm release update --owner jenkins-x --name jx --tag v$JX_VERSION --prerelease=false --kind github --server https://github.com --token $GITHUB_TOKEN
-            jx scm release update --owner jenkins-x --name lighthouse --tag $LH_VERSION --prerelease=false --kind github --server https://github.com --token $GITHUB_TOKEN
+            jx scm release update --owner jenkins-x --name lighthouse --tag v$LH_VERSION --prerelease=false --kind github --server https://github.com --token $GITHUB_TOKEN
         - image: gcr.io/jenkinsxio/jx-changelog:0.0.11
           name: changelog
           resources: {}
