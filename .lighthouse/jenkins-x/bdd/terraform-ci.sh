@@ -155,7 +155,7 @@ $JX_SCM repo clone ${GH_CLONE_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev
 
 pushd `pwd`/cluster-${CLUSTER_NAME}-dev
 
-      git pull origin master
+      git pull origin main
       # use the changes from this PR in the version stream for the cluster repo when resolving the helmfile
       rm -rf versionStream
       cp -R $SOURCE_DIR versionStream
