@@ -79,7 +79,8 @@ spec:
     echo "lets setup and install the vault"
     git clone $TF_VAR_jx_git_url dev-cluster
     cd dev-cluster/infra
-    helmfile install helmfile.yaml
+    ls -al 
+    helmfile apply
     echo  "lets wait for the vault to be running"
     sleep 30
     jx secret vault wait
