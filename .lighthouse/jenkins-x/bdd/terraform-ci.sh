@@ -214,7 +214,7 @@ else
 
       pushd `pwd`/infra-${CLUSTER_NAME}-dev
             # lets use the latest terraform versions
-            jx gitops upgrade --version-stream-dir $SOURCE_DIR/versionStream
+            jx gitops upgrade --version-stream-dir $SOURCE_DIR
 
             # lets add / commit any cloud resource specific changes
             git commit -a -m "chore: terraform version changes" || true
