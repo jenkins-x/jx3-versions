@@ -79,10 +79,11 @@ spec:
     echo "lets setup and install the vault"
     git clone $TF_VAR_jx_git_url dev-cluster
     cd dev-cluster/infra
-    ls -al 
-    helmfile apply
+    ls -al
+    helmfile sync
     echo  "lets wait for the vault to be running"
     sleep 30
+    jx secret vault port-forward&
     jx secret vault wait
     cd ../..
 
