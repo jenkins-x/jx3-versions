@@ -22,6 +22,8 @@ declare -a repos=(
 
 declare -a tfrepos=(
   "jx3-terraform-gke"
+  "jx3-terraform-eks"
+  "jx3-terraform-azure"
 )
 
 export TMPDIR=/tmp/jx3-gitops-promote
