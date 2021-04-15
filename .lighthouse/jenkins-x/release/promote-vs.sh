@@ -11,7 +11,7 @@ declare -a repos=(
   # GKE
   "jx3-gke-vault" "jx3-gke-gsm" "jx3-gke-gsm-gitea" "jx3-gke-gcloud-vault"
   # EKS
-  "jx3-eks-terraform-vault" "jx3-eks-vault"
+  "jx3-eks-vault"
   # Azure
   "jx3-azure-vault" "jx3-azure-akv"
   # OpenShift
