@@ -160,7 +160,8 @@ post-build: $(GENERATE_SCHEDULER)
 # lets add the kubectl-apply prune annotations
 #
 # NOTE be very careful about these 3 labels as getting them wrong can remove stuff in you cluster!
-	jx gitops label --dir $(OUTPUT_DIR)/cluster                   gitops.jenkins-x.io/pipeline=cluster
+	jx gitops label --dir $(OUTPUT_DIR)/cluster/resources         gitops.jenkins-x.io/pipeline=cluster
+	jx gitops label --dir $(OUTPUT_DIR)/cluster/namespaces        gitops.jenkins-x.io/pipeline=clusterNamespaces
 	jx gitops label --dir $(OUTPUT_DIR)/customresourcedefinitions gitops.jenkins-x.io/pipeline=customresourcedefinitions
 	jx gitops label --dir $(OUTPUT_DIR)/namespaces                gitops.jenkins-x.io/pipeline=namespaces
 
@@ -169,7 +170,7 @@ post-build: $(GENERATE_SCHEDULER)
 	jx gitops annotate --dir $(OUTPUT_DIR) --selector app.kubernetes.io/name=ingress-nginx kapp.k14s.io/change-group=apps.jenkins-x.io/ingress-nginx
 
 # lets label all Namespace resources with the main namespace which creates them and contains the Environment resources
-	jx gitops label --dir $(OUTPUT_DIR)/cluster --kind=Namespace team=jx
+	jx gitops label --dir $(OUTPUT_DIR)/cluster/namespaces team=jx
 
 # lets enable pusher-wave to perform rolling updates of any Deployment when its underlying Secrets get modified
 # by modifying the underlying secret store (e.g. vault / GSM / ASM) which then causes External Secrets to modify the k8s Secrets
@@ -276,9 +277,13 @@ failed: apply-completed
 kubectl-apply:
 	@echo "using kubectl to apply resources"
 
-# NOTE be very careful about these 2 labels as getting them wrong can remove stuff in you cluster!
+# lets not prune namespaces to avoid accidentally removing other resources which could be created in the namespaces
+	jx gitops label --dir $(OUTPUT_DIR)/cluster/namespaces gitops.jenkins-x.io/pipeline=clusterNamespaces
+	kubectl apply $(KUBECTL_APPLY_FLAGS) -R -f $(OUTPUT_DIR)/cluster/namespaces
+
+# NOTE be very careful about these 3 labels as getting them wrong can remove stuff in you cluster!
 	kubectl apply $(KUBECTL_APPLY_FLAGS) --prune -l=gitops.jenkins-x.io/pipeline=customresourcedefinitions -R -f $(OUTPUT_DIR)/customresourcedefinitions
-	kubectl apply $(KUBECTL_APPLY_FLAGS) --prune -l=gitops.jenkins-x.io/pipeline=cluster                   -R -f $(OUTPUT_DIR)/cluster
+	kubectl apply $(KUBECTL_APPLY_FLAGS) --prune -l=gitops.jenkins-x.io/pipeline=cluster                   -R -f $(OUTPUT_DIR)/cluster/resources
 	kubectl apply $(KUBECTL_APPLY_FLAGS) --prune -l=gitops.jenkins-x.io/pipeline=namespaces                -R -f $(OUTPUT_DIR)/namespaces
 
 # lets apply any infrastructure specific labels or annotations to enable IAM roles on ServiceAccounts etc
