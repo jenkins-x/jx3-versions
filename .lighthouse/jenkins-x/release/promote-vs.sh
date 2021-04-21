@@ -16,8 +16,8 @@ declare -a repos=(
   "jx3-azure-vault" "jx3-azure-akv"
   # OpenShift
   "jx3-openshift" "jx3-openshift-crc"
-  # IKS
-  "jx3-iks"
+  # other clouds
+  "jx3-iks" "jx3-alicloud"
 )
 
 declare -a tfrepos=(
