@@ -20,3 +20,8 @@ rbac:
   create: true
 domainFilters:
 - "{{ .Values.jxRequirements.ingress.domain }}"
+{{- if hasKey .Values.jxRequirements.ingress "extraDomains" }}
+{{- range .Values.jxRequirements.ingress.extraDomains }}
+- {{ . }}
+{{- end }}
+{{- end }}
