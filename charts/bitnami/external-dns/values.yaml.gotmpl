@@ -45,9 +45,11 @@ domainFilters:
 {{- end }}
 {{- end }}
 {{- end }}
-{{- if hasKey .Values.jxRequirements.ingress "extraDomains" }}
-{{- range .Values.jxRequirements.ingress.extraDomains }}
-- {{ . }}
+{{- if hasKey .Values.jxRequirements "extraDomains" }}
+{{- range $key, $val := .Values.jxRequirements.environments }}
+{{- if hasKey $val "ingress" }}
+- {{ $val.ingress.domain }}
+{{- end }}
 {{- end }}
 {{- end }}
 
