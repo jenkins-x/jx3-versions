@@ -270,7 +270,7 @@ status:
 .PHONY: apply-completed
 apply-completed: $(POST_APPLY_HOOK)
 # copy any git operator secrets to the jx namespace
-	jx secret copy --namespace jx-git-operator --to jx --selector git-operator.jenkins.io/secret=git-operator
+	jx secret copy --ns jx-git-operator --to jx --selector git-operator.jenkins.io/secret=git-operator
 
 	@echo "completed the boot Job"
 
