@@ -27,7 +27,7 @@ spec:
           script: |
             #!/usr/bin/env bash
             jx step next-version --use-git-tag-only --tag
-        - image: ghcr.io/jenkins-x/jx:3.2.113
+        - image: ghcr.io/jenkins-x/jx:3.2.114
           name: jx-variables
           resources: {}
           script: |
@@ -64,7 +64,7 @@ spec:
             #!/bin/sh
             source .jx/variables.sh
             jx changelog create --verbose --version ${VERSION} --rev v${VERSION}
-        - image: ghcr.io/jenkins-x/jx:3.2.113
+        - image: ghcr.io/jenkins-x/jx:3.2.114
           name: promote-vs
           resources: {}
           script: |
