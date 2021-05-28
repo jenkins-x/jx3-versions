@@ -12,6 +12,11 @@ crds:
 replicaCount: 0
 {{- end }}
 
+{{- if eq .Values.jxRequirements.secretStorage "azurekeyvault" }}
+env:
+  POLLER_INTERVAL_MILLISECONDS: 60000
+{{- end }}
+
 {{- if eq .Values.jxRequirements.secretStorage "vault" }}
 env:
   VAULT_ADDR: https://vault.jx-vault:8200
