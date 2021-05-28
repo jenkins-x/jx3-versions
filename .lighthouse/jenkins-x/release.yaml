@@ -21,7 +21,18 @@ spec:
         steps:
         - image: uses:jenkins-x/jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@versionStream
           name: ""
-        - image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
+        - env:
+          - name: GIT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: tekton-git
+          - name: GIT_USER
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: tekton-git
+          image: ghcr.io/jenkins-x/jx-release-version:2.4.7
           name: next-version
           resources: {}
           script: |
@@ -33,13 +44,7 @@ spec:
           script: |
             #!/usr/bin/env bash
             jx gitops variables
-        - image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-          name: get-jx-prerelease-state
-          resources: {}
-          script: |
-            #!/bin/sh
-            ./.lighthouse/jenkins-x/release/get-jx-prerelease-state.sh
-        - image: gcr.io/jenkinsxio/jx-scm:0.0.7
+        - image: ghcr.io/jenkins-x/jx-scm:0.0.28
           name: release-jx-cli
           resources: {}
           env:
@@ -57,7 +62,7 @@ spec:
             echo "using versions JX: ${JX_VERSION} lighthouse: ${LH_VERSION}"
             jx scm release update --owner jenkins-x --name jx --tag v$JX_VERSION --prerelease=false --kind github --server https://github.com --token $GITHUB_TOKEN
             jx scm release update --owner jenkins-x --name lighthouse --tag v$LH_VERSION --prerelease=false --kind github --server https://github.com --token $GITHUB_TOKEN
-        - image: gcr.io/jenkinsxio/jx-changelog:0.0.11
+        - image: ghcr.io/jenkins-x/jx-changelog:0.0.43
           name: changelog
           resources: {}
           script: |
