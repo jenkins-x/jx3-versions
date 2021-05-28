@@ -11,6 +11,7 @@ spec:
       taskSpec:
         metadata: {}
         stepTemplate:
+          image: uses:jenkins-x/jx3-pipeline-catalog/tasks/go-plugin/release.yaml@versionStream
           name: ""
           resources: {}
           volumeMounts:
@@ -21,29 +22,11 @@ spec:
         steps:
         - image: uses:jenkins-x/jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@versionStream
           name: ""
-        - env:
-          - name: GIT_TOKEN
-            valueFrom:
-              secretKeyRef:
-                key: password
-                name: tekton-git
-          - name: GIT_USER
-            valueFrom:
-              secretKeyRef:
-                key: username
-                name: tekton-git
-          image: ghcr.io/jenkins-x/jx-release-version:2.4.7
-          name: next-version
           resources: {}
-          script: |
-            #!/usr/bin/env bash
-            jx step next-version --use-git-tag-only --tag
-        - image: ghcr.io/jenkins-x/jx:3.2.124
-          name: jx-variables
+        - name: next-version
           resources: {}
-          script: |
-            #!/usr/bin/env bash
-            jx gitops variables
+        - name: jx-variables
+          resources: {}
         - image: ghcr.io/jenkins-x/jx-scm:0.0.28
           name: release-jx-cli
           resources: {}
@@ -62,14 +45,9 @@ spec:
             echo "using versions JX: ${JX_VERSION} lighthouse: ${LH_VERSION}"
             jx scm release update --owner jenkins-x --name jx --tag v$JX_VERSION --prerelease=false --kind github --server https://github.com --token $GITHUB_TOKEN
             jx scm release update --owner jenkins-x --name lighthouse --tag v$LH_VERSION --prerelease=false --kind github --server https://github.com --token $GITHUB_TOKEN
-        - image: ghcr.io/jenkins-x/jx-changelog:0.0.43
-          name: changelog
+        - name: changelog
           resources: {}
-          script: |
-            #!/bin/sh
-            source .jx/variables.sh
-            jx changelog create --verbose --version ${VERSION} --rev v${VERSION}
-        - image: ghcr.io/jenkins-x/jx:3.2.124
+        - image: ghcr.io/jenkins-x/jx:3.2.123
           name: promote-vs
           resources: {}
           script: |
