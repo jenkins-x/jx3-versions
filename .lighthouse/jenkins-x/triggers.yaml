@@ -53,7 +53,7 @@ spec:
     source: "pullrequest.yaml"
   - name: gsm-kapp
     context: "gsm-kapp"
-    always_run: true
+    always_run: false
     optional: false
     trigger: (?m)^/test( all| gsm-kapp),?(s+|$)
     rerun_command: /test gsm-kapp
