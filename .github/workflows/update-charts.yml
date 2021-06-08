@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - env:
-          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GIT_TOKEN: ${{ secrets.GIT_BOT_TOKEN }}
         name: updatebot
         uses: docker://ghcr.io/jenkins-x/jx-updatebot:0.0.75
         with:
