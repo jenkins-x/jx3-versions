@@ -133,7 +133,7 @@ fetch: init $(COPY_SOURCE) $(REPOSITORY_RESOLVE)
 	jx secret replicate --selector secret.jenkins-x.io/replica-source=true
 
 # populate secrets from filesystem definitions
-	-VAULT_ADDR=$(VAULT_ADDR) VAULT_NAMESPACE=$(VAULT_NAMESPACE) jx secret populate --source filesystem --secret-namespace $(VAULT_NAMESPACE)
+#	-VAULT_ADDR=$(VAULT_ADDR) VAULT_NAMESPACE=$(VAULT_NAMESPACE) jx secret populate --source filesystem --secret-namespace $(VAULT_NAMESPACE)
 
 # lets make sure all the namespaces exist for environments of the replicated secrets
 	jx gitops namespace --dir-mode --dir $(OUTPUT_DIR)/namespaces
@@ -223,6 +223,7 @@ secrets-populate:
 # lets populate any missing secrets we have a generator in `charts/repoName/chartName/secret-schema.yaml`
 # they can be modified/regenerated at any time via `jx secret edit`
 	-VAULT_ADDR=$(VAULT_ADDR) VAULT_NAMESPACE=$(VAULT_NAMESPACE) jx secret populate --secret-namespace $(VAULT_NAMESPACE)
+
 
 .PHONY: secrets-wait
 secrets-wait:
