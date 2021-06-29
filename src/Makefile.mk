@@ -247,14 +247,14 @@ regen-phase-1: git-setup resolve-metadata all $(KUBEAPPLY) verify-ingress-ignore
 regen-phase-2: verify-ingress-ignore all verify-ignore commit
 
 .PHONY: regen-phase-3
-regen-phase-3: push secrets-wait
+regen-phase-3: push secrets-populate secrets-wait
 
 .PHONY: regen-none
 regen-none:
 # we just merged a PR so lets perform any extra checks after the merge but before the kubectl apply
 
 .PHONY: apply
-apply: regen-check $(KUBEAPPLY) secrets-populate verify annotate-resources apply-completed status
+apply: regen-check $(KUBEAPPLY) verify annotate-resources apply-completed status
 
 .PHONY: report
 report:
