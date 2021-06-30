@@ -45,6 +45,13 @@ domainFilters:
 {{- end }}
 {{- end }}
 {{- end }}
+{{- if hasKey .Values.jxRequirements "extraDomains" }}
+{{- range $key, $val := .Values.jxRequirements.environments }}
+{{- if hasKey $val "ingress" }}
+- {{ $val.ingress.domain }}
+{{- end }}
+{{- end }}
+{{- end }}
 
 metrics:
   enabled: true
