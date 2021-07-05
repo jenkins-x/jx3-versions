@@ -47,7 +47,7 @@ spec:
             jx scm release update --owner jenkins-x --name lighthouse --tag v$LH_VERSION --prerelease=false --kind github --server https://github.com --token $GITHUB_TOKEN
         - name: changelog
           resources: {}
-        - image: ghcr.io/jenkins-x/jx:3.2.160
+        - image: ghcr.io/jenkins-x/jx:3.2.161
           name: promote-vs
           resources: {}
           script: |
