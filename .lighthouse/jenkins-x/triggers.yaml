@@ -46,7 +46,7 @@ spec:
     source: "pullrequest-gitea.yaml"
   - name: gsm
     context: "gsm"
-    always_run: true
+    always_run: false
     optional: false
     trigger: (?m)^/test( all| gsm),?(s+|$)
     rerun_command: /test gsm
@@ -60,7 +60,7 @@ spec:
     source: "pullrequest.yaml"
   - name: kube
     context: "kube"
-    always_run: true
+    always_run: false
     optional: false
     trigger: (?m)^/test( all| kube),?(s+|$)
     rerun_command: /test kube
@@ -81,14 +81,14 @@ spec:
     source: "pullrequest.yaml"
   - name: tls
     context: "tls"
-    always_run: true
+    always_run: false
     optional: false
     trigger: (?m)^/test( all| tls),?(s+|$)
     rerun_command: /test tls
     source: "pullrequest.yaml"
   - name: vault
     context: "vault"
-    always_run: true
+    always_run: false
     optional: false
     trigger: (?m)^/test( all| vault),?(s+|$)
     rerun_command: /test vault
