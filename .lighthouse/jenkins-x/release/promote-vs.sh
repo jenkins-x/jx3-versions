@@ -7,7 +7,7 @@ echo "promoting changes in jx3-gitops-template to downstream templates"
 
 declare -a repos=(
   # local
-  "jx3-kubernetes" "jx3-kubernetes-production" "jx3-kubernetes-bbc" "jx3-kubernetes-istio" "jx3-kubernetes-minio" "jx3-kubernetes-vault" "jx3-kind" "jx3-minikube" "jx3-docker-vault"
+  "jx3-kubernetes" "jx3-kubernetes-production" "jx3-kubernetes-bbc" "jx3-kubernetes-istio" "jx3-kubernetes-minio" "jx3-kubernetes-vault" "jx3-kind" "jx3-kind-gitea" "jx3-minikube" "jx3-docker-vault"
   # GKE
   "jx3-gke-vault" "jx3-gke-gsm" "jx3-gke-gsm-gitea" "jx3-gke-gcloud-vault"
   # EKS
