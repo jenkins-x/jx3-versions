@@ -45,6 +45,7 @@ spec:
             echo "using versions JX: ${JX_VERSION} lighthouse: ${LH_VERSION}"
             jx scm release update --owner jenkins-x --name jx --tag v$JX_VERSION --prerelease=false --kind github --server https://github.com --token $GITHUB_TOKEN
             jx scm release update --owner jenkins-x --name lighthouse --tag v$LH_VERSION --prerelease=false --kind github --server https://github.com --token $GITHUB_TOKEN
+            ./.lighthouse/jenkins-x/release/promote-jx-website.sh
         - name: changelog
           resources: {}
         - image: ghcr.io/jenkins-x/jx:3.2.165
