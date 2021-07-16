@@ -48,7 +48,7 @@ spec:
             ./.lighthouse/jenkins-x/release/promote-jx-website.sh
         - name: changelog
           resources: {}
-        - image: ghcr.io/jenkins-x/jx:3.2.171
+        - image: ghcr.io/jenkins-x/jx:3.2.172
           name: promote-vs
           resources: {}
           script: |
