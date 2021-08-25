@@ -166,7 +166,7 @@ pushd `pwd`/cluster-${CLUSTER_NAME}-dev
       rm -rf .jx/git-operator/filename.txt
 
       # lets add some testing charts....
-      jx gitops helmfile add --chart jx3/jx-test-collector
+      jx gitops helmfile add --chart jxgh/jx-test-collector
 
       # configure the git server
       jx gitops requirements edit --git-server $GIT_SERVER --git-kind $GIT_KIND --git-name $GIT_NAME

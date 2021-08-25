@@ -82,7 +82,7 @@ spec:
     export TEST_NAME="test-create-spring"
     echo "PATH=$PATH"
     helm version
-    helm repo add jx3 https://storage.googleapis.com/jenkinsxio/charts
+    helm repo add jx3 https://jenkins-x-charts.github.io/repo
     helm upgrade --install bdd jx3/jx-bdd  --namespace jx --create-namespace --set bdd.approverSecret="bdd-git-gitea-approver",bdd.kind="$GIT_KIND",bdd.owner="$GIT_ORGANISATION",bdd.gitServerHost="$GIT_SERVER_HOST",bdd.gitServerURL="$GIT_SERVER_URL",command.test="make $TEST_NAME",jxgoTag="$JX_VERSION",bdd.user="${GIT_USER}",bdd.token="${GIT_TOKEN}"
 
     echo "about to wait for the BDD test to run"
