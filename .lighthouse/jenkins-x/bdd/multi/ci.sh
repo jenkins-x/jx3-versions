@@ -14,7 +14,7 @@ export TERRAFORM_FILE="terraform-multi-prod.yaml.gotmpl"
 # enable the terraform gsm config
 export TF_VAR_gsm=true
 
-export PROJECT_ID=jenkins-x-labs-bdd1
+export PROJECT_ID=jenkins-x-bdd-326715
 export TF_VAR_project_id=$PROJECT_ID
 
 export JX_TEST_COMMAND="jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/terraform-multi-prod.yaml.gotmpl --verify-result --name-prefix tf-prod- --no-delete"
