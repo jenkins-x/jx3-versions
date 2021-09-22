@@ -15,7 +15,7 @@ export JX_TEST_COMMAND="jx test create -f /workspace/source/.lighthouse/jenkins-
 
 # enable the terraform gsm config
 export TF_VAR_gsm=true
-export TF_VAR_apex_domain=jenkinsxlabs.com
+export TF_VAR_apex_domain=jenkinsxlabs-test.com
 export TF_VAR_subdomain=$CLUSTER_NAME
 export TF_VAR_lets_encrypt_production=false
 export TF_VAR_tls_email=jenkins-x-admin@googlegroups.com
@@ -26,5 +26,5 @@ export RUN_TEST="`dirname "$0"`/test.sh"
 `dirname "$0"`/../terraform-ci.sh
 
 ## cleanup secrets in google secrets manager if it was enabled
-export PROJECT_ID=jenkins-x-labs-bdd1
+export PROJECT_ID=jenkins-x-bdd-326715
 gcloud secrets list --project $PROJECT_ID --format='get(NAME)' --limit=unlimited --filter=$CLUSTER_NAME | xargs -I {arg} gcloud secrets delete  "{arg}" --quiet

@@ -9,7 +9,7 @@ export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-kubernetes"
 
 export TERRAFORM_FILE="terraform-gitea.yaml.gotmpl"
 
-export PROJECT_ID=jenkins-x-labs-bdd1
+export PROJECT_ID=jenkins-x-bdd-326715
 export TF_VAR_project_id=$PROJECT_ID
 
 export PATH=$PATH:/usr/local/bin
@@ -30,7 +30,7 @@ export TERRAFORM_INPUT="-input=false"
 # ensure buckets are cleaned up for CI
 export TF_VAR_force_destroy=true
 
-export PROJECT_ID=jenkins-x-labs-bdd1
+export PROJECT_ID=jenkins-x-bdd-326715
 export CREATED_TIME=$(date '+%a-%b-%d-%Ybin/ main.tf values.auto.tfvars terraform.tfstate variables.tf-%H-%M-%S')
 export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
 export ZONE=europe-west1-c
