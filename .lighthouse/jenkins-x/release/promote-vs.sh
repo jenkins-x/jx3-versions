@@ -64,8 +64,8 @@ done
 # lets upgarde our own infra automatically
 LOCAL_BRANCH_NAME="jx-vs_$VERSION"
 cd $TMPDIR
-git clone https://github.com/jenkins-x/jx3-eagle.git
-cd "jx3-eagle"
+git clone https://github.com/jenkins-x/jx3-oss-cluster.git
+cd "jx3-oss-cluster"
 git checkout -b $LOCAL_BRANCH_NAME
 jx gitops upgrade --commit-message "chore: version stream upgrade $VERSION"
 git push origin $LOCAL_BRANCH_NAME
