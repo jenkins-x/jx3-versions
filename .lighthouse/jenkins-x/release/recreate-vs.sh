@@ -12,7 +12,7 @@ declare -a xrepos=(
   # EKS
   "jx3-eks-terraform-vault"
   # local
-  "jx3-kind-vault" "jx3-minikube-vault" "jx3-docker-vault"
+  "jx3-kind-vault" "jx3-minikube-vault" "jx3-docker-vault" "jx3-k3s-vault"
 )
 
 declare -a repos=(
