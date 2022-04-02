@@ -5,6 +5,9 @@ KUBEAPPLY ?= kubectl-apply
 HELM_TMP_GENERATE ?= /tmp/generate
 HELM_TMP_SECRETS ?= /tmp/secrets/jx-helm
 
+# Prevent accidental git commit of secrets
+HELM_TMP_SECRETS_WORKSPACE ?= /workspace/source/tmp/secrets/jx-helm
+
 # lets you define a post apply hook such as to run custom validation
 POST_APPLY_HOOK ?=
 
@@ -57,7 +60,7 @@ HELMFILE_TEMPLATE_FLAGS ?=
 
 .PHONY: clean
 clean:
-	@rm -rf build $(OUTPUT_DIR) $(HELM_TMP_SECRETS) $(HELM_TMP_GENERATE)
+	@rm -rf build $(OUTPUT_DIR) $(HELM_TMP_SECRETS) $(HELM_TMP_GENERATE) $(HELM_TMP_SECRETS_WORKSPACE)
 
 .PHONY: setup
 setup:

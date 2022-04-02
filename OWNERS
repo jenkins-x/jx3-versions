@@ -13,6 +13,7 @@ approvers:
 - warrenbailey
 - jenkins-x-labs-bot
 - cloudbees-ci-cd[bot]
+- ankitm123
 reviewers:
 - abayer
 - cagiti
@@ -28,3 +29,4 @@ reviewers:
 - warrenbailey
 - jenkins-x-labs-bot
 - cloudbees-ci-cd[bot]
+- ankitm123
