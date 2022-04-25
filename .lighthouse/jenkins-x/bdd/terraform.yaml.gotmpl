@@ -6,6 +6,8 @@ spec:
     value: "/tmp/kubecfg"
   - name: TF_VAR_jx_git_url
     value: https://github.com/jenkins-x-bdd/cluster-{{ .Env.TF_VAR_cluster_name }}-dev.git
+  - name: TF_VAR_node_preemptible
+    value: "true"
   - name: TF_VAR_jx_bot_username
     value: jenkins-x-bot-bdd
   - name: TF_VAR_jx_bot_token
