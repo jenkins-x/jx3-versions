@@ -18,3 +18,6 @@ export TF_VAR_gsm=true
 export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
 export PROJECT_ID=jenkins-x-bdd-326715
 gcloud secrets list --project $PROJECT_ID --format='get(NAME)' --limit=unlimited --filter=$CLUSTER_NAME | xargs -I {arg} gcloud secrets delete  "{arg}" --quiet
+
+## Clean up service accounts
+gcloud iam service-accounts list --project $PROJECT_ID --format='get(EMAIL)' --limit=unlimited --filter=$CLUSTER_NAME | xargs -I {arg} gcloud iam service-accounts delete "{arg}" --quiet

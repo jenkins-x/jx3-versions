@@ -238,3 +238,10 @@ export TF_VAR_gcp_project=$PROJECT_ID
 export TF_VAR_cluster_name=$CLUSTER_NAME
 
 $JX_TEST_COMMAND
+
+# Needs a new token to delete repo
+# $JX_SCM auth refresh -h github.com -s delete_repo
+# echo "Deleting cluster git repo: ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev"
+# $JX_SCM repo delete ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev --confirm
+# echo "Deleting infra repo: ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev"
+# $JX_SCM repo delete ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev --confirm
