@@ -12,3 +12,7 @@ spec:
               - jenkins-x/*
               - jx3/*
               - jxgh/*
+              # Cert manager
+              - jetstack/*
+              # External secrets
+              - external-secrets/*
