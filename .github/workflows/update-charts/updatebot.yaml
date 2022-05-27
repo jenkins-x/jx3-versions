@@ -16,3 +16,5 @@ spec:
               - jetstack/*
               # External secrets
               - external-secrets/*
+              # nginx
+              - ingress-nginx/*
