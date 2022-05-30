@@ -1,0 +1,19 @@
+extraArgs:
+  provider: github
+
+config:
+  clientID: ""
+  clientSecret: ""
+
+ingress:
+  # -- Enable Ingress
+  enabled: true
+  # -- Ingress accepted path
+  path: /oauth2
+  # -- Ingress accepted hostnames
+  hosts:
+  - dashboard{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
+  - lighthouse{{ .Values.jxRequirements.ingress.namespaceSubDomain }}{{ .Values.jxRequirements.ingress.domain }}
+  annotations: {
+    kubernetes.io/ingress.class: "nginx"
+  }
