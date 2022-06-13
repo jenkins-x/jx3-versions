@@ -1,16 +1,6 @@
 approvers:
-- garethjevans
-- jstrachan
-- rawlingsj
 - jenkins-x-labs-bot
-- ankitm123
-- babadofar
-- tomhobson
+- maintainers
 reviewers:
-- garethjevans
-- jstrachan
-- rawlingsj
 - jenkins-x-labs-bot
-- ankitm123
-- babadofar
-- tomhobson
+- maintainers
