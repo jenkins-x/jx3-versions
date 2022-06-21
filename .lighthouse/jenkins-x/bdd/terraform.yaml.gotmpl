@@ -6,7 +6,7 @@ spec:
     value: "/tmp/kubecfg"
   - name: TF_VAR_jx_git_url
     value: https://github.com/jenkins-x-bdd/cluster-{{ .Env.TF_VAR_cluster_name }}-dev.git
-  - name: TF_VAR_node_preemptible
+  - name: TF_VAR_node_spot
     value: "true"
   - name: TF_VAR_kuberhealthy
     value: "false"
@@ -32,11 +32,7 @@ spec:
           namespace: jx
           key: password
 
-  terraformRunner: ghcr.io/jenkins-x/terraform-operator-gcp
-  terraformVersion: 3.2.377
-
-  terraformModule:
-    address: https://github.com/jenkins-x-bdd/infra-{{ .Env.TF_VAR_cluster_name }}-dev
+  terraformModule: https://github.com/jenkins-x-bdd/infra-{{ .Env.TF_VAR_cluster_name }}-dev?ref=main
 
   customBackend: |-
     terraform {
@@ -50,12 +46,10 @@ spec:
   serviceAccount: tekton-bot
 
   applyOnCreate: true
-  applyOnUpdate: true
-  applyOnDelete: true
   ignoreDelete: false
 
 
-  postrunScript: |-
+  postApplyScript: |-
     #!/bin/bash
     set -e
     set -x
@@ -82,7 +76,6 @@ spec:
 
     echo "lets verify the log completes"
     jx admin log -b
-    
     echo "installing the BDD test"
     export GIT_ORGANISATION="jenkins-x-bdd"
     export TEST_NAME="test-create-spring"
