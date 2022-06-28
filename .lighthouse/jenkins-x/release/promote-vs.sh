@@ -70,11 +70,3 @@ git checkout -b $LOCAL_BRANCH_NAME
 jx gitops upgrade --commit-message "chore: version stream upgrade $VERSION"
 git push origin $LOCAL_BRANCH_NAME
 jx create pullrequest -t "chore: version stream upgrade $VERSION" -l updatebot
-
-cd $TMPDIR
-git clone https://github.com/jenkins-x/jx3-lts-versions.git
-cd "jx3-lts-versions"
-git checkout -b $LOCAL_BRANCH_NAME
-jx gitops upgrade --commit-message "chore: version stream upgrade $VERSION"
-git push origin $LOCAL_BRANCH_NAME
-jx create pullrequest -t "chore: version stream upgrade $VERSION"
