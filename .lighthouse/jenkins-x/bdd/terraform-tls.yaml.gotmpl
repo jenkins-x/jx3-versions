@@ -69,7 +69,7 @@ spec:
     $(terraform output -raw connect)
 
     echo "now connected to cluster:"
-    jx ctx -b
+    jx ns -b
 
     # verify we have the correct context
     jx verify ctx -c "gke_${TF_VAR_gcp_project}_us-central1-a_${TF_VAR_cluster_name}"

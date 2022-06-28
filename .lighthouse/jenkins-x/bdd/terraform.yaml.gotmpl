@@ -73,7 +73,7 @@ spec:
     $(terraform output -raw connect)
 
     echo "now connected to cluster:"
-    jx ctx -b
+    jx ns -b
 
     echo "using jx version: $JX_VERSION"
 
