@@ -52,6 +52,9 @@ VAULT_MOUNT_POINT_POPULATE ?= ${VAULT_MOUNT_POINT}
 VAULT_MOUNT_POINT_EXTERNAL_SECRETS ?= ${VAULT_MOUNT_POINT}
 
 GIT_SHA ?= $(shell git rev-parse HEAD)
+# NEW_CLUSTER is set on command line by jx gitops apply for regen targets
+NEW_CLUSTER ?= false
+GIT_NEXT_TAG ?= $(shell date "+%Y%m%d-%H%M%S")
 
 # You can disable force mode on kubectl apply by modifying this line:
 KUBECTL_APPLY_FLAGS ?= --force
@@ -72,7 +75,7 @@ HELMFILE_TEMPLATE_FLAGS ?=
 
 .PHONY: clean
 clean:
-	@rm -rf build $(OUTPUT_DIR)/*/ $(HELM_TMP_SECRETS) $(HELM_TMP_GENERATE)
+	@rm -rf build $(OUTPUT_DIR)/*/*/ $(HELM_TMP_SECRETS) $(HELM_TMP_GENERATE)
 
 .PHONY: setup
 setup:
@@ -267,7 +270,7 @@ regen-none:
 # we just merged a PR so lets perform any extra checks after the merge but before the kubectl apply
 
 .PHONY: apply
-apply: regen-check $(KUBEAPPLY) gitops-postprocess verify annotate-resources apply-completed status
+apply: regen-check $(KUBEAPPLY) gitops-postprocess push-tag-if-missing verify annotate-resources apply-completed status
 
 .PHONY: report
 report:
@@ -325,22 +328,52 @@ kapp-apply-dry-run:
 # kpt live apply is very strict on the syntax of the manifest yaml files. Before switching to kpt-apply it might be good
 # idea to use a yaml linter on the files in config-root.
 .PHONY: kpt-apply
-kpt-apply: $(OUTPUT_DIR)/Kptfile
-	@echo "using kpt to apply resources"
+kpt-apply: GIT_PREV_TAG != test $(NEW_CLUSTER) != true && git describe --abbrev=0 --tags 2> /dev/null || git rev-list --max-parents=0 HEAD
+kpt-apply: kpt-apply-customresourcedefinitions kpt-apply-cluster kpt-apply-namespaces
 
-	kpt live apply $(KPT_LIVE_APPLY_FLAGS) $(OUTPUT_DIR)
+.PHONY: kpt-apply-customresourcedefinitions
+kpt-apply-customresourcedefinitions: $(OUTPUT_DIR)/customresourcedefinitions/Kptfile
+	@echo "using kpt to apply custom resource definitions"
+
+	[ ! -d $(OUTPUT_DIR)/customresourcedefinitions ] || git diff --exit-code $(GIT_PREV_TAG) $(OUTPUT_DIR)/customresourcedefinitions || kpt live apply $(KPT_LIVE_APPLY_FLAGS) $(OUTPUT_DIR)/customresourcedefinitions
+
+.PHONY: kpt-apply-cluster
+kpt-apply-cluster: $(OUTPUT_DIR)/cluster/Kptfile
+	@echo "using kpt to apply cluster resources"
+
+	git diff --exit-code $(GIT_PREV_TAG) $(OUTPUT_DIR)/cluster || kpt live apply $(KPT_LIVE_APPLY_FLAGS) $(OUTPUT_DIR)/cluster
+
+.PHONY: kpt-apply-namespaces
+kpt-apply-namespaces: $(OUTPUT_DIR)/namespaces/Kptfile
+	@echo "using kpt to apply namespaced resources"
+
+	git diff --exit-code $(GIT_PREV_TAG) $(OUTPUT_DIR)/namespaces || kpt live apply $(KPT_LIVE_APPLY_FLAGS) $(OUTPUT_DIR)/namespaces
 
 .PHONY: kpt-apply-dry-run
-kpt-apply-dry-run: $(OUTPUT_DIR)/Kptfile
+kpt-apply-dry-run:
 	@echo "verifying changes with kpt"
 
-	kpt live apply $(KPT_LIVE_APPLY_FLAGS) --dry-run $(OUTPUT_DIR)
+	kpt live apply $(KPT_LIVE_APPLY_FLAGS) --dry-run $(OUTPUT_DIR)/customresourcedefinitions
+	kpt live apply $(KPT_LIVE_APPLY_FLAGS) --dry-run $(OUTPUT_DIR)/cluster
+	kpt live apply $(KPT_LIVE_APPLY_FLAGS) --dry-run $(OUTPUT_DIR)/namespaces
 
-$(OUTPUT_DIR)/Kptfile:
-	@echo "initializing $(OUTPUT_DIR)/Kptfile"
+$(OUTPUT_DIR)/customresourcedefinitions/Kptfile:
+	@echo "initializing $(OUTPUT_DIR)/customresourcedefinitions/Kptfile"
 
-	kpt pkg init --description "Jenkins-X cluster config" $(OUTPUT_DIR)
-	kpt live init --namespace=jx-git-operator $(OUTPUT_DIR)
+	kpt pkg init --description "Jenkins-X CRD config" $(OUTPUT_DIR)/customresourcedefinitions
+	kpt live init --namespace=jx-git-operator --name customresourcedefinitions $(OUTPUT_DIR)/customresourcedefinitions
+
+$(OUTPUT_DIR)/cluster/Kptfile:
+	@echo "initializing $(OUTPUT_DIR)/cluster/Kptfile"
+
+	kpt pkg init --description "Jenkins-X cluster config" $(OUTPUT_DIR)/cluster
+	kpt live init --namespace=jx-git-operator --name cluster $(OUTPUT_DIR)/cluster
+
+$(OUTPUT_DIR)/namespaces/Kptfile:
+	@echo "initializing $(OUTPUT_DIR)/namespaces/Kptfile"
+
+	kpt pkg init --description "Jenkins-X namespaces config" $(OUTPUT_DIR)/namespaces
+	kpt live init --namespace=jx-git-operator --name namespaces $(OUTPUT_DIR)/namespaces
 
 .PHONY: annotate-resources
 annotate-resources:
@@ -385,8 +418,16 @@ push-pr-branch:
 
 .PHONY: push
 push:
+	git tag $(GIT_NEXT_TAG)
 	@git pull
 	@git push -f
+	@git push --tags
+
+# Ensure that applied version is tagged
+.PHONO: push-tag-if-missing
+push-tag-if-missing:
+	git describe  --tags --contains 2> /dev/null || git tag $(GIT_NEXT_TAG)
+	@git push --tags
 
 .PHONY: dev-ns
 dev-ns:
