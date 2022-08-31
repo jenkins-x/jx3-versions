@@ -59,13 +59,14 @@ spec:
     # Let's avoid using containers with root user
     mkdir -p ${PWD}/.local/bin
     export PATH=$PATH:${PWD}/.local/bin
-    curl -LO https://releases.hashicorp.com/terraform/1.1.2/terraform_1.1.2_linux_amd64.zip
-    unzip terraform_1.1.2_linux_amd64.zip
+    curl --no-progress-meter -LO https://releases.hashicorp.com/terraform/1.1.2/terraform_1.1.2_linux_amd64.zip
+    unzip terraform_1.1.2_linux_amd64.zip || (echo failed to unzip terraform_1.1.2_linux_amd64.zip && cat terraform_1.1.2_linux_amd64.zip && false)
     chmod +x terraform && mv terraform ${PWD}/.local/bin && rm terraform_1.1.2_linux_amd64.zip
 
     echo "Installing jx cli ${JX_VERSION}"
     mkdir -p /${HOME}/.jx3
-    curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv
+    curl --no-progress-meter -LO https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz
+    tar xzvf jx-linux-amd64.tar.gz || (echo failed to unpack jx-linux-amd64.tar.gz && cat jx-linux-amd64.tar.gz && false)
     mv jx ${PWD}/.local/bin
 
     echo "Installing jx plugins"
