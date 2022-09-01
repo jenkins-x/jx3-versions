@@ -237,7 +237,7 @@ then
         while kubectl get terraforms.tf.isaaguilar.com $tf_resource -ojsonpath='{.status.phase}' | grep -vq completed
         do
             kubectl logs -l terraforms.tf.isaaguilar.com/resourceName=$tf_resource -f | tee saved_log || true
-            grep "^POD RESULT:" saved_log >> pod_results || true
+            grep --text "^POD RESULT:" saved_log >> pod_results || true
             sleep 10
             if [[ $(date +%s) > $aborttime ]]
             then
@@ -246,8 +246,7 @@ then
             fi
         done
         # Verifying that the last pod result is OK
-        echo Summary:
-        cat pod_results
+        tail -n 1 pod_results | grep -q OK && echo Test has succeeded
     }
     # Declare show the function for debugging purposes
     declare -f jxTestCommand
