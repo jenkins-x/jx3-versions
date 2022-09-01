@@ -229,22 +229,28 @@ fi
 
 if [ -z "$JX_TEST_COMMAND" ]
 then
-    # Work around since new tf opeator doesn't create job as is expected by jx test
+    # Work around since new version of terraform operator doesn't create job as is expected by jx test
     jxTestCommand() {
         jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/$TERRAFORM_FILE --no-watch-job
-        tf_resource=tf-jx3-versions-pr${PULL_NUMBER}-gsm-${BUILD_NUMBER}
-        aborttime=$(( `date +%s` + 3600 ))
+        tf_resource=tf-${REPO_NAME}-pr${PULL_NUMBER}-${JOB_NAME}-${BUILD_NUMBER}
+        aborttime=$(( $(date +%s) + 3600 ))
         while kubectl get terraforms.tf.isaaguilar.com $tf_resource -ojsonpath='{.status.phase}' | grep -vq completed
         do
-            kubectl logs -l terraforms.tf.isaaguilar.com/resourceName=$tf_resource -f || true
+            kubectl logs -l terraforms.tf.isaaguilar.com/resourceName=$tf_resource -f | tee saved_log || true
+            grep "^POD RESULT:" saved_log >> pod_results || true
             sleep 10
-            if [[ `date +%s` > $aborttime ]]
+            if [[ $(date +%s) > $aborttime ]]
             then
               echo Timed out waiting for terraform resource $tf_resource
-              exit 1
+              exit 11
             fi
         done
+        # Verifying that the last pod result is OK
+        echo Summary:
+        cat pod_results
     }
+    # Declare show the function for debugging purposes
+    declare -f jxTestCommand
     export JX_TEST_COMMAND=jxTestCommand
 fi
 
