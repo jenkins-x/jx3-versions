@@ -236,14 +236,23 @@ then
         aborttime=$(( $(date +%s) + 3600 ))
         while kubectl get terraforms.tf.isaaguilar.com $tf_resource -ojsonpath='{.status.phase}' | grep -vq completed
         do
-            kubectl logs -l terraforms.tf.isaaguilar.com/resourceName=$tf_resource -f | tee saved_log || true
-            grep --text "^POD RESULT:" saved_log >> pod_results || true
-            sleep 10
             if [[ $(date +%s) > $aborttime ]]
             then
               echo Timed out waiting for terraform resource $tf_resource
               exit 11
             fi
+            for pod in $(kubectl get po --sort-by '{.metadata.creationTimestamp}' --field-selector=status.phase=Running -l terraforms.tf.isaaguilar.com/resourceName=$tf_resource -oname)
+            do
+                echo Showing log for $pod
+                kubectl logs -f $pod | tee saved_log || true
+                grep --text "^POD RESULT:" saved_log >> pod_results || true
+            done
+            sleep 10
+            for pod in $(kubectl get po --sort-by '{.metadata.creationTimestamp}' --field-selector=status.phase=Failed -l terraforms.tf.isaaguilar.com/resourceName=$tf_resource -oname)
+            do
+              echo Pod $pod has failed
+              exit 5
+            done
         done
         # Verifying that the last pod result is OK
         tail -n 1 pod_results | grep -q OK && echo Test has succeeded
