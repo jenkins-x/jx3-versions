@@ -7,7 +7,7 @@ echo "promoting changes in jx3-gitops-template to downstream templates"
 
 declare -a repos=(
   # vanilla
-  "jx3-kubernetes" "jx3-kubernetes-production" "jx3-kubernetes-bbc" "jx3-kubernetes-istio" "jx3-kubernetes-minio" "jx3-kubernetes-vault" "jx3-kind" "jx3-kind-gitea" "jx3-minikube" "jx3-docker-vault" "jx3-k3s-vault"
+  "jx3-kubernetes" "jx3-kubernetes-bbc" "jx3-kubernetes-istio" "jx3-kubernetes-minio" "jx3-kubernetes-vault" "jx3-kind" "jx3-kind-gitea" "jx3-minikube" "jx3-docker-vault" "jx3-k3s-vault"
   # GKE
   "jx3-gke-vault" "jx3-gke-gsm" "jx3-gke-gsm-gitea" "jx3-gke-gcloud-vault"
   # EKS
@@ -30,16 +30,15 @@ export TMPDIR=/tmp/jx3-gitops-promote
 rm -rf $TMPDIR
 mkdir -p $TMPDIR
 
-for r in "${repos[@]}"
-do
-  echo "upgrading repository https://github.com/jx3-gitops-repositories/$r"
+function upgradeClusterRepo {
+  echo "upgrading repository https://github.com/jx3-gitops-repositories/$1"
   cd $TMPDIR
-  git clone https://github.com/jx3-gitops-repositories/$r.git
-  cd "$r"
+  git clone https://github.com/jx3-gitops-repositories/$1.git
+  cd "$1"
   echo "recreating a clean version stream"
   rm -rf versionStream .lighthouse/jenkins-x .lighthouse/Kptfile
   jx gitops kpt update || true
-  kpt pkg get https://github.com/jenkins-x/jx3-pipeline-catalog.git/environment/.lighthouse/jenkins-x .lighthouse/jenkins-x
+  kpt pkg get https://github.com/jenkins-x/jx3-pipeline-catalog.git/$2/.lighthouse/jenkins-x .lighthouse/jenkins-x
   kpt pkg get https://github.com/jenkins-x/jxr-versions.git/ versionStream
   rm -rf versionStream/jenkins*.yml versionStream/jx versionStream/.github versionStream/.pre* versionStream/.secrets* versionStream/OWNER* versionStream/.lighthouse
   jx gitops helmfile resolve --update
@@ -47,8 +46,14 @@ do
   git add * .lighthouse || true
   git commit -a -m "chore: upgrade version stream" || true
   git push || true
+}
+
+for r in "${repos[@]}"
+do
+  upgradeClusterRepo $r environment
 done
 
+upgradeClusterRepo jx3-kubernetes-production environment-remote
 
 for r in "${tfrepos[@]}"
 do
