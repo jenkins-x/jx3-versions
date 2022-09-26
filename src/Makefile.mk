@@ -257,7 +257,7 @@ regen-check:
 	jx gitops apply
 
 .PHONY: regen-phase-1
-regen-phase-1: git-setup resolve-metadata all $(KUBEAPPLY) verify-ingress-ignore commit
+regen-phase-1: git-setup resolve-metadata all commit $(KUBEAPPLY) verify-ingress-ignore
 
 .PHONY: regen-phase-2
 regen-phase-2: verify-ingress-ignore all verify-ignore commit
@@ -270,7 +270,7 @@ regen-none:
 # we just merged a PR so lets perform any extra checks after the merge but before the kubectl apply
 
 .PHONY: apply
-apply: regen-check $(KUBEAPPLY) gitops-postprocess push-tag-if-missing verify annotate-resources apply-completed status
+apply: regen-check $(KUBEAPPLY) gitops-postprocess verify annotate-resources apply-completed status
 
 .PHONY: report
 report:
@@ -332,22 +332,28 @@ kpt-apply: GIT_PREV_TAG != test $(NEW_CLUSTER) != true && git describe --abbrev=
 kpt-apply: kpt-apply-customresourcedefinitions kpt-apply-cluster kpt-apply-namespaces
 
 .PHONY: kpt-apply-customresourcedefinitions
+kpt-apply-customresourcedefinitions: GIT_PREV_TAG != test $(NEW_CLUSTER) != true && git for-each-ref --sort=-taggerdate --count=1  refs/tags/crd\* --format '%(refname)' 2> /dev/null || git rev-list --max-parents=0 HEAD
 kpt-apply-customresourcedefinitions: $(OUTPUT_DIR)/customresourcedefinitions/Kptfile
 	@echo "using kpt to apply custom resource definitions"
 
-	[ ! -d $(OUTPUT_DIR)/customresourcedefinitions ] || git diff --exit-code $(GIT_PREV_TAG) $(OUTPUT_DIR)/customresourcedefinitions || kpt live apply $(KPT_LIVE_APPLY_FLAGS) $(OUTPUT_DIR)/customresourcedefinitions
+	[ ! -d $(OUTPUT_DIR)/customresourcedefinitions ] || git diff --exit-code $(GIT_PREV_TAG) $(OUTPUT_DIR)/customresourcedefinitions || (kpt live apply $(KPT_LIVE_APPLY_FLAGS) $(OUTPUT_DIR)/customresourcedefinitions &&  (git describe  --tags --contains --match crd\* 2> /dev/null || git tag  -m 'Custom resource definitions applied' $(shell date "+crd-%Y%m%d-%H%M%S")))
+	@git push --tags
 
 .PHONY: kpt-apply-cluster
+kpt-apply-cluster: GIT_PREV_TAG != test $(NEW_CLUSTER) != true && git for-each-ref --sort=-taggerdate --count=1  refs/tags/cluster\* --format '%(refname)' 2> /dev/null || git rev-list --max-parents=0 HEAD
 kpt-apply-cluster: $(OUTPUT_DIR)/cluster/Kptfile
 	@echo "using kpt to apply cluster resources"
 
-	git diff --exit-code $(GIT_PREV_TAG) $(OUTPUT_DIR)/cluster || kpt live apply $(KPT_LIVE_APPLY_FLAGS) $(OUTPUT_DIR)/cluster
+	git diff --exit-code $(GIT_PREV_TAG) $(OUTPUT_DIR)/cluster || (kpt live apply $(KPT_LIVE_APPLY_FLAGS) $(OUTPUT_DIR)/cluster && (git describe  --tags --contains --match cluster\* 2> /dev/null || git tag -m 'Cluster wide resources applied' $(shell date "+cluster-%Y%m%d-%H%M%S")))
+	@git push --tags
 
 .PHONY: kpt-apply-namespaces
+kpt-apply-namespaces: GIT_PREV_TAG != test $(NEW_CLUSTER) != true && git for-each-ref --sort=-taggerdate --count=1  refs/tags/ns\* --format '%(refname)' 2> /dev/null || git rev-list --max-parents=0 HEAD
 kpt-apply-namespaces: $(OUTPUT_DIR)/namespaces/Kptfile
 	@echo "using kpt to apply namespaced resources"
 
-	git diff --exit-code $(GIT_PREV_TAG) $(OUTPUT_DIR)/namespaces || kpt live apply $(KPT_LIVE_APPLY_FLAGS) $(OUTPUT_DIR)/namespaces
+	git diff --exit-code $(GIT_PREV_TAG) $(OUTPUT_DIR)/namespaces || (kpt live apply $(KPT_LIVE_APPLY_FLAGS) $(OUTPUT_DIR)/namespaces && (git describe  --tags --contains --match ns\* 2> /dev/null || git tag -m 'Namespaced resources applied' $(shell date "+ns-%Y%m%d-%H%M%S")))
+	@git push --tags
 
 .PHONY: kpt-apply-dry-run
 kpt-apply-dry-run:
@@ -418,16 +424,8 @@ push-pr-branch:
 
 .PHONY: push
 push:
-	git tag $(GIT_NEXT_TAG)
 	@git pull
 	@git push -f
-	@git push --tags
-
-# Ensure that applied version is tagged
-.PHONO: push-tag-if-missing
-push-tag-if-missing:
-	git describe  --tags --contains 2> /dev/null || git tag $(GIT_NEXT_TAG)
-	@git push --tags
 
 .PHONY: dev-ns
 dev-ns:
