@@ -107,7 +107,7 @@ spec:
 
     helm version
     helm repo add jxgh https://jenkins-x-charts.github.io/repo
-    helm upgrade --install bdd jxgh/jx-bdd  --namespace jx --create-namespace --set bdd.owner="$GIT_ORGANISATION",command.test="make $TEST_NAME",jxgoTag="$JX_VERSION"
+    helm upgrade --install bdd jxgh/jx-bdd  --namespace jx --create-namespace --set bdd.owner="$GIT_ORGANISATION",command.test="go version && make $TEST_NAME",jxgoTag="$JX_VERSION"
 
     echo "about to wait for the BDD test to run"
     sleep 20
