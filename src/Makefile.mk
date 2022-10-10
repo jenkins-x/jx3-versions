@@ -52,14 +52,14 @@ VAULT_MOUNT_POINT_POPULATE ?= ${VAULT_MOUNT_POINT}
 VAULT_MOUNT_POINT_EXTERNAL_SECRETS ?= ${VAULT_MOUNT_POINT}
 
 GIT_SHA ?= $(shell git rev-parse HEAD)
+
 # NEW_CLUSTER is set on command line by jx gitops apply for regen targets
 NEW_CLUSTER ?= false
-GIT_NEXT_TAG ?= $(shell date "+%Y%m%d-%H%M%S")
 
 # You can disable force mode on kubectl apply by modifying this line:
 KUBECTL_APPLY_FLAGS ?= --force
 
-KPT_LIVE_APPLY_FLAGS ?= --install-resource-group --inventory-policy=adopt --server-side --force-conflicts
+KPT_LIVE_APPLY_FLAGS ?= --install-resource-group --inventory-policy=adopt --reconcile-timeout=15m
 
 SOURCE_DIR ?= /workspace/source
 
@@ -203,15 +203,15 @@ copy-resources: pre-build
 	@cp -r ./build/base/* $(OUTPUT_DIR)
 	@rm -rf $(OUTPUT_DIR)/kustomization.yaml
 
-.PHONY: dev-ns verify-ingress
+.PHONY: verify-ingress
 verify-ingress:
 	jx verify ingress --ingress-service ingress-nginx-controller
 
-.PHONY: dev-ns verify-ingress-ignore
+.PHONY: verify-ingress-ignore
 verify-ingress-ignore:
 	-jx verify ingress --ingress-service ingress-nginx-controller
 
-.PHONY: dev-ns verify-install
+.PHONY: verify-install
 verify-install:
 # TODO lets disable errors for now
 # as some pods stick around even though they are failed causing errors
@@ -231,7 +231,7 @@ no-gitops-webhook-update:
 	@echo "disabled 'jx gitops webhook update' as we are not a development cluster"
 
 
-.PHONY: dev-ns verify-ignore
+.PHONY: verify-ignore
 verify-ignore: verify-ingress-ignore
 
 .PHONY: secrets-populate
@@ -328,37 +328,31 @@ kapp-apply-dry-run:
 # kpt live apply is very strict on the syntax of the manifest yaml files. Before switching to kpt-apply it might be good
 # idea to use a yaml linter on the files in config-root.
 .PHONY: kpt-apply
-kpt-apply: GIT_PREV_TAG != test $(NEW_CLUSTER) != true && git describe --abbrev=0 --tags 2> /dev/null || git rev-list --max-parents=0 HEAD
 kpt-apply: kpt-apply-customresourcedefinitions kpt-apply-cluster kpt-apply-namespaces
 
 .PHONY: kpt-apply-customresourcedefinitions
-kpt-apply-customresourcedefinitions: GIT_PREV_TAG != test $(NEW_CLUSTER) != true && git for-each-ref --sort=-taggerdate --count=1  refs/tags/crd\* --format '%(refname)' 2> /dev/null || git rev-list --max-parents=0 HEAD
 kpt-apply-customresourcedefinitions: $(OUTPUT_DIR)/customresourcedefinitions/Kptfile
 	@echo "using kpt to apply custom resource definitions"
 
-	[ ! -d $(OUTPUT_DIR)/customresourcedefinitions ] || git diff --exit-code $(GIT_PREV_TAG) $(OUTPUT_DIR)/customresourcedefinitions || (kpt live apply $(KPT_LIVE_APPLY_FLAGS) $(OUTPUT_DIR)/customresourcedefinitions &&  (git describe  --tags --contains --match crd\* 2> /dev/null || git tag  -m 'Custom resource definitions applied' $(shell date "+crd-%Y%m%d-%H%M%S")))
-	@git push --tags
+	[ ! -d $(OUTPUT_DIR)/customresourcedefinitions ] || ./versionStream/src/kpt-live-apply-wrapper.sh $(OUTPUT_DIR)/customresourcedefinitions crd 'Custom resource definitions applied' $(NEW_CLUSTER) $(KPT_LIVE_APPLY_FLAGS)
 
 .PHONY: kpt-apply-cluster
-kpt-apply-cluster: GIT_PREV_TAG != test $(NEW_CLUSTER) != true && git for-each-ref --sort=-taggerdate --count=1  refs/tags/cluster\* --format '%(refname)' 2> /dev/null || git rev-list --max-parents=0 HEAD
 kpt-apply-cluster: $(OUTPUT_DIR)/cluster/Kptfile
 	@echo "using kpt to apply cluster resources"
 
-	git diff --exit-code $(GIT_PREV_TAG) $(OUTPUT_DIR)/cluster || (kpt live apply $(KPT_LIVE_APPLY_FLAGS) $(OUTPUT_DIR)/cluster && (git describe  --tags --contains --match cluster\* 2> /dev/null || git tag -m 'Cluster wide resources applied' $(shell date "+cluster-%Y%m%d-%H%M%S")))
-	@git push --tags
+	./versionStream/src/kpt-live-apply-wrapper.sh $(OUTPUT_DIR)/cluster cluster 'Cluster wide resources applied'  $(NEW_CLUSTER) $(KPT_LIVE_APPLY_FLAGS)
 
 .PHONY: kpt-apply-namespaces
-kpt-apply-namespaces: GIT_PREV_TAG != test $(NEW_CLUSTER) != true && git for-each-ref --sort=-taggerdate --count=1  refs/tags/ns\* --format '%(refname)' 2> /dev/null || git rev-list --max-parents=0 HEAD
 kpt-apply-namespaces: $(OUTPUT_DIR)/namespaces/Kptfile
 	@echo "using kpt to apply namespaced resources"
 
-	git diff --exit-code $(GIT_PREV_TAG) $(OUTPUT_DIR)/namespaces || (kpt live apply $(KPT_LIVE_APPLY_FLAGS) $(OUTPUT_DIR)/namespaces && (git describe  --tags --contains --match ns\* 2> /dev/null || git tag -m 'Namespaced resources applied' $(shell date "+ns-%Y%m%d-%H%M%S")))
-	@git push --tags
+	./versionStream/src/kpt-live-apply-wrapper.sh $(OUTPUT_DIR)/namespaces ns 'Namespaced resources applied' $(NEW_CLUSTER) $(KPT_LIVE_APPLY_FLAGS)
 
 .PHONY: kpt-apply-dry-run
 kpt-apply-dry-run:
 	@echo "verifying changes with kpt"
 
+	-git diff
 	kpt live apply $(KPT_LIVE_APPLY_FLAGS) --dry-run $(OUTPUT_DIR)/customresourcedefinitions
 	kpt live apply $(KPT_LIVE_APPLY_FLAGS) --dry-run $(OUTPUT_DIR)/cluster
 	kpt live apply $(KPT_LIVE_APPLY_FLAGS) --dry-run $(OUTPUT_DIR)/namespaces
