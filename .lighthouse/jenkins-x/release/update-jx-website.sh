@@ -7,7 +7,7 @@ set -o pipefail
 if $(cat ${IS_JX_PRERELEASE})
 then
   JX_VERSION=$(sed "s:^.*jenkins-x\/jx.*\[\([0-9.]*\)\].*$:\1:;t;d" ./dependency-matrix/matrix.md)
-  LOCAL_BRANCH_NAME="jx_cli_$VERSION"
+  LOCAL_BRANCH_NAME="jx-vs_$(date +%s)"
   if [[ $JX_VERSION =~ ^[0-9]*\.[0-9]*\.[0-9]*$ ]]
   then
     echo "updating the CLI reference"

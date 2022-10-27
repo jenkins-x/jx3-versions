@@ -11,7 +11,7 @@ declare -a repos=(
   # GKE
   "jx3-gke-vault" "jx3-gke-gsm" "jx3-gke-gsm-gitea" "jx3-gke-gcloud-vault"
   # EKS
-  "jx3-eks-asm" "jx3-eks-vault"  
+  "jx3-eks-asm" "jx3-eks-vault"
   # Azure
   "jx3-azure-vault" "jx3-azure-akv"
   # OpenShift
@@ -48,15 +48,13 @@ function upgradeClusterRepo {
   git push || true
 }
 
-for r in "${repos[@]}"
-do
+for r in "${repos[@]}"; do
   upgradeClusterRepo $r environment
 done
 
 upgradeClusterRepo jx3-kubernetes-production environment-remote
 
-for r in "${tfrepos[@]}"
-do
+for r in "${tfrepos[@]}"; do
   echo "upgrading repository https://github.com/jx3-gitops-repositories/$r"
   cd $TMPDIR
   git clone https://github.com/jx3-gitops-repositories/$r.git
@@ -67,11 +65,11 @@ do
 done
 
 # lets upgarde our own infra automatically
-LOCAL_BRANCH_NAME="jx-vs_$VERSION"
+LOCAL_BRANCH_NAME="jx-vs_$(date +%s)"
 cd $TMPDIR
 git clone https://github.com/jenkins-x/jx3-oss-cluster.git
 cd "jx3-oss-cluster"
 git checkout -b $LOCAL_BRANCH_NAME
-jx gitops upgrade --commit-message "chore: version stream upgrade $VERSION"
+jx gitops upgrade --commit-message "chore: version stream upgrade"
 git push origin $LOCAL_BRANCH_NAME
-jx create pullrequest -t "chore: version stream upgrade $VERSION" -l updatebot
+jx create pullrequest -t "chore: version stream upgrade" -l updatebot
