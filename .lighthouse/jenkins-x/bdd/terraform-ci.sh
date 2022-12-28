@@ -92,8 +92,8 @@ export TERRAFORM_INPUT="-input=false"
 export TF_VAR_force_destroy=true
 
 export PROJECT_ID=jenkins-x-bdd-326715
-export CREATED_TIME=$(date '+%a-%b-%d-%Ybin/ main.tf values.auto.tfvars terraform.tfstate variables.tf-%H-%M-%S')
-export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
+export CREATED_TIME=$(date '+%Y-%m-%d-%H-%M-%S')
+export CLUSTER_NAME="${BRANCH_NAME,,}-$CREATED_TIME-$BDD_NAME"
 export ZONE=europe-west1-c
 export LABELS="branch=${BRANCH_NAME,,},cluster=$BDD_NAME,create-time=${CREATED_TIME,,}"
 
