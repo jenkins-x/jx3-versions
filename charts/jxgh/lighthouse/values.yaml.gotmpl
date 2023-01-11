@@ -12,7 +12,7 @@ git:
 
 service:
   name: hook
-  
+
 replicaCount: 2
 
 {{- if eq .Values.jxRequirements.cluster.provider "gke" }}
@@ -60,6 +60,12 @@ vault:
 # bitbucket cloud doesn't support hmac token for webhooks which is crazy insecure but what can we do?
 {{- if and (hasKey .Values.jxRequirements.cluster "gitKind") (eq .Values.jxRequirements.cluster.gitKind "bitbucketcloud") }}
 hmacTokenEnabled: false
+{{- end }}
+
+{{- if and (hasKey .Values.jxRequirements.cluster "argocd") (.Values.jxRequirements.cluster.argocd.enabled) }}
+# avoid creating new secrets. bypasses 'jx secret' steps in Makefile
+hmacSecretName: lighthouse-hmac-token
+oauthSecretName: lighthouse-oauth-token
 {{- end }}
 
 {{- if hasKey .Values.jxRequirements.cluster "clusterName" }}
