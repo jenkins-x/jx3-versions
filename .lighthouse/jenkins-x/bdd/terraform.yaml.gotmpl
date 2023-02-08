@@ -1,6 +1,7 @@
 apiVersion: tf.isaaguilar.com/v1alpha1
 kind: Terraform
 spec:
+  persistentVolumeSize: "4Gi"
   env:
   - name: KUBECONFIG
     value: "/tmp/kubecfg"

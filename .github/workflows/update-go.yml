@@ -15,6 +15,6 @@ jobs:
       - env:
           GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
         name: updatebot
-        uses: ghcr.io/jenkins-x/jx-updatebot:0.0.75
+        uses: docker://ghcr.io/jenkins-x/jx-updatebot:0.4.0
         with:
           args: pr -c .github/workflows/update-go/updatebot.yaml --no-version --git-credentials
