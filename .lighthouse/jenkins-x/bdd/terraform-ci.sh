@@ -235,7 +235,7 @@ then
         jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/$TERRAFORM_FILE --no-watch-job
         tf_resource=tf-${REPO_NAME}-pr${PULL_NUMBER}-${JOB_NAME}-${BUILD_NUMBER}
         aborttime=$(( $(date +%s) + 3600 ))
-        while kubectl get terraforms.tf.isaaguilar.com $tf_resource -ojsonpath='{.status.phase}' | grep -vq completed
+        while kubectl get terraforms.tf.isaaguilar.com $tf_resource -ojsonpath='{.status.phase}' | grep -v completed
         do
             if [[ $(date +%s) > $aborttime ]]
             then
