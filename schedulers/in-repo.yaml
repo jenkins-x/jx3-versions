@@ -24,11 +24,11 @@ spec:
   in_repo: true
   plugins:
     entries:
+      - lgtm
       - approve
       - assign
       - help
       - hold
-      - lgtm
       - lifecycle
       - override
       - size

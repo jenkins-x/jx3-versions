@@ -22,12 +22,12 @@ spec:
     target_url: http://lighthouse{{ .Requirements.ingress.namespaceSubDomain }}{{ .Requirements.ingress.domain }}/merge/status
   plugins:
     entries:
+      - lgtm
       - config-updater
       - approve
       - assign
       - help
       - hold
-      - lgtm
       - lifecycle
       - size
       - trigger
