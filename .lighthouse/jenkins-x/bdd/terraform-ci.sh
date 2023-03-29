@@ -93,8 +93,8 @@ export TF_VAR_force_destroy=true
 
 export PROJECT_ID=jenkins-x-bdd-326715
 export CREATED_TIME=$(date '+%a-%b-%d-%Y-%H-%M-%S')
-export RANDOM=$(tr -dc 'a-z0-9' < /dev/urandom | head -c5)
-export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$RANDOM-$BDD_NAME"
+export RANDOM=$(tr -dc 'a-z0-9' < /dev/urandom | head -c6)
+export CLUSTER_NAME="${BRANCH_NAME,,}-$RANDOM-$BDD_NAME"
 export ZONE=europe-west1-c
 export LABELS="branch=${BRANCH_NAME,,},cluster=$BDD_NAME,create-time=${CREATED_TIME,,}"
 
@@ -235,6 +235,7 @@ then
         jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/$TERRAFORM_FILE --no-watch-job
         tf_resource=tf-${REPO_NAME}-pr${PULL_NUMBER}-${JOB_NAME}-${BUILD_NUMBER}
         aborttime=$(( $(date +%s) + 3600 ))
+        sleep 5
         while kubectl get terraforms.tf.isaaguilar.com $tf_resource -ojsonpath='{.status.phase}' | grep -vq completed
         do
             if [[ $(date +%s) > $aborttime ]]
@@ -268,6 +269,7 @@ echo "testing terraform with: $JX_TEST_COMMAND"
 export TF_VAR_gcp_project=$PROJECT_ID
 export TF_VAR_cluster_name=$CLUSTER_NAME
 
+set -x
 $JX_TEST_COMMAND
 
 # Needs a new token to delete repo
