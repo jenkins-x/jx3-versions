@@ -244,7 +244,7 @@ then
             fi
             sleep 1
         done
-        while kubectl get terraforms.tf.isaaguilar.com $tf_resource -ojsonpath='{.status.phase}' | grep -v completed
+        while kubectl get terraforms.tf.isaaguilar.com $tf_resource -ojsonpath='{.status.phase}' | grep -vq completed
         do
             if [[ $(date +%s) > $aborttime ]]
             then
