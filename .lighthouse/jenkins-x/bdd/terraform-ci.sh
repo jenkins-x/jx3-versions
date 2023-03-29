@@ -235,7 +235,7 @@ then
         jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/$TERRAFORM_FILE --no-watch-job
         tf_resource=tf-${REPO_NAME}-pr${PULL_NUMBER}-${JOB_NAME}-${BUILD_NUMBER}
         aborttime=$(( $(date +%s) + 3600 ))
-        while kubectl get terraforms.tf.isaaguilar.com $tf_resource -ojsonpath='{.status.phase}' | grep -vq completed
+        while kubectl get terraforms.tf.isaaguilar.com $tf_resource -ojsonpath='{.status.phase}' | grep -v completed
         do
             if [[ $(date +%s) > $aborttime ]]
             then
@@ -268,6 +268,7 @@ echo "testing terraform with: $JX_TEST_COMMAND"
 export TF_VAR_gcp_project=$PROJECT_ID
 export TF_VAR_cluster_name=$CLUSTER_NAME
 
+set -x
 $JX_TEST_COMMAND
 
 # Needs a new token to delete repo
