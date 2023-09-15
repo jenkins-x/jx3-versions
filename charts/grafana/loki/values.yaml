@@ -3,11 +3,13 @@
 persistence:
   enabled: true
 
-config:
+loki:
   # configure a 30 days retention by default
   # note that data might be available for up to 60 days, because of the internal implementation
   # see https://grafana.com/docs/loki/v2.2.0/operations/storage/retention/
   # and https://grafana.com/docs/loki/v2.2.0/operations/storage/table-manager/
-  table_manager:
-    retention_deletes_enabled: true
-    retention_period: 720h
+  config: |
+    compactor:
+      retention_enabled: true
+    limits_config:
+      retention_period: 720h
