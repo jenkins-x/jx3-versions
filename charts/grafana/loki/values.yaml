@@ -5,11 +5,19 @@ loki:
   auth_enabled: false
   commonConfig:
     replication_factor: 1
+  storage:
+    type: 'filesystem'
+    filesystem:
+      rules_directory: /loki/rules
   compactor:
     retention_enabled: true
   limits_config:
     retention_period: 720h
-
+# enable single-binary statefulset
+singleBinary:
+  replicas: 1
+  persistence:
+    enable: true
 # disable unnecessary deployments that comes with Loki Helm 3.0.0+
 rbac:
   pspEnabled: false
