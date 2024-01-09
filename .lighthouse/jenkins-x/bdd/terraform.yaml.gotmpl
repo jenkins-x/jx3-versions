@@ -81,12 +81,14 @@ spec:
     terraform state rm 'module.jx.module.cluster.module.jx-health[0].helm_release.kuberhealthy' || echo "Resource does not exist"
 
     echo "Install gcloud cli"
-    curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-399.0.0-linux-x86_64.tar.gz
-    tar -xf google-cloud-cli-399.0.0-linux-x86_64.tar.gz
+    curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-458.0.1-linux-x86_64.tar.gz
+    tar -xf google-cloud-cli-458.0.1-linux-x86_64.tar.gz
     ./google-cloud-sdk/install.sh -q
 
     export PATH=$PATH:${PWD}/google-cloud-sdk/bin
     gcloud --version
+    gcloud init
+    gcloud components install -q gke-gcloud-auth-plugin
 
     echo "lets connect to the remote cluster"
     $(terraform output -raw connect)
@@ -108,7 +110,7 @@ spec:
 
     helm version
     helm repo add jxgh https://jenkins-x-charts.github.io/repo
-    helm upgrade --install bdd jxgh/jx-bdd  --namespace jx --create-namespace --set bdd.owner="$GIT_ORGANISATION",command.test="make $TEST_NAME",jxgoTag="$JX_VERSION"
+    helm upgrade --install bdd jxgh/jx-bdd  --namespace jx --create-namespace --set bdd.owner="$GIT_ORGANISATION",command.test="make $TEST_NAME",jxgoTag="$JX_VERSION",env.JAVA_VERSION=17
 
     echo "about to wait for the BDD test to run"
     sleep 20
