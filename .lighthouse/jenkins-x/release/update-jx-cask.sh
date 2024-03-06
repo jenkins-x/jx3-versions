@@ -14,7 +14,7 @@ do
   fi
 done <<< "$CHECKSUMS"
 
-content=$(base64 << EOT
+content=$(base64 -w 0 << EOT
 cask "jx" do
   arch arm: "arm64", intel: "amd64"
 
