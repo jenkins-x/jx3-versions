@@ -269,7 +269,7 @@ regen-check:
 	jx gitops apply
 
 .PHONY: regen-phase-1
-regen-phase-1: git-setup resolve-metadata all report commit $(KUBEAPPLY) verify-ingress-ignore
+regen-phase-1: git-setup resolve-metadata all $(KUBEAPPLY) report commit verify-ingress-ignore
 
 .PHONY: regen-phase-2
 regen-phase-2: verify-ingress-ignore all verify-ignore commit
@@ -282,7 +282,7 @@ regen-none:
 # we just merged a PR so lets perform any extra checks after the merge but before the kubectl apply
 
 .PHONY: apply
-apply: regen-check report commit $(KUBEAPPLY) push gitops-postprocess verify annotate-resources apply-completed status
+apply: regen-check $(KUBEAPPLY) report commit push gitops-postprocess verify annotate-resources apply-completed status
 
 .PHONY: report
 report:
