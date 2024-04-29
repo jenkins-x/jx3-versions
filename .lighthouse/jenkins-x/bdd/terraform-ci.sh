@@ -267,6 +267,7 @@ echo "testing terraform with: $JX_TEST_COMMAND"
 
 export TF_VAR_gcp_project=$PROJECT_ID
 export TF_VAR_cluster_name=$CLUSTER_NAME
+export TF_VAR_artifact_repository_id=$CLUSTER_NAME
 
 set -x
 $JX_TEST_COMMAND
