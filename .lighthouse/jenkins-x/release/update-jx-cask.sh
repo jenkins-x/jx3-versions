@@ -39,7 +39,6 @@ existingfile=$(curl -Ls \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   https://api.github.com/repos/jenkins-x/homebrew-jx/contents/Casks/jx.rb)
 
-set -o xtrace
 prevcontent="$(grep '"content"' <<< "$existingfile" | cut -d\" -f4)"
 # Github returns content wrapped at column 60. Removing the newlines before comparing
 
@@ -49,8 +48,6 @@ then
   exit 0
 fi
 
-set +o xtrace
-
 prevsha=$(grep '"sha"' <<< "$existingfile" | cut -d\" -f4)
 
 curl -Ls \
@@ -59,7 +56,7 @@ curl -Ls \
   -H "Authorization: Bearer ${GITHUB_TOKEN}" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   https://api.github.com/repos/jenkins-x/homebrew-jx/contents/Casks/jx.rb \
-  -d @- << EOT > /dev/null
+  -d @- << EOT
 {
   "message":"chore: upgrade cask jx to version $JX_VERSION",
   "committer":{"name":"jenkins-x-bot","email":"jenkinsx@cd.foundation"},
