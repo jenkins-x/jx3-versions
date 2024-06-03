@@ -37,7 +37,6 @@ function upgradeClusterRepo {
   cd "$1"
   echo "recreating a clean version stream"
   rm -rf versionStream .lighthouse/jenkins-x .lighthouse/Kptfile
-  jx gitops kpt update || true
   kpt pkg get https://github.com/jenkins-x/jx3-pipeline-catalog.git/$2/.lighthouse/jenkins-x .lighthouse/jenkins-x
   kpt pkg get https://github.com/jenkins-x/jxr-versions.git/ versionStream
   rm -rf versionStream/jenkins*.yml versionStream/jx versionStream/.github versionStream/.pre* versionStream/.secrets* versionStream/OWNER* versionStream/.lighthouse
@@ -45,6 +44,7 @@ function upgradeClusterRepo {
   jx gitops helmfile report
   git add * .lighthouse || true
   git commit -a -m "chore: upgrade version stream" || true
+  jx gitops kpt update && git add . && git commit -a -m "chore: upgrade other kpt packages" || true
   git push || true
 }
 
