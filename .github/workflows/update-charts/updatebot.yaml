@@ -13,7 +13,7 @@ spec:
               - jx3/*
               - jxgh/*
               # Cert manager
-              - jetstack/*
+              # - jetstack/*
               # External secrets
               - external-secrets/*
               # nginx
