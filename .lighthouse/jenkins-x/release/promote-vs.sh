@@ -36,16 +36,16 @@ function upgradeClusterRepo {
   git clone https://github.com/jx3-gitops-repositories/$1.git
   cd "$1"
   echo "recreating a clean version stream"
-  rm -rf versionStream .lighthouse/jenkins-x .lighthouse/Kptfile
+  git rm -r versionStream .lighthouse/jenkins-x .lighthouse/Kptfile
+  git commit -m "chore: remove old versionstream"
+  # jx gitops kpt update fails if there are uncommitted changes
+  jx gitops kpt update
   kpt pkg get https://github.com/jenkins-x/jx3-pipeline-catalog.git/$2/.lighthouse/jenkins-x .lighthouse/jenkins-x
   kpt pkg get https://github.com/jenkins-x/jxr-versions.git/ versionStream
-  rm -rf versionStream/jenkins*.yml versionStream/jx versionStream/.github versionStream/.pre* versionStream/.secrets* versionStream/OWNER* versionStream/.lighthouse
+  rm -rf versionStream/jenkins*.yml versionStream/jx versionStream/.github versionStream/.pre* versionStream/.secrets* versionStream/OWNER* versionStream/.lighthouse versionStream/.github
   jx gitops helmfile resolve --update
   jx gitops helmfile report
-  git add * .lighthouse || true
-  git commit -a -m "chore: upgrade version stream" || true
-  jx gitops kpt update && git add . && git commit -a -m "chore: upgrade other kpt packages" || true
-  git push || true
+  git add * .lighthouse && git commit -a --amend -m "chore: upgrade version stream" && git push || true
 }
 
 for r in "${repos[@]}"
