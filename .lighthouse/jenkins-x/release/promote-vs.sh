@@ -40,6 +40,7 @@ function upgradeClusterRepo {
   git commit -m "chore: remove old versionstream"
   # jx gitops kpt update fails if there are uncommitted changes
   jx gitops kpt update
+  mkdir -p .lighthouse
   kpt pkg get https://github.com/jenkins-x/jx3-pipeline-catalog.git/$2/.lighthouse/jenkins-x .lighthouse/jenkins-x
   kpt pkg get https://github.com/jenkins-x/jxr-versions.git/ versionStream
   rm -rf versionStream/jenkins*.yml versionStream/jx versionStream/.github versionStream/.pre* versionStream/.secrets* versionStream/OWNER* versionStream/.lighthouse versionStream/.github
