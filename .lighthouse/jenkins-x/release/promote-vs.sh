@@ -36,7 +36,7 @@ function upgradeClusterRepo {
   git clone https://github.com/jx3-gitops-repositories/$1.git
   cd "$1"
   echo "recreating a clean version stream"
-  git rm -r versionStream .lighthouse/jenkins-x .lighthouse/Kptfile
+  git rm -r --ignore-unmatch versionStream .lighthouse/jenkins-x .lighthouse/Kptfile
   git commit -m "chore: remove old versionstream"
   # jx gitops kpt update fails if there are uncommitted changes
   jx gitops kpt update
