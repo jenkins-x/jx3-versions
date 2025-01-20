@@ -51,7 +51,7 @@ spec:
                 ./.lighthouse/jenkins-x/release/update-jx-cask.sh || echo Update of cask failed
             - name: changelog
               resources: {}
-            - image: ghcr.io/jenkins-x/jx-boot:3.11.21
+            - image: ghcr.io/jenkins-x/jx-boot:3.11.24
               name: promote-vs
               resources: {}
               script: |
