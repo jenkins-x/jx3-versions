@@ -9,8 +9,6 @@ spec:
             kind: charts
             include:
               # - cdf/*
-              - jenkins-x/*
-              - jx3/*
               - jxgh/*
               # Cert manager
               # - jetstack/*
@@ -18,3 +16,6 @@ spec:
               - external-secrets/*
               # nginx
               - ingress-nginx/*
+            # Exclude lighthouse until tekton upgrade is done
+            exclude:
+            - jxgh/lighthouse
