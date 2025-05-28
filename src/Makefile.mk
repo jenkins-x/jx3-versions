@@ -83,7 +83,7 @@ HELMFILE_TEMPLATE_FLAGS ?=
 # HELMFILE_USE_SELECTORS = true
 HELMFILE_USE_SELECTORS ?= false
 CLEAN_OUTPUT_DIR ?= $(if $(findstring true,$(HELMFILE_USE_SELECTORS)),,$(OUTPUT_DIR)/*/*/)
-HELMFILE_GLOBAL_FLAGS += $(if $(findstring true,$(HELMFILE_USE_SELECTORS)),$(shell versionStream/src/get-selectors-and-clean.sh $(OUTPUT_DIR)),)
+HELMFILE_GLOBAL_FLAGS += $(if $(findstring true,$(HELMFILE_USE_SELECTORS)),$(shell versionStream/src/get-selectors-and-clean.sh $(OUTPUT_DIR)) --allow-no-matching-release,)
 
 .PHONY: clean
 clean:
