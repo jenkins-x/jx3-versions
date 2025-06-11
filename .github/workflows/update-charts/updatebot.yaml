@@ -8,7 +8,7 @@ spec:
         - versionStream:
             kind: charts
             include:
-              # - cdf/*
+              - cdf/*
               - jxgh/*
               # Cert manager
               # - jetstack/*
