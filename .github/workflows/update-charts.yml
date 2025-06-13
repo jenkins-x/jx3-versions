@@ -1,8 +1,8 @@
 name: Update charts in the version stream
 on:
-  schedule:
+#  schedule:
     # run at midnight
-    - cron: '0 0 * * *'
+#    - cron: '0 0 * * *'
 
   # allow manual triggering
   workflow_dispatch: {}
