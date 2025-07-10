@@ -26,6 +26,9 @@ declare -a tfrepos=(
   "jx3-terraform-azure"
 )
 
+git config --global --add user.name ${GIT_AUTHOR_NAME:-jenkins-x-bot}
+git config --global --add user.email ${GIT_AUTHOR_EMAIL:-jenkins-x@googlegroups.com}
+
 export SOURCE_DIR=$PWD
 export TMPDIR=/tmp/jx3-gitops-promote
 rm -rf $TMPDIR
