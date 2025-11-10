@@ -8,14 +8,11 @@ spec:
         - versionStream:
             kind: charts
             include:
-              - cdf/*
-              - jxgh/*
-              # Cert manager
-              # - jetstack/*
-              # External secrets
-              - external-secrets/*
-              # nginx
-              - ingress-nginx/*
-            # Exclude lighthouse until tekton upgrade is done
-            exclude:
-            - jxgh/lighthouse
+            - cdf/*
+            - jxgh/*
+            # Cert manager
+            # - jetstack/*
+            # External secrets
+            - external-secrets/*
+            # nginx
+            - ingress-nginx-oci/*
