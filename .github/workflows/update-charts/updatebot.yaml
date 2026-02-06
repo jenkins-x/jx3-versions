@@ -15,4 +15,4 @@ spec:
             # External secrets
             - external-secrets/*
             # nginx
-            - ingress-nginx-oci/*
+            # - ingress-nginx-oci/*
