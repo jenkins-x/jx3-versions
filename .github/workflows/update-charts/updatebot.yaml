@@ -16,3 +16,5 @@ spec:
             - external-secrets/*
             # nginx
             # - ingress-nginx-oci/*
+            - wave-k8s/wave
+
