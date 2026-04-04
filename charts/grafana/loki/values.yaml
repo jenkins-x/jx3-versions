@@ -35,4 +35,4 @@ test:
 metricsInstance:
   enabled: false
 gateway:
-  enabled: false
+  enabled: true
