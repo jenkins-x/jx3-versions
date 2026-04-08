@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-git clone https://github.com/jenkins-x/jx-docs.git
+git clone https://github.com/jayex-io/jx-docs.git
 
 cd jx-docs
 git config --add user.name ${GIT_AUTHOR_NAME:-jenkins-x-bot}
