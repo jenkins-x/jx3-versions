@@ -53,6 +53,10 @@ VAULT_MOUNT_POINT_EXTERNAL_SECRETS ?= ${VAULT_MOUNT_POINT}
 
 GIT_SHA ?= $(shell git rev-parse HEAD)
 
+INGRESS_KIND      ?= $(shell yq e '.ingress.kind // "nginx"' jx-requirements.yml)
+INGRESS_ENABLED   ?= $(shell yq e '.ingress.enabled // false' jx-global-values.yaml)
+HTTPROUTE_ENABLED ?= $(shell yq e '.httpRoute.enabled // false' jx-global-values.yaml)
+
 # NEW_CLUSTER is set on command line by jx gitops apply for regen targets
 NEW_CLUSTER ?= false
 
@@ -195,9 +199,11 @@ post-build: $(GENERATE_SCHEDULER)
 	jx gitops label --dir $(OUTPUT_DIR)/customresourcedefinitions gitops.jenkins-x.io/pipeline=customresourcedefinitions
 	jx gitops label --dir $(OUTPUT_DIR)/namespaces                gitops.jenkins-x.io/pipeline=namespaces
 
-# lets add kapp friendly change group identifiers to nginx-ingress and wave so we can write rules against them
+# lets add kapp friendly change group identifiers to wave so we can write rules against them
 	jx gitops annotate --dir $(OUTPUT_DIR) --selector app=wave kapp.k14s.io/change-group=apps.jenkins-x.io/pusher-wave
-	jx gitops annotate --dir $(OUTPUT_DIR) --selector app.kubernetes.io/name=ingress-nginx kapp.k14s.io/change-group=apps.jenkins-x.io/ingress-nginx
+	@if [ "$(INGRESS_KIND)" = "nginx" ]; then \
+		jx gitops annotate --dir $(OUTPUT_DIR) --selector app.kubernetes.io/name=ingress-nginx kapp.k14s.io/change-group=apps.jenkins-x.io/ingress-nginx; \
+	fi
 
 # lets label all Namespace resources with the main namespace which creates them and contains the Environment resources
 	jx gitops label --dir $(OUTPUT_DIR)/cluster --kind=Namespace team=jx
@@ -205,6 +211,13 @@ post-build: $(GENERATE_SCHEDULER)
 # lets enable wave to perform rolling updates of any Deployment when its underlying Secrets get modified
 # by modifying the underlying secret store (e.g. vault / GSM / ASM) which then causes External Secrets to modify the k8s Secrets
 	jx gitops annotate --dir  $(OUTPUT_DIR)/namespaces --kind Deployment --selector app=wave --invert-selector wave.pusher.com/update-on-config-change=true
+
+# on first boot admission webhook backing services don't exist yet; set failurePolicy=Ignore so the
+# cluster apply doesn't fail — next boot regenerates manifests from charts restoring failurePolicy=Fail
+	@if [ "$(NEW_CLUSTER)" = "true" ]; then \
+	  find $(OUTPUT_DIR)/cluster -name "*.yaml" | xargs grep -l "WebhookConfiguration" 2>/dev/null | \
+	    xargs -I{} yq e '.webhooks[].failurePolicy = "Ignore"' -i {} || true; \
+	fi
 
 .PHONY: kustomize
 kustomize: pre-build
@@ -217,11 +230,19 @@ copy-resources: pre-build
 
 .PHONY: verify-ingress
 verify-ingress:
-	jx verify ingress --ingress-service ingress-nginx-controller
+	@if [ "$(HTTPROUTE_ENABLED)" = "true" ]; then \
+		jx verify ingress --ingress-service envoy-default; \
+	elif [ "$(INGRESS_ENABLED)" = "true" ]; then \
+		jx verify ingress --ingress-service ingress-nginx-controller; \
+	fi
 
 .PHONY: verify-ingress-ignore
 verify-ingress-ignore:
-	-jx verify ingress --ingress-service ingress-nginx-controller
+	@if [ "$(HTTPROUTE_ENABLED)" = "true" ]; then \
+		jx verify ingress --ingress-service envoy-default || true; \
+	elif [ "$(INGRESS_ENABLED)" = "true" ]; then \
+		jx verify ingress --ingress-service ingress-nginx-controller || true; \
+	fi
 
 .PHONY: verify-install
 verify-install:
@@ -326,6 +347,14 @@ kubectl-apply:
 	fi
 	kubectl apply $(KUBECTL_APPLY_FLAGS) --prune -l=gitops.jenkins-x.io/pipeline=cluster                   -R -f $(OUTPUT_DIR)/cluster
 	kubectl apply $(KUBECTL_APPLY_FLAGS) --prune -l=gitops.jenkins-x.io/pipeline=namespaces                -R -f $(OUTPUT_DIR)/namespaces
+
+# restore failurePolicy=Fail now that namespace services are deployed
+	@if [ "$(NEW_CLUSTER)" = "true" ]; then \
+	  find $(OUTPUT_DIR)/cluster -name "*.yaml" | xargs grep -l "WebhookConfiguration" 2>/dev/null | \
+	    xargs -I{} yq e '.webhooks[].failurePolicy = "Fail"' -i {}; \
+	  find $(OUTPUT_DIR)/cluster -name "*.yaml" | xargs grep -l "WebhookConfiguration" 2>/dev/null | \
+	    xargs -I{} kubectl apply $(KUBECTL_APPLY_FLAGS) -f {} || true; \
+	fi
 
 .PHONY: kapp-apply
 kapp-apply:
