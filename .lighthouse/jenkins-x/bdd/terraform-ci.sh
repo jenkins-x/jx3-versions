@@ -92,8 +92,9 @@ export TERRAFORM_INPUT="-input=false"
 export TF_VAR_force_destroy=true
 
 export PROJECT_ID=jenkins-x-bdd-326715
-export CREATED_TIME=$(date '+%a-%b-%d-%Ybin/ main.tf values.auto.tfvars terraform.tfstate variables.tf-%H-%M-%S')
-export CLUSTER_NAME="${BRANCH_NAME,,}-$BUILD_NUMBER-$BDD_NAME"
+export CREATED_TIME=$(date '+%a-%b-%d-%Y-%H-%M-%S')
+export URANDOM=$(tr -dc 'a-z0-9' < /dev/urandom | head -c6)
+export CLUSTER_NAME="${BRANCH_NAME,,}-$URANDOM-$BDD_NAME"
 export ZONE=europe-west1-c
 export LABELS="branch=${BRANCH_NAME,,},cluster=$BDD_NAME,create-time=${CREATED_TIME,,}"
 
@@ -229,14 +230,46 @@ fi
 
 if [ -z "$JX_TEST_COMMAND" ]
 then
-  export JX_TEST_COMMAND="jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/$TERRAFORM_FILE --verify-result"
+    # Work around since new version of terraform operator doesn't create job as is expected by jx test
+    jxTestCommand() {
+        jx test create -f /workspace/source/.lighthouse/jenkins-x/bdd/$TERRAFORM_FILE --no-watch-job
+        tf_resource=tf-${REPO_NAME}-pr${PULL_NUMBER}-${JOB_NAME}-${BUILD_NUMBER}
+        aborttime=$(( $(date +%s) + 5400 ))
+        while ! kubectl get terraforms.tf.isaaguilar.com $tf_resource -ojsonpath='{.status.phase}' | grep -q completed
+        do
+            if [[ $(date +%s) > $aborttime ]]
+            then
+              echo Timed out waiting for terraform resource $tf_resource
+              exit 11
+            fi
+            for pod in $(kubectl get po --sort-by '{.metadata.creationTimestamp}' --field-selector=status.phase=Running -l terraforms.tf.isaaguilar.com/resourceName=$tf_resource -oname)
+            do
+                echo Showing log for $pod
+                kubectl logs -f $pod | tee saved_log || true
+                grep --text "^POD RESULT:" saved_log >> pod_results || true
+            done
+            sleep 10
+            for pod in $(kubectl get po --sort-by '{.metadata.creationTimestamp}' --field-selector=status.phase=Failed -l terraforms.tf.isaaguilar.com/resourceName=$tf_resource -oname)
+            do
+              echo Pod $pod has failed
+              exit 5
+            done
+        done
+        # Verifying that the last pod result is OK
+        tail -n 1 pod_results | grep -q OK && echo Test has succeeded
+    }
+    # Declare show the function for debugging purposes
+    declare -f jxTestCommand
+    export JX_TEST_COMMAND=jxTestCommand
 fi
 
 echo "testing terraform with: $JX_TEST_COMMAND"
 
 export TF_VAR_gcp_project=$PROJECT_ID
 export TF_VAR_cluster_name=$CLUSTER_NAME
+export TF_VAR_artifact_repository_id=$CLUSTER_NAME
 
+set -x
 $JX_TEST_COMMAND
 
 # Needs a new token to delete repo

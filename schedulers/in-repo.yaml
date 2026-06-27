@@ -26,7 +26,6 @@ spec:
     entries:
       - approve
       - assign
-      - blunderbuss
       - help
       - hold
       - lgtm
@@ -35,7 +34,6 @@ spec:
       - size
       - trigger
       - wip
-      - heart
       - cat
       - dog
       - pony
@@ -83,6 +81,5 @@ spec:
     ignore_ok_to_test: false
     join_org_url: ""
     only_org_members: false
-    trusted_org: todo
   welcome:
     - message_template: Welcome

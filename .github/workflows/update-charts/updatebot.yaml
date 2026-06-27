@@ -8,13 +8,13 @@ spec:
         - versionStream:
             kind: charts
             include:
-              - cdf/*
-              - jenkins-x/*
-              - jx3/*
-              - jxgh/*
-              # Cert manager
-              - jetstack/*
-              # External secrets
-              - external-secrets/*
-              # nginx
-              - ingress-nginx/*
+            - cdf/*
+            - jxgh/*
+            # Cert manager
+            # - jetstack/*
+            # External secrets
+            - external-secrets/*
+            # nginx
+            # - ingress-nginx-oci/*
+            - wave-k8s/wave
+

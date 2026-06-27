@@ -25,7 +25,6 @@ spec:
       - config-updater
       - approve
       - assign
-      - blunderbuss
       - help
       - hold
       - lgtm
@@ -33,7 +32,6 @@ spec:
       - size
       - trigger
       - wip
-      - heart
       - cat
       - override
   external_plugins:
@@ -103,6 +101,5 @@ spec:
     ignore_ok_to_test: false
     join_org_url: ""
     only_org_members: false
-    trusted_org: todo
   welcome:
     - message_template: Welcome

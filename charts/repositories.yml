@@ -1,10 +1,7 @@
 repositories:
-- prefix: banzaicloud-stable
+- prefix: bitnami-oci
   urls:
-  - https://kubernetes-charts.banzaicloud.com
-- prefix: bitnami
-  urls:
-  - https://charts.bitnami.com/bitnami
+  - oci://registry-1.docker.io/bitnamicharts
 - prefix: cdf
   urls:
   - https://cdfoundation.github.io/tekton-helm-chart
@@ -50,3 +47,21 @@ repositories:
 - prefix: argocd
   urls:
   - https://argoproj.github.io/argo-helm
+- prefix: wave-k8s
+  urls:
+  - https://wave-k8s.github.io/wave/
+- prefix: autoscaler
+  urls:
+  - https://kubernetes.github.io/autoscaler
+- prefix: bank-vaults
+  urls:
+  - oci://ghcr.io/bank-vaults/helm-charts
+- prefix: ingress-nginx-oci
+  urls:
+  - oci://registry.k8s.io/ingress-nginx/charts
+- prefix: twuni
+  urls:
+  - https://helm.twun.io
+- prefix: envoyproxy
+  urls:
+  - oci://docker.io/envoyproxy

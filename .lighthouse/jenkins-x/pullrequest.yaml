@@ -7,6 +7,7 @@ spec:
     tasks:
       - name: test
         resources: {}
+        timeout: 3h0m0s
         taskSpec:
           metadata: {}
           stepTemplate:
@@ -19,7 +20,7 @@ spec:
           steps:
             - image: uses:jenkins-x/jx3-pipeline-catalog/tasks/git-clone/git-clone-pr.yaml@versionStream
               name: ""
-            - image: ghcr.io/jenkins-x/jx:3.2.404
+            - image: ghcr.io/jenkins-x/jx:3.17.24
               name: jx-variables
               resources: {}
               script: |
@@ -31,7 +32,7 @@ spec:
                     secretKeyRef:
                       key: password
                       name: bdd-git
-              image: ghcr.io/jenkins-x/jx:3.2.404
+              image: ghcr.io/jenkins-x/jx:3.17.24
               name: runci
               resources: {}
               script: |
@@ -48,5 +49,5 @@ spec:
               name: podinfo
   podTemplate: {}
   serviceAccountName: bdd-bot
-  timeout: 2h0m0s
+  timeout: 3h0m0s
 status: {}

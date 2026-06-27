@@ -1,0 +1,5 @@
+Labels: null
+component: ingress-nginx
+gitUrl: https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx
+namespace: nginx
+version: v4.15.1
