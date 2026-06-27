@@ -11,7 +11,7 @@ spec:
             - cdf/*
             - jxgh/*
             # Cert manager
-            # - jetstack/*
+            - jetstack-oci/*
             # External secrets
             - external-secrets/*
             # nginx
