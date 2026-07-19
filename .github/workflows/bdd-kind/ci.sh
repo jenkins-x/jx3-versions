@@ -299,6 +299,9 @@ configureHelm() {
 
     substep "external-secrets"
     helm --kube-context "kind-${KIND_CLUSTER_NAME}" repo add external-secrets https://external-secrets.github.io/kubernetes-external-secrets
+
+    substep "external-secrets-operator"
+    helm --kube-context "kind-${KIND_CLUSTER_NAME}" repo add external-secrets-operator https://charts.external-secrets.io
   fi
 
   substep "helm repo update"
