@@ -61,7 +61,7 @@ extraObjects:
       - apiGroups: [""]
         resources: ["secrets"]
         resourceNames: ["vault-tls"]
-        verbs: ["get", "list"]
+        verbs: ["get"]
   - apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
     metadata:
