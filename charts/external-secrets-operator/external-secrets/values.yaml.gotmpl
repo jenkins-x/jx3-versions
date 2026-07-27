@@ -8,7 +8,8 @@ certController:
 
 serviceAccount:
   create: true
-  name: external-secrets
+  # Renaming to match the SA of KES so they can share IAM/Roles defined in the TF for AWS/GCP clusters.
+  name: kubernetes-external-secrets
 {{- if eq .Values.jxRequirements.secretStorage "secretsManager" }}
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::{{ .Values.jxRequirements.cluster.project }}:role/{{ .Values.jxRequirements.cluster.clusterName }}-external-secrets-secrets-manager
@@ -48,7 +49,7 @@ extraObjects:
               mountPath: kubernetes
               role: jx-vault
               serviceAccountRef:
-                name: external-secrets
+                name: kubernetes-external-secrets
                 namespace: secret-infra
   {{- if not (hasKey .Values.jxRequirements.vault "url") }}
   - apiVersion: rbac.authorization.k8s.io/v1
@@ -72,7 +73,7 @@ extraObjects:
       name: external-secrets-vault-ca
     subjects:
       - kind: ServiceAccount
-        name: external-secrets
+        name: kubernetes-external-secrets
         namespace: secret-infra
   {{- end }}
 {{- end }}
@@ -89,7 +90,7 @@ extraObjects:
           auth:
             jwt:
               serviceAccountRef:
-                name: external-secrets
+                name: kubernetes-external-secrets
                 namespace: secret-infra
 {{- end }}
 {{- if eq .Values.jxRequirements.secretStorage "systemManager" }}
@@ -105,7 +106,7 @@ extraObjects:
           auth:
             jwt:
               serviceAccountRef:
-                name: external-secrets
+                name: kubernetes-external-secrets
                 namespace: secret-infra
 {{- end }}
 {{- if eq .Values.jxRequirements.secretStorage "gsm" }}
@@ -122,7 +123,7 @@ extraObjects:
               clusterLocation: {{ .Values.jxRequirements.cluster.region }}
               clusterName: {{ .Values.jxRequirements.cluster.clusterName }}
               serviceAccountRef:
-                name: external-secrets
+                name: kubernetes-external-secrets
                 namespace: secret-infra
 {{- end }}
 {{- if eq .Values.jxRequirements.secretStorage "azurekeyvault" }}
