@@ -28,4 +28,4 @@ According to the ESO maintainers there are no schema changes
 — it's a pure apiVersion bump (see https://github.com/external-secrets/external-secrets/issues/4785).
 
 ### 3. Upgrade to 2.8.0
-Once every cluster's ESO resources are on `external-secrets.io/v1` and the 0.16.2 rollout is healthy, bump ESO to 2.8.0.
+Once every ESO resource is on `external-secrets.io/v1` and the 0.16.2 rollout is healthy, bump ESO to 2.8.0.
