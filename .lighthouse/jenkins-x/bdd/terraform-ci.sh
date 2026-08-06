@@ -93,8 +93,6 @@ export TF_VAR_force_destroy=true
 
 export PROJECT_ID=jenkins-x-bdd-326715
 export CREATED_TIME=$(date '+%a-%b-%d-%Y-%H-%M-%S')
-export URANDOM=$(tr -dc 'a-z0-9' < /dev/urandom | head -c6)
-export CLUSTER_NAME="${BRANCH_NAME,,}-$URANDOM-$BDD_NAME"
 export ZONE=europe-west1-c
 export LABELS="branch=${BRANCH_NAME,,},cluster=$BDD_NAME,create-time=${CREATED_TIME,,}"
 
@@ -271,10 +269,3 @@ export TF_VAR_artifact_repository_id=$CLUSTER_NAME
 
 set -x
 $JX_TEST_COMMAND
-
-# Needs a new token to delete repo
-# $JX_SCM auth refresh -h github.com -s delete_repo
-# echo "Deleting cluster git repo: ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev"
-# $JX_SCM repo delete ${GH_HOST}${GH_OWNER}/cluster-$CLUSTER_NAME-dev --confirm
-# echo "Deleting infra repo: ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev"
-# $JX_SCM repo delete ${GH_HOST}${GH_OWNER}/infra-$CLUSTER_NAME-dev --confirm
