@@ -10,7 +10,7 @@ cd jx-docs
 git config --add user.name ${GIT_AUTHOR_NAME:-jenkins-x-bot}
 git config --add user.email ${GIT_AUTHOR_EMAIL:-jenkins-x@googlegroups.com}
 
-sed -i "s/release = \".*\"/release = \"${JX_VERSION}\"/" config.toml
+printf '%s' $JX_VERSION > layouts/shortcodes/version.html
 if git commit -a -m "chore: upgrade jx version"
 then
   git push
