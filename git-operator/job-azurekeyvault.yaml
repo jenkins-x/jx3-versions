@@ -8,7 +8,7 @@ spec:
   backoffLimit: 4
   completions: 1
   parallelism: 1
-  ttlSecondsAfterFinished: 86400
+  ttlSecondsAfterFinished: 604800 # 7 Days
   template:
     metadata:
       labels:
