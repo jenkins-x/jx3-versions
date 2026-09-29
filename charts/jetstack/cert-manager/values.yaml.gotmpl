@@ -12,6 +12,9 @@ startupapicheck:
 
 extraArgs:
   - --issuer-ambient-credentials
+{{- if eq .Values.jxRequirements.ingress.kind "gateway" }}
+  - --enable-gateway-api
+{{- end }}
 
 securityContext:
   runAsNonRoot: true
