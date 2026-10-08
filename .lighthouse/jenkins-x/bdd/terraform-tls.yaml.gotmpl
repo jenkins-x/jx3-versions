@@ -6,6 +6,10 @@ spec:
     value: "/tmp/kubecfg"
   - name: TF_VAR_jx_git_url
     value: https://github.com/jenkins-x-bdd/cluster-{{ .Env.TF_VAR_cluster_name }}-dev.git
+  - name: TF_VAR_node_spot
+    value: "true"
+  - name: TF_VAR_kuberhealthy
+    value: "false"
   - name: TF_VAR_jx_bot_username
     value: jenkins-x-bot-bdd
   - name: TF_VAR_jx_bot_token
@@ -61,9 +65,9 @@ spec:
     echo "Removing kubernetes resources from state"
     terraform state rm 'module.jx.module.cluster.helm_release.jx-git-operator[0]'
     terraform state rm 'module.jx.module.cluster.kubernetes_config_map.jenkins_x_requirements[0]'
-    terraform state rm 'module.jx.module.cluster.module.jx-health[0].helm_release.cluster-checks'
-    terraform state rm 'module.jx.module.cluster.module.jx-health[0].helm_release.health-checks-install'
-    terraform state rm 'module.jx.module.cluster.module.jx-health[0].helm_release.kuberhealthy'
+    terraform state rm 'module.jx.module.cluster.module.jx-health[0].helm_release.cluster-checks' || echo "Resource does not exist"
+    terraform state rm 'module.jx.module.cluster.module.jx-health[0].helm_release.health-checks-install' || echo "Resource does not exist"
+    terraform state rm 'module.jx.module.cluster.module.jx-health[0].helm_release.kuberhealthy' || echo "Resource does not exist"
 
     echo "lets connect to the remote cluster"
     $(terraform output -raw connect)
